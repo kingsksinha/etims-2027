@@ -1,0 +1,17 @@
+{
+  "name": "ETIMS 2027 Conference",
+  "short_name": "ETIMS 2027",
+  "description": "1st National Conference on Emerging Technologies, Innovation and Multidisciplinary Studies at NSIT Bihta, Patna",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F4F8F7",
+  "theme_color": "#073B3A",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

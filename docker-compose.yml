@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: etims2027-web
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - DATABASE_URL=postgresql://etims_user:etims_secure_pass@db:5432/etims2027?schema=public
+      - CORS_ORIGIN=*
+      - JWT_SECRET=change-this-production-jwt-secret-key-32-chars
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    container_name: etims2027-db
+    restart: always
+    environment:
+      POSTGRES_USER: etims_user
+      POSTGRES_PASSWORD: etims_secure_pass
+      POSTGRES_DB: etims2027
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U etims_user -d etims2027"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

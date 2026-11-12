@@ -1,0 +1,30 @@
+{
+  "name": "etims-2027",
+  "version": "1.0.0",
+  "description": "ETIMS 2027 — National Summit on Emerging Technologies, Innovation & Multidisciplinary Studies",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "install:all": "npm --prefix client install && npm --prefix server install",
+    "postinstall": "npm --prefix server run prisma:generate",
+    "build:client": "npm --prefix client run build",
+    "build:server": "npm --prefix server run build",
+    "build": "npm run build:client && npm run build:server",
+    "start": "node server/dist/index.js",
+    "prisma:generate": "npm --prefix server run prisma:generate",
+    "prisma:migrate": "npm --prefix server run prisma:migrate"
+  },
+  "keywords": [
+    "etims2027",
+    "conference",
+    "nsit",
+    "react",
+    "express",
+    "prisma"
+  ],
+  "author": "ETIMS 2027 Organizing Secretariat",
+  "license": "ISC"
+}

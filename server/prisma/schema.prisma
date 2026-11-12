@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Conference {
+  id          String   @id @default(uuid())
+  name        String
+  acronym     String   @unique
+  edition     String
+  tagline     String?
+  description String?  @db.Text
+  startDate   DateTime
+  endDate     DateTime
+  venue       String
+  city        String
+  state       String
+  country     String   @default("India")
+  website     String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CommitteeMember {
+  id          String   @id @default(uuid())
+  name        String
+  title       String?
+  affiliation String?
+  role        String
+  category    String
+  photoUrl    String?
+  sortOrder   Int      @default(0)
+  isVisible   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+}
+
+model ResearchTrack {
+  id          String   @id @default(uuid())
+  name        String
+  description String?  @db.Text
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ImportantDate {
+  id          String   @id @default(uuid())
+  title       String
+  date        DateTime
+  description String?
+  category    String
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+}
+
+model Registration {
+  id            String   @id @default(uuid())
+  fullName      String
+  email         String
+  phone         String?
+  affiliation   String?
+  designation   String?
+  category      String
+  paperTitle    String?
+  transactionId String?
+  amount        Decimal? @db.Decimal(10, 2)
+  status        String   @default("pending")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+}
+
+model PaperSubmission {
+  id                String   @id @default(uuid())
+  title             String
+  abstract          String?  @db.Text
+  authors           String
+  correspondingEmail String
+  trackId           String?
+  keywords          String?
+  fileUrl           String?
+  status            String   @default("submitted")
+  submittedAt       DateTime @default(now())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([correspondingEmail])
+  @@index([status])
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String?
+  message   String   @db.Text
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isRead])
+}
