@@ -8,14 +8,11 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "install:all": "npm --prefix client install && npm --prefix server install",
-    "postinstall": "npm --prefix server run prisma:generate",
+    "postinstall": "npm --prefix client install",
     "build:client": "npm --prefix client run build",
     "build:server": "npm --prefix server run build",
-    "build": "npm run build:client && npm run build:server",
-    "start": "node server/dist/index.js",
-    "prisma:generate": "npm --prefix server run prisma:generate",
-    "prisma:migrate": "npm --prefix server run prisma:migrate"
+    "build": "npm run build:client",
+    "start": "node server/dist/index.js"
   },
   "keywords": [
     "etims2027",
