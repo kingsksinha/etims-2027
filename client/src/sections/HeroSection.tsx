@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
   Calendar,
@@ -13,12 +14,7 @@ import ScientificNetworkVisual from '../components/ui/ScientificNetworkVisual';
 import { CONFERENCE, HOST_INSTITUTION } from '../utils/constants';
 
 export default function HeroSection() {
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const navigate = useNavigate();
 
   return (
     <section className="relative min-h-[94vh] flex items-center overflow-hidden bg-midnight pt-8 pb-20 sm:pt-14 sm:pb-28 lg:pt-16 lg:pb-32 border-b border-border-dark">
@@ -116,7 +112,10 @@ export default function HeroSection() {
                 variant="primary"
                 size="lg"
                 className="w-full sm:w-auto shadow-xl"
-                onClick={() => scrollTo('submission')}
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  navigate('/submission');
+                }}
               >
                 <FileText className="h-5 w-5" />
                 <span>Submit Your Paper</span>
@@ -126,7 +125,10 @@ export default function HeroSection() {
                 variant="outline"
                 size="lg"
                 className="w-full sm:w-auto"
-                onClick={() => scrollTo('about')}
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  navigate('/about');
+                }}
               >
                 <Compass className="h-5 w-5 text-cyan" />
                 <span>Explore Conference</span>

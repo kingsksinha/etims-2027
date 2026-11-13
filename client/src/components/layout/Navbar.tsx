@@ -1,50 +1,19 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowUpRight, FileText, Calendar, MapPin, Mail, Phone } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { NAV_LINKS, CONFERENCE, CONVENOR } from '../../utils/constants';
-
-interface MobileNavItem {
-  label: string;
-  href: string;
-  id: string;
-}
-
-const MOBILE_NAV_ITEMS: MobileNavItem[] = [
-  { label: 'Home', href: '#', id: '' },
-  { label: 'About Conference', href: '#about', id: 'about' },
-  { label: 'About NSIT', href: '#nsit', id: 'nsit' },
-  { label: 'Committees', href: '#committees', id: 'committees' },
-  { label: 'Research Tracks', href: '#tracks', id: 'tracks' },
-  { label: 'Important Dates', href: '#dates', id: 'dates' },
-  { label: 'Paper Submission', href: '#submission', id: 'submission' },
-  { label: 'Registration', href: '#registration', id: 'registration' },
-  { label: 'Venue & Contact', href: '#contact', id: 'contact' },
-];
+import { TAB_NAV_ITEMS, CONFERENCE, CONVENOR } from '../../utils/constants';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>('');
+  const location = useLocation();
+  const currentPath = location.pathname;
 
-  // Scroll detection and active section spy
+  // Scroll detection for navbar background translucency
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-
-      const sectionIds = ['about', 'nsit', 'tracks', 'dates', 'submission', 'registration', 'committees', 'venue', 'contact'];
-      let current = '';
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 140 && rect.bottom >= 140) {
-            current = id;
-            break;
-          }
-        }
-      }
-      setActiveSection(current);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -79,18 +48,9 @@ export default function Navbar() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = () => {
     setMobileOpen(false);
-    if (href === '#' || href === '') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-    if (href.startsWith('#')) {
-      const el = document.getElementById(href.slice(1));
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -99,7 +59,7 @@ export default function Navbar() {
         className={`sticky top-0 z-40 transition-all duration-300 ${
           scrolled
             ? 'border-b border-border-dark bg-midnight/95 backdrop-blur-md shadow-lg shadow-black/40 py-2.5'
-            : 'border-b border-border-dark/40 bg-midnight/80 backdrop-blur-xs py-3.5'
+            : 'border-b border-border-dark/40 bg-midnight/85 backdrop-blur-xs py-3'
         }`}
       >
         <nav
@@ -110,7 +70,7 @@ export default function Navbar() {
           <Link
             to="/"
             className="flex items-center gap-2 sm:gap-3 group min-w-0 shrink"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={handleNavClick}
             aria-label="ETIMS 2027 Conference Home"
           >
             <img
@@ -134,36 +94,33 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation Links with Glowing Active Indicator */}
-          <ul className="hidden items-center gap-1 xl:gap-2 lg:flex">
-            {NAV_LINKS.map((link) => {
-              const sectionKey = link.href.replace('#', '');
-              const isActive = activeSection === sectionKey;
+          <ul className="hidden items-center gap-1 xl:gap-1.5 lg:flex">
+            {TAB_NAV_ITEMS.map((tab) => {
+              const isActive =
+                tab.path === '/'
+                  ? currentPath === '/'
+                  : currentPath === tab.path || currentPath.startsWith(`${tab.path}/`);
 
               return (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => {
-                      if (link.href.startsWith('#')) {
-                        e.preventDefault();
-                        handleNavClick(link.href);
-                      }
-                    }}
-                    className={`relative rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                <li key={tab.id}>
+                  <Link
+                    to={tab.path}
+                    onClick={handleNavClick}
+                    className={`relative rounded-xl px-2.5 py-1.5 text-xs font-semibold transition-all duration-200 cursor-pointer ${
                       isActive
-                        ? 'text-cyan bg-cyan/10 font-bold'
+                        ? 'text-cyan bg-cyan/15 font-bold shadow-xs'
                         : 'text-secondary-text hover:text-light-text hover:bg-navy/60'
                     }`}
                   >
-                    <span>{link.label}</span>
+                    <span>{tab.shortLabel}</span>
                     {isActive && (
                       <motion.span
                         layoutId="navUnderline"
-                        className="absolute -bottom-1 left-2.5 right-2.5 h-0.5 rounded-full bg-cyan shadow-[0_0_8px_rgba(53,217,232,0.8)]"
+                        className="absolute -bottom-1 left-2 right-2 h-0.5 rounded-full bg-cyan shadow-[0_0_8px_rgba(53,217,232,0.8)]"
                         transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                       />
                     )}
-                  </a>
+                  </Link>
                 </li>
               );
             })}
@@ -171,17 +128,14 @@ export default function Navbar() {
 
           {/* Desktop Header CTA Button */}
           <div className="hidden lg:flex items-center gap-3 shrink-0">
-            <a
-              href="#submission"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick('#submission');
-              }}
+            <Link
+              to="/submission"
+              onClick={handleNavClick}
               className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-primary-teal to-cyan px-4 py-2 text-xs font-bold text-midnight shadow-md hover:shadow-cyan/30 transition-all active:scale-95 cursor-pointer glow-cyan-sm"
             >
               <span>Submit Paper</span>
               <ArrowUpRight className="h-3.5 w-3.5" />
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Hamburger Toggle Button */}
@@ -252,49 +206,48 @@ export default function Navbar() {
 
               {/* Drawer Navigation List */}
               <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
-                {MOBILE_NAV_ITEMS.map((item) => {
+                {TAB_NAV_ITEMS.map((item) => {
                   const isActive =
-                    item.id === ''
-                      ? activeSection === '' && window.scrollY < 200
-                      : activeSection === item.id;
+                    item.path === '/'
+                      ? currentPath === '/'
+                      : currentPath === item.path || currentPath.startsWith(`${item.path}/`);
 
                   return (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick(item.href);
-                      }}
+                    <Link
+                      key={item.id}
+                      to={item.path}
+                      onClick={handleNavClick}
                       className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold transition-all cursor-pointer ${
                         isActive
                           ? 'bg-gradient-to-r from-primary-teal to-cyan text-midnight font-bold shadow-sm'
                           : 'text-light-text hover:bg-navy/80 hover:text-cyan'
                       }`}
                     >
-                      <span>{item.label}</span>
+                      <div>
+                        <div className="font-medium">{item.label}</div>
+                        <div className={`text-[10px] ${isActive ? 'text-midnight/80' : 'text-secondary-text'}`}>
+                          {item.description}
+                        </div>
+                      </div>
                       {isActive ? (
                         <span className="h-2 w-2 rounded-full bg-midnight" />
                       ) : (
                         <ArrowUpRight className="h-4 w-4 opacity-40 text-cyan" />
                       )}
-                    </a>
+                    </Link>
                   );
                 })}
 
                 {/* Prominent Action inside Drawer */}
                 <div className="pt-4 pb-2">
-                  <a
-                    href="#submission"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick('#submission');
-                    }}
+                  <Link
+                    to="/submission"
+                    onClick={handleNavClick}
                     className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary-teal to-cyan px-5 py-3.5 text-sm font-bold text-midnight shadow-md transition-all active:scale-[0.98] cursor-pointer glow-cyan-sm"
                   >
                     <FileText className="h-4 w-4 text-midnight" />
                     <span>Submit Your Paper</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
 
