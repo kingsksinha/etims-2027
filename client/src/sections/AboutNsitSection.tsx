@@ -11,35 +11,51 @@ import { HOST_INSTITUTION } from '../utils/constants';
 
 const campusGallery = [
   {
-    id: 'student',
-    src: '/assets/nsit-student.jpg',
-    title: 'Academic Life & Research Library',
-    tag: 'NSIT Scholar & Scholarly Environment',
-    badge: 'Campus Life',
-    style: { objectPosition: 'center 12%' },
+    id: 'campus',
+    src: '/assets/nsit-campus.jpg',
+    title: 'Main Academic Building & Plaza',
+    tag: 'NSIT Bihta Integrated Tech Campus',
+    badge: 'Academic Facade',
+    style: { objectPosition: 'center center' },
   },
   {
     id: 'classroom',
     src: '/assets/nsit-classroom.png',
-    title: 'Smart Lecture Theatres & Conference Halls',
+    title: 'Smart Auditoriums & Plenary Halls',
     tag: 'Air-Conditioned Digital Plenary Venue',
     badge: 'Plenary Venue',
     style: { objectPosition: 'center center' },
   },
   {
+    id: 'computing',
+    src: '/assets/nsit-computing.jpg',
+    title: 'Computing Laboratory & IT Center',
+    tag: 'High-Speed LAN & Programming Workstations',
+    badge: 'Computing Center',
+    style: { objectPosition: 'center center' },
+  },
+  {
     id: 'lab',
     src: '/assets/nsit-lab.jpg',
-    title: 'Advanced Engineering Laboratories',
+    title: 'Core Engineering Laboratories',
     tag: 'Hands-on Technical Research Facilities',
     badge: 'Research Labs',
     style: { objectPosition: 'center center' },
   },
   {
-    id: 'computing',
-    src: '/assets/nsit-computing.jpg',
-    title: 'High-Performance Computing Center',
-    tag: 'High-Speed Networking & Computing Clusters',
-    badge: 'Computing Hub',
+    id: 'library',
+    src: '/assets/nsit-library.png',
+    title: 'Central Library & Reading Hall',
+    tag: 'Engineering Reference & Periodicals',
+    badge: 'Library',
+    style: { objectPosition: 'center center' },
+  },
+  {
+    id: 'sports',
+    src: '/assets/nsit-sports-grounds.jpg',
+    title: '11-Acre Campus Grounds & Fleet',
+    tag: 'Athletic Fields & Transit Hub',
+    badge: 'Campus Grounds',
     style: { objectPosition: 'center center' },
   },
 ];
@@ -106,7 +122,7 @@ export default function AboutNsitSection() {
               </div>
 
               {/* Multi-Photo Switcher Bar */}
-              <div className="mt-3 grid grid-cols-4 gap-2">
+              <div className="mt-3 grid grid-cols-3 sm:grid-cols-6 gap-2">
                 {campusGallery.map((photo, idx) => {
                   const isSelected = activePhotoIdx === idx;
                   return (
@@ -195,7 +211,7 @@ export default function AboutNsitSection() {
             </div>
 
             {/* Location & Navigation Link */}
-            <div className="flex items-center justify-between rounded-2xl border border-cyan/20 bg-navy/60 p-4">
+            <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/60 p-4">
               <div className="flex items-center gap-2.5">
                 <MapPin className="h-4.5 w-4.5 text-cyan shrink-0" />
                 <span className="text-xs sm:text-sm text-light-text">
@@ -213,6 +229,57 @@ export default function AboutNsitSection() {
               </a>
             </div>
           </motion.div>
+        </div>
+
+        {/* Bento Strip of Key Institutional Metrics */}
+        <div className="mt-12 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="rounded-2xl border border-white/10 bg-black/50 p-4 hover:border-cyan/40 transition-colors">
+            <span className="font-heading text-2xl sm:text-3xl font-black text-white font-mono block">
+              11 Acres
+            </span>
+            <span className="text-xs font-bold text-light-text mt-0.5 block">
+              Lush Green Tech Campus
+            </span>
+            <span className="text-[10px] font-mono text-cyan mt-1 block">
+              Bihta Knowledge Hub
+            </span>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-black/50 p-4 hover:border-cyan/40 transition-colors">
+            <span className="font-heading text-2xl sm:text-3xl font-black text-white font-mono block">
+              5 Depts
+            </span>
+            <span className="text-xs font-bold text-light-text mt-0.5 block">
+              Engineering Disciplines
+            </span>
+            <span className="text-[10px] font-mono text-cyan mt-1 block">
+              B.Tech & Applied Sciences
+            </span>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-black/50 p-4 hover:border-cyan/40 transition-colors">
+            <span className="font-heading text-2xl sm:text-3xl font-black text-white font-mono block">
+              Est. 2007
+            </span>
+            <span className="text-xs font-bold text-light-text mt-0.5 block">
+              AICTE & BEU Approved
+            </span>
+            <span className="text-[10px] font-mono text-emerald-400 mt-1 block">
+              State Recognized Host
+            </span>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-black/50 p-4 hover:border-cyan/40 transition-colors">
+            <span className="font-heading text-2xl sm:text-3xl font-black text-white font-mono block">
+              Adjacent
+            </span>
+            <span className="text-xs font-bold text-light-text mt-0.5 block">
+              To IIT Patna
+            </span>
+            <span className="text-[10px] font-mono text-cyan mt-1 block">
+              NH-922 Expressway
+            </span>
+          </div>
         </div>
       </Container>
     </section>

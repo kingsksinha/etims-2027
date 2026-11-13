@@ -58,8 +58,8 @@ export default function Navbar() {
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           scrolled
-            ? 'border-b border-border-dark bg-midnight/95 backdrop-blur-md shadow-lg shadow-black/40 py-2.5'
-            : 'border-b border-border-dark/40 bg-midnight/85 backdrop-blur-xs py-3'
+            ? 'border-b border-white/10 bg-black/90 backdrop-blur-xl shadow-2xl shadow-black/80 py-2.5'
+            : 'border-b border-white/5 bg-black/75 backdrop-blur-lg py-3'
         }`}
       >
         <nav
@@ -69,25 +69,25 @@ export default function Navbar() {
           {/* Brand Identity: Official NSIT Logo + ETIMS 2027 Typography */}
           <Link
             to="/"
-            className="flex items-center gap-2 sm:gap-3 group min-w-0 shrink"
+            className="flex items-center gap-2.5 sm:gap-3 group min-w-0 shrink"
             onClick={handleNavClick}
             aria-label="ETIMS 2027 Conference Home"
           >
             <img
               src="/assets/nsit-logo.png"
               alt="NSIT Official Logo"
-              className="h-7 sm:h-9 max-w-[125px] sm:max-w-none w-auto object-contain transition-transform group-hover:scale-105 filter drop-shadow-[0_0_6px_rgba(53,217,232,0.3)] shrink-0"
+              className="h-8 sm:h-9 max-w-[125px] sm:max-w-none w-auto object-contain transition-transform group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(56,189,248,0.35)] shrink-0"
             />
             <div className="flex flex-col min-w-0">
-              <div className="flex items-center gap-1 sm:gap-1.5 leading-tight">
-                <span className="font-heading text-sm sm:text-lg font-bold tracking-tight text-light-text">
+              <div className="flex items-center gap-1.5 leading-tight">
+                <span className="font-heading text-sm sm:text-lg font-bold tracking-tight text-white">
                   ETIMS
                 </span>
-                <span className="font-heading text-sm sm:text-lg font-extrabold text-cyan text-glow-cyan">
+                <span className="font-heading text-sm sm:text-lg font-extrabold text-cyan">
                   2027
                 </span>
               </div>
-              <span className="text-[9px] sm:text-[11px] uppercase tracking-wider text-secondary-text font-mono truncate hidden sm:inline">
+              <span className="text-[9px] sm:text-[11px] uppercase tracking-wider text-zinc-400 font-mono truncate hidden sm:inline">
                 NSIT Bihta, Patna
               </span>
             </div>
@@ -108,15 +108,15 @@ export default function Navbar() {
                     onClick={handleNavClick}
                     className={`relative rounded-xl px-2.5 py-1.5 text-xs font-semibold transition-all duration-200 cursor-pointer ${
                       isActive
-                        ? 'text-cyan bg-cyan/15 font-bold shadow-xs'
-                        : 'text-secondary-text hover:text-light-text hover:bg-navy/60'
+                        ? 'text-white bg-white/10 border border-white/15 font-bold shadow-sm'
+                        : 'text-zinc-400 hover:text-white hover:bg-white/5'
                     }`}
                   >
                     <span>{tab.shortLabel}</span>
                     {isActive && (
                       <motion.span
                         layoutId="navUnderline"
-                        className="absolute -bottom-1 left-2 right-2 h-0.5 rounded-full bg-cyan shadow-[0_0_8px_rgba(53,217,232,0.8)]"
+                        className="absolute -bottom-1 left-2 right-2 h-0.5 rounded-full bg-cyan shadow-[0_0_8px_#38bdf8]"
                         transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                       />
                     )}
@@ -131,7 +131,7 @@ export default function Navbar() {
             <Link
               to="/submission"
               onClick={handleNavClick}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-primary-teal to-cyan px-4 py-2 text-xs font-bold text-midnight shadow-md hover:shadow-cyan/30 transition-all active:scale-95 cursor-pointer glow-cyan-sm"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-cyan to-blue-500 px-4 py-2 text-xs font-bold text-black shadow-md hover:brightness-110 transition-all active:scale-95 cursor-pointer glow-cyan-sm"
             >
               <span>Submit Paper</span>
               <ArrowUpRight className="h-3.5 w-3.5" />

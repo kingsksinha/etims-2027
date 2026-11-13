@@ -729,6 +729,21 @@ export const CAMPUS_FACILITIES: CampusFacility[] = [
       'On-campus health center with round-the-clock medical first-aid support',
     ],
   },
+  {
+    id: 'sports-grounds',
+    name: '11-Acre Athletic Grounds & Institutional Transit Fleet',
+    category: 'Campus Grounds & Transit',
+    image: '/assets/nsit-sports-grounds.jpg',
+    description:
+      'Vast outdoor sports fields, cricket pitch, basketball courts, and institutional transport fleet stationed across the 11-acre green campus quadrangle.',
+    capacity: '11-Acre Integrated Campus Complex',
+    features: [
+      'Multi-sport athletic field for cricket, football, and track events',
+      'Dedicated institutional bus fleet connecting Patna and surrounding regions',
+      'Open green courtyards and pedestrian pathways',
+      'Outdoor conference networking and exhibition pavilion grounds',
+    ],
+  },
 ];
 
 // ── Detailed Faculty Teams & Task In-Charges ─────────────────────

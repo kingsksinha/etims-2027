@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import Container from '../components/common/Container';
 import HeroSection from '../sections/HeroSection';
+import OrbitalVenueRadar from '../components/ui/OrbitalVenueRadar';
 import {
   CONFERENCE,
   CONVENOR,
@@ -414,42 +415,27 @@ export default function HomePage() {
                   transition={{ duration: 0.25 }}
                   className="space-y-6"
                 >
-                  <div className="flex items-center justify-between border-b border-border-dark pb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border-dark pb-4">
                     <div>
-                      <span className="text-xs font-mono text-cyan uppercase">
-                        Campus Location & Transit
+                      <span className="text-xs font-mono text-cyan uppercase tracking-wider">
+                        SPATIAL RADAR & CAMPUS ACCESS
                       </span>
                       <h3 className="font-heading text-2xl font-bold text-light-text mt-0.5">
-                        How to Reach NSIT Bihta, Patna
+                        Netaji Subhas Institute of Technology (NSIT) • Bihta, Patna
                       </h3>
                     </div>
                     <button
                       type="button"
                       onClick={() => goToTab('/venue')}
-                      className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-primary-teal to-cyan px-4 py-2 text-xs font-bold text-midnight shadow-md glow-cyan-sm cursor-pointer"
+                      className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-cyan to-blue-500 px-4 py-2 text-xs font-bold text-black shadow-md hover:brightness-110 cursor-pointer self-start sm:self-auto"
                     >
-                      <span>Travel Guide</span>
+                      <span>Full Venue Page</span>
                       <ArrowRight className="h-3.5 w-3.5" />
                     </button>
                   </div>
 
-                  <div className="grid gap-3 sm:grid-cols-3 text-xs">
-                    <div className="rounded-2xl border border-border-dark bg-midnight p-4">
-                      <span className="font-mono text-cyan font-bold block">30 km</span>
-                      <p className="text-light-text font-semibold">Patna Airport (PAT)</p>
-                      <p className="text-secondary-text text-[11px]">Connecting major domestic flights</p>
-                    </div>
-                    <div className="rounded-2xl border border-border-dark bg-midnight p-4">
-                      <span className="font-mono text-mint font-bold block">4 km</span>
-                      <p className="text-light-text font-semibold">Bihta Railway Station</p>
-                      <p className="text-secondary-text text-[11px]">Frequent local & express trains</p>
-                    </div>
-                    <div className="rounded-2xl border border-border-dark bg-midnight p-4">
-                      <span className="font-mono text-cyan font-bold block">NH-922</span>
-                      <p className="text-light-text font-semibold">4-Lane Highway Corridor</p>
-                      <p className="text-secondary-text text-[11px]">Smooth road transit across Bihar</p>
-                    </div>
-                  </div>
+                  {/* Embedded Interactive Orbital Radar */}
+                  <OrbitalVenueRadar />
                 </motion.div>
               )}
 

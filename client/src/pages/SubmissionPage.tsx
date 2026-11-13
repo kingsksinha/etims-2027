@@ -117,48 +117,65 @@ export default function SubmissionPage() {
         {/* TAB 1: GUIDELINES */}
         {activeTab === 'guidelines' && (
           <div className="space-y-8">
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-5 md:grid-cols-2">
               {SUBMISSION_GUIDELINES.map((guide, idx) => (
                 <div
                   key={idx}
-                  className="rounded-3xl border border-border-dark bg-navy/70 p-6 space-y-3"
+                  className="rounded-3xl border border-white/10 bg-zinc-950/80 p-6 sm:p-7 space-y-3.5 backdrop-blur-md hover:border-cyan/40 hover:bg-zinc-900/60 transition-all duration-300 relative overflow-hidden group"
                 >
-                  <div className="flex items-center gap-2.5 text-cyan">
-                    <CheckCircle2 className="h-5 w-5 shrink-0" />
-                    <h3 className="font-heading text-base font-bold text-light-text">
-                      {guide.title}
-                    </h3>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30 font-mono text-xs font-bold">
+                        0{idx + 1}
+                      </div>
+                      <h3 className="font-heading text-base sm:text-lg font-bold text-white group-hover:text-cyan transition-colors">
+                        {guide.title}
+                      </h3>
+                    </div>
+                    <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 opacity-80" />
                   </div>
-                  <p className="text-xs sm:text-sm text-secondary-text leading-relaxed">
+                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed pl-1">
                     {guide.detail}
                   </p>
+                  <div className="pt-2 border-t border-white/5 flex items-center justify-between font-mono text-[10px] text-zinc-500">
+                    <span>STANDARD SPECIFICATION</span>
+                    <span className="text-cyan font-semibold">ETIMS-2027-STD</span>
+                  </div>
                 </div>
               ))}
             </div>
 
-            {/* Submission Portal Action Card */}
-            <div className="rounded-3xl border border-cyan/40 bg-gradient-to-r from-navy via-midnight to-navy p-7 sm:p-9 shadow-2xl glow-cyan-sm">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-                <div>
-                  <span className="text-xs font-mono text-cyan uppercase tracking-wider block">
-                    Online Peer Review Submission Portal
-                  </span>
-                  <h3 className="font-heading text-xl sm:text-2xl font-black text-light-text mt-1">
-                    Ready to Submit Your Manuscript?
+            {/* Academic Submission Console HUD */}
+            <div className="rounded-3xl border border-cyan/40 bg-gradient-to-r from-zinc-950 via-black to-zinc-950 p-7 sm:p-10 shadow-2xl backdrop-blur-xl relative overflow-hidden">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-cyan font-bold block">
+                      ONLINE PEER REVIEW INTAKE PORTAL
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[9px] font-semibold text-emerald-400 border border-emerald-500/30">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      ACTIVE
+                    </span>
+                  </div>
+                  <h3 className="font-heading text-2xl sm:text-3xl font-black text-white">
+                    Ready to Submit Your Research Manuscript?
                   </h3>
-                  <p className="text-xs sm:text-sm text-secondary-text mt-1 max-w-xl">
-                    Submissions are accepted in PDF format. Ensure all author identities are masked in the manuscript draft for double-blind peer review compliance.
+                  <p className="text-xs sm:text-sm text-zinc-300 max-w-2xl leading-relaxed">
+                    Submissions are accepted in PDF format. Ensure all author names, affiliations, and acknowledgments are masked in the initial manuscript draft to comply with strict double-blind peer review protocols.
                   </p>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => setModalOpen(true)}
-                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary-teal to-cyan px-6 py-3.5 text-xs sm:text-sm font-bold text-midnight shadow-md hover:shadow-cyan/30 transition-all glow-cyan-sm shrink-0 cursor-pointer"
-                >
-                  <Upload className="h-4 w-4" />
-                  <span>Submit Paper via Secretariat</span>
-                </button>
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setModalOpen(true)}
+                    className="inline-flex items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-cyan to-blue-500 px-7 py-3.5 text-sm font-bold text-black shadow-[0_0_20px_rgba(34,211,238,0.4)] hover:brightness-110 active:scale-95 transition-all cursor-pointer"
+                  >
+                    <Upload className="h-4.5 w-4.5 text-black" />
+                    <span>Submit Manuscript Online</span>
+                  </button>
+                </div>
               </div>
             </div>
 

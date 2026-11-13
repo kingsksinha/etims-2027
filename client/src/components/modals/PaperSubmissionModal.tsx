@@ -255,10 +255,10 @@ export default function PaperSubmissionModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 16 }}
           transition={{ type: 'spring', damping: 26, stiffness: 300 }}
-          className="relative w-full max-w-2xl rounded-3xl border border-cyan/40 bg-gradient-to-b from-[#0B1E2D] via-midnight to-[#081824] shadow-2xl glow-cyan-sm my-auto text-light-text overflow-hidden z-10"
+          className="relative w-full max-w-2xl rounded-3xl border border-white/15 bg-zinc-950 shadow-2xl my-auto text-light-text overflow-hidden z-10"
         >
           {/* Modal Header */}
-          <div className="flex items-center justify-between border-b border-border-dark px-6 py-4 bg-navy/60">
+          <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 bg-zinc-900/60">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
                 <Upload className="h-5 w-5" />

@@ -15,6 +15,7 @@ import {
   Rocket,
   Phone,
   Mail,
+  BookOpen,
 } from 'lucide-react';
 import Container from '../components/common/Container';
 import {
@@ -164,28 +165,189 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* 8-Metric Key Institutional Highlights Grid */}
-            <div className="space-y-4">
-              <h3 className="font-heading text-lg font-bold text-light-text">
-                Key Institutional Metrics & Campus Scale
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {HOST_INSTITUTION.stats.map((stat, idx) => (
-                  <div
-                    key={idx}
-                    className="rounded-2xl border border-border-dark bg-navy/70 p-4 text-center hover:border-cyan/40 transition-colors"
-                  >
-                    <span className="text-xl sm:text-2xl font-black text-cyan font-mono block">
-                      {stat.value}
-                    </span>
-                    <span className="text-xs font-bold text-light-text mt-1 block">
-                      {stat.label}
-                    </span>
-                    <span className="text-[10px] text-secondary-text mt-0.5 block">
-                      {stat.subtext}
-                    </span>
+            {/* Editorial Bento Telemetry: Institutional Scale & Metrics */}
+            <div className="space-y-4 pt-4">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-cyan block">
+                    INSTITUTIONAL METRICS // VERIFIED AUDIT
+                  </span>
+                  <h3 className="font-heading text-xl sm:text-2xl font-bold text-light-text">
+                    Campus Scale, Research Facilities & Academic Scale
+                  </h3>
+                </div>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-mono text-[10px] text-emerald-400">
+                  <CheckCircle2 className="h-3.5 w-3.5" />
+                  <span>AICTE & BEU Charter Compliant</span>
+                </span>
+              </div>
+
+              {/* Bento Grid Layout with Honest Verified Information */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {/* 1. Sprawling Campus Scale (Span 2) */}
+                <div className="sm:col-span-2 rounded-3xl border border-white/10 bg-gradient-to-br from-navy via-black to-navy p-6 relative overflow-hidden group hover:border-cyan/40 transition-colors">
+                  <div className="relative z-10 flex flex-col justify-between h-full">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-[10px] uppercase tracking-wider text-cyan bg-cyan/10 border border-cyan/30 px-2.5 py-0.5 rounded-full">
+                        CAMPUS INFRASTRUCTURE
+                      </span>
+                      <span className="text-xs font-mono text-secondary-text">Est. 2007 • AICTE Approved</span>
+                    </div>
+                    <div className="my-5">
+                      <div className="flex items-baseline gap-3">
+                        <span className="font-heading text-4xl sm:text-5xl font-black text-white tracking-tight">
+                          11 Acres
+                        </span>
+                        <span className="font-mono text-sm text-cyan font-bold">
+                          • Amhara, Bihta Campus
+                        </span>
+                      </div>
+                      <h4 className="font-heading text-base font-bold text-light-text mt-1.5">
+                        Integrated Academic & Residential Campus
+                      </h4>
+                      <p className="text-xs text-secondary-text mt-1 max-w-lg leading-relaxed">
+                        Pollution-free engineering campus situated in the Bihta educational corridor along NH-922, featuring departmental lecture halls, computer labs, and student residential blocks.
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2 pt-2 border-t border-white/10 text-[11px] font-mono text-zinc-400">
+                      <MapPin className="h-3.5 w-3.5 text-cyan" />
+                      <span>Bihta Knowledge Hub, Patna (Near IIT Patna)</span>
+                    </div>
                   </div>
-                ))}
+                  <div className="pointer-events-none absolute -bottom-10 -right-10 h-36 w-36 rounded-full bg-cyan/10 blur-[50px]" />
+                </div>
+
+                {/* 2. Academic Departments */}
+                <div className="rounded-3xl border border-white/10 bg-black/60 p-5 flex flex-col justify-between hover:border-cyan/40 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
+                      <Cpu className="h-4.5 w-4.5" />
+                    </div>
+                    <span className="text-[10px] font-mono text-secondary-text uppercase">ACADEMICS</span>
+                  </div>
+                  <div className="my-4">
+                    <span className="font-heading text-3xl font-black text-white font-mono block">
+                      5 Depts
+                    </span>
+                    <h4 className="font-heading text-sm font-bold text-light-text mt-1">
+                      Engineering Disciplines
+                    </h4>
+                    <p className="text-[11px] text-secondary-text mt-1">
+                      CSE, EEE, Mechanical & Civil Engineering.
+                    </p>
+                  </div>
+                  <span className="text-[10px] font-mono text-cyan">BEU Patna Affiliated</span>
+                </div>
+
+                {/* 3. Computing Lab */}
+                <div className="rounded-3xl border border-white/10 bg-black/60 p-5 flex flex-col justify-between hover:border-cyan/40 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
+                      <Layers className="h-4.5 w-4.5" />
+                    </div>
+                    <span className="text-[10px] font-mono text-secondary-text uppercase">COMPUTING</span>
+                  </div>
+                  <div className="my-4">
+                    <span className="font-heading text-3xl font-black text-white font-mono block">
+                      IT Labs
+                    </span>
+                    <h4 className="font-heading text-sm font-bold text-light-text mt-1">
+                      Campus Computer Center
+                    </h4>
+                    <p className="text-[11px] text-secondary-text mt-1">
+                      Desktop terminals with campus LAN network for academic sessions.
+                    </p>
+                  </div>
+                  <span className="text-[10px] font-mono text-emerald-400">Campus LAN Connected</span>
+                </div>
+
+                {/* 4. Practical Laboratories */}
+                <div className="rounded-3xl border border-white/10 bg-black/60 p-5 flex flex-col justify-between hover:border-cyan/40 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
+                      <FlaskConical className="h-4.5 w-4.5" />
+                    </div>
+                    <span className="text-[10px] font-mono text-secondary-text uppercase">LABS</span>
+                  </div>
+                  <div className="my-4">
+                    <span className="font-heading text-3xl font-black text-white font-mono block">
+                      Dept Labs
+                    </span>
+                    <h4 className="font-heading text-sm font-bold text-light-text mt-1">
+                      Workshops & Testing Labs
+                    </h4>
+                    <p className="text-[11px] text-secondary-text mt-1">
+                      Circuit testing, mechanical workshops, and civil surveying setups.
+                    </p>
+                  </div>
+                  <span className="text-[10px] font-mono text-secondary-text">Hands-On Practice</span>
+                </div>
+
+                {/* 5. College Library */}
+                <div className="rounded-3xl border border-white/10 bg-black/60 p-5 flex flex-col justify-between hover:border-cyan/40 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
+                      <BookOpen className="h-4.5 w-4.5" />
+                    </div>
+                    <span className="text-[10px] font-mono text-secondary-text uppercase">LIBRARY</span>
+                  </div>
+                  <div className="my-4">
+                    <span className="font-heading text-3xl font-black text-white font-mono block">
+                      Library
+                    </span>
+                    <h4 className="font-heading text-sm font-bold text-light-text mt-1">
+                      Central Reading Hall
+                    </h4>
+                    <p className="text-[11px] text-secondary-text mt-1">
+                      Engineering textbooks, reference material, and quiet study desks.
+                    </p>
+                  </div>
+                  <span className="text-[10px] font-mono text-cyan">Reference Collection</span>
+                </div>
+
+                {/* 6. Conference Hall */}
+                <div className="rounded-3xl border border-white/10 bg-black/60 p-5 flex flex-col justify-between hover:border-cyan/40 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
+                      <Building2 className="h-4.5 w-4.5" />
+                    </div>
+                    <span className="text-[10px] font-mono text-secondary-text uppercase">HALL</span>
+                  </div>
+                  <div className="my-4">
+                    <span className="font-heading text-3xl font-black text-white font-mono block">
+                      Auditorium
+                    </span>
+                    <h4 className="font-heading text-sm font-bold text-light-text mt-1">
+                      Air-Conditioned Hall
+                    </h4>
+                    <p className="text-[11px] text-secondary-text mt-1">
+                      Presentation hall with audio-visual equipment and tiered seating.
+                    </p>
+                  </div>
+                  <span className="text-[10px] font-mono text-amber">ETIMS 2027 Venue</span>
+                </div>
+
+                {/* 7. Student Living */}
+                <div className="rounded-3xl border border-white/10 bg-black/60 p-5 flex flex-col justify-between hover:border-cyan/40 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
+                      <Shield className="h-4.5 w-4.5" />
+                    </div>
+                    <span className="text-[10px] font-mono text-secondary-text uppercase">HOSTEL</span>
+                  </div>
+                  <div className="my-4">
+                    <span className="font-heading text-3xl font-black text-white font-mono block">
+                      Hostels
+                    </span>
+                    <h4 className="font-heading text-sm font-bold text-light-text mt-1">
+                      On-Campus Residence
+                    </h4>
+                    <p className="text-[11px] text-secondary-text mt-1">
+                      Separate residential accommodation for boys & girls with mess.
+                    </p>
+                  </div>
+                  <span className="text-[10px] font-mono text-emerald-400">Campus Accommodation</span>
+                </div>
               </div>
             </div>
 
@@ -454,7 +616,7 @@ export default function AboutPage() {
                   </div>
 
                   {/* Thumbnail Row */}
-                  <div className="mt-3 grid grid-cols-6 gap-2">
+                  <div className="mt-3 grid grid-cols-4 sm:grid-cols-7 gap-2">
                     {CAMPUS_FACILITIES.map((fac, idx) => {
                       const isSel = idx === activePhotoIdx;
                       return (

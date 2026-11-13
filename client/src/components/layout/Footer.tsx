@@ -8,7 +8,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-midnight text-light-text border-t border-border-dark overflow-hidden">
+    <footer className="relative bg-black text-light-text border-t border-white/10 overflow-hidden">
       {/* Subtle Bottom Ambient Glow */}
       <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 h-64 w-[40rem] rounded-full bg-cyan/5 blur-[120px]" />
 
@@ -20,10 +20,10 @@ export default function Footer() {
               <img
                 src="/assets/nsit-logo.png"
                 alt="NSIT Official Logo"
-                className="h-11 w-auto object-contain filter drop-shadow-[0_0_8px_rgba(53,217,232,0.3)]"
+                className="h-11 w-auto object-contain filter drop-shadow-[0_0_8px_rgba(56,189,248,0.3)]"
               />
               <div>
-                <h3 className="font-heading text-lg font-bold tracking-tight text-light-text">
+                <h3 className="font-heading text-lg font-bold tracking-tight text-white">
                   {CONFERENCE.acronym}
                 </h3>
                 <p className="text-[11px] font-mono text-cyan">
@@ -32,18 +32,18 @@ export default function Footer() {
               </div>
             </div>
 
-            <p className="text-xs leading-relaxed text-secondary-text">
+            <p className="text-xs leading-relaxed text-zinc-400">
               {CONFERENCE.name}
             </p>
 
-            <div className="rounded-2xl border border-border-dark bg-navy/60 p-4">
+            <div className="rounded-2xl border border-white/10 bg-zinc-950 p-4">
               <p className="text-[10px] font-mono uppercase tracking-wider text-cyan">
                 Host Academic Institution
               </p>
-              <p className="text-xs text-light-text mt-1 font-semibold">
+              <p className="text-xs text-white mt-1 font-semibold">
                 {HOST_INSTITUTION.name}
               </p>
-              <p className="text-[11px] text-secondary-text mt-0.5">
+              <p className="text-[11px] text-zinc-400 mt-0.5">
                 Bihta, Patna, Bihar – 801106, India
               </p>
             </div>
@@ -114,15 +114,15 @@ export default function Footer() {
               Confirmed Dates
             </h4>
             <div className="mt-4 space-y-4">
-              <div className="rounded-2xl border border-cyan/30 bg-navy/60 p-4">
+              <div className="rounded-2xl border border-white/10 bg-zinc-950 p-4">
                 <div className="flex items-center gap-2 text-xs text-cyan">
                   <Calendar className="h-4 w-4" />
                   <span className="font-mono font-semibold uppercase">National Convention</span>
                 </div>
-                <p className="mt-2 text-base font-bold text-light-text">
+                <p className="mt-2 text-base font-bold text-white">
                   {CONFERENCE.dateDisplay}
                 </p>
-                <p className="mt-0.5 text-[11px] text-secondary-text">
+                <p className="mt-0.5 text-[11px] text-zinc-400">
                   In-Person Technical Sessions at NSIT Bihta
                 </p>
               </div>
@@ -130,7 +130,7 @@ export default function Footer() {
               <Link
                 to="/submission"
                 onClick={scrollToTop}
-                className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-primary-teal to-cyan px-4 py-2.5 text-xs font-bold text-midnight shadow-md transition-all active:scale-[0.98] cursor-pointer glow-cyan-sm"
+                className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-cyan to-blue-500 px-4 py-2.5 text-xs font-bold text-black shadow-md hover:brightness-110 transition-all active:scale-[0.98] cursor-pointer"
               >
                 <span>Submit Your Manuscript</span>
                 <ExternalLink className="h-3.5 w-3.5" />
@@ -140,7 +140,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar: Copyright & Attribution */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border-dark pt-8 sm:flex-row text-xs text-secondary-text">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row text-xs text-zinc-500">
           <p>
             &copy; {new Date().getFullYear()} {CONFERENCE.acronym} &bull; Netaji Subhas Institute of Technology, Bihta, Patna. All rights reserved.
           </p>
@@ -148,7 +148,7 @@ export default function Footer() {
           <button
             type="button"
             onClick={scrollToTop}
-            className="flex items-center gap-1.5 text-xs text-secondary-text hover:text-cyan transition-colors cursor-pointer group"
+            className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-cyan transition-colors cursor-pointer group"
             aria-label="Back to Top"
           >
             <span>Back to Top</span>
