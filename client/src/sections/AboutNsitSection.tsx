@@ -153,11 +153,11 @@ export default function AboutNsitSection() {
 
             {/* Institutional Seal Lockup */}
             <div className="flex items-center gap-4 rounded-2xl border border-border-dark bg-navy/60 p-4 backdrop-blur-xs w-full min-w-0">
-              <div className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl bg-white p-1 shadow-md ring-1 ring-white/20">
+              <div className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-slate-900/90 border border-white/15 ring-1 ring-cyan/30 p-1 shadow-md">
                 <img
                   src="/assets/nsit-seal.png"
                   alt="NSIT Official Seal"
-                  className="h-full w-full object-contain"
+                  className="h-full w-full object-contain drop-shadow-md"
                 />
               </div>
               <div className="min-w-0">

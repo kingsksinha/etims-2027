@@ -17,11 +17,11 @@ export default function Footer() {
           {/* Column 1: Institutional Leadership & Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white p-1 shadow-sm ring-1 ring-white/20">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-900/90 border border-white/15 ring-1 ring-cyan/30 p-1 shadow-sm">
                 <img
                   src="/assets/nsit-seal.png"
                   alt="NSIT Official Seal"
-                  className="h-full w-full object-contain"
+                  className="h-full w-full object-contain drop-shadow-md"
                 />
               </div>
               <div>

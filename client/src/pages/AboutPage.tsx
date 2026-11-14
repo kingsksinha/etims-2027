@@ -58,14 +58,14 @@ export default function AboutPage() {
       <div className="pointer-events-none absolute top-10 left-1/4 h-96 w-96 rounded-full bg-cyan/10 blur-[140px]" />
       <div className="pointer-events-none absolute bottom-20 right-10 h-96 w-96 rounded-full bg-primary-teal/10 blur-[150px]" />
 
-      <Container className="relative z-10">
+      <Container className="relative z-10 w-full min-w-0">
         {/* Page Header */}
-        <div className="mb-10 sm:mb-14">
+        <div className="mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan/40 bg-navy/80 px-4 py-1.5 text-xs font-mono font-semibold text-cyan mb-4 glow-cyan-sm">
             <Building2 className="h-3.5 w-3.5" />
             <span>Host Academic Institution Profile</span>
           </div>
-          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-light-text">
+          <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-light-text break-words leading-tight">
             Netaji Subhas Institute of Technology{' '}
             <span className="text-cyan text-glow-cyan">& ETIMS 2027</span>
           </h1>
@@ -74,7 +74,7 @@ export default function AboutPage() {
           </p>
 
           {/* Sub-Tabs Switcher Bar */}
-          <div className="mt-8 flex flex-wrap items-center gap-2 border-b border-border-dark pb-4">
+          <div className="mt-6 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-border-dark w-full min-w-0">
             {SUB_TABS.map((tab) => {
               const isSelected = activeSubTab === tab.id;
               return (
@@ -82,10 +82,10 @@ export default function AboutPage() {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveSubTab(tab.id)}
-                  className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                  className={`flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                     isSelected
                       ? 'bg-gradient-to-r from-primary-teal to-cyan text-midnight shadow-md glow-cyan-sm'
-                      : 'bg-navy/60 text-secondary-text hover:text-light-text hover:bg-navy'
+                      : 'bg-navy/60 text-secondary-text hover:text-light-text hover:bg-navy border border-white/5'
                   }`}
                 >
                   {tab.icon}
@@ -108,18 +108,18 @@ export default function AboutPage() {
             <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
               <div className="lg:col-span-7 space-y-5">
                 <div className="flex items-center gap-3.5">
-                  <div className="flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-2xl bg-white p-1.5 shadow-lg ring-1 ring-white/20">
+                  <div className="flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-full bg-slate-900/90 border border-white/15 ring-1 ring-cyan/30 p-1.5 shadow-lg">
                     <img
                       src="/assets/nsit-seal.png"
                       alt="NSIT Official Seal"
-                      className="h-full w-full object-contain"
+                      className="h-full w-full object-contain drop-shadow-md"
                     />
                   </div>
-                  <div>
-                    <h2 className="font-heading text-xl sm:text-2xl font-bold text-light-text">
+                  <div className="min-w-0">
+                    <h2 className="font-heading text-lg sm:text-2xl font-bold text-light-text truncate">
                       {HOST_INSTITUTION.name}
                     </h2>
-                    <p className="text-xs font-mono text-cyan flex items-center gap-1.5 mt-0.5">
+                    <p className="text-xs font-mono text-cyan flex items-center gap-1.5 mt-0.5 truncate">
                       <MapPin className="h-3.5 w-3.5 shrink-0" />
                       <span>{HOST_INSTITUTION.fullAddress}</span>
                     </p>

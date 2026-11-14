@@ -73,20 +73,24 @@ export default function Navbar() {
             onClick={handleNavClick}
             aria-label="ETIMS 2027 Conference Home"
           >
-            <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-white p-1 shadow-md ring-1 ring-white/20 transition-transform group-hover:scale-105">
+            <div className="relative flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full bg-slate-900/90 border border-white/15 ring-1 ring-cyan/25 p-1 shadow-md transition-transform duration-300 group-hover:scale-105">
               <img
                 src="/assets/nsit-seal.png"
                 alt="NSIT Official Seal"
-                className="h-full w-full object-contain"
+                className="h-full w-full object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
               />
             </div>
             <div className="flex flex-col min-w-0">
               <div className="flex items-center gap-1.5 leading-tight">
-                <span className="font-heading text-sm sm:text-base font-extrabold tracking-tight text-white">
+                <span className="font-heading text-sm sm:text-base font-extrabold tracking-tight text-white group-hover:text-cyan transition-colors">
                   ETIMS
                 </span>
                 <span className="font-heading text-sm sm:text-base font-extrabold text-cyan">
                   2027
+                </span>
+                <span className="hidden md:inline-block h-3.5 w-px bg-white/20 mx-1" />
+                <span className="hidden md:inline-block text-[11px] font-heading font-medium text-zinc-300 tracking-wide truncate">
+                  Netaji Subhas Institute of Technology
                 </span>
               </div>
               <span className="text-[9px] sm:text-[11px] uppercase tracking-wider text-zinc-400 font-mono truncate hidden sm:inline">
@@ -179,7 +183,7 @@ export default function Navbar() {
               {/* Drawer Header */}
               <div className="flex items-center justify-between border-b border-border-dark px-5 py-4 bg-navy/60">
                 <div className="flex items-center gap-2.5">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white p-1 shadow-sm ring-1 ring-white/20">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-900/90 border border-white/15 ring-1 ring-cyan/25 p-1 shadow-sm">
                     <img
                       src="/assets/nsit-seal.png"
                       alt="NSIT Official Seal"
