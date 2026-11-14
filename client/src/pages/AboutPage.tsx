@@ -107,18 +107,20 @@ export default function AboutPage() {
             {/* Hero Profile Lockup */}
             <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
               <div className="lg:col-span-7 space-y-5">
-                <div className="flex items-center gap-3">
-                  <img
-                    src="/assets/nsit-logo.png"
-                    alt="NSIT Official Emblem"
-                    className="h-12 w-auto object-contain filter drop-shadow-[0_0_10px_rgba(53,217,232,0.4)]"
-                  />
+                <div className="flex items-center gap-3.5">
+                  <div className="flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-2xl bg-white p-1.5 shadow-lg ring-1 ring-white/20">
+                    <img
+                      src="/assets/nsit-seal.png"
+                      alt="NSIT Official Seal"
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
                   <div>
                     <h2 className="font-heading text-xl sm:text-2xl font-bold text-light-text">
                       {HOST_INSTITUTION.name}
                     </h2>
                     <p className="text-xs font-mono text-cyan flex items-center gap-1.5 mt-0.5">
-                      <MapPin className="h-3.5 w-3.5" />
+                      <MapPin className="h-3.5 w-3.5 shrink-0" />
                       <span>{HOST_INSTITUTION.fullAddress}</span>
                     </p>
                   </div>

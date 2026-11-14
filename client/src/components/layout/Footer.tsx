@@ -17,11 +17,13 @@ export default function Footer() {
           {/* Column 1: Institutional Leadership & Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <img
-                src="/assets/nsit-logo.png"
-                alt="NSIT Official Logo"
-                className="h-11 w-auto object-contain filter drop-shadow-[0_0_8px_rgba(56,189,248,0.3)]"
-              />
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white p-1 shadow-sm ring-1 ring-white/20">
+                <img
+                  src="/assets/nsit-seal.png"
+                  alt="NSIT Official Seal"
+                  className="h-full w-full object-contain"
+                />
+              </div>
               <div>
                 <h3 className="font-heading text-lg font-bold tracking-tight text-white">
                   {CONFERENCE.acronym}

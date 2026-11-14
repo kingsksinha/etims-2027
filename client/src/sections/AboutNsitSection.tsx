@@ -153,11 +153,13 @@ export default function AboutNsitSection() {
 
             {/* Institutional Seal Lockup */}
             <div className="flex items-center gap-4 rounded-2xl border border-border-dark bg-navy/60 p-4 backdrop-blur-xs w-full min-w-0">
-              <img
-                src="/assets/nsit-logo.png"
-                alt="NSIT Official Emblem"
-                className="h-10 sm:h-12 w-auto max-w-[140px] sm:max-w-none object-contain filter drop-shadow-[0_0_8px_rgba(53,217,232,0.3)] shrink-0"
-              />
+              <div className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl bg-white p-1 shadow-md ring-1 ring-white/20">
+                <img
+                  src="/assets/nsit-seal.png"
+                  alt="NSIT Official Seal"
+                  className="h-full w-full object-contain"
+                />
+              </div>
               <div className="min-w-0">
                 <span className="text-[10px] font-mono uppercase tracking-wider text-cyan block truncate">
                   Institutional Host

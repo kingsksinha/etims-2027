@@ -66,24 +66,26 @@ export default function Navbar() {
           aria-label="Main Navigation"
           className="mx-auto flex max-w-7xl items-center justify-between px-3.5 sm:px-6 lg:px-8 w-full min-w-0"
         >
-          {/* Brand Identity: Official NSIT Logo + ETIMS 2027 Typography */}
+          {/* Brand Identity: Official NSIT Seal + ETIMS 2027 Typography */}
           <Link
             to="/"
             className="flex items-center gap-2.5 sm:gap-3 group min-w-0 shrink"
             onClick={handleNavClick}
             aria-label="ETIMS 2027 Conference Home"
           >
-            <img
-              src="/assets/nsit-logo.png"
-              alt="NSIT Official Logo"
-              className="h-8 sm:h-9 max-w-[125px] sm:max-w-none w-auto object-contain transition-transform group-hover:scale-105 filter drop-shadow-[0_0_8px_rgba(56,189,248,0.35)] shrink-0"
-            />
+            <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-white p-1 shadow-md ring-1 ring-white/20 transition-transform group-hover:scale-105">
+              <img
+                src="/assets/nsit-seal.png"
+                alt="NSIT Official Seal"
+                className="h-full w-full object-contain"
+              />
+            </div>
             <div className="flex flex-col min-w-0">
               <div className="flex items-center gap-1.5 leading-tight">
-                <span className="font-heading text-sm sm:text-lg font-bold tracking-tight text-white">
+                <span className="font-heading text-sm sm:text-base font-extrabold tracking-tight text-white">
                   ETIMS
                 </span>
-                <span className="font-heading text-sm sm:text-lg font-extrabold text-cyan">
+                <span className="font-heading text-sm sm:text-base font-extrabold text-cyan">
                   2027
                 </span>
               </div>
@@ -177,17 +179,19 @@ export default function Navbar() {
               {/* Drawer Header */}
               <div className="flex items-center justify-between border-b border-border-dark px-5 py-4 bg-navy/60">
                 <div className="flex items-center gap-2.5">
-                  <img
-                    src="/assets/nsit-logo.png"
-                    alt="NSIT Official Logo"
-                    className="h-9 w-auto object-contain"
-                  />
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white p-1 shadow-sm ring-1 ring-white/20">
+                    <img
+                      src="/assets/nsit-seal.png"
+                      alt="NSIT Official Seal"
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
                   <div>
                     <div className="flex items-center gap-1 leading-none">
                       <span className="font-heading text-lg font-bold text-light-text">ETIMS</span>
                       <span className="font-heading text-lg font-extrabold text-cyan">2027</span>
                     </div>
-                    <span className="text-[10px] uppercase font-mono text-cyan tracking-wide">
+                    <span className="text-[10px] uppercase font-mono text-zinc-400 tracking-wide">
                       NSIT Bihta, Patna
                     </span>
                   </div>
