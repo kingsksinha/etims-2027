@@ -178,26 +178,26 @@ export default function HomePage() {
                   </div>
 
                   {/* Convenor Snapshot */}
-                  <div className="rounded-2xl border border-cyan/30 bg-midnight/90 p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="flex items-center gap-4">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-cyan/20 border border-cyan/40 text-cyan font-bold text-xl">
+                  <div className="rounded-2xl border border-cyan/30 bg-midnight/90 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full min-w-0">
+                    <div className="flex items-center gap-3.5 sm:gap-4 w-full min-w-0">
+                      <div className="flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl bg-cyan/20 border border-cyan/40 text-cyan font-bold text-lg sm:text-xl">
                         AH
                       </div>
-                      <div>
+                      <div className="min-w-0 flex-1">
                         <span className="text-[10px] font-mono text-cyan uppercase block">
                           Conference Convenor
                         </span>
-                        <h4 className="font-heading text-lg font-bold text-light-text">
+                        <h4 className="font-heading text-base sm:text-lg font-bold text-light-text truncate">
                           {CONVENOR.name}
                         </h4>
-                        <p className="text-xs text-secondary-text">
-                          Assistant Professor, Dept. of Electrical & Electronics Engineering, NSIT Bihta
+                        <p className="text-xs text-secondary-text truncate">
+                          Assistant Professor, Dept. of Electrical & Electronics Engineering
                         </p>
                       </div>
                     </div>
 
-                    <div className="text-xs font-mono text-right space-y-1">
-                      <a href={`mailto:${CONVENOR.email}`} className="text-cyan block hover:underline">
+                    <div className="text-xs font-mono text-left sm:text-right space-y-1 w-full sm:w-auto shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border-dark/60">
+                      <a href={`mailto:${CONVENOR.email}`} className="text-cyan block hover:underline break-all">
                         {CONVENOR.email}
                       </a>
                       <a href={`tel:${CONVENOR.phoneTel}`} className="text-light-text block hover:underline">

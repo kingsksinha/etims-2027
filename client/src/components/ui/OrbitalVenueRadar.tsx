@@ -209,47 +209,50 @@ export default function OrbitalVenueRadar() {
           </div>
         </div>
 
-        {/* View Switcher Pills */}
-        <div className="flex items-center rounded-full border border-white/10 bg-zinc-900/90 p-1">
+        {/* View Switcher Pills — Responsive Grid on Mobile */}
+        <div className="w-full sm:w-auto grid grid-cols-3 sm:flex items-center rounded-2xl sm:rounded-full border border-white/10 bg-zinc-900/90 p-1 gap-1">
           <button
             type="button"
             onClick={() => setActiveTab('3d-globe')}
-            className={`rounded-full px-3.5 py-1 text-xs font-mono font-medium transition-all cursor-pointer ${
+            className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-medium transition-all cursor-pointer text-center truncate ${
               activeTab === '3d-globe'
                 ? 'bg-cyan-500 text-black font-bold shadow-[0_0_12px_rgba(6,182,212,0.6)]'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            3D Interactive Earth
+            <span className="sm:hidden">3D Earth</span>
+            <span className="hidden sm:inline">3D Interactive Earth</span>
           </button>
           <button
             type="button"
             onClick={() => setActiveTab('facilities')}
-            className={`rounded-full px-3.5 py-1 text-xs font-mono font-medium transition-all cursor-pointer ${
+            className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-medium transition-all cursor-pointer text-center truncate ${
               activeTab === 'facilities'
                 ? 'bg-cyan-500 text-black font-bold shadow-[0_0_12px_rgba(6,182,212,0.6)]'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            Campus Facilities
+            <span className="sm:hidden">Facilities</span>
+            <span className="hidden sm:inline">Campus Facilities</span>
           </button>
           <button
             type="button"
             onClick={() => setActiveTab('transit')}
-            className={`rounded-full px-3.5 py-1 text-xs font-mono font-medium transition-all cursor-pointer ${
+            className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-medium transition-all cursor-pointer text-center truncate ${
               activeTab === 'transit'
                 ? 'bg-cyan-500 text-black font-bold shadow-[0_0_12px_rgba(6,182,212,0.6)]'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            Transit & Routes
+            <span className="sm:hidden">Transit</span>
+            <span className="hidden sm:inline">Transit & Routes</span>
           </button>
         </div>
       </div>
 
       {/* TAB 1: 3D INTERACTIVE EARTH (FUN, SMOOTH, 60 FPS, NOT LAGGY) */}
       {activeTab === '3d-globe' && (
-        <div className="p-4 sm:p-6 bg-black space-y-6">
+        <div className="p-3 sm:p-6 bg-black space-y-4 sm:space-y-6">
           {/* Instructions Bar */}
           <div className="flex flex-wrap items-center justify-between gap-3 px-2">
             <div className="flex items-center gap-2 text-xs font-mono text-zinc-300">

@@ -31,7 +31,7 @@ export default function CommitteeSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
-            className="rounded-3xl border border-cyan/40 bg-gradient-to-b from-navy to-midnight p-7 sm:p-9 shadow-2xl glow-cyan-sm lg:col-span-7"
+            className="rounded-3xl border border-cyan/40 bg-gradient-to-b from-navy to-midnight p-5 sm:p-8 shadow-2xl glow-cyan-sm lg:col-span-7 w-full min-w-0"
           >
             <div className="flex items-center justify-between border-b border-border-dark pb-4">
               <span className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan">
@@ -42,9 +42,9 @@ export default function CommitteeSection() {
               </span>
             </div>
 
-            <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <div className="relative flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan/20 via-navy to-midnight border border-cyan/40 text-cyan shadow-xl glow-cyan-sm">
-                <span className="font-heading text-3xl font-black text-cyan tracking-wider">
+            <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 w-full min-w-0">
+              <div className="relative flex h-20 w-20 sm:h-24 sm:w-24 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan/20 via-navy to-midnight border border-cyan/40 text-cyan shadow-xl glow-cyan-sm">
+                <span className="font-heading text-2xl sm:text-3xl font-black text-cyan tracking-wider">
                   AH
                 </span>
                 <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-midnight border border-cyan">
@@ -52,35 +52,35 @@ export default function CommitteeSection() {
                 </span>
               </div>
 
-              <div>
+              <div className="min-w-0 flex-1">
                 <span className="text-xs font-mono uppercase tracking-wider text-mint block">
                   Assistant Professor & Conference Convenor
                 </span>
-                <h3 className="mt-1 font-heading text-2xl sm:text-3xl font-extrabold text-light-text text-glow-cyan">
+                <h3 className="mt-1 font-heading text-xl sm:text-2xl md:text-3xl font-extrabold text-light-text text-glow-cyan truncate">
                   {CONVENOR.name}
                 </h3>
-                <p className="mt-1.5 text-sm sm:text-base text-secondary-text flex items-center gap-2">
+                <p className="mt-1.5 text-xs sm:text-sm md:text-base text-secondary-text flex items-center gap-2">
                   <Building className="h-4 w-4 text-cyan shrink-0" />
-                  <span>{CONVENOR.institution}, {CONVENOR.campus}</span>
+                  <span className="truncate">{CONVENOR.institution}, {CONVENOR.campus}</span>
                 </p>
-                <p className="text-xs sm:text-sm text-secondary-text mt-1 font-mono">
+                <p className="text-xs sm:text-sm text-secondary-text mt-1 font-mono truncate">
                   Department of {CONVENOR.department}
                 </p>
               </div>
             </div>
 
             {/* Direct Communication Channels */}
-            <div className="mt-8 pt-6 border-t border-border-dark flex flex-col sm:flex-row gap-3 text-xs font-mono">
+            <div className="mt-8 pt-6 border-t border-border-dark flex flex-col sm:flex-row gap-3 text-xs font-mono w-full min-w-0">
               <a
                 href={`mailto:${CONVENOR.email}`}
-                className="flex items-center gap-2.5 rounded-xl border border-border-dark bg-midnight px-4 py-2.5 font-medium text-light-text hover:border-cyan hover:text-cyan transition-colors"
+                className="flex items-center justify-center gap-2.5 rounded-xl border border-border-dark bg-midnight px-4 py-2.5 font-medium text-light-text hover:border-cyan hover:text-cyan transition-colors min-w-0"
               >
                 <Mail className="h-4 w-4 text-cyan shrink-0" />
-                <span className="truncate">{CONVENOR.email}</span>
+                <span className="break-all">{CONVENOR.email}</span>
               </a>
               <a
                 href={`tel:${CONVENOR.phoneTel}`}
-                className="flex items-center gap-2.5 rounded-xl border border-border-dark bg-midnight px-4 py-2.5 font-medium text-light-text hover:border-cyan hover:text-cyan transition-colors"
+                className="flex items-center justify-center gap-2.5 rounded-xl border border-border-dark bg-midnight px-4 py-2.5 font-medium text-light-text hover:border-cyan hover:text-cyan transition-colors shrink-0"
               >
                 <Phone className="h-4 w-4 text-cyan shrink-0" />
                 <span>{CONVENOR.phone}</span>

@@ -68,11 +68,11 @@ export default function CommitteesPage() {
           </p>
 
           {/* Featured Convenor Profile Banner */}
-          <div className="mt-8 rounded-3xl border border-cyan/40 bg-gradient-to-r from-navy via-midnight to-navy p-6 sm:p-8 shadow-2xl glow-cyan-sm">
-            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-              <div className="flex items-center gap-5">
-                <div className="relative flex h-20 w-20 sm:h-24 sm:w-24 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan/20 to-primary-teal/30 border border-cyan/40 text-cyan shadow-xl glow-cyan-sm">
-                  <span className="font-heading text-3xl sm:text-4xl font-black text-cyan">
+          <div className="mt-8 rounded-3xl border border-cyan/40 bg-gradient-to-r from-navy via-midnight to-navy p-4 sm:p-7 md:p-8 shadow-2xl glow-cyan-sm w-full min-w-0">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 w-full min-w-0">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 w-full min-w-0">
+                <div className="relative flex h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan/20 to-primary-teal/30 border border-cyan/40 text-cyan shadow-xl glow-cyan-sm">
+                  <span className="font-heading text-2xl sm:text-3xl md:text-4xl font-black text-cyan">
                     AH
                   </span>
                   <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-midnight border border-cyan">
@@ -80,39 +80,39 @@ export default function CommitteesPage() {
                   </span>
                 </div>
 
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="rounded-full bg-cyan/15 border border-cyan/30 px-3 py-0.5 text-xs font-mono font-bold text-cyan">
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="rounded-full bg-cyan/15 border border-cyan/30 px-3 py-0.5 text-[11px] font-mono font-bold text-cyan">
                       Conference Convenor
                     </span>
                     <span className="text-[10px] font-mono text-mint uppercase">
                       Primary Liaison
                     </span>
                   </div>
-                  <h3 className="font-heading text-xl sm:text-2xl font-extrabold text-light-text mt-1">
+                  <h3 className="font-heading text-lg sm:text-xl md:text-2xl font-extrabold text-light-text mt-1 truncate">
                     {CONVENOR.name}
                   </h3>
-                  <p className="text-xs sm:text-sm text-secondary-text">
+                  <p className="text-xs sm:text-sm text-secondary-text leading-snug">
                     Assistant Professor, Department of Electrical & Electronics Engineering
                   </p>
-                  <p className="text-xs font-mono text-cyan/90 mt-0.5">
+                  <p className="text-xs font-mono text-cyan/90 mt-0.5 break-words">
                     {CONVENOR.institution}, {CONVENOR.campus}
                   </p>
                 </div>
               </div>
 
               {/* Direct Convenor Contacts */}
-              <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto text-xs font-mono">
+              <div className="flex flex-col sm:flex-row gap-2.5 w-full lg:w-auto text-xs font-mono min-w-0">
                 <a
                   href={`mailto:${CONVENOR.email}`}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-cyan/30 bg-midnight/80 px-4 py-2.5 text-light-text hover:border-cyan hover:text-cyan transition-colors"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-cyan/30 bg-midnight/80 px-3.5 py-2.5 text-light-text hover:border-cyan hover:text-cyan transition-colors min-w-0"
                 >
                   <Mail className="h-4 w-4 text-cyan shrink-0" />
-                  <span>{CONVENOR.email}</span>
+                  <span className="break-all">{CONVENOR.email}</span>
                 </a>
                 <a
                   href={`tel:${CONVENOR.phoneTel}`}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-cyan/30 bg-midnight/80 px-4 py-2.5 text-light-text hover:border-cyan hover:text-cyan transition-colors"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-cyan/30 bg-midnight/80 px-3.5 py-2.5 text-light-text hover:border-cyan hover:text-cyan transition-colors shrink-0"
                 >
                   <Phone className="h-4 w-4 text-cyan shrink-0" />
                   <span>{CONVENOR.phone}</span>
@@ -122,9 +122,9 @@ export default function CommitteesPage() {
           </div>
 
           {/* Search & Filter Bar */}
-          <div className="mt-8 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 border-b border-border-dark pb-6">
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap items-center gap-2">
+          <div className="mt-8 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 border-b border-border-dark pb-6 w-full min-w-0">
+            {/* Category Filter Pills (Smooth Horizontal Touch Scroll on Mobile) */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none w-full max-w-full -mx-1 px-1">
               {FILTER_CATEGORIES.map((cat) => {
                 const isSelected = selectedCategory === cat;
                 return (
@@ -132,7 +132,7 @@ export default function CommitteesPage() {
                     key={cat}
                     type="button"
                     onClick={() => setSelectedCategory(cat)}
-                    className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${
+                    className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                       isSelected
                         ? 'bg-gradient-to-r from-cyan to-primary-teal text-midnight shadow-md glow-cyan-sm'
                         : 'bg-navy/70 border border-border-dark text-secondary-text hover:text-light-text hover:border-cyan/40'
@@ -145,7 +145,7 @@ export default function CommitteesPage() {
             </div>
 
             {/* Keyword Search */}
-            <div className="relative min-w-[260px]">
+            <div className="relative w-full md:w-auto md:min-w-[280px] shrink-0">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-secondary-text" />
               <input
                 type="text"
@@ -187,33 +187,33 @@ export default function CommitteesPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.25, delay: index * 0.04 }}
-                className="flex flex-col justify-between rounded-3xl border border-border-dark bg-navy/70 p-6 backdrop-blur-md hover:border-cyan/40 hover:shadow-xl transition-all"
+                className="flex flex-col justify-between rounded-3xl border border-border-dark bg-navy/70 p-5 sm:p-6 backdrop-blur-md hover:border-cyan/40 hover:shadow-xl transition-all w-full min-w-0 overflow-hidden"
               >
-                <div>
+                <div className="w-full min-w-0">
                   {/* Card Header: Badge & Category */}
-                  <div className="flex items-center justify-between gap-2 border-b border-border-dark pb-3">
-                    <span className="rounded-full bg-cyan/15 border border-cyan/30 px-2.5 py-0.5 text-[10px] font-mono font-bold text-cyan truncate">
+                  <div className="flex items-center justify-between gap-2 border-b border-border-dark pb-3 min-w-0">
+                    <span className="rounded-full bg-cyan/15 border border-cyan/30 px-2.5 py-0.5 text-[10px] font-mono font-bold text-cyan shrink-0">
                       {team.badge}
                     </span>
-                    <span className="text-[10px] font-mono text-secondary-text truncate">
+                    <span className="text-[10px] font-mono text-secondary-text truncate min-w-0 text-right">
                       {team.taskCategory}
                     </span>
                   </div>
 
                   {/* Task Title */}
-                  <h3 className="font-heading text-base font-bold text-light-text mt-3">
+                  <h3 className="font-heading text-base font-bold text-light-text mt-3 break-words">
                     {team.taskTitle}
                   </h3>
 
                   {/* Faculty Lead Details */}
-                  <div className="mt-3 rounded-2xl border border-border-dark/80 bg-midnight/80 p-3.5 space-y-1">
+                  <div className="mt-3 rounded-2xl border border-border-dark/80 bg-midnight/80 p-3.5 space-y-1 min-w-0">
                     <span className="text-[10px] font-mono uppercase text-mint block">
                       In-Charge Faculty Lead
                     </span>
-                    <p className="font-heading text-sm font-bold text-light-text">
+                    <p className="font-heading text-sm font-bold text-light-text break-words">
                       {team.leadName}
                     </p>
-                    <p className="text-xs text-secondary-text">
+                    <p className="text-xs text-secondary-text break-words">
                       {team.leadDesignation}
                     </p>
                     <p className="text-[11px] text-secondary-text font-mono truncate">
@@ -222,15 +222,15 @@ export default function CommitteesPage() {
                   </div>
 
                   {/* Responsibilities List */}
-                  <div className="mt-4 space-y-2">
+                  <div className="mt-4 space-y-2 min-w-0">
                     <span className="text-[11px] font-mono uppercase text-cyan block tracking-wider">
                       Specific Task Responsibilities:
                     </span>
                     <ul className="space-y-1.5 text-xs text-secondary-text">
                       {team.responsibilities.map((resp, i) => (
-                        <li key={i} className="flex items-start gap-2">
+                        <li key={i} className="flex items-start gap-2 min-w-0">
                           <CheckCircle2 className="h-3.5 w-3.5 text-cyan shrink-0 mt-0.5" />
-                          <span className="leading-snug">{resp}</span>
+                          <span className="leading-snug break-words">{resp}</span>
                         </li>
                       ))}
                     </ul>
@@ -238,12 +238,12 @@ export default function CommitteesPage() {
                 </div>
 
                 {/* Card Footer: Institution / Contacts */}
-                <div className="mt-5 pt-4 border-t border-border-dark flex items-center justify-between text-[11px] text-secondary-text">
-                  <span className="truncate">{team.institution}</span>
+                <div className="mt-5 pt-4 border-t border-border-dark flex items-center justify-between gap-2 text-[11px] text-secondary-text min-w-0">
+                  <span className="truncate min-w-0">{team.institution}</span>
                   {team.contactEmail && (
                     <a
                       href={`mailto:${team.contactEmail}`}
-                      className="font-mono text-cyan hover:underline shrink-0"
+                      className="font-mono text-cyan hover:underline shrink-0 text-right"
                     >
                       Email Desk
                     </a>
