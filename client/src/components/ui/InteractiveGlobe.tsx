@@ -52,6 +52,144 @@ function latLonToVector3(lat: number, lon: number, radius: number): THREE.Vector
   return new THREE.Vector3(x, y, z);
 }
 
+// Generate 0ms Instant Procedural Earth Canvas Texture (Frame 0 display - never an empty dark sphere!)
+function createInstantProceduralEarthTexture(): THREE.CanvasTexture {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1024;
+  canvas.height = 512;
+  const ctx = canvas.getContext('2d')!;
+
+  // 1. Deep Ocean Base Gradient
+  const oceanGrad = ctx.createLinearGradient(0, 0, 0, 512);
+  oceanGrad.addColorStop(0, '#041226');
+  oceanGrad.addColorStop(0.5, '#082548');
+  oceanGrad.addColorStop(1, '#041226');
+  ctx.fillStyle = oceanGrad;
+  ctx.fillRect(0, 0, 1024, 512);
+
+  // 2. Latitude & Longitude Coordinate Graticule Grid
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.16)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x <= 1024; x += 1024 / 12) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, 512);
+    ctx.stroke();
+  }
+  for (let y = 0; y <= 512; y += 512 / 12) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(1024, y);
+    ctx.stroke();
+  }
+
+  // Equator & Prime Meridian highlight
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(0, 256);
+  ctx.lineTo(1024, 256);
+  ctx.stroke();
+
+  // 3. Vector Continents
+  ctx.fillStyle = 'rgba(16, 185, 129, 0.32)';
+  ctx.strokeStyle = 'rgba(52, 211, 153, 0.75)';
+  ctx.lineWidth = 1.8;
+
+  // Eurasia & India Subcontinent
+  ctx.beginPath();
+  ctx.moveTo(490, 160);
+  ctx.lineTo(520, 130);
+  ctx.lineTo(590, 110);
+  ctx.lineTo(720, 100);
+  ctx.lineTo(840, 110);
+  ctx.lineTo(870, 150);
+  ctx.lineTo(840, 180);
+  ctx.lineTo(810, 230);
+  ctx.lineTo(765, 270);
+  ctx.lineTo(735, 240); // Bay of Bengal / India East
+  ctx.lineTo(753, 183); // Patna / Bihar / Himalayas
+  ctx.lineTo(715, 225); // Gujarat / India West
+  ctx.lineTo(665, 215); // Arabian Peninsula
+  ctx.lineTo(610, 190);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // Africa
+  ctx.beginPath();
+  ctx.moveTo(490, 210);
+  ctx.lineTo(590, 210);
+  ctx.lineTo(630, 260);
+  ctx.lineTo(580, 365);
+  ctx.lineTo(515, 345);
+  ctx.lineTo(460, 260);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // North America & Greenland
+  ctx.beginPath();
+  ctx.moveTo(175, 75);
+  ctx.lineTo(310, 75);
+  ctx.lineTo(345, 120);
+  ctx.lineTo(290, 175);
+  ctx.lineTo(260, 235);
+  ctx.lineTo(220, 255);
+  ctx.lineTo(190, 190);
+  ctx.lineTo(155, 130);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // South America
+  ctx.beginPath();
+  ctx.moveTo(230, 265);
+  ctx.lineTo(315, 295);
+  ctx.lineTo(285, 415);
+  ctx.lineTo(240, 365);
+  ctx.lineTo(220, 295);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // Australia
+  ctx.beginPath();
+  ctx.moveTo(800, 315);
+  ctx.lineTo(885, 315);
+  ctx.lineTo(875, 385);
+  ctx.lineTo(790, 375);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // Antarctica
+  ctx.beginPath();
+  ctx.moveTo(0, 480);
+  ctx.lineTo(1024, 480);
+  ctx.lineTo(1024, 512);
+  ctx.lineTo(0, 512);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // Bihar, India Glowing Target Pin on Procedural Texture (x: 753, y: 183)
+  ctx.fillStyle = '#22d3ee';
+  ctx.beginPath();
+  ctx.arc(753, 183, 4, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = 'rgba(34, 211, 238, 0.8)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.arc(753, 183, 10, 0, Math.PI * 2);
+  ctx.stroke();
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
+}
+
 // 7 Verified Street-Level Campus Hotspots with Authentic Photographic Evidence
 const STREET_LEVEL_HOTSPOTS = [
   {
@@ -111,6 +249,7 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
   const [autoRotate, setAutoRotate] = useState(false);
   const [isZoomedIn, setIsZoomedIn] = useState(false);
   const [isFlying, setIsFlying] = useState(false);
+  const [nasaFeedStatus, setNasaFeedStatus] = useState<'instant' | 'ready'>('instant');
   const [flightTelemetry, setFlightTelemetry] = useState<{
     stage: string;
     altitude: string;
@@ -323,37 +462,51 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
     const earthRadius = 1.35;
     const textureLoader = new THREE.TextureLoader();
 
-    // 4. Real NASA Blue Marble High-Resolution Earth Map
-    const earthDayTexture = textureLoader.load('/assets/earth_daymap.jpg', () => {
-      renderer.render(scene, camera);
-    });
-    earthDayTexture.colorSpace = THREE.SRGBColorSpace;
+    // 4. Instant 0ms Procedural Earth Texture (Frame 0 display - never blank/black!)
+    const instantProceduralTexture = createInstantProceduralEarthTexture();
 
     const earthGeometry = new THREE.SphereGeometry(earthRadius, 64, 64);
     const earthMaterial = new THREE.MeshPhongMaterial({
-      map: earthDayTexture,
+      map: instantProceduralTexture,
       shininess: 22,
       specular: new THREE.Color(0x38bdf8),
-      emissive: new THREE.Color(0x030816),
-      emissiveIntensity: 0.25,
+      emissive: new THREE.Color(0x040e20),
+      emissiveIntensity: 0.35,
     });
 
     const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
     globeGroup.add(earthMesh);
 
-    // 5. Photorealistic Cloud Mesh Layer
-    const cloudsTexture = textureLoader.load('/assets/earth_clouds.png');
+    // Progressive upgrade to full-resolution NASA Blue Marble satellite map
+    let loadedEarthTexture: THREE.Texture | null = null;
+    textureLoader.load('/assets/earth_daymap.jpg', (loadedTexture) => {
+      loadedEarthTexture = loadedTexture;
+      loadedTexture.colorSpace = THREE.SRGBColorSpace;
+      earthMaterial.map = loadedTexture;
+      earthMaterial.needsUpdate = true;
+      setNasaFeedStatus('ready');
+      renderer.render(scene, camera);
+    });
+
+    // 5. Photorealistic Cloud Mesh Layer (Fades in when loaded)
+    let loadedCloudsTexture: THREE.Texture | null = null;
     const cloudsGeometry = new THREE.SphereGeometry(earthRadius * 1.012, 64, 64);
     const cloudsMaterial = new THREE.MeshPhongMaterial({
-      map: cloudsTexture,
       transparent: true,
-      opacity: 0.4,
+      opacity: 0,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     });
     const cloudsMesh = new THREE.Mesh(cloudsGeometry, cloudsMaterial);
     cloudsMeshRef.current = cloudsMesh;
     globeGroup.add(cloudsMesh);
+
+    textureLoader.load('/assets/earth_clouds.png', (loadedClouds) => {
+      loadedCloudsTexture = loadedClouds;
+      cloudsMaterial.map = loadedClouds;
+      cloudsMaterial.opacity = 0.42;
+      cloudsMaterial.needsUpdate = true;
+    });
 
     // 6. Atmospheric Scattering Outer Glow Layer (Fresnel Halo)
     const atmosphereGeometry = new THREE.SphereGeometry(earthRadius * 1.055, 64, 64);
@@ -577,10 +730,11 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
 
       earthGeometry.dispose();
       earthMaterial.dispose();
-      earthDayTexture.dispose();
+      instantProceduralTexture.dispose();
       cloudsGeometry.dispose();
       cloudsMaterial.dispose();
-      cloudsTexture.dispose();
+      if (loadedCloudsTexture) (loadedCloudsTexture as THREE.Texture).dispose();
+      if (loadedEarthTexture) (loadedEarthTexture as THREE.Texture).dispose();
       starGeometry.dispose();
       starMaterial.dispose();
       starTexture.dispose();
@@ -745,10 +899,22 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
         </button>
       </div>
 
-      {/* Top Left Hint */}
-      <div className="absolute top-3 left-3 hidden md:flex items-center gap-2 rounded-full border border-white/10 bg-black/70 px-3.5 py-1.5 font-mono text-[10px] text-zinc-300 backdrop-blur-md pointer-events-none z-10">
-        <Compass className="h-3.5 w-3.5 text-cyan-400" />
-        <span>3D EARTH SPHERE • TWINKLING STARFIELD • CLICK ZOOM TO LAND AT CAMPUS</span>
+      {/* Top Left Live Satellite Telemetry Status */}
+      <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full border border-white/10 bg-black/75 px-3 py-1.5 font-mono text-[10px] text-zinc-300 backdrop-blur-md pointer-events-none z-10">
+        <Compass className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
+        <span className="hidden sm:inline">3D EARTH SPHERE</span>
+        <span className="text-zinc-600 hidden sm:inline">•</span>
+        {nasaFeedStatus === 'ready' ? (
+          <span className="inline-flex items-center gap-1.5 text-emerald-400 font-bold">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span>NASA 2K SATELLITE ACTIVE</span>
+          </span>
+        ) : (
+          <span className="inline-flex items-center gap-1.5 text-cyan-300 font-semibold">
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-ping" />
+            <span>SYNCING NASA SATELLITE...</span>
+          </span>
+        )}
       </div>
 
       {/* STREET-LEVEL CAMPUS VIEW (Smoothly Unlocks When Zoom Reaches Surface) */}
