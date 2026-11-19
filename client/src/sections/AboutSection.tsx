@@ -44,7 +44,7 @@ const summitPillars = [
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative py-20 md:py-28 bg-white border-b border-[#E7E0D6] overflow-hidden">
+    <section id="about" className="relative py-12 sm:py-16 md:py-24 bg-white border-b border-[#E7E0D6] overflow-hidden">
       <Container className="relative z-10">
         <SectionHeading
           tag="01 // Conference Overview"
@@ -54,7 +54,7 @@ export default function AboutSection() {
         />
 
         {/* Large Typography-Led Summit Metrics */}
-        <div className="mb-16 grid grid-cols-2 lg:grid-cols-4 gap-8 border-y border-[#E7E0D6] py-10 bg-[#FAF8F5]/50 rounded-2xl px-6">
+        <div className="mb-8 sm:mb-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 border-y border-[#E7E0D6] py-6 sm:py-10 bg-[#FAF8F5]/50 rounded-2xl px-4 sm:px-6">
           <div>
             <div className="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-[#7B1123]">
               02

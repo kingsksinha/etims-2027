@@ -58,28 +58,28 @@ export default function AboutPage() {
   const activeFacility = CAMPUS_FACILITIES[activePhotoIdx] || CAMPUS_FACILITIES[0];
 
   return (
-    <div className="relative min-h-screen bg-midnight text-light-text py-12 sm:py-16 overflow-hidden">
+    <div className="relative min-h-screen bg-[#FAF8F5] text-[#1C1917] py-8 sm:py-12 md:py-16 overflow-hidden">
       {/* Background Ambience */}
-      <div className="pointer-events-none absolute top-10 left-1/4 h-96 w-96 rounded-full bg-cyan/10 blur-[140px]" />
-      <div className="pointer-events-none absolute bottom-20 right-10 h-96 w-96 rounded-full bg-primary-teal/10 blur-[150px]" />
+      <div className="pointer-events-none absolute top-10 left-1/4 h-96 w-96 rounded-full bg-[#BF982E]/10 blur-[140px]" />
+      <div className="pointer-events-none absolute bottom-20 right-10 h-96 w-96 rounded-full bg-[#7B1123]/10 blur-[150px]" />
 
       <Container className="relative z-10 w-full min-w-0">
         {/* Page Header */}
-        <div className="mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan/40 bg-navy/80 px-4 py-1.5 text-xs font-mono font-semibold text-cyan mb-4 glow-cyan-sm">
+        <div className="mb-6 sm:mb-10">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#7B1123]/30 bg-[#7B1123]/10 px-3.5 py-1 text-xs font-mono font-semibold text-[#7B1123] mb-3 sm:mb-4">
             <Building2 className="h-3.5 w-3.5" />
             <span>Host Academic Institution Profile</span>
           </div>
-          <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-light-text break-words leading-tight">
+          <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-[#1C1917] break-words leading-tight">
             Netaji Subhas Institute of Technology{' '}
-            <span className="text-cyan text-glow-cyan">& ETIMS 2027</span>
+            <span className="text-[#7B1123]">& ETIMS 2027</span>
           </h1>
-          <p className="mt-3 max-w-3xl text-sm sm:text-base text-secondary-text leading-relaxed">
+          <p className="mt-2.5 sm:mt-3 max-w-3xl text-sm sm:text-base text-[#57534E] leading-relaxed">
             Discover the premier technical institution hosting the 1st National Conference on Emerging Technologies, Innovation and Multidisciplinary Studies at Bihta, Patna, Bihar.
           </p>
 
           {/* Sub-Tabs Switcher Bar */}
-          <div className="mt-6 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-border-dark w-full min-w-0">
+          <div className="mt-5 sm:mt-6 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-[#E7E0D6] w-full min-w-0">
             {SUB_TABS.map((tab) => {
               const isSelected = activeSubTab === tab.id;
               return (
@@ -87,10 +87,10 @@ export default function AboutPage() {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveSubTab(tab.id)}
-                  className={`flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+                  className={`flex items-center gap-2 rounded-xl px-3 sm:px-3.5 py-1.5 sm:py-2 text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                     isSelected
-                      ? 'bg-gradient-to-r from-primary-teal to-cyan text-midnight shadow-md glow-cyan-sm'
-                      : 'bg-navy/60 text-secondary-text hover:text-light-text hover:bg-navy border border-white/5'
+                      ? 'bg-[#7B1123] text-white shadow-sm'
+                      : 'bg-white text-[#57534E] hover:text-[#1C1917] hover:bg-[#FAF8F5] border border-[#E7E0D6]'
                   }`}
                 >
                   {tab.icon}
@@ -107,17 +107,17 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35 }}
-            className="space-y-12"
+            className="space-y-8 sm:space-y-12"
           >
             {/* Hero Profile Lockup */}
-            <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
-              <div className="lg:col-span-7 space-y-5">
-                <div className="flex items-center gap-3.5">
-                  <div className="flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-full bg-slate-900/90 border border-white/15 ring-1 ring-cyan/30 p-1.5 shadow-lg">
+            <div className="grid gap-6 sm:gap-8 lg:grid-cols-12 lg:items-center">
+              <div className="lg:col-span-7 space-y-4 sm:space-y-5">
+                <div className="flex items-center gap-3 sm:gap-3.5">
+                  <div className="flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-full bg-white border border-[#E7E0D6] p-1.5 shadow-sm">
                     <img
                       src="/assets/nsit-seal.png"
                       alt="NSIT Official Seal"
-                      className="h-full w-full object-contain drop-shadow-md"
+                      className="h-full w-full object-contain drop-shadow-xs"
                     />
                   </div>
                   <div className="min-w-0">
@@ -154,17 +154,17 @@ export default function AboutPage() {
 
               {/* Campus Feature Frame */}
               <div className="lg:col-span-5">
-                <div className="relative overflow-hidden rounded-3xl border border-cyan/40 bg-navy/90 p-3 shadow-2xl glow-cyan-sm">
+                <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E7E0D6] bg-white p-2 sm:p-3 shadow-md">
                   <img
                     src="/assets/nsit-campus.jpg"
                     alt="NSIT Bihta Sprawling Campus"
-                    className="h-72 sm:h-96 w-full object-cover rounded-2xl"
+                    className="h-56 xs:h-64 sm:h-80 md:h-96 w-full object-cover rounded-xl sm:rounded-2xl"
                   />
-                  <div className="absolute bottom-6 left-6 right-6 rounded-xl bg-midnight/90 border border-border-dark p-3.5 backdrop-blur-md">
-                    <span className="text-[10px] font-mono text-cyan uppercase tracking-wider block">
+                  <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 rounded-xl bg-white/95 border border-[#E7E0D6] p-2.5 sm:p-3.5 backdrop-blur-md shadow-xs">
+                    <span className="text-[10px] font-mono text-[#7B1123] font-bold uppercase tracking-wider block">
                       Host Institution Campus
                     </span>
-                    <p className="text-xs font-semibold text-light-text mt-0.5">
+                    <p className="text-xs font-semibold text-[#1C1917] mt-0.5">
                       Netaji Subhas Institute of Technology, Bihta, Patna
                     </p>
                   </div>

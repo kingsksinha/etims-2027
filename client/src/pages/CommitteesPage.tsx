@@ -208,20 +208,38 @@ export default function CommitteesPage() {
                     {team.taskTitle}
                   </h3>
 
-                  {/* Faculty Lead Details */}
-                  <div className="mt-3 rounded-2xl border border-[#E7E0D6] bg-[#FAF8F5] p-3.5 space-y-1 min-w-0">
-                    <span className="text-[10px] font-mono uppercase text-[#BF982E] font-bold block">
-                      In-Charge Faculty Lead
-                    </span>
-                    <p className="font-heading text-sm font-bold text-[#1C1917] break-words">
-                      {team.leadName}
-                    </p>
-                    <p className="text-xs text-[#57534E] break-words">
-                      {team.leadDesignation}
-                    </p>
-                    <p className="text-[11px] text-[#78716C] font-mono truncate">
-                      {team.leadDepartment}
-                    </p>
+                  {/* Faculty Lead Details with Small Photo */}
+                  <div className="mt-3 rounded-2xl border border-[#E7E0D6] bg-[#FAF8F5] p-3.5 flex items-center gap-3.5 min-w-0">
+                    <div className="relative h-12 w-12 sm:h-13 sm:w-13 shrink-0 rounded-full border-2 border-[#BF982E] overflow-hidden bg-white shadow-xs">
+                      {team.photo ? (
+                        <img
+                          src={team.photo}
+                          alt={team.leadName}
+                          className="h-full w-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = '/assets/nsit-seal.png';
+                          }}
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center bg-[#7B1123]/10 text-[#7B1123] font-mono font-bold text-xs">
+                          {team.leadName.split(' ').map((n) => n[0]).filter(Boolean).slice(0, 2).join('')}
+                        </div>
+                      )}
+                    </div>
+                    <div className="min-w-0 flex-1 space-y-0.5">
+                      <span className="text-[10px] font-mono uppercase text-[#BF982E] font-bold block">
+                        In-Charge Faculty Lead
+                      </span>
+                      <p className="font-heading text-sm font-bold text-[#1C1917] truncate">
+                        {team.leadName}
+                      </p>
+                      <p className="text-xs text-[#57534E] truncate">
+                        {team.leadDesignation}
+                      </p>
+                      <p className="text-[11px] text-[#78716C] font-mono truncate">
+                        {team.leadDepartment}
+                      </p>
+                    </div>
                   </div>
 
                   {/* Responsibilities List */}

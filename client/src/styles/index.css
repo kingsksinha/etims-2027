@@ -67,10 +67,12 @@ body {
   background-color: #FAF8F5;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  color: #1C1917;
-  letter-spacing: -0.02em;
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: inherit;
+    letter-spacing: -0.02em;
+  }
 }
 
 /* Subtle Academic Parchment Matrix Grid */

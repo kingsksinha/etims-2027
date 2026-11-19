@@ -716,6 +716,7 @@ export interface FacultyInCharge {
   contactEmail?: string;
   contactPhone?: string;
   badge: string;
+  photo?: string;
 }
 
 export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
@@ -728,6 +729,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'Netaji Subhas Institute of Technology (NSIT)',
     campus: 'Amhara, Bihta, Patna',
     badge: 'Chief Patron',
+    photo: '/assets/committee/mm-singh.png',
     responsibilities: [
       'Institutional patronage, policy guidance, and strategic direction for ETIMS 2027',
       'High-level dignitary hosting and liaison with governmental and university bodies',
@@ -743,6 +745,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'Netaji Subhas Institute of Technology (NSIT)',
     campus: 'Amhara, Bihta, Patna',
     badge: 'Patron',
+    photo: '/assets/committee/nitu-singh.png',
     responsibilities: [
       'Institutional resource allocation, administrative enablement, and delegate amenities',
       'Overseeing campus infrastructure readiness and hospitality standards',
@@ -757,6 +760,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'Netaji Subhas Institute of Technology (NSIT)',
     campus: 'Amhara, Bihta, Patna',
     badge: 'Co-Patron',
+    photo: '/assets/committee/jyotirmayee-dalei.png',
     responsibilities: [
       'Academic governance and institutional coordination across all 7 departments',
       'Quality assurance of research proceedings, technical sessions, and award evaluation',
@@ -774,6 +778,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     badge: 'Convenor',
     contactEmail: 'etims2027@nsiterp.in',
     contactPhone: '+91 83402 58426',
+    photo: '/assets/committee/atif-hussain.png',
     responsibilities: [
       'Chief coordinator for all academic, technical, editorial, and logistics committees',
       'Primary official communication channel for authors, delegates, reviewers, and keynote speakers',
@@ -790,6 +795,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'Netaji Subhas Institute of Technology (NSIT)',
     campus: 'Amhara, Bihta, Patna',
     badge: 'Co-Convenor',
+    photo: '/assets/committee/rajan-kumar.png',
     responsibilities: [
       'Assisting the convenor in coordinating inter-departmental workflows and paper review tracking',
       'Coordination with session chairs and invited keynote speakers',
@@ -804,6 +810,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'Netaji Subhas Institute of Technology (NSIT)',
     campus: 'Amhara, Bihta, Patna',
     badge: 'Co-Convenor',
+    photo: '/assets/committee/gautam.png',
     responsibilities: [
       'Overseeing technical session planning and paper presentation allocations',
       'Coordination of oral and poster evaluation sessions',
@@ -818,6 +825,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'Netaji Subhas Institute of Technology (NSIT)',
     campus: 'Amhara, Bihta, Patna',
     badge: 'Co-Convenor',
+    photo: '/assets/committee/deepansh-yadav.png',
     responsibilities: [
       'Digital systems coordination, CFP submission intake, and author notifications',
       'Liaison with delegates regarding conference schedules and presentation kits',
@@ -832,6 +840,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'Netaji Subhas Institute of Technology (NSIT)',
     campus: 'Amhara, Bihta, Patna',
     badge: 'Co-Convenor',
+    photo: '/assets/committee/farrukh.png',
     responsibilities: [
       'Campus logistics, session halls setup, and technical audio-visual infrastructure',
       'Managing registration desks and delegate welcome facilitation',
@@ -846,6 +855,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'Netaji Subhas Institute of Technology (NSIT)',
     campus: 'Amhara, Bihta, Patna',
     badge: 'Co-Convenor',
+    photo: '/assets/committee/nilanjan-manna.png',
     responsibilities: [
       'Delegate hospitality, outstation accommodations, and transport logistics',
       'Print materials, certificate preparation, and delegate kit distribution',
@@ -860,6 +870,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'IIT Patna',
     campus: 'Bihta, Patna',
     badge: 'IIT Patna',
+    photo: '/assets/committee/kailash-chandra-ray.png',
     responsibilities: [
       'Academic guidance on conference tracks, research standards, and session chairing',
       'Strategic advising on Electrical Engineering and IoT/VLSI submissions',
@@ -874,6 +885,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'IIT Patna',
     campus: 'Bihta, Patna',
     badge: 'IIT Patna',
+    photo: '/assets/committee/raju-halder.png',
     responsibilities: [
       'Advisory guidance for Track 01 (Computer Science & Artificial Intelligence)',
       'Review integrity and academic publication standards oversight',
@@ -888,6 +900,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'IIT Patna',
     campus: 'Bihta, Patna',
     badge: 'IIT Patna',
+    photo: '/assets/committee/akhilendra-singh.png',
     responsibilities: [
       'Advisory guidance for Track 04 (Mechanical and Manufacturing Engineering)',
       'Reviewing advanced manufacturing and robotics session scopes',
@@ -902,6 +915,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'NIT Surathkal',
     campus: 'Surathkal, Karnataka',
     badge: 'NIT Surathkal',
+    photo: '/assets/committee/debashisha-jena.png',
     responsibilities: [
       'National advisory benchmarking for power systems, renewable energy, and control engineering',
       'Assisting with reviewer recommendations and keynote nominations',
@@ -916,6 +930,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'IIT Patna',
     campus: 'Bihta, Patna',
     badge: 'IIT Patna',
+    photo: '/assets/committee/yatendra-kumar-singh.png',
     responsibilities: [
       'Advising on smart grid and electrical drives research tracks',
       'Evaluation criteria guidance for Best Paper and Best Poster awards',
@@ -930,6 +945,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'GEC Munger',
     campus: 'Munger, Bihar',
     badge: 'GEC Munger',
+    photo: '/assets/committee/gopal-krishna.png',
     responsibilities: [
       'Regional academic outreach and technical advisory for AI & Data Science papers',
       'Student and scholar participation mobilization',
@@ -944,6 +960,7 @@ export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
     institution: 'GEC Bhojpur',
     campus: 'Bhojpur, Bihar',
     badge: 'GEC Bhojpur',
+    photo: '/assets/committee/chandan-kumar-sharma.png',
     responsibilities: [
       'Technical advisory for Track 02 (Civil Engineering and Infrastructure)',
       'Guidance on sustainable materials and geospatial session tracks',

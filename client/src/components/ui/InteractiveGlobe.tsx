@@ -250,11 +250,6 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
   const [isZoomedIn, setIsZoomedIn] = useState(false);
   const [isFlying, setIsFlying] = useState(false);
   const [nasaFeedStatus, setNasaFeedStatus] = useState<'instant' | 'ready'>('instant');
-  const [flightTelemetry, setFlightTelemetry] = useState<{
-    stage: string;
-    altitude: string;
-    velocity: string;
-  } | null>(null);
 
   // Street-level campus view modal state
   const [showStreetLevel, setShowStreetLevel] = useState(false);
@@ -280,7 +275,7 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
   const targetRotation = useRef({ ...TARGET_ROTATION_INDIA });
   const currentRotation = useRef({ ...TARGET_ROTATION_INDIA });
 
-  // Cinematic Full Fly-To Zoom Animation to Street-Level
+  // Smooth Fly-To Zoom directly to NSIT Bihta, Patna
   const locateAndZoomToNSIT = useCallback(() => {
     setIsFlying(true);
     setAutoRotate(false);
@@ -292,57 +287,15 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
       y: TARGET_ROTATION_INDIA.y,
     };
 
-    // 2. High-speed cinematic dive towards surface
-    targetCameraZ.current = 1.48;
+    // 2. Smooth zoom to 2.6 (perfect framing showing northern India, Bihar, and the pulsing NSIT pin)
+    targetCameraZ.current = 2.6;
     setIsZoomedIn(true);
 
-    // Dynamic Telemetry Readout simulation
-    setFlightTelemetry({
-      stage: 'ORBITAL DESCENT TRAJECTORY LOCKED',
-      altitude: '35,786 KM (GEOSTATIONARY ORBIT)',
-      velocity: '7.8 KM/S',
-    });
-
-    const t1 = setTimeout(() => {
-      setFlightTelemetry({
-        stage: 'ATMOSPHERIC ENTRY // NORTHERN INDIA VECTOR',
-        altitude: '1,200 KM (LOW EARTH ORBIT)',
-        velocity: 'MACH 22',
-      });
-    }, 600);
-
-    const t2 = setTimeout(() => {
-      setFlightTelemetry({
-        stage: 'APPROACHING PATNA–BIHTA AIRSPACE',
-        altitude: '45 KM (STRATOSPHERE)',
-        velocity: '850 KM/H',
-      });
+    const t = setTimeout(() => {
+      setIsFlying(false);
     }, 1200);
 
-    const t3 = setTimeout(() => {
-      setFlightTelemetry({
-        stage: 'FINAL DESCENT // NSIT BIHTA CORRIDOR',
-        altitude: '500 M (GROUND APPROACH)',
-        velocity: '120 KM/H',
-      });
-    }, 1800);
-
-    const t4 = setTimeout(() => {
-      setFlightTelemetry({
-        stage: 'TOUCHDOWN // NSIT BIHTA CAMPUS SURFACE',
-        altitude: '52 M (GROUND LEVEL)',
-        velocity: '0 KM/H',
-      });
-      setIsFlying(false);
-      setShowStreetLevel(true);
-    }, 2400);
-
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      clearTimeout(t4);
-    };
+    return () => clearTimeout(t);
   }, []);
 
   // Reset View to Full Space Orbit
@@ -351,7 +304,6 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
     setIsZoomedIn(false);
     setShowStreetLevel(false);
     setIsFlying(false);
-    setFlightTelemetry(null);
 
     targetRotation.current = {
       x: 0.15,
@@ -744,13 +696,8 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
 
   // Manual zoom buttons (+ / -)
   const handleZoom = (delta: number) => {
-    targetCameraZ.current = Math.max(1.48, Math.min(6.5, targetCameraZ.current + delta));
+    targetCameraZ.current = Math.max(2.2, Math.min(6.5, targetCameraZ.current + delta));
     setIsZoomedIn(targetCameraZ.current < 3.2);
-    if (targetCameraZ.current <= 1.6) {
-      setShowStreetLevel(true);
-    } else {
-      setShowStreetLevel(false);
-    }
   };
 
   const selectedHotspot =
@@ -758,51 +705,52 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
 
   return (
     <div
-      className={`relative w-full rounded-3xl border border-white/10 overflow-hidden shadow-2xl bg-gradient-to-b from-[#020409] via-[#050b14] to-[#020409] ${className}`}
+      className={`relative w-full rounded-2xl sm:rounded-3xl border border-white/10 overflow-hidden shadow-2xl bg-gradient-to-b from-[#020409] via-[#050b14] to-[#020409] ${className}`}
     >
       {/* 3D WebGL Canvas Viewport */}
       <div
         ref={mountRef}
-        className="relative h-[400px] sm:h-[480px] md:h-[580px] w-full cursor-grab active:cursor-grabbing select-none"
+        className="relative h-[320px] xs:h-[380px] sm:h-[480px] md:h-[560px] w-full cursor-grab active:cursor-grabbing select-none"
       />
 
       {/* Target Pin HUD Card (Bottom Left) — Compact & Responsive on Mobile */}
       {!showStreetLevel && (
-        <div className="absolute bottom-3 left-3 right-3 sm:right-auto sm:max-w-sm pointer-events-auto z-10">
-          <div className="rounded-2xl border border-cyan-400/40 bg-zinc-950/90 p-3 sm:p-4 backdrop-blur-xl shadow-2xl">
-            <div className="flex items-center justify-between gap-2 border-b border-white/10 pb-2 mb-2">
-              <div className="flex items-center gap-1.5 text-cyan-400 font-mono text-[10px] font-bold uppercase tracking-wider">
-                <MapPin className="h-3.5 w-3.5 text-cyan-400 animate-bounce shrink-0" />
-                <span className="truncate">OFFICIAL SUMMIT VENUE PIN</span>
+        <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-3 sm:left-3 sm:right-auto sm:max-w-sm pointer-events-auto z-10">
+          <div className="rounded-xl sm:rounded-2xl border border-[#BF982E]/50 bg-black/85 p-3 sm:p-4 backdrop-blur-xl shadow-2xl">
+            <div className="flex items-center justify-between gap-2 border-b border-white/10 pb-1.5 mb-1.5">
+              <div className="flex items-center gap-1.5 text-[#BF982E] font-mono text-[10px] font-bold uppercase tracking-wider">
+                <MapPin className="h-3.5 w-3.5 text-[#BF982E] animate-bounce shrink-0" />
+                <span className="truncate">CONFERENCE VENUE // PATNA</span>
               </div>
               <span className="font-mono text-[9px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold shrink-0">
-                VERIFIED
+                PHYSICAL SUMMIT
               </span>
             </div>
 
             <div className="flex items-start justify-between gap-2">
               <div className="min-w-0">
-                <h4 className="font-heading text-sm sm:text-base font-bold text-white truncate">
+                <h4 className="font-heading text-xs sm:text-base font-bold text-white truncate">
                   {NSIT_COORDS.name}
                 </h4>
-                <p className="text-[11px] sm:text-xs text-zinc-300 mt-0.5 font-mono truncate">
+                <p className="text-[10px] sm:text-xs text-zinc-300 mt-0.5 font-mono truncate">
                   {NSIT_COORDS.fullAddress}
                 </p>
               </div>
 
-              {/* Quick Street Level Trigger */}
-              <button
-                type="button"
-                onClick={locateAndZoomToNSIT}
-                className="rounded-lg bg-cyan-400/20 border border-cyan-400/40 px-2.5 py-1 text-[10px] font-mono font-bold text-cyan-300 hover:bg-cyan-400 hover:text-black transition-all shrink-0 cursor-pointer"
+              <a
+                href="https://maps.google.com/?q=Netaji+Subhas+Institute+of+Technology+Bihta+Patna"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded-lg bg-[#BF982E] px-2.5 py-1 text-[10px] font-mono font-bold text-[#450F1D] hover:bg-[#D4AF37] transition-all shrink-0 cursor-pointer shadow-xs"
               >
-                Inspect
-              </button>
+                <span>Maps</span>
+                <ExternalLink className="h-2.5 w-2.5" />
+              </a>
             </div>
 
-            <div className="mt-2 flex items-center justify-between font-mono text-[10px] text-zinc-400 pt-1.5 border-t border-white/5">
+            <div className="mt-1.5 flex items-center justify-between font-mono text-[9px] sm:text-[10px] text-zinc-400 pt-1.5 border-t border-white/5">
               <span>SATELLITE COORDINATES:</span>
-              <span className="text-cyan-300 font-bold">25.5684° N, 84.8872° E</span>
+              <span className="text-[#BF982E] font-bold">25.5684° N, 84.8872° E</span>
             </div>
           </div>
         </div>
@@ -810,45 +758,34 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
 
       {/* Flight Telemetry HUD Toast (During Fly-To Zoom Descent) */}
       <AnimatePresence>
-        {isFlying && flightTelemetry && (
+        {isFlying && (
           <motion.div
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10 }}
             className="absolute top-16 left-3 right-3 sm:left-1/2 sm:-translate-x-1/2 sm:w-auto pointer-events-none z-30"
           >
-            <div className="rounded-2xl bg-cyan-950/95 border border-cyan-400/80 p-3.5 sm:px-6 sm:py-3 text-xs font-mono text-cyan-300 backdrop-blur-2xl shadow-[0_0_35px_rgba(34,211,238,0.7)] flex flex-col sm:flex-row items-center gap-3">
-              <div className="flex items-center gap-2">
-                <Sparkles className="h-4 w-4 text-cyan-300 animate-spin-slow shrink-0" />
-                <span className="font-bold tracking-wider uppercase text-[11px] sm:text-xs">
-                  {flightTelemetry.stage}
-                </span>
-              </div>
-              <div className="flex items-center gap-3 text-[10px] sm:text-[11px] text-zinc-300 border-t sm:border-t-0 sm:border-l border-white/15 pt-1.5 sm:pt-0 sm:pl-3">
-                <span>
-                  ALT: <strong className="text-white">{flightTelemetry.altitude}</strong>
-                </span>
-                <span>
-                  VEL: <strong className="text-cyan-400">{flightTelemetry.velocity}</strong>
-                </span>
-              </div>
+            <div className="rounded-2xl bg-black/90 border border-[#BF982E]/80 p-3 sm:px-5 sm:py-2.5 text-xs font-mono text-[#BF982E] backdrop-blur-xl shadow-xl flex items-center gap-2.5">
+              <Sparkles className="h-4 w-4 text-[#BF982E] animate-spin-slow shrink-0" />
+              <span className="font-bold tracking-wider uppercase text-[11px] text-white">
+                FOCUSING ON NSIT BIHTA, PATNA...
+              </span>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Interactive Controls Overlay (Top Right) — Clean & Responsive on Phones */}
-      <div className="absolute top-3 right-3 flex items-center gap-1.5 sm:gap-2 z-20">
-        {/* Fly-to Zoom Button: "Locate NSIT Bihta" */}
+      <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 flex items-center gap-1.5 sm:gap-2 z-20">
+        {/* Fly-to Zoom Button: "Locate NSIT" */}
         <button
           type="button"
           onClick={locateAndZoomToNSIT}
-          title="Fly & Zoom camera directly into NSIT Bihta at street level"
-          className="inline-flex items-center gap-1 sm:gap-1.5 rounded-xl bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold text-black shadow-[0_0_20px_rgba(34,211,238,0.5)] hover:brightness-110 active:scale-95 transition-all cursor-pointer shrink-0"
+          title="Zoom camera directly into NSIT Bihta, Patna"
+          className="inline-flex items-center gap-1.5 rounded-xl bg-[#BF982E] hover:bg-[#D4AF37] px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold text-[#450F1D] shadow-md transition-all active:scale-95 cursor-pointer shrink-0"
         >
-          <Target className="h-3.5 w-3.5 text-black animate-pulse shrink-0" />
-          <span className="hidden xs:inline">Zoom to NSIT</span>
-          <span className="xs:hidden">Zoom</span>
+          <Target className="h-3.5 w-3.5 text-[#450F1D] shrink-0" />
+          <span>Locate NSIT</span>
         </button>
 
         {/* Reset / Space Orbit Button */}
@@ -857,7 +794,7 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
             type="button"
             onClick={resetOrbitView}
             title="Reset to Full Orbit View"
-            className="inline-flex items-center gap-1 rounded-xl border border-white/20 bg-zinc-900/90 px-2.5 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-xs font-mono text-zinc-300 hover:text-white hover:border-cyan-400 transition-all cursor-pointer shrink-0"
+            className="inline-flex items-center gap-1 rounded-xl border border-white/20 bg-black/70 px-2.5 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-xs font-mono text-zinc-200 hover:text-white hover:border-[#BF982E] transition-all cursor-pointer shrink-0"
           >
             <RefreshCcw className="h-3.5 w-3.5 shrink-0" />
             <span className="hidden sm:inline">Orbit View</span>
@@ -871,7 +808,7 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
           title="Toggle Auto Rotation"
           className={`flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl border transition-all cursor-pointer ${
             autoRotate
-              ? 'border-cyan-400 bg-cyan-950/80 text-cyan-400 shadow-sm'
+              ? 'border-[#BF982E] bg-[#BF982E]/20 text-[#BF982E] shadow-sm'
               : 'border-white/15 bg-black/70 text-zinc-400 hover:text-white'
           }`}
         >
@@ -881,7 +818,7 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
         {/* Zoom In */}
         <button
           type="button"
-          onClick={() => handleZoom(-0.7)}
+          onClick={() => handleZoom(-0.6)}
           title="Zoom In"
           className="hidden xs:flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl border border-white/15 bg-black/70 text-zinc-300 hover:text-white hover:border-white/30 transition-all cursor-pointer"
         >
@@ -891,7 +828,7 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
         {/* Zoom Out */}
         <button
           type="button"
-          onClick={() => handleZoom(0.7)}
+          onClick={() => handleZoom(0.6)}
           title="Zoom Out"
           className="hidden xs:flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl border border-white/15 bg-black/70 text-zinc-300 hover:text-white hover:border-white/30 transition-all cursor-pointer"
         >
@@ -900,8 +837,8 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
       </div>
 
       {/* Top Left Live Satellite Telemetry Status */}
-      <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full border border-white/10 bg-black/75 px-3 py-1.5 font-mono text-[10px] text-zinc-300 backdrop-blur-md pointer-events-none z-10">
-        <Compass className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
+      <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 flex items-center gap-2 rounded-full border border-white/10 bg-black/75 px-3 py-1.5 font-mono text-[10px] text-zinc-300 backdrop-blur-md pointer-events-none z-10">
+        <Compass className="h-3.5 w-3.5 text-[#BF982E] shrink-0" />
         <span className="hidden sm:inline">3D EARTH SPHERE</span>
         <span className="text-zinc-600 hidden sm:inline">•</span>
         {nasaFeedStatus === 'ready' ? (
@@ -910,9 +847,9 @@ export default function InteractiveGlobe({ className = '' }: InteractiveGlobePro
             <span>NASA 2K SATELLITE ACTIVE</span>
           </span>
         ) : (
-          <span className="inline-flex items-center gap-1.5 text-cyan-300 font-semibold">
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-ping" />
-            <span>SYNCING NASA SATELLITE...</span>
+          <span className="inline-flex items-center gap-1.5 text-[#BF982E] font-semibold">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#BF982E] animate-ping" />
+            <span>SYNCING SATELLITE...</span>
           </span>
         )}
       </div>

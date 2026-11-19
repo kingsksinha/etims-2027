@@ -186,38 +186,38 @@ export default function OrbitalVenueRadar() {
     HONEST_VENUE_NODES.find((node) => node.id === activeNodeId) || HONEST_VENUE_NODES[0];
 
   return (
-    <div className="relative w-full rounded-3xl border border-white/10 bg-zinc-950 text-white overflow-hidden shadow-2xl backdrop-blur-2xl">
-      {/* Top Header Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-5 sm:px-8 py-4 bg-black/90">
+    <div className="relative w-full rounded-3xl border border-[#BF982E]/30 bg-zinc-950 text-white overflow-hidden shadow-2xl backdrop-blur-2xl">
+      {/* Top Header Bar — Styled in Brochure Maroon (#4A0E1C) with Warm Gold Accents */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#BF982E]/25 px-4 sm:px-8 py-3.5 sm:py-4 bg-[#4A0E1C]">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#BF982E]/40 bg-[#BF982E]/15 text-[#BF982E]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#BF982E]/40 bg-[#BF982E]/20 text-[#BF982E] shrink-0">
             <GlobeIcon className="h-5 w-5 text-[#BF982E]" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-[#BF982E]">
+              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-[#F3D993]">
                 NSIT BIHTA, PATNA // SPATIAL RADAR
               </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[9px] font-semibold text-emerald-400 border border-emerald-500/30">
+              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/20 px-2 py-0.5 font-mono text-[9px] font-semibold text-emerald-300 border border-emerald-500/40">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 INTERACTIVE 3D
               </span>
             </div>
-            <h3 className="font-heading text-sm sm:text-base font-extrabold text-white tracking-tight">
+            <h3 className="font-heading text-sm sm:text-base font-extrabold !text-white tracking-tight drop-shadow-xs">
               Summit Location, Interactive 3D Earth & Campus Facilities
             </h3>
           </div>
         </div>
 
-        {/* View Switcher Pills — Responsive Grid on Mobile */}
-        <div className="w-full sm:w-auto grid grid-cols-3 sm:flex items-center rounded-2xl sm:rounded-full border border-white/10 bg-zinc-900/90 p-1 gap-1">
+        {/* View Switcher Pills — High-Contrast on Mobile & Desktop */}
+        <div className="w-full sm:w-auto grid grid-cols-3 sm:flex items-center rounded-2xl sm:rounded-full border border-white/15 bg-black/40 p-1 gap-1">
           <button
             type="button"
             onClick={() => setActiveTab('3d-globe')}
-            className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-medium transition-all cursor-pointer text-center truncate ${
+            className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-bold transition-all cursor-pointer text-center truncate ${
               activeTab === '3d-globe'
-                ? 'bg-[#BF982E] text-white font-bold shadow-md'
-                : 'text-zinc-400 hover:text-white'
+                ? 'bg-[#BF982E] !text-[#3B0A16] shadow-md ring-1 ring-[#BF982E]'
+                : '!text-zinc-200 hover:!text-white hover:bg-white/10'
             }`}
           >
             <span className="sm:hidden">3D Earth</span>
@@ -226,10 +226,10 @@ export default function OrbitalVenueRadar() {
           <button
             type="button"
             onClick={() => setActiveTab('facilities')}
-            className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-medium transition-all cursor-pointer text-center truncate ${
+            className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-bold transition-all cursor-pointer text-center truncate ${
               activeTab === 'facilities'
-                ? 'bg-[#BF982E] text-white font-bold shadow-md'
-                : 'text-zinc-400 hover:text-white'
+                ? 'bg-[#BF982E] !text-[#3B0A16] shadow-md ring-1 ring-[#BF982E]'
+                : '!text-zinc-200 hover:!text-white hover:bg-white/10'
             }`}
           >
             <span className="sm:hidden">Facilities</span>
@@ -238,10 +238,10 @@ export default function OrbitalVenueRadar() {
           <button
             type="button"
             onClick={() => setActiveTab('transit')}
-            className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-medium transition-all cursor-pointer text-center truncate ${
+            className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-bold transition-all cursor-pointer text-center truncate ${
               activeTab === 'transit'
-                ? 'bg-[#BF982E] text-white font-bold shadow-md'
-                : 'text-zinc-400 hover:text-white'
+                ? 'bg-[#BF982E] !text-[#3B0A16] shadow-md ring-1 ring-[#BF982E]'
+                : '!text-zinc-200 hover:!text-white hover:bg-white/10'
             }`}
           >
             <span className="sm:hidden">Transit</span>
@@ -254,14 +254,14 @@ export default function OrbitalVenueRadar() {
       {activeTab === '3d-globe' && (
         <div className="p-3 sm:p-6 bg-black space-y-4 sm:space-y-6">
           {/* Instructions Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-3 px-2">
-            <div className="flex items-center gap-2 text-xs font-mono text-zinc-300">
-              <Compass className="h-4 w-4 text-cyan-400" />
+          <div className="flex flex-wrap items-center justify-between gap-2.5 px-2">
+            <div className="flex items-center gap-2 text-xs font-mono text-zinc-200">
+              <Compass className="h-4 w-4 text-[#BF982E] shrink-0" />
               <span>
-                Drag mouse or touch to rotate the 3D Earth • Click <strong className="text-cyan-300">"Locate NSIT Bihta"</strong> to fly directly to Patna, India
+                Drag or touch to rotate the 3D Earth • Tap <strong className="text-[#F3D993]">"Locate NSIT"</strong> to focus on Patna, India
               </span>
             </div>
-            <span className="font-mono text-[11px] text-cyan-400 font-semibold">
+            <span className="font-mono text-[11px] text-[#BF982E] font-bold">
               Latitude: 25.5684° N • Longitude: 84.8872° E
             </span>
           </div>
