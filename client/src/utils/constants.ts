@@ -1479,7 +1479,7 @@ export const CAMPUS_FACILITIES: CampusFacility[] = [
     id: 'campus-hub',
     name: '9.2-Acre Integrated Green Campus',
     category: 'Campus Environment',
-    image: '/assets/nsit-campus.jpg',
+    image: '/assets/nsit-campus-official.png',
     description:
       'Spread over approximately 9.2 acres at Amhara, Bihta (~30 km from Patna), featuring landscaped gardens, sports grounds, and modern academic architecture.',
     capacity: '9.2 Acres Academic Campus',

@@ -123,7 +123,7 @@ export default function TracksSection() {
           {filteredTracks.map((track: ResearchTrackItem, index: number) => {
             const isExpanded = expandedTrack === track.id;
             const trackNum = parseInt(track.id.replace('track-', ''), 10) || (index + 1);
-            const trackImg = `/assets/tracks/track_${trackNum}.png`;
+            const trackImg = `/assets/tracks/track_${trackNum}.jpg`;
 
             return (
               <motion.div
@@ -154,11 +154,11 @@ export default function TracksSection() {
                       </div>
                     </div>
 
-                    <div className="h-10 w-16 rounded-lg overflow-hidden border border-[#E7E0D6] shrink-0">
+                    <div className="h-11 w-18 rounded-xl overflow-hidden border border-[#E7E0D6] shrink-0 shadow-xs">
                       <img
                         src={trackImg}
                         alt={track.title}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                         onError={(e) => {
                           // fallback to icon if image fails
                           (e.target as HTMLElement).style.display = 'none';

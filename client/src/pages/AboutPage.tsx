@@ -156,7 +156,7 @@ export default function AboutPage() {
               <div className="lg:col-span-5">
                 <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E7E0D6] bg-white p-2 sm:p-3 shadow-md">
                   <img
-                    src="/assets/nsit-campus.jpg"
+                    src="/assets/nsit-campus-official.png"
                     alt="NSIT Bihta Sprawling Campus"
                     className="h-56 xs:h-64 sm:h-80 md:h-96 w-full object-cover rounded-xl sm:rounded-2xl"
                   />

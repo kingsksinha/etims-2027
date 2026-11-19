@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
   Layers,
@@ -114,17 +114,39 @@ export default function TracksPage() {
               transition={{ duration: 0.3 }}
               className="rounded-3xl border border-[#E7E0D6] bg-white p-7 sm:p-9 shadow-lg space-y-6"
             >
-              {/* Track Thumbnail Image extracted from brochure */}
-              <div className="relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden border border-[#E7E0D6] bg-[#FAF8F5]">
-                <img
-                  src={`/assets/tracks/track_${selectedTrackIdx + 1}.png`}
-                  alt={activeTrack.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#7B1123] text-white text-xs font-mono font-bold shadow-md">
-                  <span>{activeTrack.code}</span>
-                  <span>·</span>
+              {/* High-Resolution Thematic Track Visual Header */}
+              <div className="relative w-full h-52 sm:h-64 md:h-72 rounded-2xl overflow-hidden border border-[#E7E0D6] bg-zinc-950 shadow-md">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={activeTrack.id}
+                    src={`/assets/tracks/track_${selectedTrackIdx + 1}.jpg`}
+                    alt={activeTrack.title}
+                    initial={{ opacity: 0, scale: 1.03 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </AnimatePresence>
+
+                {/* Subtle vignette gradient for crisp badge contrast */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/30 pointer-events-none" />
+
+                {/* Top Badge */}
+                <div className="absolute top-3.5 left-3.5 flex items-center gap-2 px-3 py-1 rounded-full bg-[#7B1123]/95 backdrop-blur-md text-white text-xs font-mono font-bold shadow-md border border-[#BF982E]/40">
+                  <span className="text-[#F3D993]">{activeTrack.code}</span>
+                  <span className="text-white/60">·</span>
                   <span>{activeTrack.number}</span>
+                </div>
+
+                {/* Bottom Tagline on Image */}
+                <div className="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between text-xs font-mono text-zinc-200">
+                  <span className="text-[11px] text-[#F3D993] font-bold uppercase tracking-wider drop-shadow-sm truncate pr-2">
+                    ETIMS 2027 OFFICIAL THEMATIC SCOPE
+                  </span>
+                  <span className="rounded-full bg-black/60 px-2.5 py-0.5 text-[10px] text-white/90 border border-white/20 shrink-0">
+                    Peer-Reviewed Track
+                  </span>
                 </div>
               </div>
 

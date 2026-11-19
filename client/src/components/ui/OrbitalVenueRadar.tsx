@@ -148,7 +148,7 @@ export const HONEST_VENUE_NODES: HonestVenueNode[] = [
       'Situated in Bihta knowledge corridor near IIT Patna',
       'Green lawns & open campus parking area',
     ],
-    image: '/assets/nsit-campus.jpg',
+    image: '/assets/nsit-campus-official.png',
     badge: 'ACADEMIC FACADE',
     tag: 'Main Building',
     icon: Building,

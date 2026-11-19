@@ -12,7 +12,7 @@ import { HOST_INSTITUTION } from '../utils/constants';
 const campusGallery = [
   {
     id: 'campus',
-    src: '/assets/nsit-campus.jpg',
+    src: '/assets/nsit-campus-official.png',
     title: 'Main Academic Building & Plaza',
     tag: 'NSIT Bihta Integrated Tech Campus',
     badge: 'Academic Facade',
@@ -20,7 +20,7 @@ const campusGallery = [
   },
   {
     id: 'classroom',
-    src: '/assets/nsit-classroom.png',
+    src: '/assets/nsit-classroom.jpg',
     title: 'Smart Auditoriums & Plenary Halls',
     tag: 'Air-Conditioned Digital Plenary Venue',
     badge: 'Plenary Venue',
@@ -44,7 +44,7 @@ const campusGallery = [
   },
   {
     id: 'library',
-    src: '/assets/nsit-library.png',
+    src: '/assets/nsit-library.jpg',
     title: 'Central Library & Reading Hall',
     tag: 'Engineering Reference & Periodicals',
     badge: 'Library',

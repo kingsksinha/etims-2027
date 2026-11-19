@@ -135,7 +135,7 @@ export default function HomePage() {
                   <div className="lg:col-span-5">
                     <div className="overflow-hidden rounded-2xl border border-border-dark bg-midnight p-2">
                       <img
-                        src="/assets/nsit-campus.jpg"
+                        src="/assets/nsit-campus-official.png"
                         alt="NSIT Bihta Campus"
                         className="h-56 sm:h-64 w-full object-cover rounded-xl"
                       />

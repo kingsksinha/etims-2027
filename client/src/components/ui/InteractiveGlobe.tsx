@@ -197,7 +197,7 @@ const STREET_LEVEL_HOTSPOTS = [
     name: 'Main Academic Building & Fountain Plaza',
     role: 'Central Academic Block',
     coordinates: '25.5684° N, 84.8872° E',
-    image: '/assets/nsit-campus.jpg',
+    image: '/assets/nsit-campus-official.png',
     description:
       'Iconic multi-storey academic complex with central fountain court, administrative offices, and conference registration desk along NH-922.',
     icon: Building,
