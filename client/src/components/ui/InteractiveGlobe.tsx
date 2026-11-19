@@ -197,7 +197,7 @@ const STREET_LEVEL_HOTSPOTS = [
     name: 'Main Academic Building & Fountain Plaza',
     role: 'Central Academic Block',
     coordinates: '25.5684° N, 84.8872° E',
-    image: '/assets/nsit-campus-official.png',
+    image: '/assets/nsit-building-real.jpg',
     description:
       'Iconic multi-storey academic complex with central fountain court, administrative offices, and conference registration desk along NH-922.',
     icon: Building,
@@ -207,7 +207,7 @@ const STREET_LEVEL_HOTSPOTS = [
     name: 'Central Plenary Seminar Auditorium',
     role: 'Keynote & Presentation Stage',
     coordinates: 'Academic Wing Floor 1',
-    image: '/assets/nsit-classroom.png',
+    image: '/assets/nsit-auditorium-real.jpg',
     description:
       'Air-conditioned tiered plenary hall equipped with digital projection systems, surround sound acoustic panels, and presentation podium.',
     icon: Layers,

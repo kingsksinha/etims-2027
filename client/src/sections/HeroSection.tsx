@@ -155,62 +155,85 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right Column: Official ETIMS Emblem & Campus Card (5 cols) */}
-          <div className="flex w-full min-w-0 flex-col items-center justify-center lg:col-span-5 relative mt-6 lg:mt-0 gap-5">
-            {/* Official Conference Emblem Showcase Card */}
-            <div className="relative w-full overflow-hidden rounded-3xl border-2 border-[#BF982E]/40 bg-white p-6 shadow-xl text-center">
-              <div className="flex items-center justify-between mb-3 border-b border-[#E7E0D6] pb-2 px-1">
-                <span className="font-mono text-[10px] uppercase tracking-wider text-[#7B1123] font-bold">
-                  OFFICIAL CONFERENCE EMBLEM
-                </span>
-                <span className="flex items-center gap-1 font-mono text-[10px] text-[#BF982E] font-bold">
-                  <span className="h-2 w-2 rounded-full bg-[#BF982E]" />
-                  8 TRACKS
-                </span>
-              </div>
+          {/* Right Column: Authentic Campus Showcase, Plenary Hall & Live Countdown (5 cols) */}
+          <div className="flex w-full min-w-0 flex-col items-center justify-center lg:col-span-5 relative mt-6 lg:mt-0 gap-4 sm:gap-5">
+            {/* Main Campus Feature Card with Integrated Official Emblem Medallion */}
+            <div className="relative w-full overflow-hidden rounded-3xl border-2 border-[#BF982E]/40 bg-white p-2.5 sm:p-3 shadow-xl">
+              {/* Authentic NSIT Academic Building Photo (High-Resolution User Photo) */}
+              <div className="relative h-64 sm:h-72 lg:h-80 w-full overflow-hidden rounded-2xl bg-[#F5EFEB]">
+                <img
+                  src="/assets/nsit-building-real.jpg"
+                  alt="Netaji Subhas Institute of Technology Academic Building, Bihta, Patna"
+                  className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                />
 
-              {/* Official Extracted Logo */}
-              <div className="mx-auto my-3 flex items-center justify-center">
-                <div className="relative h-44 w-44 sm:h-52 sm:w-52 rounded-full p-2 bg-gradient-to-tr from-[#FAF8F5] to-white border border-[#BF982E]/30 shadow-md">
-                  <img
-                    src="/assets/etims-logo.png"
-                    alt="Official ETIMS 2027 Conference Emblem"
-                    className="h-full w-full object-contain filter drop-shadow-md"
-                  />
+                {/* Subtle vignette gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30 pointer-events-none" />
+
+                {/* Top Badge: Physical Summit & Track Scope */}
+                <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/25 px-3 py-1 font-mono text-[10px] font-bold text-white shadow-md">
+                    <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>PHYSICAL SUMMIT &bull; BIHTA, PATNA</span>
+                  </span>
+                  <span className="rounded-full bg-[#7B1123]/90 backdrop-blur-md border border-[#BF982E]/40 px-2.5 py-1 font-mono text-[10px] font-bold text-[#F3D993] shadow-md">
+                    8 TRACKS
+                  </span>
+                </div>
+
+                {/* Bottom Overlay: Integrated Emblem & Campus Lockup */}
+                <div className="absolute bottom-3 left-3 right-3 rounded-xl bg-white/95 border border-[#BF982E]/40 p-2.5 sm:p-3 backdrop-blur-md shadow-lg flex items-center gap-3">
+                  <div className="relative h-12 w-12 sm:h-14 sm:w-14 rounded-full border-2 border-[#BF982E] p-1 bg-white shrink-0 shadow-xs">
+                    <img
+                      src="/assets/etims-logo.png"
+                      alt="ETIMS 2027 Official Emblem"
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-heading font-black text-sm sm:text-base text-[#7B1123] truncate">
+                        ETIMS 2027
+                      </span>
+                      <span className="font-mono text-[9px] font-bold bg-[#7B1123]/10 text-[#7B1123] px-1.5 py-0.5 rounded">
+                        1ST NATL CONF
+                      </span>
+                    </div>
+                    <p className="font-subheading text-[11px] sm:text-xs text-[#57534E] truncate font-medium">
+                      Netaji Subhas Institute of Technology, Bihta
+                    </p>
+                    <span className="text-[10px] font-mono text-[#BF982E] font-bold block truncate">
+                      9.2-Acre Integrated Tech Campus &bull; NH-922
+                    </span>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              <div className="mt-2 text-center">
-                <h3 className="font-heading text-lg font-bold text-[#7B1123]">
-                  ETIMS 2027
-                </h3>
-                <p className="text-xs text-[#57534E] font-subheading mt-0.5">
-                  Netaji Subhas Institute of Technology, Bihta, Patna
+            {/* Conference Venue Plenary Hall Teaser Card */}
+            <div className="w-full rounded-2xl border border-[#E7E0D6] bg-white p-2.5 sm:p-3 shadow-xs overflow-hidden flex items-center gap-3 hover:border-[#7B1123]/40 transition-colors">
+              <div className="relative h-16 w-24 sm:h-18 sm:w-28 rounded-xl overflow-hidden border border-[#E7E0D6] shrink-0 bg-[#F5EFEB]">
+                <img
+                  src="/assets/nsit-auditorium-real.jpg"
+                  alt="NSIT Plenary Auditorium Hall"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="min-w-0 flex-1">
+                <span className="text-[10px] font-mono uppercase text-[#7B1123] font-bold tracking-wider block">
+                  CONFERENCE VENUE // PLENARY HALL
+                </span>
+                <p className="font-heading text-xs sm:text-sm font-bold text-[#1C1917] truncate">
+                  Central Air-Conditioned Seminar Auditorium
+                </p>
+                <p className="text-[11px] text-[#57534E] truncate">
+                  Inaugural session, keynote speeches & paper presentations
                 </p>
               </div>
             </div>
 
-            {/* Official Brochure Campus Photo */}
-            <div className="w-full rounded-2xl border border-[#E7E0D6] bg-white p-3 shadow-xs overflow-hidden">
-              <div className="relative h-32 sm:h-36 w-full rounded-xl overflow-hidden border border-[#E7E0D6]">
-                <img
-                  src="/assets/nsit-campus-official.png"
-                  alt="Netaji Subhas Institute of Technology Campus Building"
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
-              <div className="mt-2.5 px-1 flex items-center justify-between text-xs">
-                <span className="font-heading font-bold text-[#1C1917]">
-                  NSIT Campus Building
-                </span>
-                <span className="font-mono text-[11px] text-[#7B1123] font-semibold">
-                  Spread over 9.2 Acres
-                </span>
-              </div>
-            </div>
-
             {/* Countdown Box */}
-            <div className="w-full rounded-2xl border border-[#BF982E]/30 bg-white p-4 text-center shadow-xs">
+            <div className="w-full rounded-2xl border border-[#BF982E]/30 bg-white p-3.5 sm:p-4 text-center shadow-xs">
               <span className="font-mono text-[10px] uppercase tracking-widest text-[#7B1123] font-bold block mb-2">
                 COUNTDOWN TO CONFERENCE INAUGURATION
               </span>

@@ -81,7 +81,7 @@ export default function VenuePage() {
             <div className="lg:col-span-5">
               <div className="relative overflow-hidden rounded-2xl border border-[#E7E0D6] bg-[#FAF8F5] p-2 shadow-md">
                 <img
-                  src="/assets/nsit-campus-official.png"
+                  src="/assets/nsit-building-real.jpg"
                   alt="NSIT Bihta Official Campus"
                   className="h-60 sm:h-72 w-full object-cover rounded-xl"
                 />

@@ -1404,7 +1404,7 @@ export const CAMPUS_FACILITIES: CampusFacility[] = [
     id: 'auditorium',
     name: 'Central Air-Conditioned Auditoriums & Plenary Halls',
     category: 'Conference Venues',
-    image: '/assets/nsit-classroom.png',
+    image: '/assets/nsit-auditorium-real.jpg',
     description:
       'Spacious presentation auditoriums and tier-seated seminar halls equipped with projection systems, acoustic paneling, and digital audio-visual setups for conference keynotes and parallel technical sessions.',
     capacity: 'Air-Conditioned Plenary & Seminar Halls',
@@ -1479,7 +1479,7 @@ export const CAMPUS_FACILITIES: CampusFacility[] = [
     id: 'campus-hub',
     name: '9.2-Acre Integrated Green Campus',
     category: 'Campus Environment',
-    image: '/assets/nsit-campus-official.png',
+    image: '/assets/nsit-building-real.jpg',
     description:
       'Spread over approximately 9.2 acres at Amhara, Bihta (~30 km from Patna), featuring landscaped gardens, sports grounds, and modern academic architecture.',
     capacity: '9.2 Acres Academic Campus',
