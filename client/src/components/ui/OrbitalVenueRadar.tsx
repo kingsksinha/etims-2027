@@ -190,12 +190,12 @@ export default function OrbitalVenueRadar() {
       {/* Top Header Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 px-5 sm:px-8 py-4 bg-black/90">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-cyan-400/40 bg-cyan-950/40 text-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.3)]">
-            <GlobeIcon className="h-5 w-5 text-cyan-400" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#BF982E]/40 bg-[#BF982E]/15 text-[#BF982E]">
+            <GlobeIcon className="h-5 w-5 text-[#BF982E]" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-cyan-400">
+              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-[#BF982E]">
                 NSIT BIHTA, PATNA // SPATIAL RADAR
               </span>
               <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[9px] font-semibold text-emerald-400 border border-emerald-500/30">
@@ -216,7 +216,7 @@ export default function OrbitalVenueRadar() {
             onClick={() => setActiveTab('3d-globe')}
             className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-medium transition-all cursor-pointer text-center truncate ${
               activeTab === '3d-globe'
-                ? 'bg-cyan-500 text-black font-bold shadow-[0_0_12px_rgba(6,182,212,0.6)]'
+                ? 'bg-[#BF982E] text-white font-bold shadow-md'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
@@ -228,7 +228,7 @@ export default function OrbitalVenueRadar() {
             onClick={() => setActiveTab('facilities')}
             className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-medium transition-all cursor-pointer text-center truncate ${
               activeTab === 'facilities'
-                ? 'bg-cyan-500 text-black font-bold shadow-[0_0_12px_rgba(6,182,212,0.6)]'
+                ? 'bg-[#BF982E] text-white font-bold shadow-md'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
@@ -240,7 +240,7 @@ export default function OrbitalVenueRadar() {
             onClick={() => setActiveTab('transit')}
             className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-medium transition-all cursor-pointer text-center truncate ${
               activeTab === 'transit'
-                ? 'bg-cyan-500 text-black font-bold shadow-[0_0_12px_rgba(6,182,212,0.6)]'
+                ? 'bg-[#BF982E] text-white font-bold shadow-md'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
@@ -272,11 +272,11 @@ export default function OrbitalVenueRadar() {
           {/* Honest Quick Coordinates & Campus Stats Bar (No fake claims!) */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
             <div className="rounded-2xl border border-white/10 bg-zinc-950 p-3.5 text-center">
-              <span className="font-mono text-cyan-400 font-bold text-xs uppercase block">
+              <span className="font-mono text-[#BF982E] font-bold text-xs uppercase block">
                 CAMPUS AREA
               </span>
               <p className="font-heading text-lg font-black text-white mt-1">
-                11 Acres
+                9.2 Acres
               </p>
               <span className="text-[10px] text-zinc-400">Green Tech Campus</span>
             </div>
@@ -292,7 +292,7 @@ export default function OrbitalVenueRadar() {
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-zinc-950 p-3.5 text-center">
-              <span className="font-mono text-cyan-400 font-bold text-xs uppercase block">
+              <span className="font-mono text-[#BF982E] font-bold text-xs uppercase block">
                 AIRPORT DISTANCE
               </span>
               <p className="font-heading text-lg font-black text-white mt-1">

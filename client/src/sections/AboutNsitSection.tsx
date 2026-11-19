@@ -65,9 +65,9 @@ export default function AboutNsitSection() {
   const activePhoto = campusGallery[activePhotoIdx];
 
   return (
-    <section id="nsit" className="relative py-24 md:py-32 bg-gradient-to-b from-[#07131F] via-[#08222F] to-[#07131F] border-b border-border-dark overflow-hidden">
+    <section id="nsit" className="relative py-20 md:py-28 bg-[#FAF8F5] border-b border-[#E7E0D6] overflow-hidden">
       {/* Background Lighting */}
-      <div className="pointer-events-none absolute -bottom-32 -left-32 h-[32rem] w-[32rem] rounded-full bg-primary-teal/15 blur-[140px]" />
+      <div className="pointer-events-none absolute -bottom-32 -left-32 h-[32rem] w-[32rem] rounded-full bg-[#BF982E]/10 blur-[140px]" />
 
       <Container className="relative z-10 w-full min-w-0">
         <SectionHeading
@@ -87,8 +87,8 @@ export default function AboutNsitSection() {
             className="flex w-full min-w-0 flex-col gap-4 sm:gap-6 lg:col-span-6"
           >
             {/* Campus Image Frame (Authentic Image with Perfect Framing) */}
-            <div className="relative overflow-hidden rounded-3xl border border-cyan/30 bg-navy/90 p-3 shadow-2xl glow-cyan-sm w-full min-w-0">
-              <div className="relative h-80 sm:h-[26rem] w-full overflow-hidden rounded-2xl bg-midnight">
+            <div className="relative overflow-hidden rounded-3xl border border-[#E7E0D6] bg-white p-3 shadow-md w-full min-w-0">
+              <div className="relative h-80 sm:h-[26rem] w-full overflow-hidden rounded-2xl bg-[#F5EFEB]">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={activePhoto.id}
@@ -103,19 +103,19 @@ export default function AboutNsitSection() {
                   />
                 </AnimatePresence>
                 
-                <div className="absolute inset-0 bg-gradient-to-t from-midnight/90 via-midnight/20 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
                 {/* Tech Badge Overlay */}
-                <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between rounded-xl bg-midnight/90 border border-border-dark px-3.5 py-2 backdrop-blur-md">
+                <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between rounded-xl bg-white/95 border border-[#E7E0D6] px-3.5 py-2 backdrop-blur-md shadow-xs">
                   <div className="min-w-0 pr-2">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-cyan block truncate">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#7B1123] font-bold block truncate">
                       {activePhoto.badge}
                     </span>
-                    <span className="text-xs font-heading font-bold text-light-text block truncate">
+                    <span className="text-xs font-heading font-bold text-[#1C1917] block truncate">
                       {activePhoto.title}
                     </span>
                   </div>
-                  <span className="rounded-md bg-cyan/15 border border-cyan/30 px-2.5 py-0.5 text-[10px] font-mono text-cyan font-bold shrink-0">
+                  <span className="rounded-md bg-[#7B1123]/10 border border-[#7B1123]/30 px-2.5 py-0.5 text-[10px] font-mono text-[#7B1123] font-bold shrink-0">
                     NSIT Bihta
                   </span>
                 </div>
@@ -132,8 +132,8 @@ export default function AboutNsitSection() {
                       onClick={() => setActivePhotoIdx(idx)}
                       className={`group relative h-14 sm:h-16 rounded-xl overflow-hidden border transition-all cursor-pointer ${
                         isSelected
-                          ? 'border-cyan ring-2 ring-cyan/50 scale-[1.02] glow-cyan-sm'
-                          : 'border-border-dark/80 opacity-60 hover:opacity-100 hover:border-cyan/50'
+                          ? 'border-[#7B1123] ring-2 ring-[#7B1123]/40 scale-[1.02] shadow-xs'
+                          : 'border-[#E7E0D6] opacity-70 hover:opacity-100 hover:border-[#7B1123]/50'
                       }`}
                     >
                       <img
@@ -143,7 +143,7 @@ export default function AboutNsitSection() {
                         style={photo.style}
                       />
                       {isSelected && (
-                        <span className="absolute inset-0 bg-cyan/10 pointer-events-none" />
+                        <span className="absolute inset-0 bg-[#7B1123]/15 pointer-events-none" />
                       )}
                     </button>
                   );
@@ -152,22 +152,22 @@ export default function AboutNsitSection() {
             </div>
 
             {/* Institutional Seal Lockup */}
-            <div className="flex items-center gap-4 rounded-2xl border border-border-dark bg-navy/60 p-4 backdrop-blur-xs w-full min-w-0">
-              <div className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-slate-900/90 border border-white/15 ring-1 ring-cyan/30 p-1 shadow-md">
+            <div className="flex items-center gap-4 rounded-2xl border border-[#E7E0D6] bg-white p-4 shadow-xs w-full min-w-0">
+              <div className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-white border border-[#BF982E]/40 p-1 shadow-xs">
                 <img
                   src="/assets/nsit-seal.png"
                   alt="NSIT Official Seal"
-                  className="h-full w-full object-contain drop-shadow-md"
+                  className="h-full w-full object-contain"
                 />
               </div>
               <div className="min-w-0">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-cyan block truncate">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-[#7B1123] font-bold block truncate">
                   Institutional Host
                 </span>
-                <h4 className="font-heading text-xs sm:text-sm font-bold text-light-text truncate">
+                <h4 className="font-heading text-xs sm:text-sm font-bold text-[#1C1917] truncate">
                   Netaji Subhas Institute of Technology
                 </h4>
-                <p className="text-[11px] text-secondary-text truncate">
+                <p className="text-[11px] text-[#57534E] truncate">
                   Bihta, Patna, Bihar – 801106, India
                 </p>
               </div>
@@ -183,29 +183,29 @@ export default function AboutNsitSection() {
             className="flex flex-col gap-6 lg:col-span-6"
           >
             <div>
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-cyan block mb-2">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#7B1123] block mb-2">
                 Academic Campus Profile
               </span>
-              <h3 className="font-heading text-2xl sm:text-3xl font-bold text-light-text">
+              <h3 className="font-heading text-2xl sm:text-3xl font-bold text-[#1C1917]">
                 Fostering Technological Leadership in Eastern India
               </h3>
-              <p className="mt-4 text-base sm:text-lg leading-relaxed text-secondary-text">
+              <p className="mt-4 text-base sm:text-lg leading-relaxed text-[#57534E] font-subheading">
                 {HOST_INSTITUTION.description}
               </p>
             </div>
 
             {/* Campus Facilities Matrix */}
-            <div className="space-y-3 pt-4 border-t border-border-dark/80">
-              <span className="text-xs font-mono uppercase tracking-wider text-secondary-text block mb-1">
+            <div className="space-y-3 pt-4 border-t border-[#E7E0D6]">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#7B1123] font-bold block mb-1">
                 Conference Facilities on Campus:
               </span>
               <div className="grid gap-3 sm:grid-cols-2">
                 {HOST_INSTITUTION.campusFeatures.map((feature, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-3 rounded-xl border border-border-dark bg-navy/50 p-3.5 text-sm text-secondary-text"
+                    className="flex items-start gap-3 rounded-xl border border-[#E7E0D6] bg-white p-3.5 text-sm text-[#57534E] shadow-xs"
                   >
-                    <CheckCircle2 className="h-4 w-4 text-cyan shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-[#BF982E] shrink-0 mt-0.5" />
                     <span>{feature}</span>
                   </div>
                 ))}
@@ -213,10 +213,10 @@ export default function AboutNsitSection() {
             </div>
 
             {/* Location & Navigation Link */}
-            <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/60 p-4">
+            <div className="flex items-center justify-between rounded-2xl border border-[#E7E0D6] bg-white p-4 shadow-xs">
               <div className="flex items-center gap-2.5">
-                <MapPin className="h-4.5 w-4.5 text-cyan shrink-0" />
-                <span className="text-xs sm:text-sm text-light-text">
+                <MapPin className="h-4.5 w-4.5 text-[#7B1123] shrink-0" />
+                <span className="text-xs sm:text-sm text-[#1C1917] font-medium">
                   {HOST_INSTITUTION.location}
                 </span>
               </div>
@@ -224,7 +224,7 @@ export default function AboutNsitSection() {
                 href="https://maps.google.com/?q=Netaji+Subhas+Institute+of+Technology+Bihta+Patna"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-lg bg-cyan/15 border border-cyan/30 px-3 py-1.5 text-xs font-mono font-bold text-cyan hover:bg-cyan hover:text-midnight transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-[#7B1123]/10 border border-[#7B1123]/30 px-3 py-1.5 text-xs font-mono font-bold text-[#7B1123] hover:bg-[#7B1123] hover:text-white transition-colors"
               >
                 <span>Google Maps</span>
                 <ExternalLink className="h-3 w-3" />
@@ -234,52 +234,52 @@ export default function AboutNsitSection() {
         </div>
 
         {/* Bento Strip of Key Institutional Metrics */}
-        <div className="mt-12 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="rounded-2xl border border-white/10 bg-black/50 p-4 hover:border-cyan/40 transition-colors">
-            <span className="font-heading text-2xl sm:text-3xl font-black text-white font-mono block">
+        <div className="mt-12 pt-8 border-t border-[#E7E0D6] grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="rounded-2xl border border-[#E7E0D6] bg-white p-4 hover:border-[#7B1123]/40 transition-colors shadow-xs">
+            <span className="font-heading text-2xl sm:text-3xl font-black text-[#7B1123] font-mono block">
               9.2 Acres
             </span>
-            <span className="text-xs font-bold text-light-text mt-0.5 block">
+            <span className="text-xs font-bold text-[#1C1917] mt-0.5 block">
               Green Residential Campus
             </span>
-            <span className="text-[10px] font-mono text-cyan mt-1 block">
+            <span className="text-[10px] font-mono text-[#BF982E] font-bold mt-1 block">
               Amhara, Bihta, Patna
             </span>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-black/50 p-4 hover:border-cyan/40 transition-colors">
-            <span className="font-heading text-2xl sm:text-3xl font-black text-white font-mono block">
+          <div className="rounded-2xl border border-[#E7E0D6] bg-white p-4 hover:border-[#7B1123]/40 transition-colors shadow-xs">
+            <span className="font-heading text-2xl sm:text-3xl font-black text-[#7B1123] font-mono block">
               7 Depts
             </span>
-            <span className="text-xs font-bold text-light-text mt-0.5 block">
+            <span className="text-xs font-bold text-[#1C1917] mt-0.5 block">
               Academic Departments
             </span>
-            <span className="text-[10px] font-mono text-cyan mt-1 block">
+            <span className="text-[10px] font-mono text-[#BF982E] font-bold mt-1 block">
               Engineering, Mgmt & Sciences
             </span>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-black/50 p-4 hover:border-cyan/40 transition-colors">
-            <span className="font-heading text-2xl sm:text-3xl font-black text-white font-mono block">
+          <div className="rounded-2xl border border-[#E7E0D6] bg-white p-4 hover:border-[#7B1123]/40 transition-colors shadow-xs">
+            <span className="font-heading text-2xl sm:text-3xl font-black text-[#7B1123] font-mono block">
               Est. 2007
             </span>
-            <span className="text-xs font-bold text-light-text mt-0.5 block">
-              AICTE & BEU Approved
+            <span className="text-xs font-bold text-[#1C1917] mt-0.5 block">
+              AICTE & DST Approved
             </span>
-            <span className="text-[10px] font-mono text-emerald-400 mt-1 block">
-              State Recognized Host
+            <span className="text-[10px] font-mono text-[#BF982E] font-bold mt-1 block">
+              BEU / SBTE / AKU Affiliated
             </span>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-black/50 p-4 hover:border-cyan/40 transition-colors">
-            <span className="font-heading text-2xl sm:text-3xl font-black text-white font-mono block">
+          <div className="rounded-2xl border border-[#E7E0D6] bg-white p-4 hover:border-[#7B1123]/40 transition-colors shadow-xs">
+            <span className="font-heading text-2xl sm:text-3xl font-black text-[#7B1123] font-mono block">
               Adjacent
             </span>
-            <span className="text-xs font-bold text-light-text mt-0.5 block">
+            <span className="text-xs font-bold text-[#1C1917] mt-0.5 block">
               To IIT Patna
             </span>
-            <span className="text-[10px] font-mono text-cyan mt-1 block">
-              NH-922 Expressway
+            <span className="text-[10px] font-mono text-[#BF982E] font-bold mt-1 block">
+              NH-922 Expressway Hub
             </span>
           </div>
         </div>

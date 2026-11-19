@@ -192,164 +192,164 @@ export default function AboutPage() {
               {/* Bento Grid Layout with Honest Verified Information */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {/* 1. Sprawling Campus Scale (Span 2) */}
-                <div className="sm:col-span-2 rounded-3xl border border-white/10 bg-gradient-to-br from-navy via-black to-navy p-6 relative overflow-hidden group hover:border-cyan/40 transition-colors">
+                <div className="sm:col-span-2 rounded-3xl border border-[#E7E0D6] bg-white p-6 relative overflow-hidden group hover:border-[#7B1123]/40 hover:shadow-md transition-all">
                   <div className="relative z-10 flex flex-col justify-between h-full">
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-[10px] uppercase tracking-wider text-cyan bg-cyan/10 border border-cyan/30 px-2.5 py-0.5 rounded-full">
+                      <span className="font-mono text-[10px] uppercase tracking-wider text-[#7B1123] bg-[#7B1123]/10 border border-[#7B1123]/25 px-2.5 py-0.5 rounded-full font-semibold">
                         CAMPUS INFRASTRUCTURE
                       </span>
-                      <span className="text-xs font-mono text-secondary-text">Est. 2007 • AICTE Approved</span>
+                      <span className="text-xs font-mono text-[#57534E]">Est. 2007 • AICTE Approved</span>
                     </div>
                     <div className="my-5">
                       <div className="flex items-baseline gap-3">
-                        <span className="font-heading text-4xl sm:text-5xl font-black text-white tracking-tight">
+                        <span className="font-heading text-4xl sm:text-5xl font-black text-[#1C1917] tracking-tight">
                           9.2 Acres
                         </span>
-                        <span className="font-mono text-sm text-cyan font-bold">
+                        <span className="font-mono text-sm text-[#7B1123] font-bold">
                           • Amhara, Bihta Campus
                         </span>
                       </div>
-                      <h4 className="font-heading text-base font-bold text-light-text mt-1.5">
+                      <h4 className="font-heading text-base font-bold text-[#1C1917] mt-1.5">
                         Integrated Academic & Residential Campus
                       </h4>
-                      <p className="text-xs text-secondary-text mt-1 max-w-lg leading-relaxed">
+                      <p className="text-xs text-[#57534E] mt-1 max-w-lg leading-relaxed">
                         Pollution-free engineering campus situated in the Bihta educational corridor along NH-922, approximately 30 km west of Patna, featuring departmental lecture halls, computer labs, and student residential blocks.
                       </p>
                     </div>
-                    <div className="flex items-center gap-2 pt-2 border-t border-white/10 text-[11px] font-mono text-zinc-400">
-                      <MapPin className="h-3.5 w-3.5 text-cyan" />
+                    <div className="flex items-center gap-2 pt-2 border-t border-[#E7E0D6] text-[11px] font-mono text-[#78716C]">
+                      <MapPin className="h-3.5 w-3.5 text-[#7B1123]" />
                       <span>Bihta Knowledge Hub, Patna (Near IIT Patna)</span>
                     </div>
                   </div>
-                  <div className="pointer-events-none absolute -bottom-10 -right-10 h-36 w-36 rounded-full bg-cyan/10 blur-[50px]" />
+                  <div className="pointer-events-none absolute -bottom-10 -right-10 h-36 w-36 rounded-full bg-[#BF982E]/10 blur-[50px]" />
                 </div>
 
                 {/* 2. Academic Departments */}
-                <div className="rounded-3xl border border-white/10 bg-black/60 p-5 flex flex-col justify-between hover:border-cyan/40 transition-colors">
+                <div className="rounded-3xl border border-[#E7E0D6] bg-white p-5 flex flex-col justify-between hover:border-[#7B1123]/40 hover:shadow-sm transition-all">
                   <div className="flex items-center justify-between">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#7B1123]/10 text-[#7B1123] border border-[#7B1123]/25">
                       <Cpu className="h-4.5 w-4.5" />
                     </div>
-                    <span className="text-[10px] font-mono text-secondary-text uppercase">ACADEMICS</span>
+                    <span className="text-[10px] font-mono text-[#78716C] uppercase">ACADEMICS</span>
                   </div>
                   <div className="my-4">
-                    <span className="font-heading text-3xl font-black text-white font-mono block">
+                    <span className="font-heading text-3xl font-black text-[#1C1917] font-mono block">
                       7 Depts
                     </span>
-                    <h4 className="font-heading text-sm font-bold text-light-text mt-1">
+                    <h4 className="font-heading text-sm font-bold text-[#1C1917] mt-1">
                       Academic Departments
                     </h4>
-                    <p className="text-[11px] text-secondary-text mt-1">
+                    <p className="text-[11px] text-[#57534E] mt-1">
                       Civil, Mechanical, EEE, CSE, Applied Sciences, Management, Humanities.
                     </p>
                   </div>
-                  <span className="text-[10px] font-mono text-cyan">BEU / SBTE / AKU</span>
+                  <span className="text-[10px] font-mono text-[#7B1123] font-semibold">BEU / SBTE / AKU</span>
                 </div>
 
                 {/* 3. Computing Lab */}
-                <div className="rounded-3xl border border-white/10 bg-black/60 p-5 flex flex-col justify-between hover:border-cyan/40 transition-colors">
+                <div className="rounded-3xl border border-[#E7E0D6] bg-white p-5 flex flex-col justify-between hover:border-[#7B1123]/40 hover:shadow-sm transition-all">
                   <div className="flex items-center justify-between">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#7B1123]/10 text-[#7B1123] border border-[#7B1123]/25">
                       <Layers className="h-4.5 w-4.5" />
                     </div>
-                    <span className="text-[10px] font-mono text-secondary-text uppercase">COMPUTING</span>
+                    <span className="text-[10px] font-mono text-[#78716C] uppercase">COMPUTING</span>
                   </div>
                   <div className="my-4">
-                    <span className="font-heading text-3xl font-black text-white font-mono block">
+                    <span className="font-heading text-3xl font-black text-[#1C1917] font-mono block">
                       IT Labs
                     </span>
-                    <h4 className="font-heading text-sm font-bold text-light-text mt-1">
+                    <h4 className="font-heading text-sm font-bold text-[#1C1917] mt-1">
                       Campus Computer Center
                     </h4>
-                    <p className="text-[11px] text-secondary-text mt-1">
+                    <p className="text-[11px] text-[#57534E] mt-1">
                       Desktop terminals with campus LAN network for academic sessions.
                     </p>
                   </div>
-                  <span className="text-[10px] font-mono text-emerald-400">Campus LAN Connected</span>
+                  <span className="text-[10px] font-mono text-emerald-700 font-semibold">Campus LAN Connected</span>
                 </div>
 
                 {/* 4. Practical Laboratories */}
-                <div className="rounded-3xl border border-white/10 bg-black/60 p-5 flex flex-col justify-between hover:border-cyan/40 transition-colors">
+                <div className="rounded-3xl border border-[#E7E0D6] bg-white p-5 flex flex-col justify-between hover:border-[#7B1123]/40 hover:shadow-sm transition-all">
                   <div className="flex items-center justify-between">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#7B1123]/10 text-[#7B1123] border border-[#7B1123]/25">
                       <FlaskConical className="h-4.5 w-4.5" />
                     </div>
-                    <span className="text-[10px] font-mono text-secondary-text uppercase">LABS</span>
+                    <span className="text-[10px] font-mono text-[#78716C] uppercase">LABS</span>
                   </div>
                   <div className="my-4">
-                    <span className="font-heading text-3xl font-black text-white font-mono block">
+                    <span className="font-heading text-3xl font-black text-[#1C1917] font-mono block">
                       Dept Labs
                     </span>
-                    <h4 className="font-heading text-sm font-bold text-light-text mt-1">
+                    <h4 className="font-heading text-sm font-bold text-[#1C1917] mt-1">
                       Workshops & Testing Labs
                     </h4>
-                    <p className="text-[11px] text-secondary-text mt-1">
+                    <p className="text-[11px] text-[#57534E] mt-1">
                       Circuit testing, mechanical workshops, and civil surveying setups.
                     </p>
                   </div>
-                  <span className="text-[10px] font-mono text-secondary-text">Hands-On Practice</span>
+                  <span className="text-[10px] font-mono text-[#57534E]">Hands-On Practice</span>
                 </div>
 
                 {/* 5. College Library */}
-                <div className="rounded-3xl border border-white/10 bg-black/60 p-5 flex flex-col justify-between hover:border-cyan/40 transition-colors">
+                <div className="rounded-3xl border border-[#E7E0D6] bg-white p-5 flex flex-col justify-between hover:border-[#7B1123]/40 hover:shadow-sm transition-all">
                   <div className="flex items-center justify-between">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#7B1123]/10 text-[#7B1123] border border-[#7B1123]/25">
                       <BookOpen className="h-4.5 w-4.5" />
                     </div>
-                    <span className="text-[10px] font-mono text-secondary-text uppercase">LIBRARY</span>
+                    <span className="text-[10px] font-mono text-[#78716C] uppercase">LIBRARY</span>
                   </div>
                   <div className="my-4">
-                    <span className="font-heading text-3xl font-black text-white font-mono block">
+                    <span className="font-heading text-3xl font-black text-[#1C1917] font-mono block">
                       Library
                     </span>
-                    <h4 className="font-heading text-sm font-bold text-light-text mt-1">
+                    <h4 className="font-heading text-sm font-bold text-[#1C1917] mt-1">
                       Central Reading Hall
                     </h4>
-                    <p className="text-[11px] text-secondary-text mt-1">
+                    <p className="text-[11px] text-[#57534E] mt-1">
                       Engineering textbooks, reference material, and quiet study desks.
                     </p>
                   </div>
-                  <span className="text-[10px] font-mono text-cyan">Reference Collection</span>
+                  <span className="text-[10px] font-mono text-[#7B1123] font-semibold">Reference Collection</span>
                 </div>
 
                 {/* 6. Conference Hall */}
-                <div className="rounded-3xl border border-white/10 bg-black/60 p-5 flex flex-col justify-between hover:border-cyan/40 transition-colors">
+                <div className="rounded-3xl border border-[#E7E0D6] bg-white p-5 flex flex-col justify-between hover:border-[#7B1123]/40 hover:shadow-sm transition-all">
                   <div className="flex items-center justify-between">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#7B1123]/10 text-[#7B1123] border border-[#7B1123]/25">
                       <Building2 className="h-4.5 w-4.5" />
                     </div>
-                    <span className="text-[10px] font-mono text-secondary-text uppercase">HALL</span>
+                    <span className="text-[10px] font-mono text-[#78716C] uppercase">HALL</span>
                   </div>
                   <div className="my-4">
-                    <span className="font-heading text-3xl font-black text-white font-mono block">
+                    <span className="font-heading text-3xl font-black text-[#1C1917] font-mono block">
                       Auditorium
                     </span>
-                    <h4 className="font-heading text-sm font-bold text-light-text mt-1">
+                    <h4 className="font-heading text-sm font-bold text-[#1C1917] mt-1">
                       Air-Conditioned Hall
                     </h4>
-                    <p className="text-[11px] text-secondary-text mt-1">
+                    <p className="text-[11px] text-[#57534E] mt-1">
                       Presentation hall with audio-visual equipment and tiered seating.
                     </p>
                   </div>
-                  <span className="text-[10px] font-mono text-amber">ETIMS 2027 Venue</span>
+                  <span className="text-[10px] font-mono text-[#BF982E] font-bold">ETIMS 2027 Venue</span>
                 </div>
 
                 {/* 7. Student Living */}
-                <div className="rounded-3xl border border-white/10 bg-black/60 p-5 flex flex-col justify-between hover:border-cyan/40 transition-colors">
+                <div className="rounded-3xl border border-[#E7E0D6] bg-white p-5 flex flex-col justify-between hover:border-[#7B1123]/40 hover:shadow-sm transition-all">
                   <div className="flex items-center justify-between">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#7B1123]/10 text-[#7B1123] border border-[#7B1123]/25">
                       <Shield className="h-4.5 w-4.5" />
                     </div>
-                    <span className="text-[10px] font-mono text-secondary-text uppercase">HOSTEL</span>
+                    <span className="text-[10px] font-mono text-[#78716C] uppercase">HOSTEL</span>
                   </div>
                   <div className="my-4">
-                    <span className="font-heading text-3xl font-black text-white font-mono block">
+                    <span className="font-heading text-3xl font-black text-[#1C1917] font-mono block">
                       Hostels
                     </span>
-                    <h4 className="font-heading text-sm font-bold text-light-text mt-1">
+                    <h4 className="font-heading text-sm font-bold text-[#1C1917] mt-1">
                       On-Campus Residence
                     </h4>
-                    <p className="text-[11px] text-secondary-text mt-1">
+                    <p className="text-[11px] text-[#57534E] mt-1">
                       Separate residential accommodation for boys & girls with mess.
                     </p>
                   </div>

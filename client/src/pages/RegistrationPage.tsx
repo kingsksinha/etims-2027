@@ -13,90 +13,90 @@ const INCLUSIONS = [
 
 export default function RegistrationPage() {
   return (
-    <div className="relative min-h-screen bg-midnight text-light-text py-12 sm:py-16 overflow-hidden">
+    <div className="relative min-h-screen bg-[#FAF8F5] text-[#1C1917] py-12 sm:py-16 overflow-hidden">
       {/* Background Lighting */}
-      <div className="pointer-events-none absolute top-10 left-1/4 h-96 w-96 rounded-full bg-cyan/10 blur-[140px]" />
+      <div className="pointer-events-none absolute top-10 left-1/4 h-96 w-96 rounded-full bg-[#BF982E]/10 blur-[140px]" />
 
       <Container className="relative z-10">
         <div className="mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan/40 bg-navy/80 px-4 py-1.5 text-xs font-mono font-semibold text-cyan mb-4 glow-cyan-sm">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#7B1123]/30 bg-[#7B1123]/10 px-4 py-1.5 text-xs font-mono font-semibold text-[#7B1123] mb-4">
             <CreditCard className="h-3.5 w-3.5" />
             <span>Delegate Registration & Tariff Schedule</span>
           </div>
-          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-light-text">
-            Registration Fees & <span className="text-cyan text-glow-cyan">Delegate Categories</span>
+          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#1C1917]">
+            Registration Fees & <span className="text-[#7B1123]">Delegate Categories</span>
           </h1>
-          <p className="mt-3 max-w-3xl text-sm sm:text-base text-secondary-text leading-relaxed">
+          <p className="mt-3 max-w-3xl text-sm sm:text-base text-[#57534E] leading-relaxed">
             ETIMS 2027 welcomes researchers, faculty, industry professionals, and students across eight disciplines. Review the official early-bird and regular fee tariff below.
           </p>
         </div>
 
         {/* Important Deadlines Callout */}
-        <div className="mb-10 rounded-2xl border border-cyan/30 bg-navy/70 p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4">
+        <div className="mb-10 rounded-2xl border border-[#E7E0D6] bg-white p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4 shadow-sm">
           <div className="flex items-center gap-3">
-            <Calendar className="h-5 w-5 text-cyan shrink-0" />
+            <Calendar className="h-5 w-5 text-[#7B1123] shrink-0" />
             <div className="text-xs sm:text-sm">
-              <span className="text-secondary-text">Early Registration Deadline: </span>
-              <strong className="text-cyan font-bold">{REGISTRATION_TERMS.earlyDeadline}</strong>
-              <span className="mx-2 text-border-dark">|</span>
-              <span className="text-secondary-text">Final Registration Deadline: </span>
-              <strong className="text-mint font-bold">{REGISTRATION_TERMS.finalDeadline}</strong>
+              <span className="text-[#57534E]">Early Registration Deadline: </span>
+              <strong className="text-[#7B1123] font-bold">{REGISTRATION_TERMS.earlyDeadline}</strong>
+              <span className="mx-2 text-[#E7E0D6]">|</span>
+              <span className="text-[#57534E]">Final Registration Deadline: </span>
+              <strong className="text-[#BF982E] font-bold">{REGISTRATION_TERMS.finalDeadline}</strong>
             </div>
           </div>
-          <span className="text-xs font-mono text-cyan bg-cyan/10 border border-cyan/30 rounded-lg px-3 py-1">
+          <span className="text-xs font-mono text-[#7B1123] bg-[#7B1123]/10 border border-[#7B1123]/25 rounded-lg px-3 py-1 font-semibold">
             Currency: INR (₹)
           </span>
         </div>
 
         {/* Categories Table / Cards */}
-        <div className="overflow-hidden rounded-3xl border border-border-dark bg-navy/60 backdrop-blur-md shadow-2xl">
-          <div className="hidden lg:grid grid-cols-12 gap-4 px-8 py-4 bg-midnight/80 border-b border-border-dark text-xs font-mono font-bold text-cyan uppercase tracking-wider">
+        <div className="overflow-hidden rounded-3xl border border-[#E7E0D6] bg-white shadow-md">
+          <div className="hidden lg:grid grid-cols-12 gap-4 px-8 py-4 bg-[#5C1324] text-white text-xs font-mono font-bold uppercase tracking-wider">
             <div className="col-span-5">Category & Scope</div>
             <div className="col-span-3 text-center">Early Fee (by 20 June 2027)</div>
             <div className="col-span-3 text-center">Regular Fee (by 10 July 2027)</div>
             <div className="col-span-1 text-right">Badge</div>
           </div>
 
-          <div className="divide-y divide-border-dark/60">
+          <div className="divide-y divide-[#E7E0D6]">
             {REGISTRATION_CATEGORIES.map((cat, idx) => (
               <div
                 key={idx}
-                className="p-6 lg:px-8 lg:py-6 grid lg:grid-cols-12 gap-4 items-center hover:bg-navy/90 transition-colors"
+                className="p-6 lg:px-8 lg:py-6 grid lg:grid-cols-12 gap-4 items-center hover:bg-[#FAF8F5] transition-colors"
               >
                 <div className="lg:col-span-5">
                   <div className="flex items-center gap-2 lg:hidden mb-2">
-                    <span className="rounded-full bg-cyan/15 border border-cyan/30 px-2.5 py-0.5 text-[10px] font-mono font-bold text-cyan">
+                    <span className="rounded-full bg-[#7B1123]/10 border border-[#7B1123]/25 px-2.5 py-0.5 text-[10px] font-mono font-bold text-[#7B1123]">
                       {cat.badge}
                     </span>
                   </div>
-                  <h3 className="font-heading text-lg font-bold text-light-text">
+                  <h3 className="font-heading text-lg font-bold text-[#1C1917]">
                     {cat.category}
                   </h3>
-                  <p className="mt-1 text-xs text-secondary-text leading-relaxed">
+                  <p className="mt-1 text-xs text-[#57534E] leading-relaxed">
                     {cat.scope}
                   </p>
                 </div>
 
-                <div className="lg:col-span-3 flex lg:justify-center items-center justify-between border-t lg:border-t-0 border-border-dark/40 pt-3 lg:pt-0">
-                  <span className="lg:hidden text-xs font-mono text-secondary-text">Early Fee:</span>
-                  <div className="rounded-xl border border-cyan/40 bg-midnight/90 px-4 py-2 text-center">
-                    <span className="font-heading text-lg font-black text-light-text text-glow-cyan">
+                <div className="lg:col-span-3 flex lg:justify-center items-center justify-between border-t lg:border-t-0 border-[#E7E0D6] pt-3 lg:pt-0">
+                  <span className="lg:hidden text-xs font-mono text-[#57534E]">Early Fee:</span>
+                  <div className="rounded-xl border border-[#7B1123]/30 bg-[#7B1123]/5 px-4 py-2 text-center">
+                    <span className="font-heading text-lg font-black text-[#7B1123]">
                       {cat.earlyFormatted}
                     </span>
                   </div>
                 </div>
 
-                <div className="lg:col-span-3 flex lg:justify-center items-center justify-between border-t lg:border-t-0 border-border-dark/40 pt-3 lg:pt-0">
-                  <span className="lg:hidden text-xs font-mono text-secondary-text">Regular Fee:</span>
-                  <div className="rounded-xl border border-border-dark bg-midnight/70 px-4 py-2 text-center">
-                    <span className="font-heading text-lg font-bold text-secondary-text">
+                <div className="lg:col-span-3 flex lg:justify-center items-center justify-between border-t lg:border-t-0 border-[#E7E0D6] pt-3 lg:pt-0">
+                  <span className="lg:hidden text-xs font-mono text-[#57534E]">Regular Fee:</span>
+                  <div className="rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-4 py-2 text-center">
+                    <span className="font-heading text-lg font-bold text-[#57534E]">
                       {cat.regularFormatted}
                     </span>
                   </div>
                 </div>
 
                 <div className="hidden lg:flex col-span-1 justify-end">
-                  <span className="rounded-full bg-cyan/15 border border-cyan/30 px-2.5 py-0.5 text-[10px] font-mono font-bold text-cyan text-right">
+                  <span className="rounded-full bg-[#7B1123]/10 border border-[#7B1123]/25 px-2.5 py-0.5 text-[10px] font-mono font-bold text-[#7B1123] text-right">
                     {cat.badge}
                   </span>
                 </div>
@@ -106,10 +106,10 @@ export default function RegistrationPage() {
         </div>
 
         {/* Delegate Entitlements & Inclusions */}
-        <div className="mt-12 rounded-3xl border border-cyan/40 bg-navy/80 p-6 sm:p-8 backdrop-blur-md space-y-6">
-          <div className="flex items-center gap-2.5 text-cyan">
+        <div className="mt-12 rounded-3xl border border-[#E7E0D6] bg-white p-6 sm:p-8 space-y-6 shadow-md">
+          <div className="flex items-center gap-2.5 text-[#7B1123]">
             <CheckCircle2 className="h-5 w-5" />
-            <h3 className="font-heading text-xl font-bold text-light-text">
+            <h3 className="font-heading text-xl font-bold text-[#1C1917]">
               Delegate Registration Inclusions
             </h3>
           </div>
@@ -118,29 +118,29 @@ export default function RegistrationPage() {
             {INCLUSIONS.map((item, i) => (
               <div
                 key={i}
-                className="flex items-start gap-2.5 rounded-2xl border border-border-dark bg-midnight/70 p-3.5 text-xs text-secondary-text"
+                className="flex items-start gap-2.5 rounded-2xl border border-[#E7E0D6] bg-[#FAF8F5] p-3.5 text-xs text-[#57534E]"
               >
-                <CheckCircle2 className="h-4 w-4 text-mint shrink-0 mt-0.5" />
-                <span className="text-light-text font-medium leading-snug">{item}</span>
+                <CheckCircle2 className="h-4 w-4 text-[#BF982E] shrink-0 mt-0.5" />
+                <span className="text-[#1C1917] font-medium leading-snug">{item}</span>
               </div>
             ))}
           </div>
 
-          <div className="pt-4 border-t border-border-dark text-xs text-secondary-text leading-relaxed">
+          <div className="pt-4 border-t border-[#E7E0D6] text-xs text-[#57534E] leading-relaxed">
             <p>
-              <strong className="text-light-text">Official Note:</strong> {REGISTRATION_TERMS.inclusions}
+              <strong className="text-[#1C1917]">Official Note:</strong> {REGISTRATION_TERMS.inclusions}
             </p>
           </div>
         </div>
 
         {/* Registration Support Desk */}
-        <div className="mt-8 rounded-2xl border border-border-dark bg-navy/60 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-xs text-secondary-text">
+        <div className="mt-8 rounded-2xl border border-[#E7E0D6] bg-white p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+          <div className="text-xs text-[#57534E]">
             <span>For group registration queries or institutional facilitation, contact the Convenor Secretariat.</span>
           </div>
           <a
             href={`mailto:${CONVENOR.email}?subject=ETIMS%202027%20Registration%20Inquiry`}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-primary-teal to-cyan px-5 py-2.5 text-xs font-bold text-midnight shadow-md glow-cyan-sm shrink-0"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-5 py-2.5 text-xs font-bold text-white shadow-md transition-all shrink-0"
           >
             <span>Contact Secretariat</span>
             <ArrowRight className="h-3.5 w-3.5" />

@@ -255,19 +255,19 @@ export default function PaperSubmissionModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 16 }}
           transition={{ type: 'spring', damping: 26, stiffness: 300 }}
-          className="relative w-full max-w-2xl rounded-3xl border border-white/15 bg-zinc-950 shadow-2xl my-auto text-light-text overflow-hidden z-10"
+          className="relative w-full max-w-2xl rounded-3xl border border-[#E7E0D6] bg-white shadow-2xl my-auto text-[#1C1917] overflow-hidden z-10"
         >
           {/* Modal Header */}
-          <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 bg-zinc-900/60">
+          <div className="flex items-center justify-between border-b border-[#E7E0D6] px-6 py-4 bg-[#FAF8F5]">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#7B1123]/10 text-[#7B1123] border border-[#7B1123]/25">
                 <Upload className="h-5 w-5" />
               </div>
               <div>
-                <h3 id="modal-title" className="font-heading text-lg font-bold text-light-text">
+                <h3 id="modal-title" className="font-heading text-lg font-bold text-[#1C1917]">
                   ETIMS 2027 Manuscript Submission Portal
                 </h3>
-                <span className="text-[10px] font-mono text-cyan uppercase tracking-wider block">
+                <span className="text-[10px] font-mono text-[#7B1123] uppercase tracking-wider block font-semibold">
                   Netaji Subhas Institute of Technology &bull; Bihta, Patna
                 </span>
               </div>
@@ -276,7 +276,7 @@ export default function PaperSubmissionModal({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-xl p-2 text-secondary-text hover:text-light-text hover:bg-navy border border-border-dark transition-colors cursor-pointer"
+              className="rounded-xl p-2 text-[#57534E] hover:text-[#1C1917] hover:bg-[#FAF8F5] border border-[#E7E0D6] transition-colors cursor-pointer"
               aria-label="Close Submission Dialog"
             >
               <X className="h-5 w-5" />
@@ -356,7 +356,7 @@ export default function PaperSubmissionModal({
                   <button
                     type="button"
                     onClick={downloadReceipt}
-                    className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary-teal to-cyan px-5 py-3 text-xs font-bold text-midnight shadow-md glow-cyan-sm cursor-pointer"
+                    className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-5 py-3 text-xs font-bold text-white shadow-md cursor-pointer transition-all"
                   >
                     <Download className="h-4 w-4" />
                     <span>Download Official Submission Slip (.txt)</span>
@@ -365,7 +365,7 @@ export default function PaperSubmissionModal({
                   <button
                     type="button"
                     onClick={resetForm}
-                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-border-dark bg-navy px-4 py-3 text-xs font-bold text-light-text hover:border-cyan cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-4 py-3 text-xs font-bold text-[#1C1917] hover:border-[#7B1123] cursor-pointer"
                   >
                     <span>Submit Another Paper</span>
                   </button>
@@ -569,7 +569,7 @@ export default function PaperSubmissionModal({
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary-teal to-cyan px-6 py-3.5 text-xs sm:text-sm font-bold text-midnight shadow-lg hover:shadow-cyan/30 transition-all active:scale-[0.99] glow-cyan-sm cursor-pointer disabled:opacity-60"
+                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-6 py-3.5 text-xs sm:text-sm font-bold text-white shadow-lg transition-all active:scale-[0.99] cursor-pointer disabled:opacity-60"
                   >
                     {submitting ? (
                       <>

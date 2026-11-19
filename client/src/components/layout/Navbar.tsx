@@ -58,48 +58,55 @@ export default function Navbar() {
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           scrolled
-            ? 'border-b border-white/10 bg-black/90 backdrop-blur-xl shadow-2xl shadow-black/80 py-2.5'
-            : 'border-b border-white/5 bg-black/75 backdrop-blur-lg py-3'
+            ? 'border-b border-[#BF982E]/40 bg-[#5C1324]/95 backdrop-blur-xl shadow-lg shadow-[#3D0A14]/30 py-2.5'
+            : 'border-b border-[#BF982E]/30 bg-[#5C1324] py-3'
         }`}
       >
         <nav
           aria-label="Main Navigation"
           className="mx-auto flex max-w-7xl items-center justify-between px-3.5 sm:px-6 lg:px-8 w-full min-w-0"
         >
-          {/* Brand Identity: Official NSIT Seal + ETIMS 2027 Typography */}
+          {/* Brand Identity: Official NSIT Seal + ETIMS 2027 Official Conference Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2.5 sm:gap-3 group min-w-0 shrink"
+            className="flex items-center gap-2.5 sm:gap-3.5 group min-w-0 shrink"
             onClick={handleNavClick}
             aria-label="ETIMS 2027 Conference Home"
           >
-            <div className="relative flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full bg-slate-900/90 border border-white/15 ring-1 ring-cyan/25 p-1 shadow-md transition-transform duration-300 group-hover:scale-105">
-              <img
-                src="/assets/nsit-seal.png"
-                alt="NSIT Official Seal"
-                className="h-full w-full object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
-              />
+            {/* Dual Emblem Group: NSIT Official Seal + ETIMS 2027 Conference Emblem */}
+            <div className="flex items-center gap-1.5 shrink-0">
+              <div className="relative flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full bg-white/95 border border-[#BF982E]/40 p-1 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                <img
+                  src="/assets/nsit-seal.png"
+                  alt="NSIT Official Seal"
+                  className="h-full w-full object-contain"
+                />
+              </div>
+              <div className="relative flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-full bg-white p-0.5 border border-[#BF982E]/50 shadow-md transition-transform duration-300 group-hover:scale-105">
+                <img
+                  src="/assets/etims-logo.png"
+                  alt="ETIMS 2027 Conference Emblem"
+                  className="h-full w-full object-contain"
+                />
+              </div>
             </div>
+
             <div className="flex flex-col min-w-0">
               <div className="flex items-center gap-1.5 leading-tight">
-                <span className="font-heading text-sm sm:text-base font-extrabold tracking-tight text-white group-hover:text-cyan transition-colors">
-                  ETIMS
+                <span className="font-heading text-base sm:text-lg font-black tracking-tight text-white group-hover:text-[#F3D993] transition-colors">
+                  ETIMS 2027
                 </span>
-                <span className="font-heading text-sm sm:text-base font-extrabold text-cyan">
-                  2027
-                </span>
-                <span className="hidden md:inline-block h-3.5 w-px bg-white/20 mx-1" />
-                <span className="hidden md:inline-block text-[11px] font-heading font-medium text-zinc-300 tracking-wide truncate">
-                  Netaji Subhas Institute of Technology
+                <span className="inline-flex items-center rounded bg-[#BF982E]/25 border border-[#BF982E]/40 px-1.5 py-0.2 text-[10px] font-mono font-bold text-[#F3D993] uppercase tracking-wide">
+                  1st National Conf.
                 </span>
               </div>
-              <span className="text-[9px] sm:text-[11px] uppercase tracking-wider text-zinc-400 font-mono truncate hidden sm:inline">
-                NSIT Bihta, Patna
+              <span className="text-[10px] sm:text-[11px] font-subheading text-[#F5EFEB]/90 font-medium truncate">
+                Netaji Subhas Institute of Technology, Bihta, Patna
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation Links with Glowing Active Indicator */}
+          {/* Desktop Navigation Links with Warm Gold Indicator */}
           <ul className="hidden items-center gap-1 xl:gap-1.5 lg:flex">
             {TAB_NAV_ITEMS.map((tab) => {
               const isActive =
@@ -114,15 +121,15 @@ export default function Navbar() {
                     onClick={handleNavClick}
                     className={`relative rounded-xl px-2.5 py-1.5 text-xs font-semibold transition-all duration-200 cursor-pointer ${
                       isActive
-                        ? 'text-white bg-white/10 border border-white/15 font-bold shadow-sm'
-                        : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                        ? 'text-white bg-white/15 border border-[#BF982E]/40 font-bold shadow-xs'
+                        : 'text-[#F5EFEB]/85 hover:text-white hover:bg-white/10'
                     }`}
                   >
                     <span>{tab.shortLabel}</span>
                     {isActive && (
                       <motion.span
                         layoutId="navUnderline"
-                        className="absolute -bottom-1 left-2 right-2 h-0.5 rounded-full bg-cyan shadow-[0_0_8px_#38bdf8]"
+                        className="absolute -bottom-1 left-2 right-2 h-0.5 rounded-full bg-[#BF982E] shadow-[0_0_8px_#bf982e]"
                         transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                       />
                     )}
@@ -132,12 +139,12 @@ export default function Navbar() {
             })}
           </ul>
 
-          {/* Desktop Header CTA Button */}
+          {/* Desktop Header CTA Button (Brochure Gold) */}
           <div className="hidden lg:flex items-center gap-3 shrink-0">
             <Link
               to="/submission"
               onClick={handleNavClick}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-cyan to-blue-500 px-4 py-2 text-xs font-bold text-black shadow-md hover:brightness-110 transition-all active:scale-95 cursor-pointer glow-cyan-sm"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#BF982E] to-[#D4AF37] px-4 py-2 text-xs font-extrabold text-[#450F1D] shadow-md hover:brightness-105 transition-all active:scale-95 cursor-pointer"
             >
               <span>Submit Paper</span>
               <ArrowUpRight className="h-3.5 w-3.5" />
@@ -148,11 +155,11 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
-            className="flex items-center justify-center rounded-xl p-2.5 text-light-text hover:bg-navy border border-border-dark lg:hidden transition-colors cursor-pointer"
+            className="flex items-center justify-center rounded-xl p-2.5 text-white hover:bg-white/10 border border-[#BF982E]/30 lg:hidden transition-colors cursor-pointer"
             aria-label="Open Navigation Menu"
             aria-expanded={mobileOpen}
           >
-            <Menu className="h-6 w-6 text-cyan" />
+            <Menu className="h-6 w-6 text-[#F3D993]" />
           </button>
         </nav>
       </header>
@@ -181,21 +188,28 @@ export default function Navbar() {
               className="fixed inset-y-0 right-0 flex w-full max-w-sm flex-col bg-midnight border-l border-border-dark shadow-2xl focus:outline-none"
             >
               {/* Drawer Header */}
-              <div className="flex items-center justify-between border-b border-border-dark px-5 py-4 bg-navy/60">
+              <div className="flex items-center justify-between border-b border-[#BF982E]/30 px-5 py-4 bg-[#5C1324]">
                 <div className="flex items-center gap-2.5">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-900/90 border border-white/15 ring-1 ring-cyan/25 p-1 shadow-sm">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white p-1 shadow-sm">
                     <img
                       src="/assets/nsit-seal.png"
                       alt="NSIT Official Seal"
                       className="h-full w-full object-contain"
                     />
                   </div>
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white p-0.5 shadow-sm">
+                    <img
+                      src="/assets/etims-logo.png"
+                      alt="ETIMS 2027 Official Logo"
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
                   <div>
                     <div className="flex items-center gap-1 leading-none">
-                      <span className="font-heading text-lg font-bold text-light-text">ETIMS</span>
-                      <span className="font-heading text-lg font-extrabold text-cyan">2027</span>
+                      <span className="font-heading text-lg font-bold text-white">ETIMS</span>
+                      <span className="font-heading text-lg font-extrabold text-[#F3D993]">2027</span>
                     </div>
-                    <span className="text-[10px] uppercase font-mono text-zinc-400 tracking-wide">
+                    <span className="text-[10px] uppercase font-mono text-[#F5EFEB]/80 tracking-wide">
                       NSIT Bihta, Patna
                     </span>
                   </div>
@@ -205,15 +219,15 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-xl p-2 text-secondary-text hover:text-light-text hover:bg-navy border border-border-dark transition-colors cursor-pointer"
+                  className="rounded-xl p-2 text-white/80 hover:text-white hover:bg-white/10 border border-[#BF982E]/30 transition-colors cursor-pointer"
                   aria-label="Close Navigation Menu"
                 >
-                  <X className="h-5 w-5 text-cyan" />
+                  <X className="h-5 w-5 text-[#F3D993]" />
                 </button>
               </div>
 
               {/* Drawer Navigation List */}
-              <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
+              <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1 bg-[#FAF8F5]">
                 {TAB_NAV_ITEMS.map((item) => {
                   const isActive =
                     item.path === '/'
@@ -227,20 +241,20 @@ export default function Navbar() {
                       onClick={handleNavClick}
                       className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold transition-all cursor-pointer ${
                         isActive
-                          ? 'bg-gradient-to-r from-primary-teal to-cyan text-midnight font-bold shadow-sm'
-                          : 'text-light-text hover:bg-navy/80 hover:text-cyan'
+                          ? 'bg-[#7B1123] text-white font-bold shadow-sm'
+                          : 'text-[#1C1917] hover:bg-white hover:text-[#7B1123]'
                       }`}
                     >
                       <div>
                         <div className="font-medium">{item.label}</div>
-                        <div className={`text-[10px] ${isActive ? 'text-midnight/80' : 'text-secondary-text'}`}>
+                        <div className={`text-[10px] ${isActive ? 'text-white/80' : 'text-[#57534E]'}`}>
                           {item.description}
                         </div>
                       </div>
                       {isActive ? (
-                        <span className="h-2 w-2 rounded-full bg-midnight" />
+                        <span className="h-2 w-2 rounded-full bg-[#BF982E]" />
                       ) : (
-                        <ArrowUpRight className="h-4 w-4 opacity-40 text-cyan" />
+                        <ArrowUpRight className="h-4 w-4 opacity-40 text-[#7B1123]" />
                       )}
                     </Link>
                   );
@@ -251,9 +265,9 @@ export default function Navbar() {
                   <Link
                     to="/submission"
                     onClick={handleNavClick}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary-teal to-cyan px-5 py-3.5 text-sm font-bold text-midnight shadow-md transition-all active:scale-[0.98] cursor-pointer glow-cyan-sm"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#BF982E] to-[#D4AF37] px-5 py-3.5 text-sm font-extrabold text-[#450F1D] shadow-md transition-all active:scale-[0.98] cursor-pointer"
                   >
-                    <FileText className="h-4 w-4 text-midnight" />
+                    <FileText className="h-4 w-4 text-[#450F1D]" />
                     <span>Submit Your Paper</span>
                   </Link>
                 </div>

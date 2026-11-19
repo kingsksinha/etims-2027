@@ -1,14 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Brain,
-  Building2,
-  Zap,
-  Bot,
-  Radio,
-  FlaskConical,
-  Briefcase,
-  BookOpen,
   CheckCircle2,
   ChevronDown,
   ChevronUp,
@@ -19,61 +11,6 @@ import {
 import Container from '../components/common/Container';
 import SectionHeading from '../components/common/SectionHeading';
 import { RESEARCH_TRACKS, type ResearchTrackItem } from '../utils/constants';
-
-const trackIcons: Record<string, typeof Brain> = {
-  'track-1': Brain,
-  'track-2': Building2,
-  'track-3': Zap,
-  'track-4': Bot,
-  'track-5': Radio,
-  'track-6': FlaskConical,
-  'track-7': Briefcase,
-  'track-8': BookOpen,
-};
-
-// Generative thematic palettes for the 8 official tracks
-const trackVisualThemes: Record<string, { bg: string; accent: string; label: string }> = {
-  'track-1': {
-    bg: 'from-cyan/20 via-blue-900/30 to-midnight',
-    accent: 'text-cyan border-cyan/40',
-    label: 'Computer Science & AI',
-  },
-  'track-2': {
-    bg: 'from-amber-500/20 via-orange-950/30 to-midnight',
-    accent: 'text-amber-400 border-amber-500/40',
-    label: 'Civil & Infrastructure',
-  },
-  'track-3': {
-    bg: 'from-emerald-500/20 via-teal-950/30 to-midnight',
-    accent: 'text-emerald-400 border-emerald-500/40',
-    label: 'Electrical Engineering',
-  },
-  'track-4': {
-    bg: 'from-blue-500/20 via-indigo-950/30 to-midnight',
-    accent: 'text-blue-400 border-blue-500/40',
-    label: 'Mechanical & Manufacturing',
-  },
-  'track-5': {
-    bg: 'from-mint/20 via-teal-900/30 to-midnight',
-    accent: 'text-mint border-mint/40',
-    label: 'Electronics & Communication',
-  },
-  'track-6': {
-    bg: 'from-purple-500/20 via-violet-950/30 to-midnight',
-    accent: 'text-purple-300 border-purple-500/40',
-    label: 'Applied Science',
-  },
-  'track-7': {
-    bg: 'from-rose-500/20 via-pink-950/30 to-midnight',
-    accent: 'text-rose-400 border-rose-500/40',
-    label: 'Management & Innovation',
-  },
-  'track-8': {
-    bg: 'from-teal-500/20 via-cyan-950/30 to-midnight',
-    accent: 'text-teal-300 border-teal-500/40',
-    label: 'Humanities & Library Science',
-  },
-};
 
 const filterTabs = [
   { id: 'all', label: 'ALL 8 TRACKS' },
@@ -109,45 +46,45 @@ export default function TracksSection() {
   };
 
   return (
-    <section id="tracks" className="relative py-24 md:py-32 bg-[#07131F] border-b border-border-dark overflow-hidden">
+    <section id="tracks" className="relative py-20 md:py-28 bg-[#FAF8F5] border-b border-[#E7E0D6] overflow-hidden">
       {/* Background Lighting */}
-      <div className="pointer-events-none absolute top-1/2 -right-40 h-[36rem] w-[36rem] rounded-full bg-cyan/8 blur-[140px]" />
+      <div className="pointer-events-none absolute top-1/2 -right-40 h-[36rem] w-[36rem] rounded-full bg-[#BF982E]/10 blur-[140px]" />
 
       <Container className="relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <SectionHeading
             tag="03 // Call for Papers"
             title="Eight Official Research Tracks"
-            subtitle="Original, unpublished research papers across 8 tracks. Related multidisciplinary contributions are also welcome."
+            subtitle="Original, unpublished research papers across 8 multidisciplinary tracks. Related multidisciplinary contributions are also welcome."
             align="left"
             className="mb-0 md:mb-0"
           />
 
           {/* Academic Scope Pill */}
-          <div className="inline-flex items-center gap-2 rounded-xl bg-navy border border-cyan/30 px-4 py-2.5 text-xs text-secondary-text shrink-0 backdrop-blur-md">
-            <Sparkles className="h-4 w-4 text-cyan shrink-0" />
+          <div className="inline-flex items-center gap-2 rounded-xl bg-white border border-[#BF982E]/40 px-4 py-2.5 text-xs text-[#57534E] shrink-0 shadow-xs">
+            <Sparkles className="h-4 w-4 text-[#BF982E] shrink-0" />
             <span>
-              <strong className="text-cyan font-semibold">Eight Tracks:</strong> Physical Mode · 200–300 Delegates
+              <strong className="text-[#7B1123] font-bold">Eight Tracks:</strong> Physical Mode &bull; 200–300 Delegates
             </span>
           </div>
         </div>
 
         {/* Search Bar & Category Filter Bar */}
-        <div className="mb-8 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 border-b border-border-dark pb-6">
+        <div className="mb-8 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 border-b border-[#E7E0D6] pb-6">
           {/* Search Input */}
           <div className="relative max-w-md w-full">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-cyan/70" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#7B1123]" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search research topics, AI, civil, VLSI, smart grid, management..."
-              className="w-full rounded-xl border border-border-dark bg-navy/90 pl-10 pr-16 py-2.5 text-xs text-light-text placeholder:text-secondary-text/50 focus:border-cyan focus:outline-none transition-colors font-mono"
+              className="w-full rounded-xl border border-[#E7E0D6] bg-white pl-10 pr-16 py-2.5 text-xs text-[#1C1917] placeholder:text-[#57534E]/60 focus:border-[#7B1123] focus:outline-none transition-colors font-mono shadow-xs"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono text-cyan hover:underline cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono text-[#7B1123] hover:underline cursor-pointer font-bold"
               >
                 CLEAR
               </button>
@@ -155,9 +92,9 @@ export default function TracksSection() {
           </div>
 
           {/* Quick Domain Status Count */}
-          <div className="text-left md:text-right font-mono text-xs text-secondary-text shrink-0">
-            SHOWING: <span className="text-cyan font-bold">{filteredTracks.length}</span> OF{' '}
-            <span className="text-light-text font-bold">{RESEARCH_TRACKS.length}</span> TRACKS
+          <div className="text-left md:text-right font-mono text-xs text-[#57534E] shrink-0">
+            SHOWING: <span className="text-[#7B1123] font-bold">{filteredTracks.length}</span> OF{' '}
+            <span className="text-[#1C1917] font-bold">{RESEARCH_TRACKS.length}</span> TRACKS
           </div>
         </div>
 
@@ -171,8 +108,8 @@ export default function TracksSection() {
                 onClick={() => setSelectedFilter(tab.id)}
                 className={`rounded-lg px-3.5 py-1.5 font-mono text-xs font-semibold transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-cyan text-midnight font-bold shadow-sm glow-cyan-sm'
-                    : 'bg-navy/70 border border-border-dark text-secondary-text hover:text-light-text hover:border-cyan/40'
+                    ? 'bg-[#7B1123] text-white font-bold shadow-xs'
+                    : 'bg-white border border-[#E7E0D6] text-[#57534E] hover:text-[#7B1123] hover:border-[#7B1123]/40'
                 }`}
               >
                 {tab.label}
@@ -184,9 +121,9 @@ export default function TracksSection() {
         {/* Distinctive Editorial Research Track Matrix */}
         <div className="grid gap-6 md:grid-cols-2">
           {filteredTracks.map((track: ResearchTrackItem, index: number) => {
-            const IconComponent = trackIcons[track.id] || Brain;
-            const theme = trackVisualThemes[track.id] || trackVisualThemes['track-1'];
             const isExpanded = expandedTrack === track.id;
+            const trackNum = parseInt(track.id.replace('track-', ''), 10) || (index + 1);
+            const trackImg = `/assets/tracks/track_${trackNum}.png`;
 
             return (
               <motion.div
@@ -195,45 +132,52 @@ export default function TracksSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-30px' }}
                 transition={{ duration: 0.45, delay: index * 0.05 }}
-                className="rounded-3xl border border-border-dark bg-navy/60 hover:bg-navy/90 hover:border-cyan/40 transition-all p-6 sm:p-7 flex flex-col justify-between backdrop-blur-md relative overflow-hidden group"
+                className="rounded-3xl border border-[#E7E0D6] bg-white hover:border-[#7B1123]/40 transition-all p-6 sm:p-7 flex flex-col justify-between shadow-xs hover:shadow-md relative overflow-hidden group"
               >
-                {/* Subtle thematic top highlight */}
-                <div
-                  className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${theme.bg} opacity-80 group-hover:opacity-100 transition-opacity`}
-                />
+                {/* Subtle top gold accent line */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#7B1123] via-[#BF982E] to-[#7B1123]" />
 
                 <div>
                   <div className="flex items-center justify-between gap-3 mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-midnight border border-border-dark text-cyan shadow-sm group-hover:scale-105 transition-transform">
-                        <IconComponent className="h-5 w-5" />
+                      {/* Deep Maroon Circle Badge T1..T8 matching brochure */}
+                      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#7B1123] text-white font-mono font-bold text-sm shadow-xs group-hover:scale-105 transition-transform">
+                        {track.code}
                       </div>
                       <div>
-                        <span className="font-mono text-xs font-bold text-cyan tracking-wider block">
-                          {track.code} // {track.number}
+                        <span className="font-mono text-xs font-bold text-[#7B1123] tracking-wider block">
+                          TRACK 0{trackNum}
                         </span>
-                        <span className="text-[11px] font-mono text-secondary-text">
-                          {theme.label}
+                        <span className="text-[11px] font-subheading text-[#57534E] font-medium">
+                          Official Scope
                         </span>
                       </div>
                     </div>
 
-                    <span className="rounded-full bg-cyan/10 border border-cyan/30 px-2.5 py-0.5 text-[10px] font-mono font-bold text-cyan">
-                      Official Track
-                    </span>
+                    <div className="h-10 w-16 rounded-lg overflow-hidden border border-[#E7E0D6] shrink-0">
+                      <img
+                        src={trackImg}
+                        alt={track.title}
+                        className="h-full w-full object-cover"
+                        onError={(e) => {
+                          // fallback to icon if image fails
+                          (e.target as HTMLElement).style.display = 'none';
+                        }}
+                      />
+                    </div>
                   </div>
 
-                  <h3 className="font-heading text-lg sm:text-xl font-bold text-light-text leading-snug">
+                  <h3 className="font-heading text-lg sm:text-xl font-bold text-[#1C1917] leading-snug">
                     {track.title}
                   </h3>
 
-                  <p className="mt-2 text-xs sm:text-sm text-secondary-text leading-relaxed">
+                  <p className="mt-2 text-xs sm:text-sm text-[#57534E] leading-relaxed font-subheading">
                     {track.tagline}
                   </p>
 
                   {/* Subtopics Checklist */}
                   <div className="mt-5 space-y-2">
-                    <span className="text-[11px] font-mono text-cyan uppercase tracking-wider block">
+                    <span className="text-[11px] font-mono text-[#7B1123] uppercase tracking-wider font-bold block">
                       Scope Topics:
                     </span>
                     <ul className="space-y-1.5">
@@ -241,10 +185,10 @@ export default function TracksSection() {
                         (topic, i) => (
                           <li
                             key={i}
-                            className="flex items-start gap-2 text-xs text-secondary-text leading-relaxed"
+                            className="flex items-start gap-2 text-xs text-[#57534E] leading-relaxed"
                           >
-                            <CheckCircle2 className="h-3.5 w-3.5 text-mint shrink-0 mt-0.5" />
-                            <span className="text-light-text/90">{topic}</span>
+                            <CheckCircle2 className="h-3.5 w-3.5 text-[#BF982E] shrink-0 mt-0.5" />
+                            <span className="text-[#1C1917] font-medium">{topic}</span>
                           </li>
                         )
                       )}
@@ -253,12 +197,12 @@ export default function TracksSection() {
                 </div>
 
                 {/* Footer Controls */}
-                <div className="mt-6 pt-4 border-t border-border-dark flex items-center justify-between">
+                <div className="mt-6 pt-4 border-t border-[#E7E0D6] flex items-center justify-between">
                   {track.illustrativeTopics.length > 3 && (
                     <button
                       type="button"
                       onClick={() => toggleExpand(track.id)}
-                      className="inline-flex items-center gap-1.5 text-xs font-mono text-cyan hover:underline cursor-pointer"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-[#7B1123] hover:underline cursor-pointer font-bold"
                     >
                       <span>
                         {isExpanded
@@ -275,7 +219,7 @@ export default function TracksSection() {
 
                   <a
                     href="/submission"
-                    className="inline-flex items-center gap-1 text-xs font-bold text-light-text hover:text-cyan ml-auto transition-colors"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-[#7B1123] hover:text-[#5C1324] ml-auto transition-colors"
                   >
                     <span>Submit to {track.code}</span>
                     <ArrowRight className="h-3.5 w-3.5" />

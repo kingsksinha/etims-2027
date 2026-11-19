@@ -51,6 +51,7 @@ export const CONVENOR = {
   email: 'etims2027@nsiterp.in',
   phone: '+91 83402 58426',
   phoneTel: '+918340258426',
+  photo: '/assets/committee/atif-hussain.png',
 } as const;
 
 // ── Host Institution Profile & Official Brochure Copy ───────────
@@ -503,6 +504,7 @@ export const REGISTRATION_TERMS = {
   finalDeadline: '10 July 2027',
   inclusions:
     'Fees include conference participation, materials, refreshments/meals and applicable certificate. Publication charges, if any, will be notified separately.',
+  publicationNote: 'Publication charges, if any, will be notified separately.',
   currency: 'INR (₹)',
 } as const;
 
@@ -513,18 +515,21 @@ export const ORGANISING_STRUCTURE = {
     designation: 'Chairman, NSIT',
     role: 'Chief Patron',
     affiliation: 'Netaji Subhas Institute of Technology (NSIT)',
+    photo: '/assets/committee/mm-singh.png',
   },
   patron: {
     name: 'Mrs. Nitu Singh',
     designation: 'Managing Director, NSIT',
     role: 'Patron',
     affiliation: 'Netaji Subhas Institute of Technology (NSIT)',
+    photo: '/assets/committee/nitu-singh.png',
   },
   coPatron: {
     name: 'Dr. Jyotirmayee Dalei',
     designation: 'Director, NSIT',
     role: 'Co-Patron',
     affiliation: 'Netaji Subhas Institute of Technology (NSIT)',
+    photo: '/assets/committee/jyotirmayee-dalei.png',
   },
   convenor: {
     name: 'Dr. Atif Hussain',
@@ -533,13 +538,14 @@ export const ORGANISING_STRUCTURE = {
     affiliation: 'Netaji Subhas Institute of Technology (NSIT)',
     email: 'etims2027@nsiterp.in',
     phone: '+91 83402 58426',
+    photo: '/assets/committee/atif-hussain.png',
   },
   coConvenors: [
-    { name: 'Dr. Rajan Kumar', designation: 'Co-Convenor', affiliation: 'NSIT' },
-    { name: 'Dr. Gautam', designation: 'Co-Convenor', affiliation: 'NSIT' },
-    { name: 'Mr. Deepansh Yadav', designation: 'Co-Convenor', affiliation: 'NSIT' },
-    { name: 'Md. Farrukh', designation: 'Co-Convenor', affiliation: 'NSIT' },
-    { name: 'Mr. Nilanjan Manna', designation: 'Co-Convenor', affiliation: 'NSIT' },
+    { name: 'Dr. Rajan Kumar', designation: 'Co-Convenor', affiliation: 'NSIT', photo: '/assets/committee/rajan-kumar.png' },
+    { name: 'Dr. Gautam', designation: 'Co-Convenor', affiliation: 'NSIT', photo: '/assets/committee/gautam.png' },
+    { name: 'Mr. Deepansh Yadav', designation: 'Co-Convenor', affiliation: 'NSIT', photo: '/assets/committee/deepansh-yadav.png' },
+    { name: 'Md. Farrukh', designation: 'Co-Convenor', affiliation: 'NSIT', photo: '/assets/committee/farrukh.png' },
+    { name: 'Mr. Nilanjan Manna', designation: 'Co-Convenor', affiliation: 'NSIT', photo: '/assets/committee/nilanjan-manna.png' },
   ],
 } as const;
 
@@ -549,6 +555,7 @@ export interface AdvisoryMember {
   designation: string;
   department: string;
   institution: string;
+  photo?: string;
 }
 
 export const ADVISORY_COMMITTEE: AdvisoryMember[] = [
@@ -557,42 +564,49 @@ export const ADVISORY_COMMITTEE: AdvisoryMember[] = [
     designation: 'Associate Professor',
     department: 'Electrical Engineering',
     institution: 'IIT Patna',
+    photo: '/assets/committee/kailash-chandra-ray.png',
   },
   {
     name: 'Dr. Raju Halder',
     designation: 'Associate Professor',
     department: 'Computer Science and Engineering',
     institution: 'IIT Patna',
+    photo: '/assets/committee/raju-halder.png',
   },
   {
     name: 'Dr. Akhilendra Singh',
     designation: 'Associate Professor',
     department: 'Mechanical Engineering',
     institution: 'IIT Patna',
+    photo: '/assets/committee/akhilendra-singh.png',
   },
   {
     name: 'Dr. Debashisha Jena',
     designation: 'Professor',
     department: 'Electrical and Electronics Engineering',
     institution: 'NIT Surathkal',
+    photo: '/assets/committee/debashisha-jena.png',
   },
   {
     name: 'Dr. Yatendra Kumar Singh',
     designation: 'Associate Professor',
     department: 'Electrical Engineering',
     institution: 'IIT Patna',
+    photo: '/assets/committee/yatendra-kumar-singh.png',
   },
   {
     name: 'Mr. Gopal Krishna',
     designation: 'Assistant Professor',
     department: 'Computer Science Engineering (AI & Data Science)',
     institution: 'GEC Munger',
+    photo: '/assets/committee/gopal-krishna.png',
   },
   {
     name: 'Mr. Chandan Kumar Sharma',
     designation: 'Assistant Professor',
     department: 'Civil Engineering',
     institution: 'GEC Bhojpur',
+    photo: '/assets/committee/chandan-kumar-sharma.png',
   },
 ];
 
