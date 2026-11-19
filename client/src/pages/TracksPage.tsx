@@ -4,30 +4,36 @@ import { Link } from 'react-router-dom';
 import {
   Layers,
   Sparkles,
-  Cpu,
-  Radio,
+  Brain,
+  Building2,
   Zap,
   Bot,
-  Microscope,
+  Radio,
+  FlaskConical,
+  Briefcase,
+  BookOpen,
   CheckCircle2,
   ArrowRight,
   FileText,
-  AlertCircle,
+  Info,
 } from 'lucide-react';
 import Container from '../components/common/Container';
-import { PROVISIONAL_TRACKS } from '../utils/constants';
+import { RESEARCH_TRACKS } from '../utils/constants';
 
 const TRACK_ICONS = [
-  <Cpu className="h-5 w-5 text-cyan" />,
+  <Brain className="h-5 w-5 text-cyan" />,
+  <Building2 className="h-5 w-5 text-amber-400" />,
+  <Zap className="h-5 w-5 text-emerald-400" />,
+  <Bot className="h-5 w-5 text-blue-400" />,
   <Radio className="h-5 w-5 text-mint" />,
-  <Zap className="h-5 w-5 text-cyan" />,
-  <Bot className="h-5 w-5 text-mint" />,
-  <Microscope className="h-5 w-5 text-cyan" />,
+  <FlaskConical className="h-5 w-5 text-purple-300" />,
+  <Briefcase className="h-5 w-5 text-rose-400" />,
+  <BookOpen className="h-5 w-5 text-teal-300" />,
 ];
 
 export default function TracksPage() {
   const [selectedTrackIdx, setSelectedTrackIdx] = useState<number>(0);
-  const activeTrack = PROVISIONAL_TRACKS[selectedTrackIdx];
+  const activeTrack = RESEARCH_TRACKS[selectedTrackIdx] || RESEARCH_TRACKS[0];
 
   return (
     <div className="relative min-h-screen bg-midnight text-light-text py-12 sm:py-16 overflow-hidden">
@@ -38,21 +44,23 @@ export default function TracksPage() {
         <div className="mb-10 sm:mb-12">
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan/40 bg-navy/80 px-4 py-1.5 text-xs font-mono font-semibold text-cyan mb-4 glow-cyan-sm">
             <Layers className="h-3.5 w-3.5" />
-            <span>Call for Papers & Thematic Domains</span>
+            <span>Call for Papers & Eight Technical Tracks</span>
           </div>
           <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-light-text">
-            Research Tracks & <span className="text-cyan text-glow-cyan">Thematic Scope</span>
+            Eight Official Tracks & <span className="text-cyan text-glow-cyan">Thematic Scope</span>
           </h1>
           <p className="mt-3 max-w-3xl text-sm sm:text-base text-secondary-text leading-relaxed">
-            ETIMS 2027 invites prospective authors, scholars, and industry practitioners to submit original research across five distinct multidisciplinary technical tracks.
+            ETIMS 2027 invites original, unpublished research papers across eight tracks. Related multidisciplinary contributions are also welcome.
           </p>
         </div>
 
-        {/* Provisional Scope Notice */}
+        {/* Official Scope Banner */}
         <div className="mb-8 rounded-2xl border border-cyan/30 bg-navy/60 p-4 flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-2.5 text-xs text-secondary-text">
-            <AlertCircle className="h-4 w-4 text-cyan shrink-0" />
-            <span>Topics listed below are illustrative and subject to expansion by track chairs.</span>
+            <Info className="h-4 w-4 text-cyan shrink-0" />
+            <span>
+              All submissions undergo preliminary screening followed by independent peer review. Physical mode · 200–300 Delegates.
+            </span>
           </div>
           <Link
             to="/submission"
@@ -66,15 +74,15 @@ export default function TracksPage() {
         {/* Two-Column Interactive Track Explorer */}
         <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
           {/* Track Selection List (5 cols) */}
-          <div className="lg:col-span-5 space-y-3">
-            {PROVISIONAL_TRACKS.map((track, idx) => {
+          <div className="lg:col-span-5 space-y-2.5">
+            {RESEARCH_TRACKS.map((track, idx) => {
               const isSelected = idx === selectedTrackIdx;
               return (
                 <button
                   key={track.id}
                   type="button"
                   onClick={() => setSelectedTrackIdx(idx)}
-                  className={`w-full text-left rounded-2xl p-4.5 transition-all cursor-pointer border ${
+                  className={`w-full text-left rounded-2xl p-4 transition-all cursor-pointer border ${
                     isSelected
                       ? 'border-cyan bg-gradient-to-r from-navy via-navy to-midnight shadow-lg glow-cyan-sm'
                       : 'border-border-dark bg-navy/60 hover:bg-navy hover:border-cyan/40 opacity-80 hover:opacity-100'
@@ -82,11 +90,11 @@ export default function TracksPage() {
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-[10px] font-mono text-cyan uppercase font-bold tracking-wider">
-                      {track.number}
+                      {track.code} // {track.number}
                     </span>
                     <span className="h-2 w-2 rounded-full bg-cyan" />
                   </div>
-                  <h3 className="font-heading text-base font-bold text-light-text mt-1">
+                  <h3 className="font-heading text-sm sm:text-base font-bold text-light-text mt-1">
                     {track.title}
                   </h3>
                   <p className="text-xs text-secondary-text mt-1 line-clamp-1">
@@ -113,7 +121,7 @@ export default function TracksPage() {
                   </div>
                   <div>
                     <span className="text-xs font-mono text-cyan uppercase tracking-wider block">
-                      {activeTrack.number}
+                      {activeTrack.code} // {activeTrack.number}
                     </span>
                     <h2 className="font-heading text-xl sm:text-2xl font-black text-light-text">
                       {activeTrack.title}
@@ -126,18 +134,18 @@ export default function TracksPage() {
               </div>
 
               <p className="text-sm sm:text-base text-secondary-text leading-relaxed">
-                {activeTrack.tagline}. Submissions should report innovative research findings, experimental outcomes, or novel analytical methodologies.
+                {activeTrack.tagline}. Submissions must report original research, novel methodologies, or applied multidisciplinary contributions.
               </p>
 
               {/* Sub-Topics List */}
               <div className="rounded-2xl border border-border-dark bg-midnight/80 p-5 space-y-3">
                 <span className="text-xs font-mono uppercase text-cyan block tracking-wider">
-                  Representative Research Sub-Themes:
+                  Official Research Topics ({activeTrack.code}):
                 </span>
-                <ul className="space-y-2.5 text-xs sm:text-sm text-secondary-text">
+                <ul className="space-y-2 text-xs sm:text-sm text-secondary-text">
                   {activeTrack.illustrativeTopics.map((topic, i) => (
                     <li key={i} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="h-4 w-4 text-cyan shrink-0 mt-0.5" />
+                      <CheckCircle2 className="h-4 w-4 text-mint shrink-0 mt-0.5" />
                       <span className="text-light-text font-medium leading-snug">{topic}</span>
                     </li>
                   ))}
@@ -147,14 +155,14 @@ export default function TracksPage() {
               {/* Track Submission CTA */}
               <div className="pt-4 border-t border-border-dark flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="text-xs text-secondary-text">
-                  <span>Oral & Poster Presentations &bull; 23–24 July 2027</span>
+                  <span>Oral & Poster Presentations &bull; 23–24 July 2027 (dates tentative)</span>
                 </div>
                 <Link
                   to="/submission"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary-teal to-cyan px-5 py-2.5 text-xs font-bold text-midnight shadow-md transition-all active:scale-95 glow-cyan-sm"
                 >
                   <FileText className="h-3.5 w-3.5" />
-                  <span>Submit to this Track</span>
+                  <span>Submit to {activeTrack.code}</span>
                 </Link>
               </div>
             </motion.div>

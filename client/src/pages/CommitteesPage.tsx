@@ -18,6 +18,7 @@ const FILTER_CATEGORIES = [
   'All In-Charges',
   'Leadership & Patrons',
   'Secretariat & Convenor',
+  'National Advisory Committee',
   'Technical Program & Track Chairs',
   'Operational Desks & In-Charges',
 ];
@@ -93,7 +94,7 @@ export default function CommitteesPage() {
                     {CONVENOR.name}
                   </h3>
                   <p className="text-xs sm:text-sm text-secondary-text leading-snug">
-                    Assistant Professor, Department of Electrical & Electronics Engineering
+                    {CONVENOR.title}
                   </p>
                   <p className="text-xs font-mono text-cyan/90 mt-0.5 break-words">
                     {CONVENOR.institution}, {CONVENOR.campus}

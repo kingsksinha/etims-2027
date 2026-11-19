@@ -474,7 +474,7 @@ export default function PaperSubmissionModal({
                     >
                       {PROVISIONAL_TRACKS.map((track) => (
                         <option key={track.id} value={track.id} className="bg-midnight text-light-text">
-                          {track.number}: {track.title}
+                          {track.code} – {track.title}
                         </option>
                       ))}
                     </select>

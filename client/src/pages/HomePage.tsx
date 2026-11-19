@@ -191,7 +191,7 @@ export default function HomePage() {
                           {CONVENOR.name}
                         </h4>
                         <p className="text-xs text-secondary-text truncate">
-                          Assistant Professor, Dept. of Electrical & Electronics Engineering
+                          {CONVENOR.title}
                         </p>
                       </div>
                     </div>
@@ -209,20 +209,20 @@ export default function HomePage() {
                   {/* Operational Task Badges */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                     <div className="rounded-xl border border-border-dark bg-midnight p-3">
-                      <span className="font-mono text-cyan font-bold block">Track 01–05</span>
-                      <span className="text-secondary-text text-[11px]">Technical Program Chairs</span>
+                      <span className="font-mono text-cyan font-bold block">Track 01–08</span>
+                      <span className="text-secondary-text text-[11px]">8 Thematic Tracks</span>
                     </div>
                     <div className="rounded-xl border border-border-dark bg-midnight p-3">
-                      <span className="font-mono text-mint font-bold block">Logistics & Fleet</span>
-                      <span className="text-secondary-text text-[11px]">Airport & Station Shuttles</span>
+                      <span className="font-mono text-mint font-bold block">Advisory Board</span>
+                      <span className="text-secondary-text text-[11px]">IIT & NIT Professors</span>
                     </div>
                     <div className="rounded-xl border border-border-dark bg-midnight p-3">
                       <span className="font-mono text-cyan font-bold block">Hospitality Desk</span>
                       <span className="text-secondary-text text-[11px]">Guest House & Catering</span>
                     </div>
                     <div className="rounded-xl border border-border-dark bg-midnight p-3">
-                      <span className="font-mono text-mint font-bold block">Publications</span>
-                      <span className="text-secondary-text text-[11px]">Similarity & Proceedings</span>
+                      <span className="font-mono text-mint font-bold block">Student Volunteers</span>
+                      <span className="text-secondary-text text-[11px]">Every Academic Dept</span>
                     </div>
                   </div>
                 </motion.div>
@@ -244,7 +244,7 @@ export default function HomePage() {
                         Thematic Research Areas
                       </span>
                       <h3 className="font-heading text-2xl font-bold text-light-text mt-0.5">
-                        Five Multidisciplinary Engineering Tracks
+                        Eight Official Research Tracks
                       </h3>
                     </div>
                     <button
@@ -561,7 +561,7 @@ export default function HomePage() {
                     Assistant Professor & Conference Convenor
                   </p>
                   <p className="text-[11px] text-secondary-text font-mono mt-0.5">
-                    Department of Electrical & Electronics Engineering, NSIT Bihta
+                    {CONVENOR.title}, {HOST_INSTITUTION.shortName}
                   </p>
                 </div>
 

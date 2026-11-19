@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
 import {
-  ShieldAlert,
-  Info,
+  CheckCircle2,
+  Calendar,
 } from 'lucide-react';
 import Container from '../components/common/Container';
 import SectionHeading from '../components/common/SectionHeading';
-import { REGISTRATION_CATEGORIES } from '../utils/constants';
+import { REGISTRATION_CATEGORIES, REGISTRATION_TERMS } from '../utils/constants';
 
 export default function RegistrationSection() {
   return (
@@ -17,22 +17,22 @@ export default function RegistrationSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <SectionHeading
             tag="06 // Registration Tiers"
-            title="Registration & Delegate Categories"
-            subtitle="Author, scholar, and attendee participation categories for ETIMS 2027"
+            title="Registration Fees & Delegate Categories"
+            subtitle="Official early and regular registration fee schedule for ETIMS 2027"
             align="left"
             className="mb-0 md:mb-0"
           />
 
           <div className="inline-flex items-center gap-2 rounded-xl bg-navy border border-cyan/30 px-4 py-2.5 text-xs text-secondary-text shrink-0 backdrop-blur-md">
-            <Info className="h-4 w-4 text-cyan shrink-0" />
+            <Calendar className="h-4 w-4 text-cyan shrink-0" />
             <span>
-              Official registration tariff circular pending Technical Committee release
+              Early: <strong className="text-cyan font-semibold">{REGISTRATION_TERMS.earlyDeadline}</strong> &bull; Final: <strong className="text-mint font-semibold">{REGISTRATION_TERMS.finalDeadline}</strong>
             </span>
           </div>
         </div>
 
-        {/* Simplified, High-Contrast Category Comparison Rows (No boxy 4-card grid!) */}
-        <div className="divide-y divide-border-dark/80 rounded-3xl border border-border-dark bg-navy/60 backdrop-blur-md overflow-hidden">
+        {/* High-Contrast Category Comparison Rows */}
+        <div className="divide-y divide-border-dark/80 rounded-3xl border border-border-dark bg-navy/60 backdrop-blur-md overflow-hidden shadow-2xl">
           {REGISTRATION_CATEGORIES.map((cat, idx) => (
             <motion.div
               key={idx}
@@ -49,7 +49,7 @@ export default function RegistrationSection() {
                   </span>
                   <span className="text-border-dark">•</span>
                   <span className="font-mono text-xs text-secondary-text">
-                    TIER 0{idx + 1}
+                    CATEGORY 0{idx + 1}
                   </span>
                 </div>
 
@@ -62,28 +62,44 @@ export default function RegistrationSection() {
                 </p>
               </div>
 
-              <div className="shrink-0 flex items-center lg:flex-col lg:items-end justify-between lg:justify-center border-t lg:border-t-0 border-border-dark/60 pt-4 lg:pt-0">
-                <span className="font-mono text-xs uppercase tracking-wider text-secondary-text block">
-                  Delegate Tariff
-                </span>
-                <div className="mt-1 flex items-center gap-2">
-                  <span className="font-heading font-extrabold text-lg sm:text-xl text-cyan text-glow-cyan">
-                    TBA
-                  </span>
-                  <span className="rounded-md bg-midnight border border-border-dark px-2.5 py-1 text-xs font-mono text-mint">
-                    Circular Pending
-                  </span>
+              <div className="shrink-0 flex items-center lg:flex-col lg:items-end justify-between lg:justify-center border-t lg:border-t-0 border-border-dark/60 pt-4 lg:pt-0 gap-4">
+                <div className="flex items-center gap-4 text-right">
+                  <div className="rounded-xl border border-cyan/40 bg-midnight/90 px-4 py-2 text-center">
+                    <span className="text-[10px] font-mono text-cyan uppercase block font-semibold">
+                      Early (INR)
+                    </span>
+                    <span className="font-heading text-lg sm:text-xl font-black text-light-text text-glow-cyan">
+                      {cat.earlyFormatted}
+                    </span>
+                  </div>
+
+                  <div className="rounded-xl border border-border-dark bg-midnight/70 px-4 py-2 text-center">
+                    <span className="text-[10px] font-mono text-secondary-text uppercase block font-semibold">
+                      Regular (INR)
+                    </span>
+                    <span className="font-heading text-lg sm:text-xl font-bold text-secondary-text">
+                      {cat.regularFormatted}
+                    </span>
+                  </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Financial Security Advisory */}
-        <div className="mt-12 rounded-2xl border border-cyan/25 bg-navy/50 p-5.5 backdrop-blur-xs flex items-start gap-4">
-          <ShieldAlert className="h-5 w-5 text-cyan shrink-0 mt-0.5" />
-          <div className="text-sm text-secondary-text leading-relaxed">
-            <strong className="text-light-text font-semibold">Financial Security Advisory:</strong> Official delegate tariffs, early-bird rates, and authorized institutional bank accounts have <strong className="text-cyan">not been issued</strong>. Official registration will only open after formal notification on this website by the Convenor Secretariat. Do not transfer funds or entertain unverified payment requests.
+        {/* Inclusions & Payment Advisory */}
+        <div className="mt-10 rounded-2xl border border-cyan/25 bg-navy/50 p-6 backdrop-blur-xs space-y-3">
+          <div className="flex items-center gap-2 text-cyan font-bold text-sm">
+            <CheckCircle2 className="h-4.5 w-4.5 text-mint" />
+            <span>Registration Entitlements</span>
+          </div>
+          <p className="text-sm text-secondary-text leading-relaxed">
+            {REGISTRATION_TERMS.inclusions}
+          </p>
+          <div className="pt-2 text-xs font-mono text-cyan/90 flex flex-wrap items-center gap-4 border-t border-border-dark/50">
+            <span>&bull; Early Registration: {REGISTRATION_TERMS.earlyDeadline}</span>
+            <span>&bull; Final Registration: {REGISTRATION_TERMS.finalDeadline}</span>
+            <span>&bull; Currency: {REGISTRATION_TERMS.currency}</span>
           </div>
         </div>
       </Container>

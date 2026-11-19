@@ -27,7 +27,7 @@ export default function DatesSection() {
           <div className="inline-flex items-center gap-2 rounded-xl bg-navy border border-cyan/30 px-4 py-2 text-xs text-secondary-text shrink-0 backdrop-blur-md">
             <Info className="h-4 w-4 text-cyan shrink-0" />
             <span>
-              Official CFP circular establishes final manuscript submission deadlines
+              Provisional; subject to institutional and publisher approval.
             </span>
           </div>
         </div>

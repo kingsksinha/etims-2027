@@ -5,10 +5,16 @@ import {
   CheckCircle2,
   ShieldAlert,
   Sparkles,
+  BookOpen,
+  AlertTriangle,
 } from 'lucide-react';
 import Container from '../components/common/Container';
 import PaperSubmissionModal from '../components/modals/PaperSubmissionModal';
-import { SUBMISSION_GUIDELINES } from '../utils/constants';
+import {
+  SUBMISSION_GUIDELINES,
+  REVIEW_AND_PUBLICATION,
+  SUBMISSION_INSTRUCTIONS,
+} from '../utils/constants';
 
 interface SavedSubmission {
   trackingId: string;
@@ -19,7 +25,7 @@ interface SavedSubmission {
 }
 
 export default function SubmissionPage() {
-  const [activeTab, setActiveTab] = useState<'guidelines' | 'templates' | 'plagiarism' | 'faq'>('guidelines');
+  const [activeTab, setActiveTab] = useState<'guidelines' | 'publication' | 'templates' | 'plagiarism' | 'faq'>('guidelines');
   const [modalOpen, setModalOpen] = useState(false);
   const [recentSubmissions, setRecentSubmissions] = useState<SavedSubmission[]>([]);
 
@@ -51,7 +57,7 @@ export default function SubmissionPage() {
                 Paper Submission <span className="text-cyan text-glow-cyan">Guidelines</span>
               </h1>
               <p className="mt-3 max-w-2xl text-sm sm:text-base text-secondary-text leading-relaxed">
-                Follow the standardized technical guidelines to prepare and submit your original research manuscript for double-blind peer review at ETIMS 2027.
+                Follow the standardized technical guidelines to prepare and submit your original research manuscript across 8 official multidisciplinary tracks for double-blind peer review at ETIMS 2027.
               </p>
             </div>
 
@@ -77,6 +83,17 @@ export default function SubmissionPage() {
               }`}
             >
               Author Guidelines
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('publication')}
+              className={`rounded-xl px-4 py-2 text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                activeTab === 'publication'
+                  ? 'bg-gradient-to-r from-primary-teal to-cyan text-midnight shadow-md glow-cyan-sm'
+                  : 'bg-navy/70 border border-border-dark text-secondary-text hover:text-light-text hover:border-cyan/40'
+              }`}
+            >
+              Review & Publication Policy
             </button>
             <button
               type="button"
@@ -230,7 +247,67 @@ export default function SubmissionPage() {
           </div>
         )}
 
-        {/* TAB 2: TEMPLATES */}
+        {/* TAB 2: PUBLICATION & REVIEW POLICY */}
+        {activeTab === 'publication' && (
+          <div className="space-y-6">
+            <div className="rounded-3xl border border-cyan/40 bg-navy/80 p-6 sm:p-8 space-y-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan/15 text-cyan border border-cyan/30">
+                  <BookOpen className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="font-heading text-xl font-bold text-light-text">
+                    Review & Publication Framework
+                  </h3>
+                  <p className="text-xs text-secondary-text">
+                    Official policy from the ETIMS 2027 Conference Secretariat
+                  </p>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-border-dark bg-midnight/90 p-5 space-y-3">
+                <span className="text-xs font-mono text-cyan uppercase font-bold tracking-wider block">
+                  Peer Review & Proceedings Outlet
+                </span>
+                <p className="text-sm text-light-text leading-relaxed">
+                  {REVIEW_AND_PUBLICATION.policy}
+                </p>
+              </div>
+
+              {/* Publisher & Indexing Disclaimer */}
+              <div className="rounded-2xl border border-amber-500/40 bg-amber-950/20 p-5 flex items-start gap-3.5">
+                <AlertTriangle className="h-5 w-5 text-amber-400 shrink-0 mt-0.5" />
+                <div className="space-y-1">
+                  <h4 className="font-heading text-sm font-bold text-amber-300">
+                    Official Publisher & Indexing Notice
+                  </h4>
+                  <p className="text-xs text-amber-200/80 leading-relaxed font-mono">
+                    {REVIEW_AND_PUBLICATION.disclaimer}
+                  </p>
+                </div>
+              </div>
+
+              {/* Author Requirement Checklist */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-border-dark bg-midnight/60 p-4 space-y-2">
+                  <span className="text-[10px] font-mono text-cyan uppercase block">Mandatory Presentation</span>
+                  <p className="text-xs text-secondary-text leading-relaxed">
+                    {SUBMISSION_INSTRUCTIONS.authorRequirement}
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-border-dark bg-midnight/60 p-4 space-y-2">
+                  <span className="text-[10px] font-mono text-cyan uppercase block">Abstract Length</span>
+                  <p className="text-xs text-secondary-text leading-relaxed">
+                    Abstract submissions must contain {SUBMISSION_INSTRUCTIONS.abstractRequirement}, accompanied by full papers in standard format.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 3: TEMPLATES */}
         {activeTab === 'templates' && (
           <div className="space-y-6">
             <div className="rounded-3xl border border-border-dark bg-navy/80 p-6 sm:p-8 space-y-6">
@@ -239,6 +316,12 @@ export default function SubmissionPage() {
               </h3>
 
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="rounded-2xl border border-border-dark bg-midnight p-4">
+                  <span className="text-[10px] font-mono text-cyan uppercase block">Abstract Scope</span>
+                  <p className="font-heading text-base font-bold text-light-text mt-1">250–300 Words</p>
+                  <p className="text-[11px] text-secondary-text mt-0.5">Problem, methodology, outcomes</p>
+                </div>
+
                 <div className="rounded-2xl border border-border-dark bg-midnight p-4">
                   <span className="text-[10px] font-mono text-cyan uppercase block">Page Limit</span>
                   <p className="font-heading text-base font-bold text-light-text mt-1">6 to 8 Pages</p>
@@ -252,12 +335,6 @@ export default function SubmissionPage() {
                 </div>
 
                 <div className="rounded-2xl border border-border-dark bg-midnight p-4">
-                  <span className="text-[10px] font-mono text-cyan uppercase block">Primary Font</span>
-                  <p className="font-heading text-base font-bold text-light-text mt-1">Times New Roman 10pt</p>
-                  <p className="text-[11px] text-secondary-text mt-0.5">Single-spaced line height</p>
-                </div>
-
-                <div className="rounded-2xl border border-border-dark bg-midnight p-4">
                   <span className="text-[10px] font-mono text-cyan uppercase block">File Format</span>
                   <p className="font-heading text-base font-bold text-light-text mt-1">PDF (.pdf)</p>
                   <p className="text-[11px] text-secondary-text mt-0.5">Font-embedded without passwords</p>
@@ -266,7 +343,7 @@ export default function SubmissionPage() {
 
               <div className="pt-4 border-t border-border-dark">
                 <p className="text-xs text-secondary-text">
-                  Official MS Word and LaTeX templates will be provided with the formal Call for Papers circular release. Authors may format drafts according to standard IEEE/Springer two-column conference formats.
+                  Official MS Word and LaTeX templates will be provided with the formal Call for Papers circular release. Authors may format drafts according to standard conference formats.
                 </p>
               </div>
             </div>

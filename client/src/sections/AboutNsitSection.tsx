@@ -53,7 +53,7 @@ const campusGallery = [
   {
     id: 'sports',
     src: '/assets/nsit-sports-grounds.jpg',
-    title: '11-Acre Campus Grounds & Fleet',
+    title: '9.2-Acre Campus Grounds & Fleet',
     tag: 'Athletic Fields & Transit Hub',
     badge: 'Campus Grounds',
     style: { objectPosition: 'center center' },
@@ -237,25 +237,25 @@ export default function AboutNsitSection() {
         <div className="mt-12 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="rounded-2xl border border-white/10 bg-black/50 p-4 hover:border-cyan/40 transition-colors">
             <span className="font-heading text-2xl sm:text-3xl font-black text-white font-mono block">
-              11 Acres
+              9.2 Acres
             </span>
             <span className="text-xs font-bold text-light-text mt-0.5 block">
-              Lush Green Tech Campus
+              Green Residential Campus
             </span>
             <span className="text-[10px] font-mono text-cyan mt-1 block">
-              Bihta Knowledge Hub
+              Amhara, Bihta, Patna
             </span>
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-black/50 p-4 hover:border-cyan/40 transition-colors">
             <span className="font-heading text-2xl sm:text-3xl font-black text-white font-mono block">
-              5 Depts
+              7 Depts
             </span>
             <span className="text-xs font-bold text-light-text mt-0.5 block">
-              Engineering Disciplines
+              Academic Departments
             </span>
             <span className="text-[10px] font-mono text-cyan mt-1 block">
-              B.Tech & Applied Sciences
+              Engineering, Mgmt & Sciences
             </span>
           </div>
 

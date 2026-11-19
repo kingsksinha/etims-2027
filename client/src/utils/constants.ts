@@ -5,21 +5,34 @@ export const CONFERENCE = {
   edition: '1st National Conference',
   tagline:
     '1st National Conference on Emerging Technologies, Innovation and Multidisciplinary Studies',
+  theme: 'SCIENCE · ENGINEERING · MANAGEMENT · HUMANITIES',
   startDate: '2027-07-23',
   endDate: '2027-07-24',
   dateDisplay: '23–24 July 2027',
+  datesTentative: true,
+  datesTentativeLabel: 'dates tentative',
+  datesTentativeNote: 'Provisional; subject to institutional and publisher approval.',
+  mode: 'Physical Mode',
+  modeVenueText: 'Physical Mode · NSIT Campus, Bihta',
+  scale: 'Eight Tracks · 200–300 Delegates',
+  tracksCount: 8,
+  delegatesRange: '200–300 Delegates',
+  callForPapersHeadline:
+    'Call for Papers - open to researchers, faculty, industry professionals and students across disciplines',
   /** ISO string for countdown — midnight start of conference date in Asia/Kolkata (UTC+5:30 -> 2027-07-22T18:30:00Z) */
   countdownTarget: '2027-07-22T18:30:00Z',
   timezoneLabel: 'Asia/Kolkata (IST)',
   hostInstitution: 'Netaji Subhas Institute of Technology (NSIT)',
-  hostCampus: 'Bihta, Patna Campus',
-  venue: 'NSIT, Bihta, Patna',
-  venueShort: 'NSIT Bihta',
+  hostCampus: 'NSIT Campus, Amhara, Bihta, Patna',
+  venue: 'NSIT, Amhara, Bihta, Patna',
+  venueShort: 'NSIT Bihta, Patna',
   city: 'Patna',
   state: 'Bihar',
   country: 'India',
-  fullVenue: 'NSIT, Bihta, Patna, India',
+  fullVenue: 'NSIT, Amhara, Bihta, Patna, Bihar, India',
   convenor: 'Dr. Atif Hussain',
+  convenorTitle: 'Assistant Professor, Department of Civil Engineering',
+  convenorDept: 'Department of Civil Engineering',
   contactEmail: 'etims2027@nsiterp.in',
   contactPhone: '+91 83402 58426',
   contactPhoneTel: '+918340258426',
@@ -28,82 +41,81 @@ export const CONFERENCE = {
 // ── Verified Convenor Secretariat Details ─────────────────────────
 export const CONVENOR = {
   name: 'Dr. Atif Hussain',
-  role: 'Convenor, ETIMS 2027',
+  role: 'Conference Convenor',
+  title: 'Assistant Professor, Department of Civil Engineering',
+  designation: 'Assistant Professor',
+  department: 'Department of Civil Engineering',
   institution: 'Netaji Subhas Institute of Technology (NSIT)',
-  campus: 'Bihta, Patna',
-  department: 'Organizing Secretariat',
+  campus: 'Amhara, Bihta, Patna',
+  state: 'Bihar',
   email: 'etims2027@nsiterp.in',
   phone: '+91 83402 58426',
   phoneTel: '+918340258426',
 } as const;
 
-// ── Host Institution Profile ─────────────────────────────────────
+// ── Host Institution Profile & Official Brochure Copy ───────────
 export const HOST_INSTITUTION = {
   name: 'Netaji Subhas Institute of Technology (NSIT)',
   shortName: 'NSIT, Bihta, Patna',
-  location: 'Bihta, Patna, Bihar, India',
+  location: 'Amhara, Bihta, Patna, Bihar, India (~30 km from Patna)',
   fullAddress: 'Amhara, Bihta, Patna, Bihar – 801106, India',
+  establishedYear: '2007',
+  campusArea: '9.2 Acres',
   trustName: 'Sitwanto Devi Mahila Kalyan Sansthan',
   approvals:
-    'Approved by AICTE (New Delhi), Recognized by Dept. of Science, Technology & Technical Education (Govt. of Bihar), Affiliated with Bihar Engineering University (BEU) / Aryabhatta Knowledge University (AKU)',
+    'Established in 2007 with the approval of AICTE and the Department of Science and Technology, Government of Bihar.',
   description:
-    'Netaji Subhas Institute of Technology (NSIT), Bihta, Patna is a premier technical institution dedicated to academic rigor, cutting-edge engineering, and multidisciplinary exploration. Situated in the emerging national knowledge hub of Bihta adjacent to IIT Patna, the campus provides world-class presentation, computing, and research infrastructure for scholarly exchange.',
-  stats: [
-    { label: 'Campus Area', value: '11 Acres', subtext: 'Lush Green Residential Campus' },
-    { label: 'Built-Up Space', value: '400,000+ Sq. Ft.', subtext: 'Academic & Laboratory Blocks' },
-    { label: 'Established', value: 'Est. 2007', subtext: 'Approved by AICTE & NAAC Graded' },
-    { label: 'Academic Departments', value: '5 Depts', subtext: 'B.Tech & Applied Sciences' },
-    { label: 'Digital Library', value: '10,000 Sq. Ft.', subtext: 'Central Digital Reading Facility' },
-    { label: 'Computing Center', value: 'Centralized', subtext: 'High-Speed Campus LAN & Wi-Fi' },
-    { label: 'Student Living', value: 'On-Campus Hostels', subtext: 'Separate Boys & Girls Hostels' },
-    { label: 'Bihta Knowledge Hub', value: 'Near IIT Patna', subtext: '2 km from Bihta & 25 km from Patna' },
-  ],
-  campusFeatures: [
-    'Air-conditioned academic auditoriums & seminar presentation halls with laser projection',
-    'Advanced computing centers & engineering research laboratories equipped with licensed software',
-    'Campus-wide high-speed Wi-Fi network & technical audio-visual infrastructure',
-    'Dedicated conference registration, logistics, and hospitality desks',
-    'On-campus faculty guest house and separate residential hostels for delegates',
-    'Center for Innovation, Incubation & Entrepreneurship (CIIE) with 3D prototyping tools',
+    'Established in 2007, Netaji Subhas Institute of Technology (NSIT) is located at Amhara, Bihta, approximately 30 km from Patna, Bihar. Spread over approximately 9.2 acres, the campus provides laboratories, workshops, a digital library, auditorium, hostels and sports facilities for rigorous academic exchange.',
+  affiliations: [
+    {
+      program: 'B.Tech Programmes',
+      body: 'Bihar Engineering University (BEU)',
+      detail: 'Affiliated with Bihar Engineering University',
+    },
+    {
+      program: 'Diploma Programmes',
+      body: 'State Board of Technical Education (SBTE)',
+      detail: 'Affiliated with State Board of Technical Education, Bihar',
+    },
+    {
+      program: 'Management Programmes',
+      body: 'Aryabhatta Knowledge University (AKU)',
+      detail: 'Affiliated with Aryabhatta Knowledge University, Patna',
+    },
   ],
   academicPrograms: {
     undergraduate: [
       {
-        degree: 'B.Tech in Computer Science & Engineering (CSE)',
+        degree: 'B.Tech in Civil Engineering (CE)',
         duration: '4 Years',
-        focus: 'AI/ML, Data Engineering, Cloud Systems & Cybersecurity',
-      },
-      {
-        degree: 'B.Tech in CSE (Artificial Intelligence & Machine Learning)',
-        duration: '4 Years',
-        focus: 'Deep Neural Networks, Natural Language Processing & Cognitive AI',
-      },
-      {
-        degree: 'B.Tech in Electrical & Electronics Engineering (EEE)',
-        duration: '4 Years',
-        focus: 'Power Electronics, Renewable Energy, Smart Grids & Microcontrollers',
+        focus: 'Structural Engineering, Environmental, Transportation & Water Resources',
       },
       {
         degree: 'B.Tech in Mechanical Engineering (ME)',
         duration: '4 Years',
-        focus: 'Robotics, Mechatronics, CAD/CAM Prototyping & Thermal Sciences',
+        focus: 'Thermal Systems, Manufacturing, CAD/CAM, Robotics & Dynamics',
       },
       {
-        degree: 'B.Tech in Civil Engineering (CE)',
+        degree: 'B.Tech in Electrical & Electronics Engineering (EEE)',
         duration: '4 Years',
-        focus: 'Structural Dynamics, Geotechnical Analysis & Smart City Systems',
+        focus: 'Power Systems, Renewable Energy, Smart Grids, Control & Electronics',
+      },
+      {
+        degree: 'B.Tech in Computer Science & Engineering (CSE)',
+        duration: '4 Years',
+        focus: 'AI/ML, Data Science, Cloud Systems, Cybersecurity & Algorithms',
       },
     ],
     polytechnic: [
       {
-        program: 'Diploma in Mechanical Engineering',
-        duration: '3 Years',
-        focus: 'Workshop Practice, Machine Design & Manufacturing',
-      },
-      {
         program: 'Diploma in Civil Engineering',
         duration: '3 Years',
         focus: 'Surveying, Construction Materials & Structural Drawing',
+      },
+      {
+        program: 'Diploma in Mechanical Engineering',
+        duration: '3 Years',
+        focus: 'Workshop Practice, Machine Design & Manufacturing',
       },
       {
         program: 'Diploma in Electrical Engineering',
@@ -111,31 +123,21 @@ export const HOST_INSTITUTION = {
         focus: 'Electrical Machines, Transmission Systems & Wiring',
       },
     ],
-    managementAndApplications: [
+    management: [
       {
-        program: 'Bachelor of Computer Applications (BCA)',
-        duration: '3 Years',
-        focus: 'Software Development, Web Technologies & Database Design',
-      },
-      {
-        program: 'Bachelor of Business Administration (BBA)',
-        duration: '3 Years',
-        focus: 'Organizational Leadership, Marketing & Financial Analytics',
-      },
-      {
-        program: 'Master of Business Administration (MBA)',
-        duration: '2 Years',
-        focus: 'Strategic Management, Operations & Tech Entrepreneurship',
+        program: 'Management Studies (Affiliated with AKU)',
+        duration: '2-3 Years',
+        focus: 'Organizational Strategy, Technology Management & Operations',
       },
     ],
   },
   innovationAndIncubation: {
     centerName: 'Center for Innovation, Incubation & Entrepreneurship (CIIE)',
     highlights: [
-      'Rapid prototyping suite with additive 3D printers, laser cutters, and embedded electronics kits',
-      'Seed capital facilitation and patent filing support for student and faculty innovators',
+      'Multidisciplinary prototyping suite with advanced testing and modeling equipment',
+      'Incubation support and patent facilitation for student and faculty innovators',
       'Regular industry hackathons, technical paper contests, and entrepreneurship bootcamps',
-      'Collaborative MoUs with state research laboratories, public sector units, and tech startups',
+      'Collaborative linkages with national laboratories, PSUs, and technical institutions',
     ],
   },
   placementsAndRecruiters: [
@@ -150,33 +152,69 @@ export const HOST_INSTITUTION = {
     'HCL Technologies',
     'Hexaware Technologies',
   ],
+  brochureText: {
+    aboutInstitute:
+      'Established in 2007, Netaji Subhas Institute of Technology (NSIT) is located at Amhara, Bihta, approximately 30 km from Patna, Bihar. The institute was established with the approval of AICTE and the Department of Science and Technology, Government of Bihar. Its B.Tech programmes are affiliated with Bihar Engineering University, its diploma programmes with the State Board of Technical Education, and its management programmes with Aryabhatta Knowledge University. Spread over approximately 9.2 acres, the campus provides laboratories, workshops, a digital library, auditorium, hostels and sports facilities.',
+    aboutDepartments:
+      'NSIT comprises Civil Engineering, Mechanical Engineering, Electrical and Electronics Engineering, Computer Science and Engineering, Applied Sciences, Management, and English and Humanities. Together, these departments encompass engineering and technology, physics, chemistry, mathematics, management and humanities. Their diverse academic backgrounds provide opportunities for interdisciplinary learning, research and knowledge exchange, forming the basis for ETIMS 2027.',
+    aboutConference:
+      'Emerging technologies and complex societal challenges require multidisciplinary approaches integrating engineering, science, management and humanities. ETIMS 2027 provides a common platform for researchers, academicians, industry professionals and students to present findings, exchange ideas and explore collaboration. The two-day event will feature keynote and invited lectures, parallel technical sessions, oral and poster presentations, industry interactions and panel discussions, promoting research dissemination and knowledge sharing.',
+    venueAndAccess:
+      'ETIMS 2027 will be held in physical mode at NSIT, Amhara, Bihta, approximately 30 km west of Patna. Limited accommodation may be available upon prior request, subject to availability. Travel details will be shared through the conference website.',
+  },
+  stats: [
+    { label: 'Campus Area', value: '9.2 Acres', subtext: 'Lush Green Residential Campus' },
+    { label: 'Established', value: 'Est. 2007', subtext: 'Approved by AICTE & DST Bihar' },
+    { label: 'Academic Departments', value: '7 Depts', subtext: 'Engineering, Sciences, Mgmt & Humanities' },
+    { label: 'Conference Delegates', value: '200–300', subtext: 'Faculty, Researchers & Industry Delegates' },
+    { label: 'Technical Tracks', value: '8 Tracks', subtext: 'Science, Engineering & Management' },
+    { label: 'Digital Library', value: 'Central Facility', subtext: 'Modern Digital Resource Center' },
+    { label: 'Campus Living', value: 'On-Campus Hostels', subtext: 'Hostels, Auditorium & Sports Grounds' },
+    { label: 'Location', value: 'Bihta, Patna', subtext: '~30 km West of Patna' },
+  ],
+  campusFeatures: [
+    'Centrally air-conditioned academic auditoriums & seminar presentation halls with laser projection',
+    'Advanced departmental engineering laboratories and workshops equipped with modern testbenches',
+    'Campus-wide high-speed Wi-Fi network & technical audio-visual infrastructure',
+    'Dedicated conference registration, logistics, and hospitality desks',
+    'On-campus faculty guest house and student residential hostels',
+    'Central digital library, sports facilities, and cafeteria',
+  ],
+  departmentsList: [
+    'Civil Engineering',
+    'Mechanical Engineering',
+    'Electrical and Electronics Engineering',
+    'Computer Science and Engineering',
+    'Applied Sciences',
+    'Management',
+    'English and Humanities',
+  ],
   transitAccess: [
     {
       mode: 'Airways Access',
       terminal: 'Patna Airport (PAT)',
       detail:
-        'Jai Prakash Narayan International Airport, Patna (~30 km from campus) with direct daily flights to Delhi, Mumbai, Bengaluru, Kolkata, and Hyderabad. Future Bihta Civil Enclave is located minutes away.',
+        'Jay Prakash Narayan International Airport, Patna (~30 km from campus) with frequent daily flights to Delhi, Mumbai, Bengaluru, Kolkata, and Hyderabad. Future Bihta Civil Enclave is located minutes away.',
     },
     {
       mode: 'Railways Access',
       terminal: 'Bihta & Patna Junction',
       detail:
-        'Bihta Railway Station (~4 km) provides frequent local connections; Patna Junction Railway Station (~32 km) connects major Rajdhani, Vande Bharat, and Superfast express trains.',
+        'Bihta Railway Station (~4 km) provides frequent local connections; Patna Junction (~32 km) connects major Rajdhani, Vande Bharat, and Superfast express trains.',
     },
     {
       mode: 'Roadways Access',
       terminal: 'NH-922 Expressway Corridor',
       detail:
-        'Strategically situated along the 4-lane Patna–Buxar highway (NH-922) and the Danapur–Bihta elevated corridor, ensuring smooth vehicular transit without city congestion.',
+        'Located at Amhara, Bihta, approximately 30 km west of Patna, smoothly connected via the 4-lane Patna–Buxar highway (NH-922) and the Danapur–Bihta elevated corridor.',
     },
   ],
 } as const;
 
-// ── Provisional Illustrative Research Tracks ─────────────────────
-// NOTE: These are strictly provisional & illustrative topics subject to
-// technical committee approval. They are NOT officially finalized.
+// ── Official Eight Research Tracks (T1 – T8 from Official Brochure) ────────
 export interface ResearchTrackItem {
   id: string;
+  code: string;
   number: string;
   title: string;
   tagline: string;
@@ -184,78 +222,153 @@ export interface ResearchTrackItem {
   illustrativeTopics: string[];
 }
 
-export const PROVISIONAL_TRACKS: ResearchTrackItem[] = [
+export const RESEARCH_TRACKS: ResearchTrackItem[] = [
   {
     id: 'track-1',
-    number: 'Provisional Area 01',
-    title: 'Artificial Intelligence & Cognitive Computing',
-    tagline: 'Intelligent algorithms, data science & cognitive architectures',
-    isProvisional: true,
+    code: 'T1',
+    number: 'Track 01',
+    title: 'Computer Science and Artificial Intelligence',
+    tagline: 'AI, machine learning, data science, HPC, cybersecurity, computer vision & software engineering',
+    isProvisional: false,
     illustrativeTopics: [
-      'Machine Learning Models & Deep Neural Architectures',
-      'Natural Language Processing & Semantic Understanding',
-      'Computer Vision, Pattern Analysis & Intelligent Robotics',
-      'Explainable AI, Responsible Data Governance & Ethics',
+      'AI, machine learning and deep learning',
+      'Data science',
+      'Cloud and high-performance computing',
+      'Cybersecurity and blockchain',
+      'Computer vision and NLP',
+      'Software engineering',
     ],
   },
   {
     id: 'track-2',
-    number: 'Provisional Area 02',
-    title: 'Communication Networks & Cyber-Physical Systems',
-    tagline: 'Wireless protocols, IoT systems & distributed infrastructure',
-    isProvisional: true,
+    code: 'T2',
+    number: 'Track 02',
+    title: 'Civil Engineering and Infrastructure',
+    tagline: 'Structural, geotechnical, transportation, environmental engineering, materials & geospatial tech',
+    isProvisional: false,
     illustrativeTopics: [
-      'Next-Generation Wireless Networks & 5G/6G Architectures',
-      'Internet of Things (IoT) & Smart Sensor Networks',
-      'Cryptography, Cyber Defense & Network Security',
-      'Edge-Cloud Continuum & Decentralized Computing',
+      'Structural, geotechnical, transportation and railway engineering',
+      'Pavements',
+      'Water resources and environmental engineering',
+      'Construction management',
+      'Advanced construction materials',
+      'Geospatial technologies',
     ],
   },
   {
     id: 'track-3',
-    number: 'Provisional Area 03',
-    title: 'Sustainable Energy Systems & Green Technology',
-    tagline: 'Clean power, grid modernization & ecological engineering',
-    isProvisional: true,
+    code: 'T3',
+    number: 'Track 03',
+    title: 'Electrical Engineering',
+    tagline: 'Renewable energy, power systems, smart grids, drives, energy storage, EVs & energy management',
+    isProvisional: false,
     illustrativeTopics: [
-      'Smart Grid Integration & Distributed Energy Resources',
-      'Renewable Generation (Solar, Wind & Bioenergy Systems)',
-      'Electric Vehicles, Battery Storage & Fast-Charging Tech',
-      'Power Electronics, Inverters & Industrial Energy Efficiency',
+      'Renewable energy',
+      'Power systems and smart grids',
+      'Power electronics and drives',
+      'Electrical machines',
+      'Energy storage',
+      'Electric vehicles',
+      'Energy management',
     ],
   },
   {
     id: 'track-4',
-    number: 'Provisional Area 04',
-    title: 'Automation, Robotics & Precision Mechatronics',
-    tagline: 'Adaptive control, industrial robotics & smart manufacturing',
-    isProvisional: true,
+    code: 'T4',
+    number: 'Track 04',
+    title: 'Mechanical and Manufacturing Engineering',
+    tagline: 'Additive manufacturing, Industry 4.0, robotics, thermal & fluid, automotive & mechanics',
+    isProvisional: false,
     illustrativeTopics: [
-      'Autonomous Mobile Robots & Industrial Manipulators',
-      'Adaptive Control Systems & Sensor Fusion Methods',
-      'Smart Manufacturing, Industry 4.0/5.0 & Digital Twins',
-      'Micro-electromechanical Systems (MEMS) & Precision Actuators',
+      'Advanced and additive manufacturing',
+      'Industry 4.0 and smart manufacturing',
+      'Robotics and automation',
+      'Thermal and fluid engineering',
+      'Automobile engineering',
+      'Mechanical design and computational mechanics',
     ],
   },
   {
     id: 'track-5',
-    number: 'Provisional Area 05',
-    title: 'Multidisciplinary Applied Sciences & Engineering',
-    tagline: 'Cross-cutting physical sciences, materials & modeling',
-    isProvisional: true,
+    code: 'T5',
+    number: 'Track 05',
+    title: 'Electronics and Communication Engineering',
+    tagline: 'Wireless & 5G/6G, IoT & embedded, VLSI, signal & image processing, antennas, sensors & optical',
+    isProvisional: false,
     illustrativeTopics: [
-      'Computational Applied Mathematics & Numerical Modeling',
-      'Advanced Functional Materials & Nanotechnology',
-      'Biomedical Instrumentation & Health Informatics',
-      'Environmental Engineering, Water Security & Climate Resilience',
+      'Wireless and 5G/6G communication',
+      'IoT and embedded systems',
+      'VLSI',
+      'Signal and image processing',
+      'Antennas and microwave engineering',
+      'Sensors',
+      'Optical communication',
+    ],
+  },
+  {
+    id: 'track-6',
+    code: 'T6',
+    number: 'Track 06',
+    title: 'Applied Science',
+    tagline: 'Applied physics, photonics, nanomaterials, electrochemistry, green chemistry, modeling & cryptography',
+    isProvisional: false,
+    illustrativeTopics: [
+      'Applied and condensed-matter physics',
+      'Photonics and thin films',
+      'Nanomaterials and functional materials',
+      'Electrochemistry and energy-storage materials',
+      'Catalysis, polymers and green chemistry',
+      'Environmental and analytical chemistry',
+      'Mathematical modelling and numerical methods',
+      'Optimization, statistics and cryptography',
+    ],
+  },
+  {
+    id: 'track-7',
+    code: 'T7',
+    number: 'Track 07',
+    title: 'Management',
+    tagline: 'Technology & innovation, supply chain, project mgmt, entrepreneurship, analytics, FinTech & ESG',
+    isProvisional: false,
+    illustrativeTopics: [
+      'Technology and innovation management',
+      'Operations and supply-chain management',
+      'Project and construction management',
+      'Entrepreneurship and start-up ecosystems',
+      'Business analytics and decision sciences',
+      'Human resource and organisational management',
+      'Financial management and FinTech',
+      'Sustainable business and ESG practices',
+    ],
+  },
+  {
+    id: 'track-8',
+    code: 'T8',
+    number: 'Track 08',
+    title: 'Humanities and Library Science',
+    tagline: 'Linguistics, technical communication, ethics & society, digital humanities, libraries & research metrics',
+    isProvisional: false,
+    illustrativeTopics: [
+      'English language, literature and linguistics',
+      'Professional and technical communication',
+      'Ethics, society and culture',
+      'Digital humanities',
+      'Library and information science',
+      'Digital libraries and knowledge management',
+      'Scholarly communication and research metrics',
+      'Information literacy',
     ],
   },
 ];
 
-// ── Conference Dates & Timelines ────────────────────────────────
+// Backwards-compatibility alias so existing components continue to work smoothly
+export const PROVISIONAL_TRACKS: ResearchTrackItem[] = RESEARCH_TRACKS;
+
+// ── Official Important Dates & Deadlines (from Official Brochure) ───────────
 export interface TimelineItem {
   milestone: string;
   statusText: string;
+  dateRaw?: string;
   isConfirmed: boolean;
   phase: string;
   note: string;
@@ -263,50 +376,286 @@ export interface TimelineItem {
 
 export const CONFERENCE_TIMELINE: TimelineItem[] = [
   {
-    milestone: 'Conference Inauguration & Sessions',
-    statusText: '23–24 July 2027',
-    isConfirmed: true,
-    phase: 'Event Days',
-    note: 'Official confirmed dates at NSIT, Bihta, Patna',
-  },
-  {
     milestone: 'Call for Papers Release',
-    statusText: 'To Be Announced',
-    isConfirmed: false,
+    statusText: 'Jan 2027',
+    dateRaw: '2027-01-01',
+    isConfirmed: true,
     phase: 'Announcement',
-    note: 'Official circular with sub-tracks & author templates',
+    note: 'Official circular and CFP portal opening across all 8 tracks',
   },
   {
-    milestone: 'Full Manuscript Submission Window',
-    statusText: 'Dates to be announced by Committee',
-    isConfirmed: false,
+    milestone: 'Full Paper Submission Deadline',
+    statusText: '30 Mar 2027',
+    dateRaw: '2027-03-30',
+    isConfirmed: true,
     phase: 'Submission Phase',
-    note: 'Scholarly papers via the designated peer-review portal',
+    note: 'Submission of original, unpublished full-length papers (abstract ~250–300 words)',
   },
   {
-    milestone: 'Peer Review & Acceptance Notification',
-    statusText: 'Dates to be announced by Committee',
-    isConfirmed: false,
-    phase: 'Review Phase',
-    note: 'Technical assessment feedback communicated to authors',
+    milestone: 'Acceptance Notification',
+    statusText: '31 May 2027',
+    dateRaw: '2027-05-31',
+    isConfirmed: true,
+    phase: 'Peer Review',
+    note: 'Peer review evaluation results communicated to corresponding authors',
   },
   {
-    milestone: 'Camera-Ready Copy Submission',
-    statusText: 'Dates to be announced by Committee',
-    isConfirmed: false,
+    milestone: 'Camera-Ready Submission Deadline',
+    statusText: '20 Jun 2027',
+    dateRaw: '2027-06-20',
+    isConfirmed: true,
     phase: 'Post-Acceptance',
-    note: 'Final formatted paper submission with author revisions',
+    note: 'Final formatted paper submission incorporating reviewer feedback',
   },
   {
-    milestone: 'Delegate & Author Registration',
-    statusText: 'Schedule to be officially notified',
-    isConfirmed: false,
-    phase: 'Registration',
-    note: 'Mandatory registration for schedule inclusion',
+    milestone: 'Early Registration Deadline',
+    statusText: '20 Jun 2027',
+    dateRaw: '2027-06-20',
+    isConfirmed: true,
+    phase: 'Early Registration',
+    note: 'Early-bird discounted registration fee deadline for authors & delegates',
+  },
+  {
+    milestone: 'Final Registration Deadline',
+    statusText: '10 Jul 2027',
+    dateRaw: '2027-07-10',
+    isConfirmed: true,
+    phase: 'Final Registration',
+    note: 'Last date for delegate registration and inclusion in final session program',
+  },
+  {
+    milestone: 'Conference Inauguration & Technical Sessions',
+    statusText: '23–24 Jul 2027',
+    dateRaw: '2027-07-23',
+    isConfirmed: true,
+    phase: 'Conference Days',
+    note: 'Physical mode at NSIT Campus, Bihta (dates tentative; provisional; subject to approvals)',
   },
 ];
 
-// ── Committee Structure (Honest Provisional Roster) ─────────────
+// ── Official Registration Tariff (INR) from Brochure ─────────────
+export interface RegistrationCategoryItem {
+  category: string;
+  badge: string;
+  earlyFee: number;
+  regularFee: number;
+  earlyFormatted: string;
+  regularFormatted: string;
+  scope: string;
+  feeStatus: string;
+}
+
+export const REGISTRATION_CATEGORIES: RegistrationCategoryItem[] = [
+  {
+    category: 'Faculty / Academicians',
+    badge: 'Faculty Delegate',
+    earlyFee: 2500,
+    regularFee: 3000,
+    earlyFormatted: '₹ 2,500',
+    regularFormatted: '₹ 3,000',
+    scope: 'Faculty members, university professors, and academic educators presenting or attending.',
+    feeStatus: 'Early: ₹2,500 / Regular: ₹3,000 (INR)',
+  },
+  {
+    category: 'Industry Professionals',
+    badge: 'Corporate / Industry',
+    earlyFee: 3500,
+    regularFee: 4000,
+    earlyFormatted: '₹ 3,500',
+    regularFormatted: '₹ 4,000',
+    scope: 'Corporate researchers, industrial practitioners, consultants, and entrepreneurs.',
+    feeStatus: 'Early: ₹3,500 / Regular: ₹4,000 (INR)',
+  },
+  {
+    category: 'Research Scholars / PG',
+    badge: 'PG & PhD Scholars',
+    earlyFee: 1500,
+    regularFee: 2000,
+    earlyFormatted: '₹ 1,500',
+    regularFormatted: '₹ 2,000',
+    scope: 'Doctoral candidates, research fellows, and postgraduate scholars.',
+    feeStatus: 'Early: ₹1,500 / Regular: ₹2,000 (INR)',
+  },
+  {
+    category: 'UG Students',
+    badge: 'Undergraduate',
+    earlyFee: 800,
+    regularFee: 1000,
+    earlyFormatted: '₹ 800',
+    regularFormatted: '₹ 1,000',
+    scope: 'Enrolled undergraduate students presenting original projects or multidisciplinary papers.',
+    feeStatus: 'Early: ₹800 / Regular: ₹1,000 (INR)',
+  },
+  {
+    category: 'Non-presenting Co-author / Attendee',
+    badge: 'Attendee / Co-author',
+    earlyFee: 500,
+    regularFee: 500,
+    earlyFormatted: '₹ 500',
+    regularFormatted: '₹ 500',
+    scope: 'Non-presenting co-authors, academic attendees, delegates, and observers.',
+    feeStatus: 'Early: ₹500 / Regular: ₹500 (INR)',
+  },
+];
+
+export const REGISTRATION_TERMS = {
+  earlyDeadline: '20 June 2027',
+  finalDeadline: '10 July 2027',
+  inclusions:
+    'Fees include conference participation, materials, refreshments/meals and applicable certificate. Publication charges, if any, will be notified separately.',
+  currency: 'INR (₹)',
+} as const;
+
+// ── Official Organising Structure (from Official Brochure Page 2) ──────────
+export const ORGANISING_STRUCTURE = {
+  chiefPatron: {
+    name: 'Mr. M. M. Singh',
+    designation: 'Chairman, NSIT',
+    role: 'Chief Patron',
+    affiliation: 'Netaji Subhas Institute of Technology (NSIT)',
+  },
+  patron: {
+    name: 'Mrs. Nitu Singh',
+    designation: 'Managing Director, NSIT',
+    role: 'Patron',
+    affiliation: 'Netaji Subhas Institute of Technology (NSIT)',
+  },
+  coPatron: {
+    name: 'Dr. Jyotirmayee Dalei',
+    designation: 'Director, NSIT',
+    role: 'Co-Patron',
+    affiliation: 'Netaji Subhas Institute of Technology (NSIT)',
+  },
+  convenor: {
+    name: 'Dr. Atif Hussain',
+    designation: 'Assistant Professor, Department of Civil Engineering',
+    role: 'Conference Convenor',
+    affiliation: 'Netaji Subhas Institute of Technology (NSIT)',
+    email: 'etims2027@nsiterp.in',
+    phone: '+91 83402 58426',
+  },
+  coConvenors: [
+    { name: 'Dr. Rajan Kumar', designation: 'Co-Convenor', affiliation: 'NSIT' },
+    { name: 'Dr. Gautam', designation: 'Co-Convenor', affiliation: 'NSIT' },
+    { name: 'Mr. Deepansh Yadav', designation: 'Co-Convenor', affiliation: 'NSIT' },
+    { name: 'Md. Farrukh', designation: 'Co-Convenor', affiliation: 'NSIT' },
+    { name: 'Mr. Nilanjan Manna', designation: 'Co-Convenor', affiliation: 'NSIT' },
+  ],
+} as const;
+
+// ── Official Advisory Committee (from Official Brochure Page 2) ───────────
+export interface AdvisoryMember {
+  name: string;
+  designation: string;
+  department: string;
+  institution: string;
+}
+
+export const ADVISORY_COMMITTEE: AdvisoryMember[] = [
+  {
+    name: 'Dr. Kailash Chandra Ray',
+    designation: 'Associate Professor',
+    department: 'Electrical Engineering',
+    institution: 'IIT Patna',
+  },
+  {
+    name: 'Dr. Raju Halder',
+    designation: 'Associate Professor',
+    department: 'Computer Science and Engineering',
+    institution: 'IIT Patna',
+  },
+  {
+    name: 'Dr. Akhilendra Singh',
+    designation: 'Associate Professor',
+    department: 'Mechanical Engineering',
+    institution: 'IIT Patna',
+  },
+  {
+    name: 'Dr. Debashisha Jena',
+    designation: 'Professor',
+    department: 'Electrical and Electronics Engineering',
+    institution: 'NIT Surathkal',
+  },
+  {
+    name: 'Dr. Yatendra Kumar Singh',
+    designation: 'Associate Professor',
+    department: 'Electrical Engineering',
+    institution: 'IIT Patna',
+  },
+  {
+    name: 'Mr. Gopal Krishna',
+    designation: 'Assistant Professor',
+    department: 'Computer Science Engineering (AI & Data Science)',
+    institution: 'GEC Munger',
+  },
+  {
+    name: 'Mr. Chandan Kumar Sharma',
+    designation: 'Assistant Professor',
+    department: 'Civil Engineering',
+    institution: 'GEC Bhojpur',
+  },
+];
+
+// ── Brochure Special Policies & Information Sections ─────────────
+export const REVIEW_AND_PUBLICATION = {
+  policy:
+    'Manuscripts will undergo preliminary screening for relevance, originality and similarity, followed by independent peer review. The organizing committee is exploring publication arrangements with an established academic publisher. Proceedings outlet, indexing status, manuscript requirements and any charges will be announced only after formal confirmation.',
+  disclaimer:
+    'Publisher and indexing are not yet confirmed; no publication or indexing guarantee is made.',
+} as const;
+
+export const WHO_SHOULD_ATTEND = [
+  'Faculty and academicians',
+  'Scientists and R&D researchers',
+  'Research scholars and postgraduate students',
+  'Undergraduate students',
+  'Industry professionals and entrepreneurs',
+  'Government and PSU representatives',
+  'Librarians and information professionals',
+] as const;
+
+export const AWARDS_AND_RECOGNITION = {
+  description:
+    'Best Paper, Best Student Paper and Best Poster awards may be presented based on originality, research quality and presentation. Track-wise awards depend on the number and quality of eligible submissions and decisions of the evaluation committee.',
+  awards: [
+    { title: 'Best Paper Award', criteria: 'Originality, methodology, scientific depth & presentation' },
+    { title: 'Best Student Paper Award', criteria: 'Outstanding student innovation and research rigor' },
+    { title: 'Best Poster Award', criteria: 'Visual clarity, research communication & technical impact' },
+  ],
+} as const;
+
+export const STUDENT_VOLUNTEERS = {
+  description:
+    'Student volunteers drawn from every department will support registration and the help desk, hall management and session assistance, guest reception and hospitality, publicity and outreach, photography and documentation, and audio-visual and IT support.',
+  wings: [
+    'Registration and Help Desk',
+    'Hall Management and Session Assistance',
+    'Guest Reception and Hospitality',
+    'Publicity and Outreach',
+    'Photography and Documentation',
+    'Audio-Visual and IT Support',
+  ],
+} as const;
+
+export const SPONSORSHIP = {
+  description:
+    'ETIMS 2027 invites sponsorship and participation from industries, PSUs, research organizations and professional bodies. Opportunities may include institutional visibility, exhibition stalls and souvenir advertisements. Sponsorship categories and benefits will be communicated separately.',
+  opportunities: [
+    'Institutional Brand Visibility across Conference Backdrops & Stage Kits',
+    'Dedicated On-Campus Technology Exhibition Stalls',
+    'Official Souvenir & Conference Kit Advertisements',
+    'Keynote Session Sponsorship & Industry Panel Partnerships',
+  ],
+} as const;
+
+export const SUBMISSION_INSTRUCTIONS = {
+  howToSubmit:
+    'Submit original, unpublished full-length papers through the official submission portal once announced. Include an abstract of approximately 250-300 words, subject to the final publisher template. At least one author of each accepted paper must register and present in person.',
+  abstractRequirement: 'Approximately 250–300 words',
+  authorRequirement: 'At least one author of each accepted paper must register and present in person.',
+} as const;
+
+// ── Committee Structure Categories (for Overview Views) ───────────
 export interface CommitteeCategory {
   title: string;
   status: string;
@@ -315,28 +664,401 @@ export interface CommitteeCategory {
 
 export const COMMITTEE_CATEGORIES: CommitteeCategory[] = [
   {
-    title: 'Patrons & Institutional Leadership',
-    status: 'Official Notification Pending',
+    title: 'Chief Patron, Patron & Co-Patron',
+    status: 'Official Institutional Leadership',
     description:
-      'Distinguished academic leadership and advisory board of Netaji Subhas Institute of Technology (NSIT), Bihta, Patna.',
+      'Executive leadership of Netaji Subhas Institute of Technology: Chairman Mr. M. M. Singh, Managing Director Mrs. Nitu Singh, and Director Dr. Jyotirmayee Dalei.',
   },
   {
-    title: 'Technical Programme Committee (TPC)',
-    status: 'Subject to Formal Constitution',
+    title: 'Convenorship & Co-Convenors',
+    status: 'Headed by Dr. Atif Hussain',
     description:
-      'Domain experts, professors, and peer reviewers from national institutions overseeing thematic track integrity and blind evaluation.',
+      'Conference Convenor Dr. Atif Hussain (Assistant Professor, Civil Engineering) supported by Co-Convenors Dr. Rajan Kumar, Dr. Gautam, Mr. Deepansh Yadav, Md. Farrukh, and Mr. Nilanjan Manna.',
   },
   {
-    title: 'Organizing Secretariat',
-    status: 'Headed by Conference Convenor',
+    title: 'Advisory Committee',
+    status: 'National Academic Council',
     description:
-      'Operational coordination headed by Dr. Atif Hussain (Convenor), overseeing session logistics, delegate facilitation, and event operations.',
+      'Distinguished professors and associate professors from IIT Patna, NIT Surathkal, GEC Munger, and GEC Bhojpur.',
   },
   {
-    title: 'Advisory Council',
-    status: 'To Be Announced in Official Circular',
+    title: 'Student Volunteer Wings',
+    status: 'Inter-Departmental Corps',
     description:
-      'Prominent scholars and researchers guiding multidisciplinary conference scopes and academic standards.',
+      'Student volunteers drawn from every department providing registration, hall management, guest reception, publicity, and AV/IT support.',
+  },
+];
+
+// ── Detailed Faculty Teams & Task In-Charges ─────────────────────
+export interface FacultyInCharge {
+  taskCategory: string;
+  taskTitle: string;
+  leadName: string;
+  leadDesignation: string;
+  leadDepartment: string;
+  institution: string;
+  campus: string;
+  responsibilities: string[];
+  contactEmail?: string;
+  contactPhone?: string;
+  badge: string;
+}
+
+export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
+  {
+    taskCategory: 'Leadership & Patrons',
+    taskTitle: 'Chief Patron',
+    leadName: 'Mr. M. M. Singh',
+    leadDesignation: 'Chairman, NSIT',
+    leadDepartment: 'Governing Board & Institutional Leadership',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'Chief Patron',
+    responsibilities: [
+      'Institutional patronage, policy guidance, and strategic direction for ETIMS 2027',
+      'High-level dignitary hosting and liaison with governmental and university bodies',
+      'Inaugural address and institutional support facilitation',
+    ],
+  },
+  {
+    taskCategory: 'Leadership & Patrons',
+    taskTitle: 'Patron',
+    leadName: 'Mrs. Nitu Singh',
+    leadDesignation: 'Managing Director, NSIT',
+    leadDepartment: 'Executive Directorate',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'Patron',
+    responsibilities: [
+      'Institutional resource allocation, administrative enablement, and delegate amenities',
+      'Overseeing campus infrastructure readiness and hospitality standards',
+    ],
+  },
+  {
+    taskCategory: 'Leadership & Patrons',
+    taskTitle: 'Co-Patron',
+    leadName: 'Dr. Jyotirmayee Dalei',
+    leadDesignation: 'Director, NSIT',
+    leadDepartment: 'Office of the Director',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'Co-Patron',
+    responsibilities: [
+      'Academic governance and institutional coordination across all 7 departments',
+      'Quality assurance of research proceedings, technical sessions, and award evaluation',
+      'Presiding over valedictory session and best paper award presentations',
+    ],
+  },
+  {
+    taskCategory: 'Secretariat & Convenor',
+    taskTitle: 'Conference Convenor & Primary Liaison',
+    leadName: 'Dr. Atif Hussain',
+    leadDesignation: 'Assistant Professor, Department of Civil Engineering',
+    leadDepartment: 'Department of Civil Engineering',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'Convenor',
+    contactEmail: 'etims2027@nsiterp.in',
+    contactPhone: '+91 83402 58426',
+    responsibilities: [
+      'Chief coordinator for all academic, technical, editorial, and logistics committees',
+      'Primary official communication channel for authors, delegates, reviewers, and keynote speakers',
+      'Supervising peer-review workflows, publication proceedings, and session allocation',
+      'Convening core committee briefings and monitoring milestone execution',
+    ],
+  },
+  {
+    taskCategory: 'Secretariat & Convenor',
+    taskTitle: 'Co-Convenor',
+    leadName: 'Dr. Rajan Kumar',
+    leadDesignation: 'Co-Convenor, ETIMS 2027',
+    leadDepartment: 'Faculty Secretariat',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'Co-Convenor',
+    responsibilities: [
+      'Assisting the convenor in coordinating inter-departmental workflows and paper review tracking',
+      'Coordination with session chairs and invited keynote speakers',
+    ],
+  },
+  {
+    taskCategory: 'Secretariat & Convenor',
+    taskTitle: 'Co-Convenor',
+    leadName: 'Dr. Gautam',
+    leadDesignation: 'Co-Convenor, ETIMS 2027',
+    leadDepartment: 'Faculty Secretariat',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'Co-Convenor',
+    responsibilities: [
+      'Overseeing technical session planning and paper presentation allocations',
+      'Coordination of oral and poster evaluation sessions',
+    ],
+  },
+  {
+    taskCategory: 'Secretariat & Convenor',
+    taskTitle: 'Co-Convenor',
+    leadName: 'Mr. Deepansh Yadav',
+    leadDesignation: 'Co-Convenor, ETIMS 2027',
+    leadDepartment: 'Faculty Secretariat',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'Co-Convenor',
+    responsibilities: [
+      'Digital systems coordination, CFP submission intake, and author notifications',
+      'Liaison with delegates regarding conference schedules and presentation kits',
+    ],
+  },
+  {
+    taskCategory: 'Secretariat & Convenor',
+    taskTitle: 'Co-Convenor',
+    leadName: 'Md. Farrukh',
+    leadDesignation: 'Co-Convenor, ETIMS 2027',
+    leadDepartment: 'Faculty Secretariat',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'Co-Convenor',
+    responsibilities: [
+      'Campus logistics, session halls setup, and technical audio-visual infrastructure',
+      'Managing registration desks and delegate welcome facilitation',
+    ],
+  },
+  {
+    taskCategory: 'Secretariat & Convenor',
+    taskTitle: 'Co-Convenor',
+    leadName: 'Mr. Nilanjan Manna',
+    leadDesignation: 'Co-Convenor, ETIMS 2027',
+    leadDepartment: 'Faculty Secretariat',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'Co-Convenor',
+    responsibilities: [
+      'Delegate hospitality, outstation accommodations, and transport logistics',
+      'Print materials, certificate preparation, and delegate kit distribution',
+    ],
+  },
+  {
+    taskCategory: 'National Advisory Committee',
+    taskTitle: 'Advisory Member',
+    leadName: 'Dr. Kailash Chandra Ray',
+    leadDesignation: 'Associate Professor, Electrical Engineering',
+    leadDepartment: 'Department of Electrical Engineering',
+    institution: 'IIT Patna',
+    campus: 'Bihta, Patna',
+    badge: 'IIT Patna',
+    responsibilities: [
+      'Academic guidance on conference tracks, research standards, and session chairing',
+      'Strategic advising on Electrical Engineering and IoT/VLSI submissions',
+    ],
+  },
+  {
+    taskCategory: 'National Advisory Committee',
+    taskTitle: 'Advisory Member',
+    leadName: 'Dr. Raju Halder',
+    leadDesignation: 'Associate Professor, Computer Science and Engineering',
+    leadDepartment: 'Department of Computer Science and Engineering',
+    institution: 'IIT Patna',
+    campus: 'Bihta, Patna',
+    badge: 'IIT Patna',
+    responsibilities: [
+      'Advisory guidance for Track 01 (Computer Science & Artificial Intelligence)',
+      'Review integrity and academic publication standards oversight',
+    ],
+  },
+  {
+    taskCategory: 'National Advisory Committee',
+    taskTitle: 'Advisory Member',
+    leadName: 'Dr. Akhilendra Singh',
+    leadDesignation: 'Associate Professor, Mechanical Engineering',
+    leadDepartment: 'Department of Mechanical Engineering',
+    institution: 'IIT Patna',
+    campus: 'Bihta, Patna',
+    badge: 'IIT Patna',
+    responsibilities: [
+      'Advisory guidance for Track 04 (Mechanical and Manufacturing Engineering)',
+      'Reviewing advanced manufacturing and robotics session scopes',
+    ],
+  },
+  {
+    taskCategory: 'National Advisory Committee',
+    taskTitle: 'Advisory Member',
+    leadName: 'Dr. Debashisha Jena',
+    leadDesignation: 'Professor, Electrical and Electronics Engineering',
+    leadDepartment: 'Department of Electrical and Electronics Engineering',
+    institution: 'NIT Surathkal',
+    campus: 'Surathkal, Karnataka',
+    badge: 'NIT Surathkal',
+    responsibilities: [
+      'National advisory benchmarking for power systems, renewable energy, and control engineering',
+      'Assisting with reviewer recommendations and keynote nominations',
+    ],
+  },
+  {
+    taskCategory: 'National Advisory Committee',
+    taskTitle: 'Advisory Member',
+    leadName: 'Dr. Yatendra Kumar Singh',
+    leadDesignation: 'Associate Professor, Electrical Engineering',
+    leadDepartment: 'Department of Electrical Engineering',
+    institution: 'IIT Patna',
+    campus: 'Bihta, Patna',
+    badge: 'IIT Patna',
+    responsibilities: [
+      'Advising on smart grid and electrical drives research tracks',
+      'Evaluation criteria guidance for Best Paper and Best Poster awards',
+    ],
+  },
+  {
+    taskCategory: 'National Advisory Committee',
+    taskTitle: 'Advisory Member',
+    leadName: 'Mr. Gopal Krishna',
+    leadDesignation: 'Assistant Professor, Computer Science Engineering (AI & Data Science)',
+    leadDepartment: 'Department of Computer Science Engineering',
+    institution: 'GEC Munger',
+    campus: 'Munger, Bihar',
+    badge: 'GEC Munger',
+    responsibilities: [
+      'Regional academic outreach and technical advisory for AI & Data Science papers',
+      'Student and scholar participation mobilization',
+    ],
+  },
+  {
+    taskCategory: 'National Advisory Committee',
+    taskTitle: 'Advisory Member',
+    leadName: 'Mr. Chandan Kumar Sharma',
+    leadDesignation: 'Assistant Professor, Civil Engineering',
+    leadDepartment: 'Department of Civil Engineering',
+    institution: 'GEC Bhojpur',
+    campus: 'Bhojpur, Bihar',
+    badge: 'GEC Bhojpur',
+    responsibilities: [
+      'Technical advisory for Track 02 (Civil Engineering and Infrastructure)',
+      'Guidance on sustainable materials and geospatial session tracks',
+    ],
+  },
+  {
+    taskCategory: 'Technical Program & Track Chairs',
+    taskTitle: 'Track 01 Chair: Computer Science & AI',
+    leadName: 'Track Chair, Track 01',
+    leadDesignation: 'Senior Faculty / Track Chair',
+    leadDepartment: 'Department of Computer Science and Engineering',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'T1 Chair',
+    responsibilities: [
+      'Reviewer assignment for AI, Machine Learning, Data Science, and Cloud submissions',
+      'Technical oral paper and poster session chairing for Track 01',
+    ],
+  },
+  {
+    taskCategory: 'Technical Program & Track Chairs',
+    taskTitle: 'Track 02 Chair: Civil Engineering & Infrastructure',
+    leadName: 'Track Chair, Track 02',
+    leadDesignation: 'Senior Faculty / Track Chair',
+    leadDepartment: 'Department of Civil Engineering',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'T2 Chair',
+    responsibilities: [
+      'Screening manuscripts on structural, geotechnical, environmental, and railway engineering',
+      'Session evaluation and award nomination for Track 02',
+    ],
+  },
+  {
+    taskCategory: 'Technical Program & Track Chairs',
+    taskTitle: 'Track 03 Chair: Electrical Engineering',
+    leadName: 'Track Chair, Track 03',
+    leadDesignation: 'Senior Faculty / Track Chair',
+    leadDepartment: 'Department of Electrical and Electronics Engineering',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'T3 Chair',
+    responsibilities: [
+      'Evaluating research in smart grids, renewable energy, and electric vehicles',
+      'Technical coordination of Track 03 presentations',
+    ],
+  },
+  {
+    taskCategory: 'Technical Program & Track Chairs',
+    taskTitle: 'Track 04 Chair: Mechanical & Manufacturing',
+    leadName: 'Track Chair, Track 04',
+    leadDesignation: 'Senior Faculty / Track Chair',
+    leadDepartment: 'Department of Mechanical Engineering',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'T4 Chair',
+    responsibilities: [
+      'Overseeing additive manufacturing, Industry 4.0, robotics, and thermal fluid papers',
+    ],
+  },
+  {
+    taskCategory: 'Technical Program & Track Chairs',
+    taskTitle: 'Track 05 Chair: Electronics & Communication',
+    leadName: 'Track Chair, Track 05',
+    leadDesignation: 'Senior Faculty / Track Chair',
+    leadDepartment: 'Department of Electronics & Communication Engineering',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'T5 Chair',
+    responsibilities: [
+      'Screening 5G/6G, IoT, VLSI, and antenna/microwave research papers',
+    ],
+  },
+  {
+    taskCategory: 'Technical Program & Track Chairs',
+    taskTitle: 'Track 06 Chair: Applied Science',
+    leadName: 'Track Chair, Track 06',
+    leadDesignation: 'Senior Faculty / Track Chair',
+    leadDepartment: 'Department of Applied Sciences',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'T6 Chair',
+    responsibilities: [
+      'Reviewing papers in physics, green chemistry, mathematical modeling, and functional materials',
+    ],
+  },
+  {
+    taskCategory: 'Technical Program & Track Chairs',
+    taskTitle: 'Track 07 Chair: Management',
+    leadName: 'Track Chair, Track 07',
+    leadDesignation: 'Senior Faculty / Track Chair',
+    leadDepartment: 'Department of Management',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'T7 Chair',
+    responsibilities: [
+      'Managing submissions in technology management, analytics, FinTech, and ESG practices',
+    ],
+  },
+  {
+    taskCategory: 'Technical Program & Track Chairs',
+    taskTitle: 'Track 08 Chair: Humanities & Library Science',
+    leadName: 'Track Chair, Track 08',
+    leadDesignation: 'Senior Faculty / Track Chair',
+    leadDepartment: 'Department of English and Humanities',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'T8 Chair',
+    responsibilities: [
+      'Reviewing linguistics, professional communication, digital humanities, and library science papers',
+    ],
+  },
+  {
+    taskCategory: 'Operational Desks & In-Charges',
+    taskTitle: 'Student Volunteer Corps Lead',
+    leadName: 'Student Coordinators (Every Department)',
+    leadDesignation: 'Student Volunteer Leads',
+    leadDepartment: 'All Academic Departments',
+    institution: 'Netaji Subhas Institute of Technology (NSIT)',
+    campus: 'Amhara, Bihta, Patna',
+    badge: 'Volunteers',
+    responsibilities: [
+      'Registration and help desk assistance',
+      'Hall management and session assistance during presentations',
+      'Guest reception and hospitality facilitation',
+      'Publicity and outreach across colleges and universities',
+      'Photography and documentation of conference proceedings',
+      'Audio-visual and IT support across all presentation auditoriums',
+    ],
   },
 ];
 
@@ -345,50 +1067,22 @@ export const SUBMISSION_GUIDELINES = [
   {
     title: 'Original Research Papers',
     detail:
-      'Submissions must present novel theoretical derivations, experimental validations, or applied multidisciplinary engineering findings not published or currently under review elsewhere.',
+      'ETIMS 2027 invites original, unpublished research papers across eight tracks. Related multidisciplinary contributions are also welcome. Manuscripts must present novel theoretical derivations, experimental validations, or applied multidisciplinary findings not published or currently under review elsewhere.',
   },
   {
-    title: 'Academic Integrity & Plagiarism Standards',
+    title: 'Abstract Requirement',
     detail:
-      'All incoming manuscripts will be subjected to similarity analysis. Plagiarism, duplicate submission, or uncredited conceptual reuse is strictly prohibited.',
+      'Include an abstract of approximately 250-300 words, subject to the final publisher template. Papers must clearly articulate the problem statement, methodology, results, and multidisciplinary relevance.',
   },
   {
-    title: 'Peer Review Integrity',
+    title: 'Preliminary Screening & Double-Blind Review',
     detail:
-      'Papers will undergo structured double-blind evaluation by technical reviewers based on technical merit, methodology, clarity, and multidisciplinary relevance.',
+      'Manuscripts will undergo preliminary screening for relevance, originality and similarity, followed by independent peer review. Plagiarism and duplicate submissions are strictly prohibited.',
   },
   {
     title: 'Author Presentation Requirement',
     detail:
-      'At least one author of every accepted paper must register and present the research in person during the conference technical sessions on 23–24 July 2027.',
-  },
-];
-
-// ── Registration Categories (No Fabricated Prices) ──────────────
-export const REGISTRATION_CATEGORIES = [
-  {
-    category: 'Academicians & Faculty Members',
-    badge: 'Institutional Delegates',
-    scope: 'Faculty members, university professors, and scientific officers presenting peer-reviewed research.',
-    feeStatus: 'Fee schedule to be notified with official circular',
-  },
-  {
-    category: 'Research Scholars & PG Students',
-    badge: 'Scholarly Delegates',
-    scope: 'PhD candidates and Master scholars presenting foundational or applied findings.',
-    feeStatus: 'Fee schedule to be notified with official circular',
-  },
-  {
-    category: 'Undergraduate Students',
-    badge: 'Student Delegates',
-    scope: 'UG student innovators presenting project research or multidisciplinary papers.',
-    feeStatus: 'Fee schedule to be notified with official circular',
-  },
-  {
-    category: 'Industry Delegates & Practitioners',
-    badge: 'Corporate & R&D',
-    scope: 'Corporate researchers, industrial practitioners, and technology professionals.',
-    feeStatus: 'Fee schedule to be notified with official circular',
+      'At least one author of each accepted paper must register and present the research in person during the conference technical sessions on 23–24 July 2027.',
   },
 ];
 
@@ -433,13 +1127,13 @@ export const TAB_NAV_ITEMS: TabNavItem[] = [
     label: 'Faculty & In-Charges',
     path: '/committees',
     shortLabel: 'Committees',
-    description: 'Organizing leadership, track chairs & task in-charges',
+    description: 'Organizing leadership, advisory committee & in-charges',
   },
   {
     id: 'tracks',
-    label: 'Research Tracks',
+    label: 'Eight Research Tracks',
     path: '/tracks',
-    shortLabel: 'Tracks',
+    shortLabel: '8 Tracks',
     description: 'Thematic domains, multidisciplinary scope & CFP topics',
   },
   {
@@ -472,7 +1166,7 @@ export const TAB_NAV_ITEMS: TabNavItem[] = [
   },
   {
     id: 'contact',
-    label: 'Contact & Helpdesk',
+    label: 'Contact & Enquiries',
     path: '/contact',
     shortLabel: 'Contact',
     description: 'Convenor secretariat, faculty coordinators & queries',
@@ -488,11 +1182,11 @@ export interface NavLink {
 export const NAV_LINKS: NavLink[] = [
   { label: 'Overview', href: '/' },
   { label: 'About NSIT', href: '/about' },
-  { label: 'Committees & In-Charges', href: '/committees' },
-  { label: 'Research Tracks', href: '/tracks' },
+  { label: 'Committees & Advisory', href: '/committees' },
+  { label: 'Eight Research Tracks', href: '/tracks' },
   { label: 'Important Dates', href: '/dates' },
   { label: 'Paper Submission', href: '/submission' },
-  { label: 'Registration', href: '/registration' },
+  { label: 'Registration & Fees', href: '/registration' },
   { label: 'Venue & Travel', href: '/venue' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -512,50 +1206,27 @@ export interface AcademicDepartment {
 
 export const COLLEGE_DEPARTMENTS: AcademicDepartment[] = [
   {
-    code: 'CSE',
-    name: 'Department of Computer Science & Engineering',
-    shortName: 'Computer Science & Engg',
-    headTitle: 'Head of Department, CSE',
-    tagline: 'Advancing computational intelligence, distributed systems & cybersecurity',
+    code: 'CE',
+    name: 'Department of Civil Engineering',
+    shortName: 'Civil Engineering',
+    headTitle: 'Head of Department, CE',
+    tagline: 'Designing resilient infrastructure, smart cities & environmental sustainability',
     overview:
-      'The Department of Computer Science & Engineering at NSIT Bihta is dedicated to producing high-caliber software engineers and researchers with expertise in cutting-edge computing paradigms, machine learning, and scalable systems.',
+      'The Department of Civil Engineering trains engineers to design, build, and sustain critical modern infrastructure, featuring state-of-the-art testing equipment for materials, geotechnical analysis, and water resources.',
     labs: [
-      'Advanced AI & Deep Learning Laboratory',
-      'Cybersecurity & Network Forensics Testbed',
-      'Cloud Computing & Distributed Systems Lab',
-      'Database & Data Engineering Facility',
-      'Software Engineering & Open Source Studio',
+      'Structural Dynamics & Concrete Technology Lab',
+      'Geotechnical Engineering & Soil Mechanics Facility',
+      'Environmental Engineering & Water Quality Testing Lab',
+      'Advanced Surveying & GIS Mapping Studio',
+      'Transportation Engineering & Highway Materials Lab',
     ],
     researchAreas: [
-      'Artificial Intelligence & Natural Language Processing',
-      'Blockchain, Cryptography & Secure Distributed Ledgers',
-      'IoT Sensor Networks & Edge Analytics',
-      'Computer Vision & Autonomous Systems',
+      'Earthquake-Resistant Structural Systems',
+      'Sustainable Green Building Materials',
+      'Smart Transportation Networks & Traffic Modeling',
+      'Urban Hydrology & Water Security',
     ],
-    keyInCharge: 'Faculty In-Charge, Department of CSE, NSIT Bihta',
-  },
-  {
-    code: 'EEE',
-    name: 'Department of Electrical & Electronics Engineering',
-    shortName: 'Electrical & Electronics',
-    headTitle: 'Head of Department, EEE',
-    tagline: 'Pioneering clean energy, smart grids, control engineering & microelectronics',
-    overview:
-      'The Department of Electrical & Electronics Engineering blends foundational power engineering with modern electronics, embedded systems, and renewable energy technologies to address national infrastructure challenges.',
-    labs: [
-      'Power Systems Simulation & Protection Lab',
-      'Electric Drives & Industrial Power Electronics Lab',
-      'Microprocessor, Microcontroller & Embedded Systems Lab',
-      'Renewable & Solar Energy Research Testbed',
-      'Control Systems & Instrumentation Lab',
-    ],
-    researchAreas: [
-      'Smart Grid Integration & Energy Storage',
-      'EV Powertrains & Fast Charging Infrastructure',
-      'VLSI Design & Embedded Cyber-Physical Architectures',
-      'Wide-Bandgap Semiconductor Applications',
-    ],
-    keyInCharge: 'Dr. Atif Hussain (Convenor, ETIMS 2027) & EEE Faculty Team',
+    keyInCharge: 'Dr. Atif Hussain (Convenor, ETIMS 2027) & Civil Engineering Faculty Team',
   },
   {
     code: 'ME',
@@ -581,49 +1252,108 @@ export const COLLEGE_DEPARTMENTS: AcademicDepartment[] = [
     keyInCharge: 'Faculty In-Charge, Department of Mechanical Engineering',
   },
   {
-    code: 'CE',
-    name: 'Department of Civil Engineering',
-    shortName: 'Civil Engineering',
-    headTitle: 'Head of Department, CE',
-    tagline: 'Designing resilient infrastructure, smart cities & environmental sustainability',
+    code: 'EEE',
+    name: 'Department of Electrical & Electronics Engineering',
+    shortName: 'Electrical & Electronics',
+    headTitle: 'Head of Department, EEE',
+    tagline: 'Pioneering clean energy, smart grids, control engineering & microelectronics',
     overview:
-      'The Department of Civil Engineering trains engineers to design, build, and sustain critical modern infrastructure, featuring state-of-the-art testing equipment for materials, geotechnical analysis, and water resources.',
+      'The Department of Electrical & Electronics Engineering blends foundational power engineering with modern electronics, embedded systems, and renewable energy technologies to address national infrastructure challenges.',
     labs: [
-      'Structural Dynamics & Concrete Technology Lab',
-      'Geotechnical Engineering & Soil Mechanics Facility',
-      'Environmental Engineering & Water Quality Testing Lab',
-      'Advanced Surveying & GIS Mapping Studio',
-      'Transportation Engineering & Highway Materials Lab',
+      'Power Systems Simulation & Protection Lab',
+      'Electric Drives & Industrial Power Electronics Lab',
+      'Microprocessor, Microcontroller & Embedded Systems Lab',
+      'Renewable & Solar Energy Research Testbed',
+      'Control Systems & Instrumentation Lab',
     ],
     researchAreas: [
-      'Earthquake-Resistant Structural Systems',
-      'Sustainable Green Building Materials',
-      'Smart Transportation Networks & Traffic Modeling',
-      'Urban Hydrology & Water Security',
+      'Smart Grid Integration & Energy Storage',
+      'EV Powertrains & Fast Charging Infrastructure',
+      'VLSI Design & Embedded Cyber-Physical Architectures',
+      'Wide-Bandgap Semiconductor Applications',
     ],
-    keyInCharge: 'Faculty In-Charge, Department of Civil Engineering',
+    keyInCharge: 'Faculty In-Charge, Department of Electrical & Electronics Engineering',
   },
   {
-    code: 'ASH',
-    name: 'Department of Applied Sciences & Humanities',
-    shortName: 'Applied Sciences & Humanities',
-    headTitle: 'Head of Department, ASH',
-    tagline: 'Foundational scientific rigor, mathematical modeling & communication excellence',
+    code: 'CSE',
+    name: 'Department of Computer Science & Engineering',
+    shortName: 'Computer Science & Engg',
+    headTitle: 'Head of Department, CSE',
+    tagline: 'Advancing computational intelligence, distributed systems & cybersecurity',
     overview:
-      'Providing the fundamental bedrock of scientific inquiry for all engineering disciplines, the department conducts rigorous research in applied mathematics, nanomaterials, chemical kinetics, and technical communications.',
+      'The Department of Computer Science & Engineering at NSIT Bihta is dedicated to producing high-caliber software engineers and researchers with expertise in cutting-edge computing paradigms, machine learning, and scalable systems.',
+    labs: [
+      'Advanced AI & Deep Learning Laboratory',
+      'Cybersecurity & Network Forensics Testbed',
+      'Cloud Computing & Distributed Systems Lab',
+      'Database & Data Engineering Facility',
+      'Software Engineering & Open Source Studio',
+    ],
+    researchAreas: [
+      'Artificial Intelligence & Natural Language Processing',
+      'Blockchain, Cryptography & Secure Distributed Ledgers',
+      'IoT Sensor Networks & Edge Analytics',
+      'Computer Vision & Autonomous Systems',
+    ],
+    keyInCharge: 'Faculty In-Charge, Department of CSE, NSIT Bihta',
+  },
+  {
+    code: 'AS',
+    name: 'Department of Applied Sciences',
+    shortName: 'Applied Sciences',
+    headTitle: 'Head of Department, Applied Sciences',
+    tagline: 'Applied physics, chemistry, mathematical modeling & material sciences',
+    overview:
+      'Providing the fundamental bedrock of scientific inquiry, the Department of Applied Sciences conducts research in applied mathematics, nanomaterials, chemical kinetics, and optical sciences.',
     labs: [
       'Engineering Physics & Optics Laboratory',
       'Applied Chemistry & Material Synthesis Lab',
       'Computational Mathematics & Statistical Modeling Suite',
-      'Digital Language Lab & Professional Communication Studio',
     ],
     researchAreas: [
       'Functional Nanomaterials & Polymer Composites',
       'Nonlinear Differential Equations & Numerical Analysis',
       'Green Chemistry & Environmental Catalysis',
-      'Professional Ethics & Engineering Pedagogy',
     ],
-    keyInCharge: 'Faculty In-Charge, Applied Sciences & Humanities',
+    keyInCharge: 'Faculty In-Charge, Department of Applied Sciences',
+  },
+  {
+    code: 'MGMT',
+    name: 'Department of Management',
+    shortName: 'Management Studies',
+    headTitle: 'Head of Department, Management',
+    tagline: 'Technology management, business analytics, entrepreneurship & FinTech',
+    overview:
+      'Offering undergraduate and postgraduate management programmes affiliated with Aryabhatta Knowledge University, focusing on operations, supply chain, and innovation management.',
+    labs: [
+      'Business Analytics & Data Modeling Lab',
+      'Entrepreneurship & Incubation Cell',
+    ],
+    researchAreas: [
+      'Technology & Innovation Management',
+      'Supply Chain & Operations Research',
+      'FinTech, Digital Finance & Sustainable ESG Practices',
+    ],
+    keyInCharge: 'Faculty In-Charge, Department of Management',
+  },
+  {
+    code: 'EH',
+    name: 'Department of English and Humanities',
+    shortName: 'English & Humanities',
+    headTitle: 'Head of Department, English & Humanities',
+    tagline: 'Professional communication, technical linguistics, digital humanities & ethics',
+    overview:
+      'Cultivating communication excellence, ethical scholarship, and interdisciplinary humanistic inquiry essential for well-rounded engineers and researchers.',
+    labs: [
+      'Digital Language Laboratory & Speech Studio',
+      'Professional Communication & Interview Suite',
+    ],
+    researchAreas: [
+      'Professional & Technical Communication',
+      'Digital Humanities & Cultural Studies',
+      'Scholarly Communication & Information Literacy',
+    ],
+    keyInCharge: 'Faculty In-Charge, English and Humanities',
   },
 ];
 
@@ -645,23 +1375,23 @@ export const CAMPUS_FACILITIES: CampusFacility[] = [
     category: 'Conference Venues',
     image: '/assets/nsit-classroom.png',
     description:
-      'Spacious presentation auditoriums and tier-seated seminar halls equipped with projection systems, acoustic paneling, and digital audio-visual setups for conference keynotes and technical sessions.',
-    capacity: 'Central Air-Conditioned Plenary Halls',
+      'Spacious presentation auditoriums and tier-seated seminar halls equipped with projection systems, acoustic paneling, and digital audio-visual setups for conference keynotes and parallel technical sessions.',
+    capacity: 'Air-Conditioned Plenary & Seminar Halls',
     features: [
       'High-definition laser projection & dual digital display screens',
       'Acoustically engineered surround sound with wireless lapel/podium mics',
       'High-speed dedicated Wi-Fi connectivity for delegates & presenters',
-      'Integrated live streaming & recording infrastructure',
+      'Integrated live streaming & audio-visual recording infrastructure',
     ],
   },
   {
     id: 'computing-center',
-    name: 'Central Computing Facility & Data Hub',
+    name: 'Central Computing Facility & Digital Infrastructure',
     category: 'Digital Infrastructure',
     image: '/assets/nsit-computing.jpg',
     description:
       'Centralized computer center providing networked workstations, high-speed campus internet connectivity, and licensed engineering software suites for research simulations and academic sessions.',
-    capacity: 'Centralized High-Speed Computing Facility',
+    capacity: 'High-Speed Computing Facility',
     features: [
       'Campus-wide high-speed optical fiber network & Wi-Fi zones',
       'Industry-standard licensed engineering & simulation software suites',
@@ -671,26 +1401,26 @@ export const CAMPUS_FACILITIES: CampusFacility[] = [
   },
   {
     id: 'library',
-    name: 'Central Knowledge Resource Center & Digital Library',
+    name: 'Central Digital Library & Knowledge Resource Center',
     category: 'Academic Research',
     image: '/assets/nsit-library.png',
     description:
-      'Spacious 10,000 sq. ft. central library housing comprehensive collections of engineering textbooks, reference volumes, national and international journals, and digital learning portals.',
-    capacity: '10,000 Sq. Ft. Digital Central Library',
+      'Spacious central library housing comprehensive collections of engineering textbooks, reference volumes, national and international journals, and digital learning portals.',
+    capacity: 'Modern Digital Central Library',
     features: [
       'Digital e-library portal with remote journal and database access',
       'Quiet research carrels and scholar discussion reading zones',
       'Subscriptions to leading national and international engineering journals',
-      'Archived proceedings of national & international engineering conventions',
+      'Archived proceedings of academic and technical conferences',
     ],
   },
   {
     id: 'laboratories',
-    name: 'Departmental Research & Testing Laboratories',
+    name: 'Departmental Laboratories & Technical Workshops',
     category: 'Research Facilities',
     image: '/assets/nsit-lab.jpg',
     description:
-      'Specialized engineering laboratories and practical workshops equipped with modern experimental test benches, mechatronics equipment, power panels, and civil testing instruments.',
+      'Specialized engineering laboratories and practical workshops equipped with modern experimental test benches across Civil, Mechanical, EEE, and CSE.',
     capacity: 'Full Departmental Engineering Labs & Workshops',
     features: [
       'Mechatronics, robotics & embedded microcontroller setups',
@@ -705,302 +1435,42 @@ export const CAMPUS_FACILITIES: CampusFacility[] = [
     category: 'Hospitality & Accommodation',
     image: '/assets/nsit-hostel.png',
     description:
-      'Safe, comfortable on-campus residential hostels for boys and girls alongside furnished faculty guest accommodations for visiting scholars and delegates.',
+      'Safe, comfortable on-campus residential hostels for boys and girls alongside furnished accommodations for visiting scholars and delegates.',
     capacity: 'On-Campus Hostels & Guest House Accommodations',
     features: [
-      'Furnished air-conditioned guest suites for visiting professors',
+      'Limited accommodation available upon prior request, subject to availability',
       'Hygienic dining halls serving nutritious vegetarian & multi-cuisine meals',
-      '24x7 security surveillance with biometric entry and campus perimeter guard',
+      '24x7 security surveillance with campus perimeter guard',
       'Power backup, Wi-Fi connectivity, and RO purified drinking water',
     ],
   },
   {
     id: 'campus-hub',
-    name: 'Bihta Knowledge Hub & Sprawling Green Campus',
+    name: '9.2-Acre Integrated Green Campus',
     category: 'Campus Environment',
     image: '/assets/nsit-campus.jpg',
     description:
-      'Strategically positioned within the emerging national educational corridor of Bihta, close to IIT Patna and the 4-lane Patna–Buxar expressway, featuring landscaped gardens, sports grounds, and eco-friendly architecture.',
-    capacity: '11 Acres Land & 400,000+ Sq. Ft. Built-Up Area',
+      'Spread over approximately 9.2 acres at Amhara, Bihta (~30 km from Patna), featuring landscaped gardens, sports grounds, and modern academic architecture.',
+    capacity: '9.2 Acres Academic Campus',
     features: [
       'Direct connectivity via NH-922 and proximity to Bihta Railway Station',
-      'Ample secure parking for delegate vehicles and conference shuttle fleets',
+      'Ample secure parking for delegate vehicles and conference transport',
       'Lush green lawns and open plazas ideal for conference networking',
       'On-campus health center with round-the-clock medical first-aid support',
     ],
   },
   {
     id: 'sports-grounds',
-    name: '11-Acre Athletic Grounds & Institutional Transit Fleet',
+    name: 'Campus Sports Facilities & Transport Fleet',
     category: 'Campus Grounds & Transit',
     image: '/assets/nsit-sports-grounds.jpg',
     description:
-      'Vast outdoor sports fields, cricket pitch, basketball courts, and institutional transport fleet stationed across the 11-acre green campus quadrangle.',
-    capacity: '11-Acre Integrated Campus Complex',
+      'Outdoor sports facilities, athletic grounds, and institutional transport fleet connecting Patna and surrounding regions.',
+    capacity: 'Sports Grounds & Transit Fleet',
     features: [
-      'Multi-sport athletic field for cricket, football, and track events',
+      'Multi-sport athletic field and outdoor recreational spaces',
       'Dedicated institutional bus fleet connecting Patna and surrounding regions',
-      'Open green courtyards and pedestrian pathways',
-      'Outdoor conference networking and exhibition pavilion grounds',
-    ],
-  },
-];
-
-// ── Detailed Faculty Teams & Task In-Charges ─────────────────────
-export interface FacultyInCharge {
-  taskCategory: string;
-  taskTitle: string;
-  leadName: string;
-  leadDesignation: string;
-  leadDepartment: string;
-  institution: string;
-  campus: string;
-  responsibilities: string[];
-  contactEmail?: string;
-  contactPhone?: string;
-  badge: string;
-}
-
-export const FACULTY_TASK_TEAMS: FacultyInCharge[] = [
-  {
-    taskCategory: 'Leadership & Patrons',
-    taskTitle: 'Chief Patron',
-    leadName: 'Hon’ble Chairman / Managing Trustee',
-    leadDesignation: 'Executive Leadership, Netaji Subhas Group',
-    leadDepartment: 'Governing Body & Institutional Trust',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Patronage',
-    responsibilities: [
-      'Overall institutional vision, conference policy approval, and strategic patronage',
-      'Government, university, and AICTE institutional liaison',
-      'Inaugural address and high-level dignitary hosting',
-    ],
-  },
-  {
-    taskCategory: 'Leadership & Patrons',
-    taskTitle: 'Patron',
-    leadName: 'Principal / Director',
-    leadDesignation: 'Head of Institution',
-    leadDepartment: 'Office of the Principal / Director',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Patronage',
-    responsibilities: [
-      'Academic governance and institutional oversight for ETIMS 2027',
-      'Mobilization of campus resources, infrastructure, and departmental cooperation',
-      'Presiding over valedictory session and best paper award presentations',
-    ],
-  },
-  {
-    taskCategory: 'Secretariat & Convenor',
-    taskTitle: 'Conference Convenor & Primary Liaison',
-    leadName: 'Dr. Atif Hussain',
-    leadDesignation: 'Assistant Professor & Conference Convenor',
-    leadDepartment: 'Department of Electrical & Electronics Engineering',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Convenorship',
-    contactEmail: 'etims2027@nsiterp.in',
-    contactPhone: '+91 83402 58426',
-    responsibilities: [
-      'Chief coordinator for all academic, technical, and operational conference committees',
-      'Primary official communication channel for delegates, authors, and partner institutions',
-      'Supervision of peer review integrity, publication proceedings, and session allocation',
-      'Convening daily committee briefings and monitoring milestone execution',
-    ],
-  },
-  {
-    taskCategory: 'Secretariat & Convenor',
-    taskTitle: 'Co-Convenor & Organizing Secretary',
-    leadName: 'Senior Faculty Lead, Dept. of CSE',
-    leadDesignation: 'Associate Professor / Organizing Secretary',
-    leadDepartment: 'Department of Computer Science & Engineering',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Secretariat',
-    contactEmail: 'etims2027@nsiterp.in',
-    responsibilities: [
-      'Assisting the convenor in coordinating inter-departmental workflows',
-      'Technical session management and paper intake tracking',
-      'Official correspondence with keynote speakers and session chairs',
-    ],
-  },
-  {
-    taskCategory: 'Secretariat & Convenor',
-    taskTitle: 'Joint Organizing Secretary',
-    leadName: 'Faculty In-Charge, Dept. of ME',
-    leadDesignation: 'Assistant Professor / Joint Secretary',
-    leadDepartment: 'Department of Mechanical Engineering',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Secretariat',
-    responsibilities: [
-      'Operational coordination of conference halls and hardware presentation setups',
-      'Certificate preparation, delegate registration packs, and memento logistics',
-    ],
-  },
-  {
-    taskCategory: 'Technical Program & Track Chairs',
-    taskTitle: 'Track 01 In-Charge: Artificial Intelligence & Cognitive Computing',
-    leadName: 'Faculty In-Charge, AI & Data Science Cell',
-    leadDesignation: 'Senior Faculty / Track Chair',
-    leadDepartment: 'Department of Computer Science & Engineering',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Track 01 Chair',
-    responsibilities: [
-      'Reviewer assignment for AI, Machine Learning, Deep Learning, and NLP submissions',
-      'Chairing technical oral sessions and poster presentations for Track 01',
-      'Ensuring technical rigor, novelty validation, and presentation quality control',
-    ],
-  },
-  {
-    taskCategory: 'Technical Program & Track Chairs',
-    taskTitle: 'Track 02 In-Charge: Communication Networks & Cyber-Physical Systems',
-    leadName: 'Faculty In-Charge, Networks & IoT Lab',
-    leadDesignation: 'Senior Faculty / Track Chair',
-    leadDepartment: 'Department of Electronics & Communications / EEE',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Track 02 Chair',
-    responsibilities: [
-      'Screening manuscripts on 5G/6G, IoT protocols, sensor networks, and cybersecurity',
-      'Coordinating session evaluations and moderating technical discussions',
-    ],
-  },
-  {
-    taskCategory: 'Technical Program & Track Chairs',
-    taskTitle: 'Track 03 In-Charge: Sustainable Energy Systems & Green Technology',
-    leadName: 'Faculty In-Charge, Renewable Energy Cell',
-    leadDesignation: 'Senior Faculty / Track Chair',
-    leadDepartment: 'Department of Electrical & Electronics Engineering',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Track 03 Chair',
-    responsibilities: [
-      'Evaluating research in smart grids, EV charging, photovoltaics, and power electronics',
-      'Organizing special technical sessions on national clean energy transition',
-    ],
-  },
-  {
-    taskCategory: 'Technical Program & Track Chairs',
-    taskTitle: 'Track 04 In-Charge: Automation, Robotics & Precision Mechatronics',
-    leadName: 'Faculty In-Charge, Robotics & CAD/CAM Lab',
-    leadDesignation: 'Senior Faculty / Track Chair',
-    leadDepartment: 'Department of Mechanical Engineering',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Track 04 Chair',
-    responsibilities: [
-      'Overseeing mechatronics, industrial robotics, Industry 4.0, and additive manufacturing papers',
-      'Demonstration coordination for live robotic prototypes and scale models',
-    ],
-  },
-  {
-    taskCategory: 'Technical Program & Track Chairs',
-    taskTitle: 'Track 05 In-Charge: Multidisciplinary Applied Sciences & Engineering',
-    leadName: 'Faculty In-Charge, Applied Sciences',
-    leadDesignation: 'Senior Faculty / Track Chair',
-    leadDepartment: 'Department of Applied Sciences & Humanities',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Track 05 Chair',
-    responsibilities: [
-      'Reviewing cross-cutting papers in applied mathematics, nanomaterials, and environmental science',
-      'Fostering interdisciplinary dialogues across engineering boundaries',
-    ],
-  },
-  {
-    taskCategory: 'Operational Desks & In-Charges',
-    taskTitle: 'Logistics, Transport & Campus Escorts In-Charge',
-    leadName: 'Faculty In-Charge, Campus Fleet & Logistics',
-    leadDesignation: 'Assistant Professor & Campus Transport Officer',
-    leadDepartment: 'Department of Civil Engineering & Administration',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Logistics Lead',
-    responsibilities: [
-      'Coordinating conference shuttle fleet between Patna Airport (PAT), Patna Junction, Bihta Station, and NSIT campus',
-      'Managing campus vehicular movement, designated VIP parking, and directional signages',
-      'Overseeing campus escort officers guiding delegates to respective plenary halls',
-    ],
-  },
-  {
-    taskCategory: 'Operational Desks & In-Charges',
-    taskTitle: 'Hospitality, Dignitary Reception & Guest House In-Charge',
-    leadName: 'Faculty In-Charge, Hospitality Desk',
-    leadDesignation: 'Senior Faculty Coordinator',
-    leadDepartment: 'Department of Applied Sciences & Humanities',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Hospitality Lead',
-    responsibilities: [
-      'Greeting keynote speakers and outstation session chairs upon arrival',
-      'Managing on-campus AC guest house reservations and partner hotel allocations',
-      'Overseeing conference dining: high teas, networking lunches, and banquet dinners',
-      'Preparation of conference delegate welcome kits and eco-friendly bags',
-    ],
-  },
-  {
-    taskCategory: 'Operational Desks & In-Charges',
-    taskTitle: 'Publication, Similarity & Proceedings Desk In-Charge',
-    leadName: 'Faculty In-Charge, Research & Publications',
-    leadDesignation: 'Associate Professor / Publications Officer',
-    leadDepartment: 'Department of Computer Science & Engineering',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Publications Lead',
-    responsibilities: [
-      'Enforcing strict similarity analysis (< 15% threshold) using authorized anti-plagiarism tools',
-      'Verification of IEEE/Springer camera-ready format templates and copyright transfers',
-      'Liaison with indexing bodies and publishing partners for conference proceedings',
-    ],
-  },
-  {
-    taskCategory: 'Operational Desks & In-Charges',
-    taskTitle: 'Finance, Accounts & Sponsorship Desk In-Charge',
-    leadName: 'Accounts Officer & Faculty Lead, Finance',
-    leadDesignation: 'Institutional Bursar & Faculty In-Charge',
-    leadDepartment: 'Finance & Accounts Division',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Finance Lead',
-    responsibilities: [
-      'Verification and reconciliation of delegate registration fees (NEFT/RTGS/UPI)',
-      'Issuing official stamped payment receipts for institutional expense reimbursement',
-      'Procurement audit for conference materials, AV hardware, and catering accounts',
-    ],
-  },
-  {
-    taskCategory: 'Operational Desks & In-Charges',
-    taskTitle: 'Web Systems, Digital Media & AV Systems In-Charge',
-    leadName: 'Faculty In-Charge, IT & Systems Cell',
-    leadDesignation: 'Assistant Professor / Systems Administrator',
-    leadDepartment: 'Department of Computer Science & Engineering / IT Cell',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Media & Systems Lead',
-    responsibilities: [
-      'Maintenance and continuous updates of the official conference web portal',
-      'Audio-visual setup, laser projectors, and microphone soundchecks across all 5 session halls',
-      'Digital certificate portal generation, live-stream feeds, and press release photography',
-    ],
-  },
-  {
-    taskCategory: 'Operational Desks & In-Charges',
-    taskTitle: 'Student Volunteer Task Force Leads',
-    leadName: 'Student Coordinators & Scholar Leads',
-    leadDesignation: 'Senior Student Executives (B.Tech & M.Tech)',
-    leadDepartment: 'Student Council & Technical Clubs',
-    institution: 'Netaji Subhas Institute of Technology (NSIT)',
-    campus: 'Bihta, Patna',
-    badge: 'Volunteer Corps',
-    responsibilities: [
-      'Manning on-site registration desks, delegate badge distribution, and attendance verification',
-      'Session hall timing management (warning bells for 15-min author presentations)',
-      'Digital slide deck loading and technical mic assistance in auditorium halls',
-      'Campus guide assistance for visiting scholars across libraries and labs',
+      'Outdoor conference networking and poster presentation courtyards',
     ],
   },
 ];

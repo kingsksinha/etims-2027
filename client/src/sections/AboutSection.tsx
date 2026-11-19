@@ -69,13 +69,13 @@ export default function AboutSection() {
 
           <div>
             <div className="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-cyan text-glow-cyan">
-              05
+              08
             </div>
             <div className="mt-2 text-sm font-semibold text-cyan uppercase tracking-wider font-mono">
-              Thematic Domains
+              Official Tracks
             </div>
             <p className="mt-1 text-sm text-secondary-text">
-              Provisional Research Tracks
+              200–300 Delegates
             </p>
           </div>
 

@@ -24,6 +24,11 @@ import {
   CAMPUS_FACILITIES,
   CONFERENCE,
   CONVENOR,
+  REVIEW_AND_PUBLICATION,
+  WHO_SHOULD_ATTEND,
+  AWARDS_AND_RECOGNITION,
+  SPONSORSHIP,
+  STUDENT_VOLUNTEERS,
 } from '../utils/constants';
 
 type SubTabId = 'overview' | 'departments' | 'facilities' | 'innovation' | 'placements' | 'summit';
@@ -198,7 +203,7 @@ export default function AboutPage() {
                     <div className="my-5">
                       <div className="flex items-baseline gap-3">
                         <span className="font-heading text-4xl sm:text-5xl font-black text-white tracking-tight">
-                          11 Acres
+                          9.2 Acres
                         </span>
                         <span className="font-mono text-sm text-cyan font-bold">
                           • Amhara, Bihta Campus
@@ -208,7 +213,7 @@ export default function AboutPage() {
                         Integrated Academic & Residential Campus
                       </h4>
                       <p className="text-xs text-secondary-text mt-1 max-w-lg leading-relaxed">
-                        Pollution-free engineering campus situated in the Bihta educational corridor along NH-922, featuring departmental lecture halls, computer labs, and student residential blocks.
+                        Pollution-free engineering campus situated in the Bihta educational corridor along NH-922, approximately 30 km west of Patna, featuring departmental lecture halls, computer labs, and student residential blocks.
                       </p>
                     </div>
                     <div className="flex items-center gap-2 pt-2 border-t border-white/10 text-[11px] font-mono text-zinc-400">
@@ -229,16 +234,16 @@ export default function AboutPage() {
                   </div>
                   <div className="my-4">
                     <span className="font-heading text-3xl font-black text-white font-mono block">
-                      5 Depts
+                      7 Depts
                     </span>
                     <h4 className="font-heading text-sm font-bold text-light-text mt-1">
-                      Engineering Disciplines
+                      Academic Departments
                     </h4>
                     <p className="text-[11px] text-secondary-text mt-1">
-                      CSE, EEE, Mechanical & Civil Engineering.
+                      Civil, Mechanical, EEE, CSE, Applied Sciences, Management, Humanities.
                     </p>
                   </div>
-                  <span className="text-[10px] font-mono text-cyan">BEU Patna Affiliated</span>
+                  <span className="text-[10px] font-mono text-cyan">BEU / SBTE / AKU</span>
                 </div>
 
                 {/* 3. Computing Lab */}
@@ -837,27 +842,110 @@ export default function AboutPage() {
 
               <div className="mt-8 grid gap-6 sm:grid-cols-3">
                 <div className="rounded-2xl border border-border-dark bg-midnight/70 p-5 space-y-2">
-                  <span className="text-xs font-mono text-cyan uppercase block">01 // Multidisciplinary</span>
+                  <span className="text-xs font-mono text-cyan uppercase block">01 // Eight Tracks</span>
                   <h4 className="font-heading text-base font-bold text-light-text">Cross-Domain Synergy</h4>
                   <p className="text-xs text-secondary-text leading-relaxed">
-                    Bridging classical engineering with computational intelligence and sustainable technological paradigms.
+                    Eight technical tracks spanning Computer Science, Civil, Electrical, Mechanical, ECE, Applied Sciences, Management, and Humanities.
                   </p>
                 </div>
 
                 <div className="rounded-2xl border border-border-dark bg-midnight/70 p-5 space-y-2">
-                  <span className="text-xs font-mono text-cyan uppercase block">02 // Blind Review</span>
-                  <h4 className="font-heading text-base font-bold text-light-text">Rigorous Peer Review</h4>
+                  <span className="text-xs font-mono text-cyan uppercase block">02 // Peer Review</span>
+                  <h4 className="font-heading text-base font-bold text-light-text">Rigorous Screening</h4>
                   <p className="text-xs text-secondary-text leading-relaxed">
-                    Double-blind peer evaluation with strict similarity thresholds ensuring genuine academic contributions.
+                    Preliminary screening for relevance, originality, and similarity followed by independent peer review.
                   </p>
                 </div>
 
                 <div className="rounded-2xl border border-border-dark bg-midnight/70 p-5 space-y-2">
-                  <span className="text-xs font-mono text-cyan uppercase block">03 // In-Person Sessions</span>
-                  <h4 className="font-heading text-base font-bold text-light-text">Interactive Exchange</h4>
+                  <span className="text-xs font-mono text-cyan uppercase block">03 // Physical Mode</span>
+                  <h4 className="font-heading text-base font-bold text-light-text">In-Person Exchange</h4>
                   <p className="text-xs text-secondary-text leading-relaxed">
-                    Oral paper presentations, keynote plenary dialogues, and hands-on networking at NSIT Bihta, Patna.
+                    Two-day physical convention at NSIT Bihta campus featuring keynotes, invited lectures, oral and poster sessions, and panel discussions.
                   </p>
+                </div>
+              </div>
+
+              {/* Review & Publication Policy */}
+              <div className="mt-8 rounded-2xl border border-cyan/30 bg-midnight/80 p-6 space-y-3">
+                <span className="text-xs font-mono text-cyan uppercase font-bold block">
+                  Review and Publication Policy
+                </span>
+                <p className="text-xs sm:text-sm text-secondary-text leading-relaxed">
+                  {REVIEW_AND_PUBLICATION.policy}
+                </p>
+                <p className="text-xs font-mono text-amber-400">
+                  * {REVIEW_AND_PUBLICATION.disclaimer}
+                </p>
+              </div>
+
+              {/* Who Should Attend & Awards */}
+              <div className="mt-8 grid gap-6 md:grid-cols-2">
+                <div className="rounded-2xl border border-border-dark bg-midnight/70 p-6 space-y-3">
+                  <span className="text-xs font-mono text-cyan uppercase font-bold block">
+                    Who Should Attend
+                  </span>
+                  <ul className="space-y-1.5 text-xs text-secondary-text">
+                    {WHO_SHOULD_ATTEND.map((item, idx) => (
+                      <li key={idx} className="flex items-center gap-2">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-mint shrink-0" />
+                        <span className="text-light-text">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="rounded-2xl border border-border-dark bg-midnight/70 p-6 space-y-3">
+                  <span className="text-xs font-mono text-mint uppercase font-bold block">
+                    Awards and Recognition
+                  </span>
+                  <p className="text-xs text-secondary-text leading-relaxed">
+                    {AWARDS_AND_RECOGNITION.description}
+                  </p>
+                  <div className="space-y-1.5 pt-2">
+                    {AWARDS_AND_RECOGNITION.awards.map((award, idx) => (
+                      <div key={idx} className="rounded-xl border border-border-dark bg-navy/80 p-2.5 text-xs">
+                        <strong className="text-light-text block">{award.title}</strong>
+                        <span className="text-[11px] text-secondary-text">{award.criteria}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Sponsorship & Student Volunteers */}
+              <div className="mt-8 grid gap-6 md:grid-cols-2">
+                <div className="rounded-2xl border border-border-dark bg-midnight/70 p-6 space-y-2">
+                  <span className="text-xs font-mono text-cyan uppercase font-bold block">
+                    Sponsorship Opportunities
+                  </span>
+                  <p className="text-xs text-secondary-text leading-relaxed">
+                    {SPONSORSHIP.description}
+                  </p>
+                  <ul className="space-y-1 text-xs text-secondary-text pt-2">
+                    {SPONSORSHIP.opportunities.map((opp, idx) => (
+                      <li key={idx} className="flex items-start gap-1.5">
+                        <span className="text-cyan font-bold">&bull;</span>
+                        <span>{opp}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="rounded-2xl border border-border-dark bg-midnight/70 p-6 space-y-2">
+                  <span className="text-xs font-mono text-mint uppercase font-bold block">
+                    Student Volunteers Corps
+                  </span>
+                  <p className="text-xs text-secondary-text leading-relaxed">
+                    {STUDENT_VOLUNTEERS.description}
+                  </p>
+                  <div className="grid grid-cols-2 gap-2 pt-2">
+                    {STUDENT_VOLUNTEERS.wings.map((wing, idx) => (
+                      <div key={idx} className="rounded-lg border border-border-dark bg-navy/60 p-2 text-[11px] text-light-text font-medium text-center">
+                        {wing}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -866,7 +954,7 @@ export default function AboutPage() {
                 <div>
                   <span className="text-xs font-mono text-cyan uppercase block">Official Convenorship</span>
                   <h4 className="font-heading text-base font-bold text-light-text">
-                    {CONVENOR.name} &bull; Assistant Professor, Dept. of EEE
+                    {CONVENOR.name} &bull; {CONVENOR.title}
                   </h4>
                   <p className="text-xs text-secondary-text">{CONVENOR.institution}, {CONVENOR.campus}</p>
                 </div>
