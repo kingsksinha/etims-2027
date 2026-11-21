@@ -11,6 +11,7 @@ import {
   Check,
   QrCode,
   Sparkles,
+  Mail,
 } from 'lucide-react';
 import {
   REGISTRATION_CATEGORIES,
@@ -236,7 +237,7 @@ export default function DelegateRegistrationModal({
                   Delegate Pass Generated
                 </h2>
                 <p className="text-xs text-[#57534E] mt-1 max-w-md mx-auto">
-                  Your seat has been reserved for the 1st National Conference at NSIT Bihta, Patna. A confirmation copy has been sent to <strong>{submittedRecord.email}</strong>.
+                  Your seat has been provisionally reserved for ETIMS 2027 at NSIT Bihta, Patna. Please download your pass or click below to email yourself a copy.
                 </p>
               </div>
 
@@ -350,18 +351,43 @@ export default function DelegateRegistrationModal({
                 <button
                   type="button"
                   onClick={downloadPass}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-6 py-3 text-xs font-bold text-white shadow-md transition-all cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-5 py-3 text-xs font-bold text-white shadow-md transition-all cursor-pointer"
                 >
                   <Download className="h-4 w-4" />
-                  <span>Download Official Delegate Pass (.txt)</span>
+                  <span>Download Pass (.txt)</span>
                 </button>
+
+                <a
+                  href={`mailto:${submittedRecord.email}?subject=${encodeURIComponent(`ETIMS 2027 Delegate Pass - ${submittedRecord.delegateId}`)}&body=${encodeURIComponent(
+                    `========================================================================\n` +
+                    `          ETIMS 2027 - OFFICIAL CONFERENCE DELEGATE PASS\n` +
+                    `    Netaji Subhas Institute of Technology (NSIT), Bihta, Patna\n` +
+                    `========================================================================\n\n` +
+                    `DELEGATE PASS ID      : ${submittedRecord.delegateId}\n` +
+                    `DELEGATE NAME         : ${submittedRecord.fullName}\n` +
+                    `INSTITUTION           : ${submittedRecord.institution}\n` +
+                    `CATEGORY              : ${submittedRecord.category}\n` +
+                    `REGISTRATION TARIFF   : ${submittedRecord.feeAmount}\n` +
+                    `ROLE / PARTICIPATION  : ${submittedRecord.presentationType}\n` +
+                    `CONFERENCE DATES      : 23–24 July 2027 (Provisional)\n` +
+                    `VENUE                 : NSIT Campus, Amhara, Bihta, Patna, Bihar\n` +
+                    `PAYMENT STATUS        : Provisional Pass (Verification at Desk)\n\n` +
+                    `CONFERENCE CONVENOR SECRETARIAT:\n` +
+                    `Dr. Atif Hussain (Assistant Professor, Dept of Civil Engineering)\n` +
+                    `Email: etims2027@nsiterp.in | Phone: +91 83402 58426\n`
+                  )}`}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-[#7B1123]/30 bg-white hover:bg-[#FAF8F5] px-4 py-3 text-xs font-bold text-[#7B1123] transition-all cursor-pointer shadow-xs"
+                >
+                  <Mail className="h-4 w-4" />
+                  <span>Email Copy to Me</span>
+                </a>
 
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl border border-[#E7E0D6] bg-white hover:bg-[#FAF8F5] px-5 py-3 text-xs font-bold text-[#57534E] transition-all cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl border border-[#E7E0D6] bg-white hover:bg-[#FAF8F5] px-4 py-3 text-xs font-bold text-[#57534E] transition-all cursor-pointer"
                 >
-                  Register Another Delegate
+                  Register Another
                 </button>
               </div>
             </div>
