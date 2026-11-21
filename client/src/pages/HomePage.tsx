@@ -77,7 +77,8 @@ export default function HomePage() {
           </div>
 
           {/* Tab Preview Stage */}
-          <div className="rounded-3xl border border-cyan/40 bg-navy/80 p-6 sm:p-10 shadow-2xl glow-cyan-sm max-w-5xl mx-auto backdrop-blur-md">
+          {/* Tab Preview Stage */}
+          <div className="rounded-2xl sm:rounded-3xl border border-[#BF982E]/30 bg-white p-4 sm:p-8 md:p-10 shadow-xl max-w-5xl mx-auto backdrop-blur-md">
             <AnimatePresence mode="wait">
               {/* TAB PREVIEW: ABOUT NSIT */}
               {activeTab === 'about' && (
@@ -87,36 +88,37 @@ export default function HomePage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.25 }}
-                  className="grid gap-8 lg:grid-cols-12 lg:items-center"
+                  className="grid gap-5 sm:gap-8 lg:grid-cols-12 lg:items-center"
                 >
-                  <div className="lg:col-span-7 space-y-4">
-                    <div className="flex items-center gap-2">
-                      <span className="rounded-full bg-cyan/15 border border-cyan/30 px-3 py-0.5 text-xs font-mono font-bold text-cyan">
+                  <div className="lg:col-span-7 space-y-3 sm:space-y-4">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="rounded-full bg-[#7B1123]/10 border border-[#7B1123]/25 px-3 py-0.5 text-xs font-mono font-bold text-[#7B1123]">
                         Host Academic Institution
                       </span>
-                      <span className="text-xs font-mono text-mint">Bihta, Patna</span>
+                      <span className="text-xs font-mono text-[#BF982E] font-bold">Bihta, Patna</span>
                     </div>
 
-                    <h3 className="font-heading text-2xl sm:text-3xl font-black text-light-text">
+                    <h3 className="font-heading text-xl sm:text-2xl md:text-3xl font-black text-[#1C1917] leading-tight break-words">
                       {HOST_INSTITUTION.name}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-secondary-text leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#57534E] leading-relaxed">
                       Approved by AICTE and affiliated to BEU / AKU, NSIT Bihta is situated in the national education hub of Bihta (near IIT Patna and NH-922). The campus features 5 engineering departments, smart AC auditoriums, computing centers, and central library resources.
                     </p>
 
-                    <div className="grid grid-cols-3 gap-2.5 pt-1">
-                      <div className="rounded-xl border border-border-dark bg-midnight p-2.5 text-center">
-                        <span className="font-mono text-cyan font-bold text-sm block">11 Acres</span>
-                        <span className="text-[10px] text-secondary-text">Campus Land</span>
+                    {/* Responsive phone-friendly metrics grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5 pt-1">
+                      <div className="rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] p-2.5 text-center">
+                        <span className="font-mono text-[#7B1123] font-black text-sm sm:text-base block">9.2 Acres</span>
+                        <span className="text-[10px] sm:text-[11px] text-[#57534E] font-medium">Lush Campus</span>
                       </div>
-                      <div className="rounded-xl border border-border-dark bg-midnight p-2.5 text-center">
-                        <span className="font-mono text-mint font-bold text-sm block">400K+ Sq. Ft.</span>
-                        <span className="text-[10px] text-secondary-text">Built-Up Space</span>
+                      <div className="rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] p-2.5 text-center">
+                        <span className="font-mono text-[#BF982E] font-black text-sm sm:text-base block">7 Depts</span>
+                        <span className="text-[10px] sm:text-[11px] text-[#57534E] font-medium">Tech & Mgmt</span>
                       </div>
-                      <div className="rounded-xl border border-border-dark bg-midnight p-2.5 text-center">
-                        <span className="font-mono text-cyan font-bold text-sm block">AICTE & BEU</span>
-                        <span className="text-[10px] text-secondary-text">Approved & Affiliated</span>
+                      <div className="col-span-2 sm:col-span-1 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] p-2.5 text-center">
+                        <span className="font-mono text-[#7B1123] font-black text-sm sm:text-base block">AICTE & BEU</span>
+                        <span className="text-[10px] sm:text-[11px] text-[#57534E] font-medium">Approved & Affiliated</span>
                       </div>
                     </div>
 
@@ -124,22 +126,22 @@ export default function HomePage() {
                       <button
                         type="button"
                         onClick={() => goToTab('/about')}
-                        className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary-teal to-cyan px-5 py-2.5 text-xs font-bold text-midnight shadow-md glow-cyan-sm cursor-pointer"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-5 py-3 text-xs font-bold text-white shadow-md transition-all cursor-pointer"
                       >
-                        <span>Explore Full College Profile & Facilities</span>
+                        <span>Explore College Profile & Facilities</span>
                         <ArrowRight className="h-4 w-4" />
                       </button>
                     </div>
                   </div>
 
                   <div className="lg:col-span-5">
-                    <div className="overflow-hidden rounded-2xl border border-border-dark bg-midnight p-2">
+                    <div className="overflow-hidden rounded-2xl border border-[#E7E0D6] bg-[#FAF8F5] p-1.5 sm:p-2">
                       <img
                         src="/assets/nsit-building-real.jpg"
                         alt="NSIT Bihta Campus"
-                        className="h-56 sm:h-64 w-full object-cover rounded-xl"
+                        className="h-48 sm:h-64 w-full object-cover rounded-xl"
                       />
-                      <div className="p-2 text-center text-xs text-secondary-text font-mono">
+                      <div className="p-2 text-center text-[11px] text-[#57534E] font-mono">
                         Netaji Subhas Institute of Technology &bull; Bihta Campus
                       </div>
                     </div>
@@ -510,22 +512,22 @@ export default function HomePage() {
       </section>
 
       {/* Institutional Host & Convenor Spotlight Section */}
-      <section className="relative py-16 sm:py-20 bg-midnight border-b border-border-dark">
+      <section className="relative py-10 sm:py-16 md:py-20 bg-[#FAF8F5] border-b border-[#E7E0D6]">
         <Container className="relative z-10">
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-12 lg:items-center">
             {/* Host Institution Spotlight (7 cols) */}
-            <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan/40 bg-navy/80 px-3.5 py-1 text-xs font-mono text-cyan">
+            <div className="lg:col-span-7 space-y-3 sm:space-y-4">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#7B1123]/25 bg-white px-3.5 py-1 text-xs font-mono text-[#7B1123] shadow-xs">
                 <Building2 className="h-3.5 w-3.5" />
                 <span>Host Institution Profile</span>
               </div>
-              <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-light-text">
+              <h2 className="font-heading text-xl sm:text-3xl font-black text-[#1C1917] leading-tight break-words">
                 Netaji Subhas Institute of Technology
               </h2>
-              <p className="text-xs sm:text-sm text-cyan font-mono">
+              <p className="text-xs sm:text-sm text-[#7B1123] font-mono font-semibold">
                 Bihta, Patna, Bihar – 801106, India
               </p>
-              <p className="text-xs sm:text-sm text-secondary-text leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#57534E] leading-relaxed">
                 NSIT Bihta stands as one of Bihar’s preeminent centers for higher technical education and applied engineering. With its proximity to IIT Patna in the educational corridor of Bihta and state-of-the-art facilities, NSIT provides an ideal forum for the 1st National Conference on Emerging Technologies, Innovation and Multidisciplinary Studies.
               </p>
 
@@ -533,51 +535,51 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={() => goToTab('/about')}
-                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary-teal to-cyan px-4 py-2 text-xs font-bold text-midnight shadow-md glow-cyan-sm cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-5 py-3 text-xs font-bold text-white shadow-md transition-all cursor-pointer"
                 >
                   <span>Read Full College Profile</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
+                  <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
             </div>
 
             {/* Convenor Direct Card (5 cols) */}
             <div className="lg:col-span-5">
-              <div className="rounded-3xl border border-cyan/40 bg-gradient-to-b from-navy to-midnight p-6 shadow-2xl glow-cyan-sm space-y-4">
-                <div className="flex items-center justify-between border-b border-border-dark pb-3">
-                  <span className="text-[10px] font-mono uppercase text-cyan font-semibold">
+              <div className="rounded-2xl sm:rounded-3xl border border-[#BF982E]/40 bg-white p-4 sm:p-6 shadow-xl space-y-3.5 sm:space-y-4">
+                <div className="flex items-center justify-between border-b border-[#E7E0D6] pb-3">
+                  <span className="text-[10px] font-mono uppercase text-[#7B1123] font-bold">
                     Conference Convenorship
                   </span>
-                  <span className="rounded-full bg-cyan/15 border border-cyan/30 px-2.5 py-0.5 text-[10px] font-mono text-cyan font-bold">
-                    Official Point of Contact
+                  <span className="rounded-full bg-[#7B1123]/10 border border-[#7B1123]/30 px-2.5 py-0.5 text-[10px] font-mono text-[#7B1123] font-bold">
+                    Point of Contact
                   </span>
                 </div>
 
                 <div>
-                  <h3 className="font-heading text-xl font-bold text-light-text">
+                  <h3 className="font-heading text-lg sm:text-xl font-bold text-[#1C1917]">
                     {CONVENOR.name}
                   </h3>
-                  <p className="text-xs text-mint mt-0.5">
+                  <p className="text-xs text-[#BF982E] font-bold mt-0.5">
                     Assistant Professor & Conference Convenor
                   </p>
-                  <p className="text-[11px] text-secondary-text font-mono mt-0.5">
+                  <p className="text-[11px] text-[#57534E] font-mono mt-0.5">
                     {CONVENOR.title}, {HOST_INSTITUTION.shortName}
                   </p>
                 </div>
 
-                <div className="space-y-2 pt-2 border-t border-border-dark text-xs font-mono">
+                <div className="space-y-2 pt-2 border-t border-[#E7E0D6] text-xs font-mono">
                   <a
                     href={`mailto:${CONVENOR.email}`}
-                    className="flex items-center gap-2 rounded-xl border border-border-dark bg-midnight px-3.5 py-2 text-light-text hover:border-cyan hover:text-cyan transition-colors"
+                    className="flex items-center gap-2 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-3.5 py-2 text-[#1C1917] hover:border-[#7B1123] hover:text-[#7B1123] transition-colors"
                   >
-                    <Mail className="h-3.5 w-3.5 text-cyan shrink-0" />
+                    <Mail className="h-3.5 w-3.5 text-[#7B1123] shrink-0" />
                     <span className="truncate">{CONVENOR.email}</span>
                   </a>
                   <a
                     href={`tel:${CONVENOR.phoneTel}`}
-                    className="flex items-center gap-2 rounded-xl border border-border-dark bg-midnight px-3.5 py-2 text-light-text hover:border-cyan hover:text-cyan transition-colors"
+                    className="flex items-center gap-2 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-3.5 py-2 text-[#1C1917] hover:border-[#7B1123] hover:text-[#7B1123] transition-colors"
                   >
-                    <Phone className="h-3.5 w-3.5 text-cyan shrink-0" />
+                    <Phone className="h-3.5 w-3.5 text-[#7B1123] shrink-0" />
                     <span>{CONVENOR.phone}</span>
                   </a>
                 </div>
