@@ -1,5 +1,7 @@
-import { CreditCard, CheckCircle2, ArrowRight, Calendar } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { CreditCard, CheckCircle2, ArrowRight, Calendar, Sparkles, QrCode } from 'lucide-react';
 import Container from '../components/common/Container';
+import DelegateRegistrationModal from '../components/modals/DelegateRegistrationModal';
 import { REGISTRATION_CATEGORIES, REGISTRATION_TERMS, CONVENOR } from '../utils/constants';
 
 const INCLUSIONS = [
@@ -12,6 +14,26 @@ const INCLUSIONS = [
 ];
 
 export default function RegistrationPage() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string>('Faculty');
+  const [recentPasses, setRecentPasses] = useState<Array<{ delegateId: string; fullName: string; category: string; registeredAt: string }>>([]);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('etims_delegates');
+      if (stored) {
+        setRecentPasses(JSON.parse(stored));
+      }
+    } catch {
+      // Ignore storage errors
+    }
+  }, [modalOpen]);
+
+  const handleOpenModal = (catName: string) => {
+    setSelectedCategory(catName);
+    setModalOpen(true);
+  };
+
   return (
     <div className="relative min-h-screen bg-[#FAF8F5] text-[#1C1917] py-12 sm:py-16 overflow-hidden">
       {/* Background Lighting */}
@@ -23,12 +45,25 @@ export default function RegistrationPage() {
             <CreditCard className="h-3.5 w-3.5" />
             <span>Delegate Registration & Tariff Schedule</span>
           </div>
-          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#1C1917]">
-            Registration Fees & <span className="text-[#7B1123]">Delegate Categories</span>
-          </h1>
-          <p className="mt-3 max-w-3xl text-sm sm:text-base text-[#57534E] leading-relaxed">
-            ETIMS 2027 welcomes researchers, faculty, industry professionals, and students across eight disciplines. Review the official early-bird and regular fee tariff below.
-          </p>
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div>
+              <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#1C1917]">
+                Registration Fees & <span className="text-[#7B1123]">Delegate Categories</span>
+              </h1>
+              <p className="mt-3 max-w-2xl text-sm sm:text-base text-[#57534E] leading-relaxed">
+                ETIMS 2027 welcomes researchers, faculty, industry professionals, and students across eight disciplines. Review the official early-bird tariff and register your delegate seat online.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => handleOpenModal('Faculty')}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#7B1123] hover:bg-[#5C1324] px-7 py-3.5 text-sm font-bold text-white shadow-md transition-all shrink-0 cursor-pointer self-start lg:self-center"
+            >
+              <Sparkles className="h-4 w-4 text-[#F3D993]" />
+              <span>Register as Delegate Online</span>
+            </button>
+          </div>
         </div>
 
         {/* Important Deadlines Callout */}
@@ -96,14 +131,58 @@ export default function RegistrationPage() {
                 </div>
 
                 <div className="hidden lg:flex col-span-1 justify-end">
-                  <span className="rounded-full bg-[#7B1123]/10 border border-[#7B1123]/25 px-2.5 py-0.5 text-[10px] font-mono font-bold text-[#7B1123] text-right">
-                    {cat.badge}
-                  </span>
+                  <button
+                    type="button"
+                    onClick={() => handleOpenModal(cat.category)}
+                    className="rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-3.5 py-1.5 text-[11px] font-mono font-bold text-white shadow-xs transition-all cursor-pointer whitespace-nowrap"
+                  >
+                    Register &rarr;
+                  </button>
+                </div>
+
+                <div className="lg:hidden col-span-12 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => handleOpenModal(cat.category)}
+                    className="w-full rounded-xl bg-[#7B1123] hover:bg-[#5C1324] py-2 text-xs font-mono font-bold text-white shadow-xs transition-all cursor-pointer text-center"
+                  >
+                    Register as {cat.badge} &rarr;
+                  </button>
                 </div>
               </div>
             ))}
           </div>
         </div>
+
+        {/* Saved Passes Banner (If any) */}
+        {recentPasses.length > 0 && (
+          <div className="mt-8 rounded-2xl border border-[#BF982E]/40 bg-[#FAF8F5] p-5 shadow-xs">
+            <div className="flex items-center justify-between mb-3 border-b border-[#E7E0D6] pb-2">
+              <span className="font-mono text-xs font-bold uppercase text-[#7B1123] flex items-center gap-1.5">
+                <QrCode className="h-4 w-4 text-[#7B1123]" />
+                <span>Recent Delegate Passes Issued on this Device</span>
+              </span>
+              <span className="text-[10px] font-mono text-[#BF982E] font-bold">
+                {recentPasses.length} Confirmed Seat(s)
+              </span>
+            </div>
+            <div className="grid gap-2.5 sm:grid-cols-2 md:grid-cols-3">
+              {recentPasses.map((pass, i) => (
+                <div key={i} className="rounded-xl border border-[#E7E0D6] bg-white p-3 shadow-2xs">
+                  <span className="font-mono text-[10px] text-[#7B1123] font-bold block">
+                    {pass.delegateId}
+                  </span>
+                  <p className="font-heading text-xs font-bold text-[#1C1917] mt-0.5 truncate">
+                    {pass.fullName}
+                  </p>
+                  <span className="text-[10px] text-[#57534E] block">
+                    {pass.category}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Delegate Entitlements & Inclusions */}
         <div className="mt-12 rounded-3xl border border-[#E7E0D6] bg-white p-6 sm:p-8 space-y-6 shadow-md">
@@ -147,6 +226,13 @@ export default function RegistrationPage() {
           </a>
         </div>
       </Container>
+
+      {/* Interactive Delegate Pass Generator Modal */}
+      <DelegateRegistrationModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        defaultCategory={selectedCategory}
+      />
     </div>
   );
 }

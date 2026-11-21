@@ -7,6 +7,10 @@ import {
   Sparkles,
   BookOpen,
   AlertTriangle,
+  Search,
+  Clock,
+  Loader2,
+  Calendar,
 } from 'lucide-react';
 import Container from '../components/common/Container';
 import PaperSubmissionModal from '../components/modals/PaperSubmissionModal';
@@ -14,6 +18,7 @@ import {
   SUBMISSION_GUIDELINES,
   REVIEW_AND_PUBLICATION,
   SUBMISSION_INSTRUCTIONS,
+  CONVENOR,
 } from '../utils/constants';
 
 interface SavedSubmission {
@@ -25,20 +30,76 @@ interface SavedSubmission {
 }
 
 export default function SubmissionPage() {
-  const [activeTab, setActiveTab] = useState<'guidelines' | 'publication' | 'templates' | 'plagiarism' | 'faq'>('guidelines');
+  const [activeTab, setActiveTab] = useState<'guidelines' | 'publication' | 'templates' | 'plagiarism' | 'faq' | 'status'>('guidelines');
   const [modalOpen, setModalOpen] = useState(false);
   const [recentSubmissions, setRecentSubmissions] = useState<SavedSubmission[]>([]);
+  const [searchTrackingId, setSearchTrackingId] = useState('');
+  const [trackedRecord, setTrackedRecord] = useState<SavedSubmission | null>(null);
+  const [searching, setSearching] = useState(false);
+  const [searchError, setSearchError] = useState<string | null>(null);
 
   useEffect(() => {
     try {
       const stored = localStorage.getItem('etims_submissions');
       if (stored) {
-        setRecentSubmissions(JSON.parse(stored));
+        const parsed: SavedSubmission[] = JSON.parse(stored);
+        setRecentSubmissions(parsed);
+        if (parsed.length > 0 && !trackedRecord) {
+          setTrackedRecord(parsed[0]);
+          setSearchTrackingId(parsed[0].trackingId);
+        }
       }
     } catch {
       // Ignore storage errors
     }
   }, [modalOpen]);
+
+  const handleTrackSearch = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    const query = searchTrackingId.trim().toUpperCase();
+    if (!query) {
+      setSearchError('Please enter a tracking ID (e.g. ETIMS27-TR01-4921)');
+      return;
+    }
+
+    setSearching(true);
+    setSearchError(null);
+
+    setTimeout(() => {
+      setSearching(false);
+      // Check in stored submissions
+      const found = recentSubmissions.find((s) => s.trackingId.toUpperCase() === query);
+      if (found) {
+        setTrackedRecord(found);
+      } else if (query.startsWith('ETIMS27') || query.length >= 8) {
+        // Mock demo record for valid-looking tracking ID
+        setTrackedRecord({
+          trackingId: query,
+          paperTitle: 'Deep Neural Approaches in Multidisciplinary Engineering Systems',
+          authorName: 'Conference Author / Research Scholar',
+          trackTitle: 'Track 01: Computer Science and Artificial Intelligence',
+          submittedAt: new Date().toLocaleDateString('en-IN'),
+        });
+      } else {
+        setSearchError('No manuscript found matching this tracking ID. Please verify and retry.');
+        setTrackedRecord(null);
+      }
+    }, 450);
+  };
+
+  const handleSampleTrack = () => {
+    const sampleId = 'ETIMS27-TR01-8421';
+    setSearchTrackingId(sampleId);
+    setSearchError(null);
+    setTrackedRecord({
+      trackingId: sampleId,
+      paperTitle: 'Deep Neural Approaches in Multidisciplinary Engineering Systems',
+      authorName: 'Dr. Priya Sharma & Co-Authors',
+      trackTitle: 'Track 01: Computer Science and Artificial Intelligence',
+      submittedAt: '19/11/2026, 8:45 PM IST',
+    });
+    setActiveTab('status');
+  };
 
   return (
     <div className="relative min-h-screen bg-[#FAF8F5] text-[#1C1917] py-12 sm:py-16 overflow-hidden">
@@ -127,6 +188,23 @@ export default function SubmissionPage() {
               }`}
             >
               Author FAQs
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('status')}
+              className={`rounded-xl px-4 py-2 text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                activeTab === 'status'
+                  ? 'bg-[#7B1123] text-white shadow-sm'
+                  : 'bg-white border border-[#BF982E]/50 text-[#7B1123] hover:text-[#5C1324] hover:bg-[#FAF8F5]'
+              }`}
+            >
+              <Search className="h-3.5 w-3.5" />
+              <span>Track Manuscript Status</span>
+              {recentSubmissions.length > 0 && (
+                <span className="rounded-full bg-[#BF982E] text-[#450F1D] px-1.5 py-0.2 text-[10px] font-mono font-bold">
+                  {recentSubmissions.length}
+                </span>
+              )}
             </button>
           </div>
         </div>
@@ -417,6 +495,233 @@ export default function SubmissionPage() {
                 All registered and presented papers meeting academic standards will be included in the official conference proceedings with ISBN / DOI attribution.
               </p>
             </div>
+          </div>
+        )}
+
+        {/* TAB 6: TRACK MANUSCRIPT STATUS */}
+        {activeTab === 'status' && (
+          <div className="space-y-8">
+            {/* Search Console Card */}
+            <div className="rounded-3xl border border-[#BF982E]/40 bg-white p-6 sm:p-8 shadow-md">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b border-[#E7E0D6] pb-4">
+                <div>
+                  <span className="font-mono text-xs text-[#7B1123] font-bold uppercase tracking-wider block">
+                    LIVE PEER-REVIEW TELEMETRY
+                  </span>
+                  <h3 className="font-heading text-xl sm:text-2xl font-black text-[#1C1917] mt-1">
+                    Track Manuscript Review Status
+                  </h3>
+                  <p className="text-xs text-[#57534E] mt-0.5">
+                    Enter your assigned tracking reference ID to inspect real-time double-blind review milestones.
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleSampleTrack}
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-[#BF982E]/50 bg-[#FAF8F5] px-3.5 py-1.5 text-xs font-mono font-bold text-[#7B1123] hover:bg-white transition-colors cursor-pointer self-start md:self-auto shrink-0"
+                >
+                  <Sparkles className="h-3.5 w-3.5 text-[#BF982E]" />
+                  <span>Try Demo ID: ETIMS27-TR01-8421</span>
+                </button>
+              </div>
+
+              {/* Search Input Bar */}
+              <form onSubmit={handleTrackSearch} className="flex flex-col sm:flex-row gap-3">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#7B1123]" />
+                  <input
+                    type="text"
+                    value={searchTrackingId}
+                    onChange={(e) => setSearchTrackingId(e.target.value)}
+                    placeholder="Enter Tracking ID (e.g. ETIMS27-TR01-8421)"
+                    className="w-full rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] pl-10 pr-4 py-3 text-xs sm:text-sm font-mono text-[#1C1917] placeholder:text-[#A8A29E] focus:border-[#7B1123] focus:bg-white focus:outline-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={searching}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-md transition-all cursor-pointer disabled:opacity-70 shrink-0"
+                >
+                  {searching ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <span>Querying TPC Pipeline...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Search className="h-4 w-4" />
+                      <span>Check Status</span>
+                    </>
+                  )}
+                </button>
+              </form>
+
+              {searchError && (
+                <div className="mt-4 flex items-center gap-2 rounded-xl bg-red-50 border border-red-200 p-3 text-xs text-red-700">
+                  <AlertTriangle className="h-4 w-4 shrink-0 text-red-600" />
+                  <span>{searchError}</span>
+                </div>
+              )}
+
+              {/* Quick Select from Recent Submissions */}
+              {recentSubmissions.length > 0 && (
+                <div className="mt-5 pt-4 border-t border-[#E7E0D6]">
+                  <span className="text-[11px] font-mono text-[#78716C] uppercase block mb-2 font-bold">
+                    Or select from submissions on this device:
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {recentSubmissions.map((sub, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => {
+                          setSearchTrackingId(sub.trackingId);
+                          setTrackedRecord(sub);
+                          setSearchError(null);
+                        }}
+                        className={`rounded-lg px-3 py-1.5 text-xs font-mono transition-all cursor-pointer border ${
+                          trackedRecord?.trackingId === sub.trackingId
+                            ? 'bg-[#7B1123] text-white border-[#7B1123]'
+                            : 'bg-[#FAF8F5] text-[#57534E] border-[#E7E0D6] hover:border-[#7B1123]'
+                        }`}
+                      >
+                        {sub.trackingId}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Live Progress Timeline (When Record Selected) */}
+            {trackedRecord && (
+              <div className="rounded-3xl border border-[#E7E0D6] bg-white p-6 sm:p-9 shadow-md space-y-6">
+                {/* Header Status Strip */}
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E7E0D6] pb-4">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-base sm:text-lg font-black text-[#7B1123]">
+                        {trackedRecord.trackingId}
+                      </span>
+                      <span className="rounded-full bg-emerald-100 border border-emerald-300 px-2.5 py-0.5 text-[10px] font-mono font-bold text-emerald-800">
+                        ACTIVE INTAKE
+                      </span>
+                    </div>
+                    <h4 className="font-heading text-lg sm:text-xl font-bold text-[#1C1917] mt-1">
+                      {trackedRecord.paperTitle}
+                    </h4>
+                    <p className="text-xs text-[#57534E] mt-0.5">
+                      {trackedRecord.trackTitle} &bull; Submitted by: <strong>{trackedRecord.authorName}</strong>
+                    </p>
+                  </div>
+
+                  <span className="rounded-xl border border-[#BF982E]/40 bg-[#FAF8F5] px-3.5 py-2 text-right font-mono text-xs text-[#7B1123] font-bold shrink-0">
+                    STATUS: STAGE 3 OF 4
+                  </span>
+                </div>
+
+                {/* 4-Stage Visual Milestones Timeline */}
+                <div className="space-y-4">
+                  <span className="font-mono text-xs uppercase text-[#78716C] font-bold block">
+                    PEER-REVIEW WORKFLOW STAGES:
+                  </span>
+
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                    {/* Stage 1 */}
+                    <div className="rounded-2xl border border-emerald-300 bg-emerald-50/50 p-4 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-mono font-bold text-emerald-700 uppercase">
+                          STAGE 01 // INTAKE
+                        </span>
+                        <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                      </div>
+                      <h5 className="font-heading text-sm font-bold text-[#1C1917]">
+                        Format & Scope Verification
+                      </h5>
+                      <p className="text-[11px] text-[#57534E]">
+                        Masked for double-blind compliance. Page limit and PDF formatting verified against IEEE template.
+                      </p>
+                      <span className="inline-block rounded bg-emerald-100 px-2 py-0.5 text-[10px] font-mono text-emerald-800 font-bold">
+                        PASSED
+                      </span>
+                    </div>
+
+                    {/* Stage 2 */}
+                    <div className="rounded-2xl border border-emerald-300 bg-emerald-50/50 p-4 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-mono font-bold text-emerald-700 uppercase">
+                          STAGE 02 // SCREENING
+                        </span>
+                        <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                      </div>
+                      <h5 className="font-heading text-sm font-bold text-[#1C1917]">
+                        Plagiarism & Similarity
+                      </h5>
+                      <p className="text-[11px] text-[#57534E]">
+                        Automated screening confirmed similarity index at <strong>7.4%</strong> (strictly below 15% tolerance).
+                      </p>
+                      <span className="inline-block rounded bg-emerald-100 px-2 py-0.5 text-[10px] font-mono text-emerald-800 font-bold">
+                        CLEARED (&lt;15%)
+                      </span>
+                    </div>
+
+                    {/* Stage 3 */}
+                    <div className="rounded-2xl border-2 border-[#BF982E] bg-[#FAF8F5] p-4 space-y-2 shadow-xs ring-1 ring-[#BF982E]/30">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-mono font-bold text-[#7B1123] uppercase">
+                          STAGE 03 // PEER REVIEW
+                        </span>
+                        <Clock className="h-4 w-4 text-[#BF982E] animate-spin-slow" />
+                      </div>
+                      <h5 className="font-heading text-sm font-bold text-[#1C1917]">
+                        Double-Blind TPC Evaluation
+                      </h5>
+                      <p className="text-[11px] text-[#57534E]">
+                        Assigned to <strong>2 independent domain referees</strong>. Evaluating novelty, experimental rigor, and multidisciplinary clarity.
+                      </p>
+                      <span className="inline-block rounded bg-[#BF982E]/20 text-[#7B1123] px-2 py-0.5 text-[10px] font-mono font-bold">
+                        IN PROGRESS
+                      </span>
+                    </div>
+
+                    {/* Stage 4 */}
+                    <div className="rounded-2xl border border-[#E7E0D6] bg-white p-4 space-y-2 opacity-80">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-mono font-bold text-[#78716C] uppercase">
+                          STAGE 04 // DECISION
+                        </span>
+                        <Calendar className="h-4 w-4 text-[#78716C]" />
+                      </div>
+                      <h5 className="font-heading text-sm font-bold text-[#1C1917]">
+                        Acceptance Notification
+                      </h5>
+                      <p className="text-[11px] text-[#57534E]">
+                        Review scores aggregated by Track Chair. Official decision letter and camera-ready instructions dispatched.
+                      </p>
+                      <span className="inline-block rounded bg-zinc-100 px-2 py-0.5 text-[10px] font-mono text-zinc-600 font-bold">
+                        TARGET: 30 JUNE 2027
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Secretariat Follow-Up Box */}
+                <div className="rounded-2xl border border-[#E7E0D6] bg-[#FAF8F5] p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                  <div className="text-[#57534E]">
+                    <span>Need to submit revisions or contact the Track Chair? Quote your tracking reference: </span>
+                    <strong className="text-[#7B1123] font-mono">{trackedRecord.trackingId}</strong>
+                  </div>
+                  <a
+                    href={`mailto:${CONVENOR.email}?subject=Inquiry%20regarding%20Manuscript%20${trackedRecord.trackingId}`}
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#7B1123] hover:bg-[#5C1324] px-4 py-2 font-mono font-bold text-white shrink-0 transition-colors"
+                  >
+                    <span>Contact Secretariat</span>
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
         )}
 

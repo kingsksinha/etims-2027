@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowUpRight, FileText, Calendar, MapPin, Mail, Phone } from 'lucide-react';
+import { Menu, X, ArrowUpRight, FileText, Calendar, MapPin, Mail, Phone, Download } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TAB_NAV_ITEMS, CONFERENCE, CONVENOR } from '../../utils/constants';
 
@@ -139,8 +139,19 @@ export default function Navbar() {
             })}
           </ul>
 
-          {/* Desktop Header CTA Button (Brochure Gold) */}
-          <div className="hidden lg:flex items-center gap-3 shrink-0">
+          {/* Desktop Header CTA Buttons (Brochure PDF & Paper Submission) */}
+          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
+            <a
+              href="/NSIT_Conference_Brochure_Final.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-[#BF982E]/40 bg-white/10 hover:bg-white/20 px-3.5 py-2 text-xs font-bold text-white transition-all cursor-pointer shadow-xs"
+              title="Open Official Conference Brochure (PDF)"
+            >
+              <Download className="h-3.5 w-3.5 text-[#F3D993]" />
+              <span>Brochure (PDF)</span>
+            </a>
+
             <Link
               to="/submission"
               onClick={handleNavClick}
@@ -260,12 +271,22 @@ export default function Navbar() {
                   );
                 })}
 
-                {/* Prominent Action inside Drawer */}
-                <div className="pt-4 pb-2">
+                {/* Prominent Actions inside Drawer */}
+                <div className="pt-3 pb-2 space-y-2">
+                  <a
+                    href="/NSIT_Conference_Brochure_Final.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#BF982E]/40 bg-white/10 px-5 py-3 text-xs font-bold text-white transition-all active:scale-[0.98] cursor-pointer"
+                  >
+                    <Download className="h-4 w-4 text-[#F3D993]" />
+                    <span>Download Official Brochure (PDF)</span>
+                  </a>
+
                   <Link
                     to="/submission"
                     onClick={handleNavClick}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#BF982E] to-[#D4AF37] px-5 py-3.5 text-sm font-extrabold text-[#450F1D] shadow-md transition-all active:scale-[0.98] cursor-pointer"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#BF982E] to-[#D4AF37] px-5 py-3 text-xs font-extrabold text-[#450F1D] shadow-md transition-all active:scale-[0.98] cursor-pointer"
                   >
                     <FileText className="h-4 w-4 text-[#450F1D]" />
                     <span>Submit Your Paper</span>

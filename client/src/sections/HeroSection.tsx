@@ -6,6 +6,7 @@ import {
   FileText,
   ShieldCheck,
   Sparkles,
+  Download,
 } from 'lucide-react';
 import Container from '../components/common/Container';
 import CountdownTimer from '../components/ui/CountdownTimer';
@@ -127,7 +128,7 @@ export default function HeroSection() {
             </div>
 
             {/* Prominent Action CTAs */}
-            <div className="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 w-full sm:w-auto">
+            <div className="mt-7 flex flex-wrap items-center gap-3 w-full sm:w-auto">
               <button
                 type="button"
                 onClick={() => {
@@ -147,11 +148,22 @@ export default function HeroSection() {
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                   navigate('/tracks');
                 }}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#BF982E] bg-white px-6 py-3.5 text-sm font-bold text-[#7B1123] hover:bg-[#FAF8F5] transition-all cursor-pointer shadow-xs"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[#BF982E] bg-white px-5 py-3.5 text-sm font-bold text-[#7B1123] hover:bg-[#FAF8F5] transition-all cursor-pointer shadow-xs"
               >
                 <Sparkles className="h-4.5 w-4.5 text-[#BF982E]" />
-                <span>Explore 08 Official Tracks</span>
+                <span>Explore 08 Tracks</span>
               </button>
+
+              <a
+                href="/NSIT_Conference_Brochure_Final.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#E7E0D6] bg-white hover:bg-[#FAF8F5] px-4 py-3.5 text-sm font-bold text-[#57534E] hover:text-[#7B1123] hover:border-[#7B1123]/30 transition-all cursor-pointer shadow-xs"
+                title="Download Official ETIMS 2027 Brochure PDF"
+              >
+                <Download className="h-4 w-4 text-[#BF982E]" />
+                <span>Brochure (PDF)</span>
+              </a>
             </div>
           </div>
 
