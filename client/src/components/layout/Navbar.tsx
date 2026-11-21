@@ -272,14 +272,14 @@ export default function Navbar() {
                 })}
 
                 {/* Prominent Actions inside Drawer */}
-                <div className="pt-3 pb-2 space-y-2">
+                <div className="pt-3 pb-2 space-y-2.5">
                   <a
                     href="/NSIT_Conference_Brochure_Final.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#BF982E]/40 bg-white/10 px-5 py-3 text-xs font-bold text-white transition-all active:scale-[0.98] cursor-pointer"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#7B1123] bg-white px-5 py-3 text-xs font-bold text-[#7B1123] hover:bg-[#7B1123] hover:text-white transition-all active:scale-[0.98] cursor-pointer shadow-xs"
                   >
-                    <Download className="h-4 w-4 text-[#F3D993]" />
+                    <Download className="h-4 w-4 text-[#7B1123]" />
                     <span>Download Official Brochure (PDF)</span>
                   </a>
 
@@ -295,34 +295,34 @@ export default function Navbar() {
               </div>
 
               {/* Drawer Footer: Verified Conference Details */}
-              <div className="border-t border-border-dark bg-navy/40 p-4 space-y-2 text-xs text-secondary-text">
+              <div className="border-t border-[#E7E0D6] bg-white p-4 space-y-2 text-xs text-[#57534E]">
                 <div className="flex items-center gap-2">
-                  <Calendar className="h-3.5 w-3.5 text-cyan shrink-0" />
-                  <span className="font-semibold text-light-text">{CONFERENCE.dateDisplay}</span>
-                  <span className="text-[10px] bg-cyan/15 text-cyan px-1.5 py-0.5 rounded font-mono font-bold">
+                  <Calendar className="h-3.5 w-3.5 text-[#7B1123] shrink-0" />
+                  <span className="font-semibold text-[#1C1917]">{CONFERENCE.dateDisplay}</span>
+                  <span className="text-[10px] bg-[#7B1123]/10 text-[#7B1123] border border-[#7B1123]/25 px-1.5 py-0.5 rounded font-mono font-bold">
                     In-Person
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin className="h-3.5 w-3.5 text-cyan shrink-0" />
+                  <MapPin className="h-3.5 w-3.5 text-[#BF982E] shrink-0" />
                   <span className="truncate">{CONFERENCE.venue}</span>
                 </div>
-                <div className="pt-1 border-t border-border-dark/60 flex flex-col gap-1 text-[11px]">
+                <div className="pt-1.5 border-t border-[#E7E0D6] flex flex-col gap-1 text-[11px]">
                   <div className="flex items-center gap-1.5">
-                    <span className="font-semibold text-light-text">Convenor:</span>
+                    <span className="font-semibold text-[#1C1917]">Convenor:</span>
                     <span>{CONVENOR.name}</span>
                   </div>
                   <div className="flex items-center gap-3 font-mono">
                     <a
                       href={`mailto:${CONVENOR.email}`}
-                      className="inline-flex items-center gap-1 text-cyan hover:underline truncate"
+                      className="inline-flex items-center gap-1 text-[#7B1123] hover:underline truncate"
                     >
                       <Mail className="h-3 w-3" />
                       <span>{CONVENOR.email}</span>
                     </a>
                     <a
                       href={`tel:${CONVENOR.phoneTel}`}
-                      className="inline-flex items-center gap-1 text-cyan hover:underline shrink-0"
+                      className="inline-flex items-center gap-1 text-[#7B1123] hover:underline shrink-0"
                     >
                       <Phone className="h-3 w-3" />
                       <span>{CONVENOR.phone}</span>
