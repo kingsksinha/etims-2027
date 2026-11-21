@@ -1150,7 +1150,7 @@ export const TAB_NAV_ITEMS: TabNavItem[] = [
     id: 'about',
     label: 'About NSIT & Summit',
     path: '/about',
-    shortLabel: 'About NSIT',
+    shortLabel: 'About',
     description: 'Host campus profile, vision, departments & facilities',
   },
   {
@@ -1164,7 +1164,7 @@ export const TAB_NAV_ITEMS: TabNavItem[] = [
     id: 'tracks',
     label: 'Eight Research Tracks',
     path: '/tracks',
-    shortLabel: '8 Tracks',
+    shortLabel: 'Tracks',
     description: 'Thematic domains, multidisciplinary scope & CFP topics',
   },
   {

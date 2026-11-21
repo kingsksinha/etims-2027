@@ -69,20 +69,20 @@ export default function Navbar() {
           {/* Brand Identity: Official NSIT Seal + ETIMS 2027 Official Conference Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2.5 sm:gap-3.5 group min-w-0 shrink"
+            className="flex items-center gap-2 sm:gap-3 group min-w-0 shrink-0"
             onClick={handleNavClick}
             aria-label="ETIMS 2027 Conference Home"
           >
             {/* Dual Emblem Group: NSIT Official Seal + ETIMS 2027 Conference Emblem */}
             <div className="flex items-center gap-1.5 shrink-0">
-              <div className="relative flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full bg-white/95 border border-[#BF982E]/40 p-1 shadow-sm transition-transform duration-300 group-hover:scale-105">
+              <div className="relative flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-white/95 border border-[#BF982E]/40 p-0.5 shadow-sm transition-transform duration-300 group-hover:scale-105">
                 <img
                   src="/assets/nsit-seal.png"
                   alt="NSIT Official Seal"
                   className="h-full w-full object-contain"
                 />
               </div>
-              <div className="relative flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-full bg-white p-0.5 border border-[#BF982E]/50 shadow-md transition-transform duration-300 group-hover:scale-105">
+              <div className="relative flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-white p-0.5 border border-[#BF982E]/50 shadow-md transition-transform duration-300 group-hover:scale-105">
                 <img
                   src="/assets/etims-logo.png"
                   alt="ETIMS 2027 Conference Emblem"
@@ -93,21 +93,21 @@ export default function Navbar() {
 
             <div className="flex flex-col min-w-0">
               <div className="flex items-center gap-1.5 leading-tight">
-                <span className="font-heading text-base sm:text-lg font-black tracking-tight text-white group-hover:text-[#F3D993] transition-colors">
+                <span className="font-heading text-base sm:text-lg font-black tracking-tight text-white group-hover:text-[#F3D993] transition-colors whitespace-nowrap">
                   ETIMS 2027
                 </span>
-                <span className="inline-flex items-center rounded bg-[#BF982E]/25 border border-[#BF982E]/40 px-1.5 py-0.2 text-[10px] font-mono font-bold text-[#F3D993] uppercase tracking-wide">
+                <span className="hidden xl:inline-flex items-center rounded bg-[#BF982E]/25 border border-[#BF982E]/40 px-1.5 py-0.5 text-[9px] font-mono font-bold text-[#F3D993] uppercase tracking-wide">
                   1st National Conf.
                 </span>
               </div>
-              <span className="text-[10px] sm:text-[11px] font-subheading text-[#F5EFEB]/90 font-medium truncate">
-                Netaji Subhas Institute of Technology, Bihta, Patna
+              <span className="text-[10px] sm:text-[11px] font-subheading text-[#F5EFEB]/80 font-medium truncate whitespace-nowrap">
+                NSIT Bihta, Patna
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation Links with Warm Gold Indicator */}
-          <ul className="hidden items-center gap-1 xl:gap-1.5 lg:flex">
+          <ul className="hidden items-center gap-0.5 xl:gap-1.5 lg:flex">
             {TAB_NAV_ITEMS.map((tab) => {
               const isActive =
                 tab.path === '/'
@@ -119,7 +119,7 @@ export default function Navbar() {
                   <Link
                     to={tab.path}
                     onClick={handleNavClick}
-                    className={`relative rounded-xl px-2.5 py-1.5 text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                    className={`relative whitespace-nowrap rounded-lg px-2 xl:px-2.5 py-1.5 text-xs font-semibold transition-all duration-200 cursor-pointer ${
                       isActive
                         ? 'text-white bg-white/15 border border-[#BF982E]/40 font-bold shadow-xs'
                         : 'text-[#F5EFEB]/85 hover:text-white hover:bg-white/10'
@@ -140,22 +140,22 @@ export default function Navbar() {
           </ul>
 
           {/* Desktop Header CTA Buttons (Brochure PDF & Paper Submission) */}
-          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
+          <div className="hidden lg:flex items-center gap-2 xl:gap-2.5 shrink-0">
             <a
               href="/NSIT_Conference_Brochure_Final.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-[#BF982E]/40 bg-white/10 hover:bg-white/20 px-3.5 py-2 text-xs font-bold text-white transition-all cursor-pointer shadow-xs"
+              className="hidden xl:inline-flex items-center gap-1.5 rounded-xl border border-[#BF982E]/40 bg-white/10 hover:bg-white/20 px-3 py-2 text-xs font-bold text-white transition-all cursor-pointer shadow-xs whitespace-nowrap"
               title="Open Official Conference Brochure (PDF)"
             >
               <Download className="h-3.5 w-3.5 text-[#F3D993]" />
-              <span>Brochure (PDF)</span>
+              <span>Brochure</span>
             </a>
 
             <Link
               to="/submission"
               onClick={handleNavClick}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#BF982E] to-[#D4AF37] px-4 py-2 text-xs font-extrabold text-[#450F1D] shadow-md hover:brightness-105 transition-all active:scale-95 cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#BF982E] to-[#D4AF37] px-3.5 xl:px-4 py-2 text-xs font-extrabold text-[#450F1D] shadow-md hover:brightness-105 transition-all active:scale-95 cursor-pointer whitespace-nowrap"
             >
               <span>Submit Paper</span>
               <ArrowUpRight className="h-3.5 w-3.5" />
