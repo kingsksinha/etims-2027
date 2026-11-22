@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ETIMS 2027 — Executive Presentation & Website Showcase</title>
+  <meta name="description" content="Executive briefing deck and digital platform showcase for ETIMS 2027 at Netaji Subhas Institute of Technology (NSIT), Bihta, Patna." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nsit-maroon: #7B1123;
+      --nsit-maroon-dark: #4e0713;
+      --nsit-maroon-deep: #32050c;
+      --nsit-gold: #BF982E;
+      --nsit-gold-light: #e5be53;
+      --nsit-cream: #FAF8F5;
+      --nsit-ivory: #F3EFEA;
+      --nsit-charcoal: #1E2024;
+      --nsit-slate: #4A4E57;
+      --nsit-card-bg: rgba(255, 255, 255, 0.96);
+      --nsit-border: rgba(123, 17, 35, 0.12);
+      --font-display: 'Cinzel', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: var(--font-body);
+      background: #111317;
+      color: var(--nsit-charcoal);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Presentation Deck Stage */
+    .deck-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: radial-gradient(circle at 10% 20%, #2a0b12 0%, #121318 60%, #0a0b0e 100%);
+    }
+
+    /* Top Control Bar */
+    .top-bar {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      background: rgba(18, 19, 24, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 50;
+      color: #fff;
+    }
+
+    .top-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .top-brand .logo-badge {
+      background: linear-gradient(135deg, var(--nsit-maroon), #400811);
+      color: var(--nsit-gold-light);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(191, 152, 46, 0.4);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .top-brand .brand-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #F3EFEA;
+      letter-spacing: 0.3px;
+    }
+
+    .top-brand .brand-subtitle {
+      font-size: 11px;
+      color: #9CA3AF;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-action {
+      background: rgba(255, 255, 255, 0.08);
+      color: #E5E7EB;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-action:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-action.highlight {
+      background: var(--nsit-maroon);
+      border-color: var(--nsit-gold);
+      color: #FFFDF9;
+    }
+    .btn-action.highlight:hover {
+      background: #96162c;
+      box-shadow: 0 0 12px rgba(191, 152, 46, 0.35);
+    }
+
+    /* Slide Viewport */
+    .viewport {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 32px;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      width: min(1200px, 94vw);
+      height: min(680px, 84vh);
+      background: var(--nsit-card-bg);
+      border-radius: 18px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.97) translateY(12px);
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      z-index: 10;
+    }
+
+    /* Slide Inner Layouts */
+    .slide-header {
+      padding: 22px 36px 14px;
+      border-bottom: 1px solid var(--nsit-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(180deg, #fff 0%, #FAF8F5 100%);
+    }
+
+    .slide-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--nsit-maroon);
+      background: rgba(123, 17, 35, 0.08);
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    .slide-title {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--nsit-maroon-dark);
+      letter-spacing: -0.2px;
+      line-height: 1.2;
+    }
+
+    .slide-subtitle {
+      font-size: 13px;
+      color: var(--nsit-slate);
+      margin-top: 3px;
+    }
+
+    .slide-number-chip {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--nsit-gold);
+      background: rgba(191, 152, 46, 0.1);
+      border: 1px solid rgba(191, 152, 46, 0.3);
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    .slide-body {
+      flex: 1;
+      padding: 26px 36px;
+      overflow-y: auto;
+      background: #FAF8F5;
+    }
+
+    /* Custom Scrollbar for slide content */
+    .slide-body::-webkit-scrollbar {
+      width: 6px;
+    }
+    .slide-body::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.02);
+    }
+    .slide-body::-webkit-scrollbar-thumb {
+      background: rgba(123, 17, 35, 0.2);
+      border-radius: 3px;
+    }
+
+    /* Bottom Control Bar */
+    .bottom-bar {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      background: rgba(18, 19, 24, 0.9);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 50;
+      color: #fff;
+    }
+
+    .nav-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #fff;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 15px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      background: var(--nsit-maroon);
+      border-color: var(--nsit-gold);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .slide-counter {
+      font-size: 13px;
+      font-weight: 600;
+      color: #E5E7EB;
+      letter-spacing: 0.5px;
+      min-width: 90px;
+      text-align: center;
+    }
+
+    .progress-track {
+      flex: 1;
+      max-width: 480px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      margin: 0 24px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--nsit-gold), #e5be53);
+      width: 10%;
+      transition: width 0.3s ease;
+      border-radius: 10px;
+    }
+
+    /* Key indicator pills */
+    .key-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: #9CA3AF;
+    }
+    .key-badge {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 10px;
+      color: #fff;
+    }
+
+    /* Speaker Notes Drawer */
+    .notes-panel {
+      position: absolute;
+      bottom: 60px;
+      left: 0;
+      right: 0;
+      background: #0f1015;
+      border-top: 2px solid var(--nsit-gold);
+      padding: 16px 32px;
+      color: #E5E7EB;
+      font-size: 13px;
+      line-height: 1.6;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 40;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .notes-panel.visible {
+      transform: translateY(0);
+    }
+
+    .notes-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .notes-label {
+      color: var(--nsit-gold);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Thumbnail Drawer */
+    .thumb-drawer {
+      position: absolute;
+      top: 64px;
+      right: 0;
+      bottom: 60px;
+      width: 290px;
+      background: #14161D;
+      border-left: 1px solid rgba(255,255,255,0.1);
+      padding: 16px;
+      overflow-y: auto;
+      z-index: 45;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .thumb-drawer.open {
+      transform: translateX(0);
+    }
+
+    .thumb-drawer-header {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--nsit-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .thumb-item {
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #9CA3AF;
+      font-size: 12px;
+    }
+
+    .thumb-item:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+
+    .thumb-item.active {
+      background: rgba(123, 17, 35, 0.35);
+      border-color: var(--nsit-gold);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* ── SLIDE SPECIFIC STYLING ── */
+    /* Slide 1: Hero Cover */
+    .hero-slide {
+      background: linear-gradient(135deg, #FAF8F5 0%, #F5EFEB 100%);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hero-pill {
+      background: #fff;
+      border: 1px solid var(--nsit-border);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--nsit-maroon);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .hero-pill.gold {
+      background: rgba(191, 152, 46, 0.12);
+      border-color: rgba(191, 152, 46, 0.3);
+      color: #8C6B14;
+    }
+
+    .hero-main-title {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--nsit-maroon-dark);
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      max-width: 960px;
+      margin-bottom: 16px;
+    }
+
+    .hero-main-title span {
+      color: var(--nsit-maroon);
+      background: linear-gradient(135deg, var(--nsit-maroon), #99162e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-theme-strip {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--nsit-gold);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+
+    .hero-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      width: 100%;
+      max-width: 900px;
+      margin-top: 10px;
+    }
+
+    .hero-meta-card {
+      background: #fff;
+      border: 1px solid var(--nsit-border);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: left;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .hero-meta-card .label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--nsit-slate);
+      margin-bottom: 4px;
+    }
+
+    .hero-meta-card .val {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--nsit-maroon-dark);
+      line-height: 1.3;
+    }
+
+    .hero-meta-card .sub {
+      font-size: 11px;
+      color: var(--nsit-slate);
+      margin-top: 2px;
+    }
+
+    /* Track Grid (Slide 2) */
+    .tracks-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .track-card {
+      background: #fff;
+      border: 1px solid var(--nsit-border);
+      border-radius: 12px;
+      padding: 16px;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .track-card:hover {
+      border-color: var(--nsit-maroon);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(123, 17, 35, 0.08);
+    }
+
+    .track-badge {
+      align-self: flex-start;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--nsit-maroon);
+      background: rgba(123, 17, 35, 0.08);
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .track-name {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--nsit-maroon-dark);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .track-desc {
+      font-size: 11px;
+      color: var(--nsit-slate);
+      line-height: 1.45;
+      flex: 1;
+    }
+
+    /* Committee Slide (Slide 3) */
+    .leadership-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .person-card {
+      background: #fff;
+      border: 1px solid var(--nsit-border);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .person-card.featured {
+      border-left: 4px solid var(--nsit-maroon);
+      background: #FFFDF9;
+    }
+
+    .person-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #FAF8F5;
+      border: 2px solid var(--nsit-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--nsit-maroon);
+      flex-shrink: 0;
+    }
+
+    .person-info .role {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--nsit-maroon);
+      margin-bottom: 2px;
+    }
+
+    .person-info .name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--nsit-charcoal);
+      line-height: 1.25;
+    }
+
+    .person-info .dept {
+      font-size: 10px;
+      color: var(--nsit-slate);
+      margin-top: 2px;
+    }
+
+    .advisory-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .advisor-pill {
+      background: #fff;
+      border: 1px solid var(--nsit-border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .advisor-pill .adv-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--nsit-charcoal);
+    }
+    .advisor-pill .adv-inst {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--nsit-gold);
+      background: rgba(191, 152, 46, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* Tariff Table (Slide 4) */
+    .tariff-table-wrap {
+      background: #fff;
+      border: 1px solid var(--nsit-border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+    }
+
+    .tariff-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .tariff-table th {
+      background: var(--nsit-maroon);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      padding: 12px 18px;
+    }
+
+    .tariff-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      font-size: 12px;
+      vertical-align: middle;
+    }
+
+    .tariff-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .tariff-table tr:nth-child(even) {
+      background: #FAF8F5;
+    }
+
+    .fee-badge {
+      font-weight: 800;
+      font-size: 13px;
+      color: var(--nsit-maroon);
+      background: rgba(123, 17, 35, 0.08);
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    .fee-badge.gold {
+      color: #8C6B14;
+      background: rgba(191, 152, 46, 0.12);
+    }
+
+    /* Architecture / Features (Slide 5 & 6) */
+    .feature-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .feature-box {
+      background: #fff;
+      border: 1px solid var(--nsit-border);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .feature-icon-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(123, 17, 35, 0.08);
+      color: var(--nsit-maroon);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .feature-box h4 {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--nsit-maroon-dark);
+      margin-bottom: 6px;
+    }
+
+    .feature-box p {
+      font-size: 12px;
+      color: var(--nsit-slate);
+      line-height: 1.5;
+    }
+
+    /* 6 Stage Lifecycle (Slide 7) */
+    .lifecycle-container {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      position: relative;
+    }
+
+    .lifecycle-step {
+      background: #fff;
+      border: 1px solid var(--nsit-border);
+      border-radius: 12px;
+      padding: 14px 12px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .step-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--nsit-maroon);
+      color: var(--nsit-gold-light);
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--nsit-maroon-dark);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .step-desc {
+      font-size: 10px;
+      color: var(--nsit-slate);
+      line-height: 1.4;
+    }
+
+    /* Comparison Option A vs Option B (Slide 8) */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .compare-card {
+      background: #fff;
+      border: 2px solid var(--nsit-border);
+      border-radius: 14px;
+      padding: 22px;
+      position: relative;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    }
+
+    .compare-card.recommended {
+      border-color: var(--nsit-gold);
+      background: #FFFDF9;
+    }
+
+    .compare-card .badge-rec {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: var(--nsit-gold);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border-radius: 12px;
+    }
+
+    .compare-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--nsit-maroon-dark);
+      margin-bottom: 6px;
+    }
+
+    .compare-summary {
+      font-size: 12px;
+      color: var(--nsit-slate);
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    .compare-list {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+
+    .compare-list li {
+      font-size: 11px;
+      color: var(--nsit-charcoal);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+    }
+
+    .compare-list li span.bullet {
+      color: var(--nsit-maroon);
+      font-weight: 800;
+    }
+
+    /* Timeline Milestones (Slide 9) */
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .milestone-card {
+      background: #fff;
+      border: 1px solid var(--nsit-border);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      position: relative;
+    }
+
+    .milestone-date-chip {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--nsit-maroon);
+      background: rgba(123, 17, 35, 0.08);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .milestone-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--nsit-maroon-dark);
+      margin-bottom: 6px;
+    }
+
+    .milestone-note {
+      font-size: 11px;
+      color: var(--nsit-slate);
+      line-height: 1.4;
+    }
+
+    /* Next Steps (Slide 10) */
+    .action-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .action-card {
+      background: #fff;
+      border: 1px solid var(--nsit-border);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+    }
+
+    .action-card h4 {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--nsit-maroon-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-list {
+      list-style: none;
+    }
+
+    .action-list li {
+      font-size: 12px;
+      color: var(--nsit-charcoal);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.4;
+    }
+
+    .action-list li .check-circle {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(191, 152, 46, 0.2);
+      color: var(--nsit-maroon);
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Modal Help Dialog */
+    .help-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .help-modal.open {
+      display: flex;
+    }
+
+    .help-box {
+      background: #181A22;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 28px;
+      width: min(480px, 90vw);
+      color: #fff;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+
+    .help-box h3 {
+      font-family: var(--font-display);
+      color: var(--nsit-gold);
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+
+    .shortcut-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 13px;
+      color: #D1D5DB;
+    }
+
+    /* Print Styles: Each slide prints cleanly on its own landscape page */
+    @media print {
+      body, html, .deck-container {
+        width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+        background: #fff !important;
+      }
+      .top-bar, .bottom-bar, .notes-panel, .thumb-drawer, .help-modal {
+        display: none !important;
+      }
+      .viewport {
+        padding: 0 !important;
+        display: block !important;
+      }
+      .slide {
+        display: flex !important;
+        opacity: 1 !important;
+        position: relative !important;
+        width: 100% !important;
+        height: 100vh !important;
+        page-break-after: always !important;
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+        border-radius: 0 !important;
+        margin-bottom: 20px !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container" id="deckContainer">
+    <!-- Top Bar Navigation & Controls -->
+    <header class="top-bar">
+      <div class="top-brand">
+        <div class="logo-badge">ETIMS 2027</div>
+        <div>
+          <div class="brand-title">Executive Briefing & Website Showcase</div>
+          <div class="brand-subtitle">Netaji Subhas Institute of Technology (NSIT), Bihta, Patna</div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn-action" id="btnNotes" title="Toggle Speaker Talking Points (Key: N)">
+          <span>🎙️ Notes</span>
+        </button>
+        <button class="btn-action" id="btnThumbs" title="Slide Index (Key: T)">
+          <span>📑 Outline</span>
+        </button>
+        <button class="btn-action" id="btnFullscreen" title="Toggle Fullscreen (Key: F)">
+          <span>⛶ Fullscreen</span>
+        </button>
+        <button class="btn-action" id="btnPrint" title="Print or Save PDF Deck (Key: P)">
+          <span>🖨️ PDF Deck</span>
+        </button>
+        <a href="/" target="_blank" class="btn-action highlight" title="Open Live Conference Website">
+          <span>🌐 Live Site ↗</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Slide Viewport -->
+    <main class="viewport" id="viewport">
+      
+      <!-- SLIDE 1: Title & Summit Identity -->
+      <section class="slide active hero-slide" data-slide="1" data-notes="Welcome Dr. Atif Hussain, institutional leaders Mr. M. M. Singh, Mrs. Nitu Singh, Director Dr. Jyotirmayee Dalei, and respected advisory members. Today we are presenting the comprehensive web platform and operational roadmap engineered for the 1st National Conference on Emerging Technologies, Innovation and Multidisciplinary Studies (ETIMS 2027) hosted at our 9.2-acre NSIT campus in Bihta, Patna.">
+        <div class="hero-badge-row">
+          <div class="hero-pill">Netaji Subhas Institute of Technology (NSIT)</div>
+          <div class="hero-pill gold">Approved by AICTE & DST Bihar · Affiliated BEU & SBTE</div>
+          <div class="hero-pill">Est. 2007 · Amhara, Bihta, Patna</div>
+        </div>
+        <h1 class="hero-main-title">
+          1st National Conference on <span>Emerging Technologies, Innovation & Multidisciplinary Studies</span>
+        </h1>
+        <div class="hero-theme-strip">
+          SCIENCE · ENGINEERING · MANAGEMENT · HUMANITIES
+        </div>
+        <div class="hero-meta-grid">
+          <div class="hero-meta-card">
+            <div class="label">Conference Dates</div>
+            <div class="val">23–24 July 2027</div>
+            <div class="sub">Physical Mode (Provisional)</div>
+          </div>
+          <div class="hero-meta-card">
+            <div class="label">Host Campus</div>
+            <div class="val">NSIT Bihta, Patna</div>
+            <div class="sub">9.2-Acre Residential Campus</div>
+          </div>
+          <div class="hero-meta-card">
+            <div class="label">Conference Convenor</div>
+            <div class="val">Dr. Atif Hussain</div>
+            <div class="sub">Asst. Prof., Civil Engineering</div>
+          </div>
+          <div class="hero-meta-card">
+            <div class="label">Target Scale</div>
+            <div class="val">200–300 Delegates</div>
+            <div class="sub">8 Multidisciplinary Tracks</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: Vision & 8 Thematic Tracks -->
+      <section class="slide" data-slide="2" data-notes="ETIMS 2027 addresses the national need for cross-disciplinary research. Rather than isolating engineering disciplines, NSIT brings together 7 academic departments across 8 official tracks. This slide reviews all 8 tracks exactly as published in the official conference brochure, spanning AI to Civil Infrastructure, Smart Energy, Advanced Materials, and Humanities.">
+        <div class="slide-header">
+          <div>
+            <div class="slide-tag">Brochure Scope · Academic Architecture</div>
+            <h2 class="slide-title">The 8 Multidisciplinary Research Tracks</h2>
+            <div class="slide-subtitle">Unifying engineering, sciences, organizational management, and scholarly communication</div>
+          </div>
+          <div class="slide-number-chip">Slide 02 / 10</div>
+        </div>
+        <div class="slide-body">
+          <div class="tracks-grid">
+            <div class="track-card">
+              <span class="track-badge">Track 01 · T1</span>
+              <div class="track-name">Computer Science & AI</div>
+              <div class="track-desc">AI, machine learning, deep learning, data science, cloud & HPC, cybersecurity, computer vision, NLP, and software engineering.</div>
+            </div>
+            <div class="track-card">
+              <span class="track-badge">Track 02 · T2</span>
+              <div class="track-name">Civil & Infrastructure</div>
+              <div class="track-desc">Structural, geotechnical, transportation & railway engineering, pavements, water resources, environmental, and geospatial technologies.</div>
+            </div>
+            <div class="track-card">
+              <span class="track-badge">Track 03 · T3</span>
+              <div class="track-name">Electrical Engineering</div>
+              <div class="track-desc">Renewable energy, smart grids, power electronics & drives, electrical machines, energy storage, electric vehicles & energy management.</div>
+            </div>
+            <div class="track-card">
+              <span class="track-badge">Track 04 · T4</span>
+              <div class="track-name">Mechanical & Mfg.</div>
+              <div class="track-desc">Additive manufacturing, Industry 4.0, robotics & automation, thermal & fluid engineering, automobile, and computational mechanics.</div>
+            </div>
+            <div class="track-card">
+              <span class="track-badge">Track 05 · T5</span>
+              <div class="track-name">Electronics & Comm.</div>
+              <div class="track-desc">Wireless & 5G/6G, IoT & embedded systems, VLSI design, signal & image processing, antennas & microwave, sensors & optical networks.</div>
+            </div>
+            <div class="track-card">
+              <span class="track-badge">Track 06 · T6</span>
+              <div class="track-name">Applied Science</div>
+              <div class="track-desc">Applied & condensed-matter physics, photonics, functional nanomaterials, electrochemistry, green chemistry, modelling & cryptography.</div>
+            </div>
+            <div class="track-card">
+              <span class="track-badge">Track 07 · T7</span>
+              <div class="track-name">Management Studies</div>
+              <div class="track-desc">Tech & innovation management, supply chain, project & construction mgmt, startup ecosystems, business analytics, FinTech & ESG.</div>
+            </div>
+            <div class="track-card">
+              <span class="track-badge">Track 08 · T8</span>
+              <div class="track-name">Humanities & Library</div>
+              <div class="track-desc">Linguistics, technical communication, ethics & society, digital humanities, library science, knowledge management & research metrics.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: Leadership & Advisory Board -->
+      <section class="slide" data-slide="3" data-notes="We ensure 100% adherence to the official brochure. We strictly feature only the 16 verified members: Chief Patron Mr. M. M. Singh, Patron Mrs. Nitu Singh, Co-Patron Dr. Jyotirmayee Dalei, Convenor Dr. Atif Hussain, 5 Co-Convenors, and 7 distinguished National Advisory Board members from IIT Patna, NIT Surathkal, GEC Munger, and GEC Bhojpur.">
+        <div class="slide-header">
+          <div>
+            <div class="slide-tag">Institutional Governance</div>
+            <h2 class="slide-title">Organising Leadership & Advisory Board</h2>
+            <div class="slide-subtitle">100% aligned with the verified official brochure — 16 accredited dignitaries</div>
+          </div>
+          <div class="slide-number-chip">Slide 03 / 10</div>
+        </div>
+        <div class="slide-body">
+          <div class="leadership-strip">
+            <div class="person-card">
+              <div class="person-avatar">MS</div>
+              <div class="person-info">
+                <div class="role">Chief Patron</div>
+                <div class="name">Mr. M. M. Singh</div>
+                <div class="dept">Chairman, NSIT</div>
+              </div>
+            </div>
+            <div class="person-card">
+              <div class="person-avatar">NS</div>
+              <div class="person-info">
+                <div class="role">Patron</div>
+                <div class="name">Mrs. Nitu Singh</div>
+                <div class="dept">Managing Director, NSIT</div>
+              </div>
+            </div>
+            <div class="person-card">
+              <div class="person-avatar">JD</div>
+              <div class="person-info">
+                <div class="role">Co-Patron</div>
+                <div class="name">Dr. Jyotirmayee Dalei</div>
+                <div class="dept">Director, NSIT</div>
+              </div>
+            </div>
+            <div class="person-card featured">
+              <div class="person-avatar">AH</div>
+              <div class="person-info">
+                <div class="role">Conference Convenor</div>
+                <div class="name">Dr. Atif Hussain</div>
+                <div class="dept">Asst. Prof., Civil Engg, NSIT</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--nsit-maroon); margin: 16px 0 8px;">
+            Co-Convenors (NSIT Faculty)
+          </div>
+          <div style="display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap;">
+            <div class="advisor-pill"><span class="adv-name">Dr. Rajan Kumar</span> <span class="adv-inst">Co-Convenor</span></div>
+            <div class="advisor-pill"><span class="adv-name">Dr. Gautam</span> <span class="adv-inst">Co-Convenor</span></div>
+            <div class="advisor-pill"><span class="adv-name">Mr. Deepansh Yadav</span> <span class="adv-inst">Co-Convenor</span></div>
+            <div class="advisor-pill"><span class="adv-name">Md. Farrukh</span> <span class="adv-inst">Co-Convenor</span></div>
+            <div class="advisor-pill"><span class="adv-name">Mr. Nilanjan Manna</span> <span class="adv-inst">Co-Convenor</span></div>
+          </div>
+
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--nsit-gold); margin: 16px 0 8px;">
+            National Advisory Committee (Premier Institutes)
+          </div>
+          <div class="advisory-grid">
+            <div class="advisor-pill">
+              <div><div class="adv-name">Dr. Kailash Chandra Ray</div><div style="font-size:10px; color:var(--nsit-slate)">Assoc. Prof., EE</div></div>
+              <span class="adv-inst">IIT Patna</span>
+            </div>
+            <div class="advisor-pill">
+              <div><div class="adv-name">Dr. Raju Halder</div><div style="font-size:10px; color:var(--nsit-slate)">Assoc. Prof., CSE</div></div>
+              <span class="adv-inst">IIT Patna</span>
+            </div>
+            <div class="advisor-pill">
+              <div><div class="adv-name">Dr. Akhilendra Singh</div><div style="font-size:10px; color:var(--nsit-slate)">Assoc. Prof., ME</div></div>
+              <span class="adv-inst">IIT Patna</span>
+            </div>
+            <div class="advisor-pill">
+              <div><div class="adv-name">Dr. Debashisha Jena</div><div style="font-size:10px; color:var(--nsit-slate)">Professor, EEE</div></div>
+              <span class="adv-inst">NIT Surathkal</span>
+            </div>
+            <div class="advisor-pill">
+              <div><div class="adv-name">Dr. Yatendra Kumar Singh</div><div style="font-size:10px; color:var(--nsit-slate)">Assoc. Prof., EE</div></div>
+              <span class="adv-inst">IIT Patna</span>
+            </div>
+            <div class="advisor-pill">
+              <div><div class="adv-name">Mr. Gopal Krishna</div><div style="font-size:10px; color:var(--nsit-slate)">Asst. Prof., CSE (AI/DS)</div></div>
+              <span class="adv-inst">GEC Munger</span>
+            </div>
+            <div class="advisor-pill">
+              <div><div class="adv-name">Mr. Chandan Kumar Sharma</div><div style="font-size:10px; color:var(--nsit-slate)">Asst. Prof., Civil</div></div>
+              <span class="adv-inst">GEC Bhojpur</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: Delegate Registration Tariff -->
+      <section class="slide" data-slide="4" data-notes="This table displays the 5 official delegate registration categories. To encourage broad student and researcher participation while ensuring institutional cost recovery, we have clear Early-bird deadlines (20 June 2027) and Final deadlines (10 July 2027). Fees cover full technical session access, official delegate kit, luncheon on both days, and certificates.">
+        <div class="slide-header">
+          <div>
+            <div class="slide-tag">Financial Tariff & Inclusions</div>
+            <h2 class="slide-title">5 Delegate Categories & Registration Schedule</h2>
+            <div class="slide-subtitle">Transparent early-bird incentives and full delegate entitlements (INR)</div>
+          </div>
+          <div class="slide-number-chip">Slide 04 / 10</div>
+        </div>
+        <div class="slide-body">
+          <div class="tariff-table-wrap">
+            <table class="tariff-table">
+              <thead>
+                <tr>
+                  <th>Delegate Category</th>
+                  <th>Eligibility & Scope</th>
+                  <th>Early Bird (by 20 June 2027)</th>
+                  <th>Regular Fee (by 10 July 2027)</th>
+                  <th>Entitlements</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Faculty / Academicians</strong></td>
+                  <td>Faculty members, university professors, and educators</td>
+                  <td><span class="fee-badge">₹ 2,500</span></td>
+                  <td><span class="fee-badge gold">₹ 3,000</span></td>
+                  <td>Sessions, Kit, Working Lunch, Certificate</td>
+                </tr>
+                <tr>
+                  <td><strong>Industry Professionals</strong></td>
+                  <td>Corporate researchers, practitioners, consultants & entrepreneurs</td>
+                  <td><span class="fee-badge">₹ 3,500</span></td>
+                  <td><span class="fee-badge gold">₹ 4,000</span></td>
+                  <td>Full Access, Kit, Networking Dinner, Certificate</td>
+                </tr>
+                <tr>
+                  <td><strong>Research Scholars / PG</strong></td>
+                  <td>Doctoral candidates, research fellows, and postgraduates</td>
+                  <td><span class="fee-badge">₹ 1,500</span></td>
+                  <td><span class="fee-badge gold">₹ 2,000</span></td>
+                  <td>Oral/Poster Slot, Kit, Lunch, Scholar Certificate</td>
+                </tr>
+                <tr>
+                  <td><strong>UG Students</strong></td>
+                  <td>Enrolled undergraduate students presenting original projects</td>
+                  <td><span class="fee-badge">₹ 800</span></td>
+                  <td><span class="fee-badge gold">₹ 1,000</span></td>
+                  <td>Project Presentation, Kit, Lunch, Student Badge</td>
+                </tr>
+                <tr>
+                  <td><strong>Non-presenting Attendee / Co-author</strong></td>
+                  <td>Non-presenting co-authors, academic observers & delegates</td>
+                  <td><span class="fee-badge">₹ 500</span></td>
+                  <td><span class="fee-badge gold">₹ 500</span></td>
+                  <td>Auditorium Access, Kit, Refreshments, Certificate</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="margin-top: 14px; padding: 12px 16px; background: rgba(191, 152, 46, 0.08); border-left: 3px solid var(--nsit-gold); border-radius: 6px; font-size: 11px; color: var(--nsit-slate);">
+            <strong>Official Policy Note:</strong> Registration fee covers entry to all technical tracks, keynote auditoriums, official conference kit, delegate lunch/refreshments on both days, and formal participation certificate. Proceedings publication charges, if applicable post-indexing confirmation, will be notified separately.
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: Web Platform & Technical Architecture -->
+      <section class="slide" data-slide="5" data-notes="We built the ETIMS 2027 digital portal to national convention standards. Developed using modern web architecture (React 18, TypeScript, Tailwind CSS, Vite), it provides lightning-fast performance, live countdown in Asia/Kolkata timezone, interactive brochure download, and 100% mobile-responsive layout across all device viewports.">
+        <div class="slide-header">
+          <div>
+            <div class="slide-tag">Web Platform Showcase</div>
+            <h2 class="slide-title">ETIMS 2027 Digital Infrastructure & Features</h2>
+            <div class="slide-subtitle">High-performance responsive portal deployed live on Vercel Edge Network</div>
+          </div>
+          <div class="slide-number-chip">Slide 05 / 10</div>
+        </div>
+        <div class="slide-body">
+          <div class="feature-grid-3">
+            <div class="feature-box">
+              <div class="feature-icon-circle">⏱️</div>
+              <h4>Real-Time Countdown Ticker</h4>
+              <p>Precision JavaScript countdown clock synchronized with IST (Asia/Kolkata) targeting 23 July 2027, maintaining urgency for submission and registration deadlines.</p>
+            </div>
+            <div class="feature-box">
+              <div class="feature-icon-circle">📱</div>
+              <h4>Mobile First Ergonomics</h4>
+              <p>100% responsive fluid interface optimized for iOS and Android smartphones, featuring accessible touch targets, hamburger drawer navigation, and zero overflow.</p>
+            </div>
+            <div class="feature-box">
+              <div class="feature-icon-circle">📄</div>
+              <h4>Official PDF Integration</h4>
+              <p>Single-click direct download of the official 8.4 MB NSIT Conference Brochure, ensuring delegates and institutions receive the authentic circular instantly.</p>
+            </div>
+            <div class="feature-box">
+              <div class="feature-icon-circle">🛡️</div>
+              <h4>Backdrop Scroll Lock</h4>
+              <p>Modal dialogs implement robust body-scroll locking with zero background scroll bleed and 80% darkened glass backdrop for focused user input.</p>
+            </div>
+            <div class="feature-box">
+              <div class="feature-icon-circle">🗺️</div>
+              <h4>Transit & Bihta Venue Map</h4>
+              <p>Interactive travel guide featuring NH-922 highway, Danapur-Bihta elevated corridor, Bihta railway station (4 km), and Patna Airport connectivity instructions.</p>
+            </div>
+            <div class="feature-box">
+              <div class="feature-icon-circle">⚡</div>
+              <h4>Sub-Second Edge Delivery</h4>
+              <p>Vite-bundled production assets deployed across global CDN edge nodes with instant caching, achieving sub-second first contentful paint.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: Delegate Registration Flow & Live Pass System -->
+      <section class="slide" data-slide="6" data-notes="Here is how the delegate registration flow operates. When a visitor clicks 'Register' on any tier (e.g. Industry Professionals or UG Students), the modal automatically pre-selects that category. Once they fill their details, the system generates an instant verifiable Delegate Pass with a unique ID and offers a downloadable .txt receipt.">
+        <div class="slide-header">
+          <div>
+            <div class="slide-tag">Interactive User Flow</div>
+            <h2 class="slide-title">Smart Delegate Pass & Registration Flow</h2>
+            <div class="slide-subtitle">Reactive category auto-selection, instant pass generation, and digital verification</div>
+          </div>
+          <div class="slide-number-chip">Slide 06 / 10</div>
+        </div>
+        <div class="slide-body">
+          <div class="lifecycle-container" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 20px;">
+            <div class="lifecycle-step">
+              <div class="step-number">1</div>
+              <div class="step-title">Click Category</div>
+              <div class="step-desc">Clicking 'Register ->' on any tier instantly opens the desk with that tier dynamically selected.</div>
+            </div>
+            <div class="lifecycle-step">
+              <div class="step-number">2</div>
+              <div class="step-title">Delegate Details</div>
+              <div class="step-desc">Author enters name, institutional affiliation (IIT/NIT/NSIT), email, and phone contact.</div>
+            </div>
+            <div class="lifecycle-step">
+              <div class="step-number">3</div>
+              <div class="step-title">Rate Calculation</div>
+              <div class="step-desc">System auto-applies Early-Bird vs Regular tariff based on current calendar date.</div>
+            </div>
+            <div class="lifecycle-step">
+              <div class="step-number">4</div>
+              <div class="step-title">Instant Pass Issued</div>
+              <div class="step-desc">Issues branded confirmation card with unique ID (e.g., ETIMS27-9482) & downloadable receipt.</div>
+            </div>
+          </div>
+
+          <div style="background: #fff; border: 1px solid var(--nsit-border); border-radius: 12px; padding: 18px; display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-size: 11px; font-weight: 700; color: var(--nsit-maroon); text-transform: uppercase;">Sample Generated Pass Output</div>
+              <div style="font-family: monospace; font-size: 13px; color: var(--nsit-charcoal); margin-top: 4px;">
+                PASS ID: <strong>ETIMS27-8419</strong> | CATEGORY: Faculty / Academicians | TEE: ₹2,500 (Early)
+              </div>
+              <div style="font-size: 11px; color: var(--nsit-slate); margin-top: 2px;">
+                Netaji Subhas Institute of Technology (NSIT) · Physical Attendance Badge
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <span style="background: rgba(16, 185, 129, 0.1); color: #059669; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px;">✓ Auto-Selected Reactive</span>
+              <span style="background: rgba(191, 152, 46, 0.15); color: #8C6B14; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px;">Instant .TXT Receipt</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: Paper Submission & Peer Review Lifecycle -->
+      <section class="slide" data-slide="7" data-notes="Academic integrity is vital for conference credibility. This slide details the 6-stage manuscript review pipeline. From abstract intake (250-300 words), plagiarism screening (<15% similarity), to double-blind evaluation by two independent reviewers, convenor editorial decision, and final camera-ready submission.">
+        <div class="slide-header">
+          <div>
+            <div class="slide-tag">Academic Rigor & Peer Review</div>
+            <h2 class="slide-title">End-to-End Manuscript Review Lifecycle</h2>
+            <div class="slide-subtitle">6-stage double-blind review workflow to ensure premier research standards</div>
+          </div>
+          <div class="slide-number-chip">Slide 07 / 10</div>
+        </div>
+        <div class="slide-body">
+          <div class="lifecycle-container">
+            <div class="lifecycle-step">
+              <div class="step-number">1</div>
+              <div class="step-title">Portal Submission</div>
+              <div class="step-desc">Corresponding author uploads manuscript in IEEE/Springer format with 250–300 word abstract.</div>
+            </div>
+            <div class="lifecycle-step">
+              <div class="step-number">2</div>
+              <div class="step-title">Desk Triage</div>
+              <div class="step-desc">Secretariat screens formatting and similarity check (Turnitin/iThenticate < 15% threshold).</div>
+            </div>
+            <div class="lifecycle-step">
+              <div class="step-number">3</div>
+              <div class="step-title">Double-Blind Review</div>
+              <div class="step-desc">Assigned to 2 independent domain reviewers with anonymized author details across tracks.</div>
+            </div>
+            <div class="lifecycle-step">
+              <div class="step-number">4</div>
+              <div class="step-title">Editorial Decision</div>
+              <div class="step-desc">Convenor Dr. Atif Hussain & Track Chairs review scores: Accept, Minor/Major Revision, or Reject.</div>
+            </div>
+            <div class="lifecycle-step">
+              <div class="step-number">5</div>
+              <div class="step-title">Camera-Ready</div>
+              <div class="step-desc">Accepted authors incorporate reviewer comments and submit verified camera-ready copy by 20 June.</div>
+            </div>
+            <div class="lifecycle-step">
+              <div class="step-number">6</div>
+              <div class="step-title">Oral Presentation</div>
+              <div class="step-desc">Author registers and presents physical oral or poster paper in designated technical hall on 23-24 July.</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div style="background: #fff; border: 1px solid var(--nsit-border); border-radius: 10px; padding: 14px;">
+              <div style="font-size: 11px; font-weight: 700; color: var(--nsit-maroon); text-transform: uppercase;">Evaluation Criteria</div>
+              <div style="font-size: 12px; color: var(--nsit-slate); margin-top: 4px; line-height: 1.45;">
+                • Originality & novelty of contribution<br>
+                • Technical soundness and experimental validation<br>
+                • Clarity of presentation and relevance to track theme
+              </div>
+            </div>
+            <div style="background: #fff; border: 1px solid var(--nsit-border); border-radius: 10px; padding: 14px;">
+              <div style="font-size: 11px; font-weight: 700; color: var(--nsit-gold); text-transform: uppercase;">Conference Best Paper Awards</div>
+              <div style="font-size: 12px; color: var(--nsit-slate); margin-top: 4px; line-height: 1.45;">
+                • <strong>Best Paper Award:</strong> Overall technical excellence<br>
+                • <strong>Best Student Paper:</strong> Undergrad/PG innovator award<br>
+                • <strong>Best Poster Award:</strong> Visual and oral impact
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: Architecture Decision: Option A vs Option B -->
+      <section class="slide" data-slide="8" data-notes="To operationalize submissions, we compared two proven architectures. Option A is Microsoft CMT, widely used by IEEE and Springer conferences. It is completely free, backed by Microsoft Research, and requires zero cloud maintenance. Option B is an in-house custom database on NSIT servers. We strongly recommend Option A for peer review, linked directly to our modern website front-end.">
+        <div class="slide-header">
+          <div>
+            <div class="slide-tag">Technical Strategy & Infrastructure</div>
+            <h2 class="slide-title">Submission Architecture: Option A vs. Option B</h2>
+            <div class="slide-subtitle">Evaluation of Microsoft CMT vs. Custom In-House Cloud Stack for NSIT Secretariat</div>
+          </div>
+          <div class="slide-number-chip">Slide 08 / 10</div>
+        </div>
+        <div class="slide-body">
+          <div class="compare-grid">
+            <div class="compare-card recommended">
+              <span class="badge-rec">Recommended Strategy</span>
+              <div class="compare-title">Option A: Microsoft CMT</div>
+              <div class="compare-summary">Microsoft Conference Management Toolkit — Industry standard used by top ACM/IEEE conferences.</div>
+              <ul class="compare-list">
+                <li><span class="bullet">✓</span> <strong>Zero Cloud Cost:</strong> Hosted and maintained entirely by Microsoft Research free of charge.</li>
+                <li><span class="bullet">✓</span> <strong>Built-in Double-Blind Tools:</strong> Automated conflict of interest detection and reviewer bidding.</li>
+                <li><span class="bullet">✓</span> <strong>Reviewer Familiarity:</strong> Reviewers from IIT Patna and NIT Surathkal already possess active CMT accounts.</li>
+                <li><span class="bullet">✓</span> <strong>Seamless Integration:</strong> Single button on our NSIT website directs authors straight into the ETIMS 2027 CMT track.</li>
+              </ul>
+              <div style="font-size: 11px; font-weight: 700; color: #059669; background: rgba(16,185,129,0.1); padding: 6px 10px; border-radius: 6px;">
+                Ready in 48 hours with zero server overhead.
+              </div>
+            </div>
+
+            <div class="compare-card">
+              <div class="compare-title">Option B: In-House Cloud Stack</div>
+              <div class="compare-summary">Custom submission portal built on PostgreSQL/Supabase & NSIT campus servers.</div>
+              <ul class="compare-list">
+                <li><span class="bullet">•</span> <strong>Total Customization:</strong> Fully white-labeled UI matching NSIT campus colors perfectly.</li>
+                <li><span class="bullet">•</span> <strong>On-Premises Data:</strong> Complete ownership of author files on college storage.</li>
+                <li><span class="bullet">•</span> <strong>Maintenance Overhead:</strong> Requires server patching, SMTP email deliverability, and database backups.</li>
+                <li><span class="bullet">•</span> <strong>Development Timeline:</strong> Requires 3-4 weeks of full-stack testing and security audits.</li>
+              </ul>
+              <div style="font-size: 11px; font-weight: 700; color: var(--nsit-slate); background: rgba(0,0,0,0.05); padding: 6px 10px; border-radius: 6px;">
+                Alternative if institutional data residency is required.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: Strategic Roadmap & Important Dates -->
+      <section class="slide" data-slide="9" data-notes="Here is the master timeline leading up to the conference dates of 23-24 July 2027. CFP opens in January 2027. Full papers are due by 30 March 2027. Review decisions are communicated by 31 May. Camera-ready and early registration close on 20 June, and final delegate rosters are locked on 10 July 2027.">
+        <div class="slide-header">
+          <div>
+            <div class="slide-tag">Operational Master Plan</div>
+            <h2 class="slide-title">Important Deadlines & Conference Timeline</h2>
+            <div class="slide-subtitle">Coordinated milestones ensuring smooth peer review and delegate logistics</div>
+          </div>
+          <div class="slide-number-chip">Slide 09 / 10</div>
+        </div>
+        <div class="slide-body">
+          <div class="timeline-grid">
+            <div class="milestone-card">
+              <span class="milestone-date-chip">Jan 2027</span>
+              <div class="milestone-title">Call for Papers Release</div>
+              <div class="milestone-note">Official circulation of brochure, CFP website portal launch, and track intake opening.</div>
+            </div>
+            <div class="milestone-card">
+              <span class="milestone-date-chip">30 March 2027</span>
+              <div class="milestone-title">Full Paper Submission Deadline</div>
+              <div class="milestone-note">Last date for authors to submit full original manuscripts with abstracts (250–300 words).</div>
+            </div>
+            <div class="milestone-card">
+              <span class="milestone-date-chip">31 May 2027</span>
+              <div class="milestone-title">Acceptance Notification</div>
+              <div class="milestone-note">Peer review feedback and formal acceptance/revision notices communicated to authors.</div>
+            </div>
+            <div class="milestone-card">
+              <span class="milestone-date-chip">20 June 2027</span>
+              <div class="milestone-title">Camera-Ready & Early Reg.</div>
+              <div class="milestone-note">Final revised manuscript submission and discounted early-bird fee deadline.</div>
+            </div>
+            <div class="milestone-card">
+              <span class="milestone-date-chip">10 July 2027</span>
+              <div class="milestone-title">Final Registration Close</div>
+              <div class="milestone-note">Final cut-off for presenter registration and printing of conference proceedings directory.</div>
+            </div>
+            <div class="milestone-card" style="border: 2px solid var(--nsit-gold); background: #FFFDF9;">
+              <span class="milestone-date-chip" style="background: var(--nsit-maroon); color: #fff;">23–24 July 2027</span>
+              <div class="milestone-title">Conference Inauguration</div>
+              <div class="milestone-note">Physical conference sessions, keynotes, panel discussions, and awards banquet at NSIT Bihta.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: Conclusion & Immediate Action Items -->
+      <section class="slide" data-slide="10" data-notes="In conclusion, the digital foundation for ETIMS 2027 is complete, tested, and live. Our immediate next steps are to link the official NSIT subdomain, activate the Microsoft CMT track, coordinate the UPI payment gateway account with the college accounts section, and finalize publisher negotiations. Thank you for your leadership and guidance.">
+        <div class="slide-header">
+          <div>
+            <div class="slide-tag">Actionable Next Steps</div>
+            <h2 class="slide-title">Action Plan & Convenor Desk Integration</h2>
+            <div class="slide-subtitle">Clear operational roadmap ready for immediate execution by the Organising Committee</div>
+          </div>
+          <div class="slide-number-chip">Slide 10 / 10</div>
+        </div>
+        <div class="slide-body">
+          <div class="action-grid">
+            <div class="action-card">
+              <h4>🎯 Immediate Action Items (Next 14 Days)</h4>
+              <ul class="action-list">
+                <li>
+                  <div class="check-circle">1</div>
+                  <div><strong>Domain Name Setup:</strong> Point <code>etims2027.nsit.ac.in</code> to the live Vercel production deployment.</div>
+                </li>
+                <li>
+                  <div class="check-circle">2</div>
+                  <div><strong>Microsoft CMT Instance:</strong> Register ETIMS 2027 with 8 sub-tracks on Microsoft CMT.</div>
+                </li>
+                <li>
+                  <div class="check-circle">3</div>
+                  <div><strong>Fee Collection Account:</strong> Connect institutional bank account / UPI QR code with NSIT Finance.</div>
+                </li>
+                <li>
+                  <div class="check-circle">4</div>
+                  <div><strong>Publisher Agreement:</strong> Conclude proceedings publisher MoU for Scopus/WoS/publisher indexing.</div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="action-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <h4>📞 Conference Secretariat Desk</h4>
+                <div style="font-size: 13px; color: var(--nsit-charcoal); line-height: 1.6; margin-bottom: 12px;">
+                  <strong>Dr. Atif Hussain</strong><br>
+                  <span style="color: var(--nsit-slate); font-size: 12px;">Conference Convenor & Assistant Professor, Civil Engineering</span><br>
+                  Netaji Subhas Institute of Technology (NSIT), Bihta, Patna<br>
+                  📧 <strong>Email:</strong> <a href="mailto:etims2027@nsiterp.in" style="color:var(--nsit-maroon); text-decoration:none;">etims2027@nsiterp.in</a><br>
+                  📱 <strong>Phone:</strong> <a href="tel:+918340258426" style="color:var(--nsit-maroon); text-decoration:none;">+91 83402 58426</a>
+                </div>
+              </div>
+
+              <div style="background: rgba(123, 17, 35, 0.06); padding: 14px; border-radius: 8px; border: 1px solid var(--nsit-border);">
+                <div style="font-size: 11px; font-weight: 700; color: var(--nsit-maroon); text-transform: uppercase;">Live Demo Quick Link</div>
+                <div style="font-size: 12px; color: var(--nsit-slate); margin-top: 4px;">
+                  Website is live and fully interactive at <a href="/" target="_blank" style="color:var(--nsit-maroon); font-weight:700;">etims-2027.vercel.app</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Speaker Notes Drawer -->
+    <div class="notes-panel" id="notesPanel">
+      <div class="notes-header">
+        <div class="notes-label">
+          <span>🎙️ Speaker Talking Points</span>
+          <span style="font-size: 10px; color: #9CA3AF; text-transform: none; font-weight: normal;">(Press 'N' to toggle)</span>
+        </div>
+        <button id="btnCloseNotes" style="background:none; border:none; color:#9CA3AF; cursor:pointer; font-size:16px;">✕</button>
+      </div>
+      <div id="notesContent" style="color: #D1D5DB; font-size: 13px;">
+        Speaker talking points will automatically update here as you change slides.
+      </div>
+    </div>
+
+    <!-- Slide Thumbnail Drawer -->
+    <div class="thumb-drawer" id="thumbDrawer">
+      <div class="thumb-drawer-header">Slide Navigator</div>
+      <div class="thumb-item active" data-goto="1">01. Title & Summit Identity</div>
+      <div class="thumb-item" data-goto="2">02. 8 Thematic Tracks</div>
+      <div class="thumb-item" data-goto="3">03. Organising Leadership</div>
+      <div class="thumb-item" data-goto="4">04. Registration Tariff</div>
+      <div class="thumb-item" data-goto="5">05. Digital Platform Features</div>
+      <div class="thumb-item" data-goto="6">06. Delegate Pass & Flow</div>
+      <div class="thumb-item" data-goto="7">07. Peer-Review Lifecycle</div>
+      <div class="thumb-item" data-goto="8">08. Submission Architecture</div>
+      <div class="thumb-item" data-goto="9">09. Timeline & Deadlines</div>
+      <div class="thumb-item" data-goto="10">10. Action Items & Q&A</div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <footer class="bottom-bar">
+      <div class="nav-group">
+        <button class="nav-btn" id="btnPrev" title="Previous Slide (Key: Left Arrow)">❮</button>
+        <button class="nav-btn" id="btnNext" title="Next Slide (Key: Right Arrow / Space)">❯</button>
+        <div class="slide-counter" id="slideCounter">1 / 10</div>
+      </div>
+
+      <div class="progress-track" id="progressTrack" title="Click anywhere to jump to slide">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="key-hint">
+        <span>Keys:</span>
+        <span class="key-badge">←</span>
+        <span class="key-badge">→</span>
+        <span>Space</span>
+        <span class="key-badge">F</span>
+        <span class="key-badge">N</span>
+        <span class="key-badge">?</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Keyboard Shortcuts Modal -->
+  <div class="help-modal" id="helpModal">
+    <div class="help-box">
+      <h3>Keyboard Presentation Shortcuts</h3>
+      <div class="shortcut-row"><span>Next Slide</span> <span class="key-badge">Right Arrow / Space / PageDown</span></div>
+      <div class="shortcut-row"><span>Previous Slide</span> <span class="key-badge">Left Arrow / Backspace / PageUp</span></div>
+      <div class="shortcut-row"><span>First Slide</span> <span class="key-badge">Home</span></div>
+      <div class="shortcut-row"><span>Last Slide</span> <span class="key-badge">End</span></div>
+      <div class="shortcut-row"><span>Toggle Fullscreen</span> <span class="key-badge">F</span></div>
+      <div class="shortcut-row"><span>Toggle Speaker Notes</span> <span class="key-badge">N</span></div>
+      <div class="shortcut-row"><span>Toggle Outline Drawer</span> <span class="key-badge">T</span></div>
+      <div class="shortcut-row"><span>Print / Save PDF Deck</span> <span class="key-badge">P</span></div>
+      <div class="shortcut-row"><span>Show Shortcuts Help</span> <span class="key-badge">? or H</span></div>
+      <div style="margin-top: 20px; text-align: right;">
+        <button class="btn-action highlight" id="btnCloseHelp">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Slide deck controller
+    (function() {
+      const slides = document.querySelectorAll('.slide');
+      const totalSlides = slides.length;
+      let currentIndex = 0;
+
+      const btnPrev = document.getElementById('btnPrev');
+      const btnNext = document.getElementById('btnNext');
+      const slideCounter = document.getElementById('slideCounter');
+      const progressFill = document.getElementById('progressFill');
+      const progressTrack = document.getElementById('progressTrack');
+      const notesPanel = document.getElementById('notesPanel');
+      const notesContent = document.getElementById('notesContent');
+      const btnNotes = document.getElementById('btnNotes');
+      const btnCloseNotes = document.getElementById('btnCloseNotes');
+      const thumbDrawer = document.getElementById('thumbDrawer');
+      const btnThumbs = document.getElementById('btnThumbs');
+      const btnFullscreen = document.getElementById('btnFullscreen');
+      const btnPrint = document.getElementById('btnPrint');
+      const helpModal = document.getElementById('helpModal');
+      const btnCloseHelp = document.getElementById('btnCloseHelp');
+      const thumbItems = document.querySelectorAll('.thumb-item');
+
+      function updateSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+        currentIndex = index;
+
+        slides.forEach((slide, idx) => {
+          if (idx === currentIndex) {
+            slide.classList.add('active');
+          } else {
+            slide.classList.remove('active');
+          }
+        });
+
+        // Update counter & progress
+        slideCounter.textContent = `${currentIndex + 1} / ${totalSlides}`;
+        const pct = ((currentIndex + 1) / totalSlides) * 100;
+        progressFill.style.width = `${pct}%`;
+
+        // Update button states
+        btnPrev.disabled = currentIndex === 0;
+        btnNext.disabled = currentIndex === totalSlides - 1;
+
+        // Update speaker notes
+        const activeSlide = slides[currentIndex];
+        const notes = activeSlide.getAttribute('data-notes') || 'No speaker notes for this slide.';
+        notesContent.textContent = notes;
+
+        // Update thumb active state
+        thumbItems.forEach((thumb, idx) => {
+          if (idx === currentIndex) {
+            thumb.classList.add('active');
+          } else {
+            thumb.classList.remove('active');
+          }
+        });
+      }
+
+      function nextSlide() {
+        if (currentIndex < totalSlides - 1) {
+          updateSlide(currentIndex + 1);
+        }
+      }
+
+      function prevSlide() {
+        if (currentIndex > 0) {
+          updateSlide(currentIndex - 1);
+        }
+      }
+
+      // Event listeners
+      btnNext.addEventListener('click', nextSlide);
+      btnPrev.addEventListener('click', prevSlide);
+
+      progressTrack.addEventListener('click', (e) => {
+        const rect = progressTrack.getBoundingClientRect();
+        const clickRatio = (e.clientX - rect.left) / rect.width;
+        const targetIndex = Math.floor(clickRatio * totalSlides);
+        updateSlide(targetIndex);
+      });
+
+      // Notes toggle
+      btnNotes.addEventListener('click', () => {
+        notesPanel.classList.toggle('visible');
+      });
+      btnCloseNotes.addEventListener('click', () => {
+        notesPanel.classList.remove('visible');
+      });
+
+      // Thumbs toggle
+      btnThumbs.addEventListener('click', () => {
+        thumbDrawer.classList.toggle('open');
+      });
+
+      thumbItems.forEach((item) => {
+        item.addEventListener('click', () => {
+          const goto = parseInt(item.getAttribute('data-goto'), 10) - 1;
+          updateSlide(goto);
+          thumbDrawer.classList.remove('open');
+        });
+      });
+
+      // Fullscreen toggle
+      btnFullscreen.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(err => console.log(err));
+        } else {
+          document.exitFullscreen().catch(err => console.log(err));
+        }
+      });
+
+      // Print PDF
+      btnPrint.addEventListener('click', () => {
+        window.print();
+      });
+
+      // Help modal
+      btnCloseHelp.addEventListener('click', () => {
+        helpModal.classList.remove('open');
+      });
+
+      // Keyboard navigation
+      window.addEventListener('keydown', (e) => {
+        // Prevent key events when typing inside inputs
+        if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+        switch(e.key) {
+          case 'ArrowRight':
+          case 'PageDown':
+          case ' ':
+            e.preventDefault();
+            nextSlide();
+            break;
+          case 'ArrowLeft':
+          case 'PageUp':
+          case 'Backspace':
+            e.preventDefault();
+            prevSlide();
+            break;
+          case 'Home':
+            e.preventDefault();
+            updateSlide(0);
+            break;
+          case 'End':
+            e.preventDefault();
+            updateSlide(totalSlides - 1);
+            break;
+          case 'f':
+          case 'F':
+            e.preventDefault();
+            btnFullscreen.click();
+            break;
+          case 'n':
+          case 'N':
+            e.preventDefault();
+            notesPanel.classList.toggle('visible');
+            break;
+          case 't':
+          case 'T':
+            e.preventDefault();
+            thumbDrawer.classList.toggle('open');
+            break;
+          case 'p':
+          case 'P':
+            e.preventDefault();
+            window.print();
+            break;
+          case '?':
+          case 'h':
+          case 'H':
+            e.preventDefault();
+            helpModal.classList.toggle('open');
+            break;
+          case 'Escape':
+            notesPanel.classList.remove('visible');
+            thumbDrawer.classList.remove('open');
+            helpModal.classList.remove('open');
+            break;
+        }
+      });
+
+      // Touch swipe support for mobile presentations
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      window.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, false);
+
+      window.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchStartX - touchEndX > 50) {
+          nextSlide();
+        } else if (touchEndX - touchStartX > 50) {
+          prevSlide();
+        }
+      }, false);
+
+      // Initialize slide 0
+      updateSlide(0);
+    })();
+  </script>
+</body>
+</html>
