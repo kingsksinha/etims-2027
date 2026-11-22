@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ETIMS 2027 — Operational Workflow & System Architecture Blueprint</title>
+  <meta name="description" content="Comprehensive operational workflow, peer-review mechanics, payment verification, and setup blueprint for ETIMS 2027 at Netaji Subhas Institute of Technology (NSIT), Bihta, Patna." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nsit-maroon: #7B1123;
+      --nsit-maroon-dark: #4A0713;
+      --nsit-maroon-light: #9B1A30;
+      --nsit-gold: #BF982E;
+      --nsit-gold-light: #DFB84E;
+      --nsit-gold-bg: rgba(191, 152, 46, 0.1);
+      --nsit-cream: #FAF8F5;
+      --nsit-ivory: #F3EFEA;
+      --nsit-dark: #12141A;
+      --nsit-card-dark: #1A1D26;
+      --nsit-slate: #4A5060;
+      --nsit-light-slate: #8F96A6;
+      --nsit-border: rgba(123, 17, 35, 0.15);
+      --font-display: 'Cinzel', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #0D0E13;
+      color: #E2E8F0;
+      font-family: var(--font-body);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Top Sticky Control Header */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 14, 19, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(191, 152, 46, 0.25);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, var(--nsit-maroon), var(--nsit-maroon-dark));
+      color: var(--nsit-gold-light);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(191, 152, 46, 0.4);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+
+    .brand-meta h1 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #F8FAFC;
+      letter-spacing: -0.2px;
+    }
+
+    .brand-meta p {
+      font-size: 11px;
+      color: var(--nsit-light-slate);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-tab-btn {
+      background: transparent;
+      border: none;
+      color: #94A3B8;
+      padding: 7px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-tab-btn:hover {
+      color: #FFF;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-tab-btn.active {
+      background: var(--nsit-maroon);
+      color: #FFFDF9;
+      box-shadow: 0 2px 8px rgba(123, 17, 35, 0.4);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(191, 152, 46, 0.4);
+      color: var(--nsit-gold-light);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-outline:hover {
+      background: var(--nsit-gold);
+      color: #12141A;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 36px 24px 80px;
+    }
+
+    /* Executive Briefing Banner */
+    .briefing-banner {
+      background: linear-gradient(135deg, rgba(74, 7, 19, 0.7) 0%, rgba(26, 29, 38, 0.95) 100%);
+      border: 1px solid rgba(191, 152, 46, 0.3);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .briefing-banner::after {
+      content: 'ETIMS 2027 WORKFLOW';
+      position: absolute;
+      right: 20px;
+      bottom: -15px;
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.03);
+      letter-spacing: 2px;
+      pointer-events: none;
+    }
+
+    .badge-convenor {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--nsit-gold-light);
+      background: rgba(191, 152, 46, 0.15);
+      border: 1px solid rgba(191, 152, 46, 0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .briefing-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 800;
+      color: #FFFDF9;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .briefing-desc {
+      font-size: 14px;
+      color: #CBD5E1;
+      max-width: 900px;
+      line-height: 1.6;
+    }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .kpi-card {
+      background: rgba(13, 14, 19, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+
+    .kpi-card .kpi-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--nsit-light-slate);
+      margin-bottom: 4px;
+    }
+
+    .kpi-card .kpi-val {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--nsit-gold-light);
+    }
+
+    .kpi-card .kpi-sub {
+      font-size: 11px;
+      color: #94A3B8;
+      margin-top: 2px;
+    }
+
+    /* Tab Section Panels */
+    .tab-section {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section Headers */
+    .section-head {
+      margin-bottom: 24px;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--nsit-gold-light);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: #F8FAFC;
+      letter-spacing: -0.3px;
+    }
+
+    .section-desc {
+      font-size: 13px;
+      color: var(--nsit-light-slate);
+      margin-top: 4px;
+    }
+
+    /* SWIMLANE WORKFLOW DIAGRAM */
+    .swimlane-container {
+      background: var(--nsit-card-dark);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      overflow-x: auto;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      margin-bottom: 36px;
+    }
+
+    .swimlane-header-row {
+      display: grid;
+      grid-template-columns: 200px repeat(5, 1fr);
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid rgba(191, 152, 46, 0.2);
+      margin-bottom: 16px;
+    }
+
+    .lane-col-title {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--nsit-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .lane-col-title:first-child {
+      text-align: left;
+    }
+
+    .swimlane-row {
+      display: grid;
+      grid-template-columns: 200px repeat(5, 1fr);
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      align-items: center;
+    }
+
+    .swimlane-row:last-child {
+      border-bottom: none;
+    }
+
+    .lane-actor {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .actor-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(123, 17, 35, 0.3);
+      border: 1px solid rgba(123, 17, 35, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--nsit-gold-light);
+      flex-shrink: 0;
+    }
+
+    .actor-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #F8FAFC;
+      line-height: 1.25;
+    }
+
+    .actor-role {
+      font-size: 10px;
+      color: var(--nsit-light-slate);
+    }
+
+    .lane-node {
+      background: rgba(13, 14, 19, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 10px 12px;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .lane-node:hover {
+      border-color: var(--nsit-gold);
+      background: rgba(191, 152, 46, 0.08);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(191, 152, 46, 0.15);
+    }
+
+    .lane-node.highlight-maroon {
+      border-left: 3px solid var(--nsit-maroon);
+    }
+
+    .lane-node.highlight-gold {
+      border-left: 3px solid var(--nsit-gold);
+    }
+
+    .lane-node.highlight-green {
+      border-left: 3px solid #10B981;
+    }
+
+    .lane-node-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #F8FAFC;
+      line-height: 1.3;
+    }
+
+    .lane-node-tool {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--nsit-gold-light);
+      background: rgba(191, 152, 46, 0.12);
+      padding: 2px 6px;
+      border-radius: 4px;
+      align-self: flex-start;
+      margin-top: 6px;
+    }
+
+    .node-empty {
+      border: 1px dashed rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.1);
+      font-size: 18px;
+    }
+
+    /* DEEP-DIVE CARDS & STAGES */
+    .stages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .stage-card {
+      background: var(--nsit-card-dark);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stage-card.featured {
+      border-color: rgba(191, 152, 46, 0.35);
+      background: linear-gradient(180deg, rgba(26, 29, 38, 1) 0%, rgba(36, 20, 26, 0.6) 100%);
+    }
+
+    .stage-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .stage-num-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--nsit-maroon);
+      color: var(--nsit-gold-light);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stage-duration {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--nsit-gold);
+      background: rgba(191, 152, 46, 0.1);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .stage-title {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      color: #FFFDF9;
+      margin-bottom: 8px;
+    }
+
+    .stage-desc {
+      font-size: 12px;
+      color: #94A3B8;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .detail-box {
+      background: rgba(13, 14, 19, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      font-size: 11px;
+    }
+
+    .detail-box .d-label {
+      font-weight: 700;
+      color: var(--nsit-gold-light);
+      text-transform: uppercase;
+      font-size: 10px;
+      margin-bottom: 4px;
+    }
+
+    .detail-box .d-content {
+      color: #E2E8F0;
+      line-height: 1.4;
+    }
+
+    /* EXACT SETUP CHECKLIST SECTION */
+    .checklist-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .check-category-card {
+      background: var(--nsit-card-dark);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .check-category-card h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--nsit-gold-light);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .check-category-card p.cat-sub {
+      font-size: 12px;
+      color: var(--nsit-light-slate);
+      margin-bottom: 18px;
+    }
+
+    .checklist-items {
+      list-style: none;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px;
+      background: rgba(13, 14, 19, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .check-item:hover {
+      border-color: rgba(191, 152, 46, 0.3);
+      background: rgba(191, 152, 46, 0.04);
+    }
+
+    .check-item-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(191, 152, 46, 0.15);
+      color: var(--nsit-gold-light);
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .check-item-text .title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #F8FAFC;
+    }
+
+    .check-item-text .detail {
+      font-size: 11px;
+      color: #94A3B8;
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+
+    .check-item-text .action-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: #38BDF8;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-top: 6px;
+    }
+
+    /* INTERACTIVE SIMULATION SANDBOX */
+    .sim-container {
+      background: var(--nsit-card-dark);
+      border: 2px solid rgba(191, 152, 46, 0.3);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 40px;
+    }
+
+    .sim-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 16px;
+    }
+
+    .sim-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: #FFFDF9;
+    }
+
+    .sim-desc {
+      font-size: 12px;
+      color: var(--nsit-light-slate);
+    }
+
+    .sim-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-sim {
+      background: var(--nsit-maroon);
+      border: 1px solid var(--nsit-gold);
+      color: #FFFDF9;
+      padding: 9px 18px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-sim:hover {
+      background: var(--nsit-maroon-light);
+      box-shadow: 0 0 16px rgba(191, 152, 46, 0.35);
+    }
+
+    .btn-sim.secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #E2E8F0;
+    }
+    .btn-sim.secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .sim-tracker {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .sim-step {
+      background: rgba(13, 14, 19, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 12px 10px;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .sim-step.active {
+      border-color: var(--nsit-gold);
+      background: rgba(191, 152, 46, 0.12);
+      transform: scale(1.03);
+      box-shadow: 0 4px 14px rgba(191, 152, 46, 0.2);
+    }
+
+    .sim-step.completed {
+      border-color: #10B981;
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .sim-step-icon {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .sim-step-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #F8FAFC;
+    }
+
+    .sim-step-state {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: #94A3B8;
+      margin-top: 4px;
+    }
+
+    .sim-log-terminal {
+      background: #090A0E;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #A7F3D0;
+      height: 180px;
+      overflow-y: auto;
+      line-height: 1.6;
+    }
+
+    .sim-log-line {
+      margin-bottom: 4px;
+    }
+    .sim-log-line .timestamp {
+      color: #64748B;
+      margin-right: 8px;
+    }
+    .sim-log-line .tag {
+      color: var(--nsit-gold-light);
+      margin-right: 6px;
+    }
+
+    /* Modal / Inspector Drawer */
+    .inspector-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .inspector-modal.open {
+      display: flex;
+    }
+
+    .inspector-box {
+      background: #151720;
+      border: 1px solid rgba(191, 152, 46, 0.4);
+      border-radius: 16px;
+      width: min(650px, 94vw);
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+      position: relative;
+    }
+
+    .inspector-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #94A3B8;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .inspector-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--nsit-gold-light);
+      margin-bottom: 8px;
+    }
+
+    .inspector-role {
+      font-size: 12px;
+      font-weight: 600;
+      color: #E2E8F0;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .inspector-content {
+      font-size: 13px;
+      color: #CBD5E1;
+      line-height: 1.6;
+    }
+
+    /* Print Optimization */
+    @media print {
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .top-nav, .btn-sim, .sim-actions, .inspector-modal {
+        display: none !important;
+      }
+      .tab-section {
+        display: block !important;
+        page-break-after: always;
+      }
+      .briefing-banner, .swimlane-container, .stage-card, .check-category-card {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+      }
+      .briefing-title, .stage-title, .section-title {
+        color: #7B1123 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation & Tab Bar -->
+  <header class="top-nav">
+    <div class="brand-group">
+      <div class="brand-badge">ETIMS 2027</div>
+      <div class="brand-meta">
+        <h1>Operational Workflow & System Architecture Blueprint</h1>
+        <p>Convenor Operations Guide · Netaji Subhas Institute of Technology (NSIT), Bihta, Patna</p>
+      </div>
+    </div>
+
+    <nav class="nav-tabs">
+      <button class="nav-tab-btn active" data-tab="swimlane">
+        <span>🔀 Master Swimlane</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="paper-flow">
+        <span>📄 Paper Review Lifecycle</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="delegate-flow">
+        <span>💳 Delegate Registration Flow</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="setup-checklist">
+        <span>🛠️ What Needs Setup</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="simulation">
+        <span>🎮 Interactive Sandbox</span>
+      </button>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn-outline" onclick="window.print()">
+        <span>🖨️ Print Blueprint</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Executive Briefing Overview Banner -->
+    <div class="briefing-banner">
+      <div class="badge-convenor">
+        <span>🏛️ Convenor Secretariat Desk · Dr. Atif Hussain</span>
+      </div>
+      <h2 class="briefing-title">
+        End-to-End Operational Workflow for ETIMS 2027
+      </h2>
+      <p class="briefing-desc">
+        This document provides the complete operational blueprint for the 1st National Conference on Emerging Technologies, Innovation and Multidisciplinary Studies (23–24 July 2027). It details how manuscripts are ingested, evaluated, and published, how delegate fees and passes are verified, and the exact software, credentials, and committees required to operationalize the summit.
+      </p>
+
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Host Campus</div>
+          <div class="kpi-val">NSIT Bihta, Patna</div>
+          <div class="kpi-sub">9.2-Acre Residential Campus</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Peer-Review Engine</div>
+          <div class="kpi-val">Double-Blind</div>
+          <div class="kpi-sub">2 Reviewers per Manuscript</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Expected Intake</div>
+          <div class="kpi-val">150–250 Papers</div>
+          <div class="kpi-sub">Across 8 Multidisciplinary Tracks</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Delegate Capacity</div>
+          <div class="kpi-val">200–300 Delegates</div>
+          <div class="kpi-sub">5 Registration Categories</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ───────────────────────────────────────────────────────────── -->
+    <!-- TAB 1: MASTER SWIMLANE WORKFLOW -->
+    <!-- ───────────────────────────────────────────────────────────── -->
+    <section class="tab-section active" id="tab-swimlane">
+      <div class="section-head">
+        <div class="section-tag">Cross-Functional Operational Flow</div>
+        <h3 class="section-title">Master Operational Swimlane Diagram</h3>
+        <p class="section-desc">Click any node to inspect responsibilities, automated triggers, software tools, and deliverables.</p>
+      </div>
+
+      <div class="swimlane-container">
+        <!-- Column Headers -->
+        <div class="swimlane-header-row">
+          <div class="lane-col-title">Actor / Role</div>
+          <div class="lane-col-title">Phase 1: Announcement</div>
+          <div class="lane-col-title">Phase 2: Intake & Triage</div>
+          <div class="lane-col-title">Phase 3: Peer Review</div>
+          <div class="lane-col-title">Phase 4: Decision & Reg.</div>
+          <div class="lane-col-title">Phase 5: Summit Days</div>
+        </div>
+
+        <!-- Swimlane 1: Author -->
+        <div class="swimlane-row">
+          <div class="lane-actor">
+            <div class="actor-icon">✍️</div>
+            <div>
+              <div class="actor-name">Corresponding Author</div>
+              <div class="actor-role">Researcher / Faculty / Student</div>
+            </div>
+          </div>
+          <div class="lane-node highlight-maroon" onclick="inspectNode('Author Downloads CFP', 'Author accesses etims-2027 portal, reviews the 8 thematic tracks (T1–T8), and downloads the standardized IEEE/Springer manuscript template and brochure.', 'etims-2027.vercel.app / Brochure PDF', 'Author', 'CFP circular & template')">
+            <div class="lane-node-title">1. Reads CFP & Tracks</div>
+            <div class="lane-node-tool">Portal / PDF</div>
+          </div>
+          <div class="lane-node highlight-maroon" onclick="inspectNode('Manuscript Submission', 'Author submits full paper (anonymized for double-blind review) along with 250–300 word abstract, keywords, and track selection. Receives Paper ID (e.g. ETIMS27-P102).', 'Microsoft CMT / Submission Portal', 'Author', 'PDF Upload + Metadata')">
+            <div class="lane-node-title">2. Submits Blind PDF</div>
+            <div class="lane-node-tool">CMT / Form</div>
+          </div>
+          <div class="node-empty">—</div>
+          <div class="lane-node highlight-maroon" onclick="inspectNode('Camera-Ready & Early Registration', 'Upon receiving acceptance notification, author incorporates reviewer revisions, submits final camera-ready PDF, signs copyright form, and pays delegate registration fee.', 'CMT + Payment Gateway', 'Author', 'Camera-Ready + Fee')">
+            <div class="lane-node-title">5. Camera-Ready & Pay</div>
+            <div class="lane-node-tool">Portal / UPI</div>
+          </div>
+          <div class="lane-node highlight-gold" onclick="inspectNode('Physical Presentation at NSIT', 'Author arrives at NSIT Bihta, collects badge and delegate kit, presents oral paper or poster in allocated technical hall before session chairs.', 'NSIT Bihta Campus Halls', 'Author', 'Oral / Poster Deck')">
+            <div class="lane-node-title">6. Oral Presentation</div>
+            <div class="lane-node-tool">Hall A/B/C</div>
+          </div>
+        </div>
+
+        <!-- Swimlane 2: Secretariat & Dr. Atif Hussain -->
+        <div class="swimlane-row">
+          <div class="lane-actor">
+            <div class="actor-icon">🏛️</div>
+            <div>
+              <div class="actor-name">Convenor Secretariat</div>
+              <div class="actor-role">Dr. Atif Hussain & Co-Convenors</div>
+            </div>
+          </div>
+          <div class="lane-node highlight-gold" onclick="inspectNode('Portal Launch & Track Configuration', 'Convenor configures 8 tracks in submission system, establishes review rubrics, and distributes promotional circulars across academic networks.', 'Microsoft CMT / Email Desk', 'Convenor Desk', 'Active Portal')">
+            <div class="lane-node-title">Setup 8 Tracks</div>
+            <div class="lane-node-tool">Admin Console</div>
+          </div>
+          <div class="lane-node highlight-gold" onclick="inspectNode('Desk Triage & Plagiarism Screening', 'Secretariat verifies compliance with page count, template format, and checks plagiarism using Turnitin/iThenticate. Must be <15% similarity. Rejects duplicates.', 'Turnitin / iThenticate', 'Secretariat', 'Desk Screening Report')">
+            <div class="lane-node-title">3. Triage & Plagiarism</div>
+            <div class="lane-node-tool">Turnitin (<15%)</div>
+          </div>
+          <div class="lane-node highlight-gold" onclick="inspectNode('Assign Reviewers & Monitor', 'Convenor assigns 2 independent domain experts per paper from advisory panel and tracks review turnaround to avoid deadline bottlenecks.', 'CMT Review Engine', 'Track Chairs', 'Reviewer Assignments')">
+            <div class="lane-node-title">Assign 2 Reviewers</div>
+            <div class="lane-node-tool">CMT Engine</div>
+          </div>
+          <div class="lane-node highlight-gold" onclick="inspectNode('Editorial Decisions & Notification', 'Convenor consolidates reviewer marks (1 to 5). Issues formal Acceptance, Revision, or Rejection notices via automated templated circulars.', 'CMT Mailer / Outlook', 'Convenor Desk', 'Formal Notices')">
+            <div class="lane-node-title">4. Editorial Decisions</div>
+            <div class="lane-node-tool">Accept / Revise</div>
+          </div>
+          <div class="lane-node highlight-gold" onclick="inspectNode('Schedule Technical Sessions', 'Compiles conference proceedings, schedules keynote timings, assigns session chairs, and oversees on-campus hall management.', 'Program Directory', 'Convenor Desk', 'Session Schedule')">
+            <div class="lane-node-title">Chair Sessions & Kit</div>
+            <div class="lane-node-tool">Proceedings</div>
+          </div>
+        </div>
+
+        <!-- Swimlane 3: Independent Reviewers -->
+        <div class="swimlane-row">
+          <div class="lane-actor">
+            <div class="actor-icon">🔬</div>
+            <div>
+              <div class="actor-name">Domain Reviewers</div>
+              <div class="actor-role">IIT Patna, NIT Surathkal, GEC Faculty</div>
+            </div>
+          </div>
+          <div class="node-empty">—</div>
+          <div class="node-empty">—</div>
+          <div class="lane-node highlight-green" onclick="inspectNode('Double-Blind Evaluation', 'Reviewer evaluates assigned anonymized paper against rubric: Novelty (20), Methodology (30), Results (20), Presentation (15), Track Fit (15). Submits confidential and author feedback.', 'CMT Evaluation Form', 'Reviewer Panel', 'Scorecard + Comments')">
+            <div class="lane-node-title">Double-Blind Review</div>
+            <div class="lane-node-tool">CMT Scorecard</div>
+          </div>
+          <div class="node-empty">—</div>
+          <div class="lane-node highlight-green" onclick="inspectNode('Session Chair / Evaluator', 'Advisory members and invited professors chair physical paper sessions and evaluate candidates for Best Paper and Best Student Paper awards.', 'Auditorium & Halls', 'Session Chairs', 'Award Nomination')">
+            <div class="lane-node-title">Evaluate Best Papers</div>
+            <div class="lane-node-tool">Award Rubric</div>
+          </div>
+        </div>
+
+        <!-- Swimlane 4: Delegate Registration & Accounts Desk -->
+        <div class="swimlane-row">
+          <div class="lane-actor">
+            <div class="actor-icon">💳</div>
+            <div>
+              <div class="actor-name">Accounts & Reception</div>
+              <div class="actor-role">NSIT Finance & Student Volunteers</div>
+            </div>
+          </div>
+          <div class="node-empty">—</div>
+          <div class="node-empty">—</div>
+          <div class="node-empty">—</div>
+          <div class="lane-node highlight-maroon" onclick="inspectNode('Fee Verification & Badge Issuance', 'Accounts desk verifies bank UTR or gateway webhook, confirms eligibility (student ID vs faculty), and system issues unique Delegate Pass ID (e.g. ETIMS27-D402).', 'NSIT Accounts / ERP', 'Accounts Clerk', 'Verified Pass')">
+            <div class="lane-node-title">Verify UTR & Pass</div>
+            <div class="lane-node-tool">Accounts Desk</div>
+          </div>
+          <div class="lane-node highlight-maroon" onclick="inspectNode('Physical Registration Desk', 'Student volunteer scans delegate QR code, marks attendance on live portal, hands over conference kit, lunch coupon, and lanyard.', 'NSIT Reception Counter', 'Volunteer Wing', 'Kit & Certificate')">
+            <div class="lane-node-title">Badge & Kit Handover</div>
+            <div class="lane-node-tool">Check-In Desk</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────────── -->
+    <!-- TAB 2: PAPER REVIEW LIFECYCLE (DEEP-DIVE) -->
+    <!-- ───────────────────────────────────────────────────────────── -->
+    <section class="tab-section" id="tab-paper-flow">
+      <div class="section-head">
+        <div class="section-tag">Academic Rigor & Review Mechanics</div>
+        <h3 class="section-title">The 6-Stage Manuscript Lifecycle</h3>
+        <p class="section-desc">Detailed step-by-step breakdown of how a research paper moves from initial intake to final presentation and proceedings indexing.</p>
+      </div>
+
+      <div class="stages-grid">
+        <!-- Stage 1 -->
+        <div class="stage-card">
+          <div class="stage-top">
+            <div class="stage-num-badge">01</div>
+            <div class="stage-duration">Jan – 30 Mar 2027</div>
+          </div>
+          <h4 class="stage-title">Manuscript Intake Portal</h4>
+          <p class="stage-desc">
+            Author registers on the portal and submits their original paper in standard double-column IEEE/Springer format. Author names are stripped from the main manuscript file.
+          </p>
+          <div class="detail-box">
+            <div class="d-label">Required Metadata</div>
+            <div class="d-content">Paper Title, Abstract (250–300 words), 5 Keywords, Target Track (T1–T8), All Co-Authors' Affiliations.</div>
+          </div>
+          <div class="detail-box">
+            <div class="d-label">Automated System Action</div>
+            <div class="d-content">Generates unique Tracking Code (e.g., <code>ETIMS27-P142</code>), sends automated email acknowledgement, and stages file in secure storage.</div>
+          </div>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="stage-card">
+          <div class="stage-top">
+            <div class="stage-num-badge">02</div>
+            <div class="stage-duration">Within 5 Days of Submission</div>
+          </div>
+          <h4 class="stage-title">Desk Triage & Plagiarism</h4>
+          <p class="stage-desc">
+            The Convenor Secretariat screens incoming manuscripts for basic quality, scope alignment, and originality before sending to reviewers.
+          </p>
+          <div class="detail-box">
+            <div class="d-label">Plagiarism Threshold</div>
+            <div class="d-content">Similarity index must be strictly < 15% overall (excluding references) and < 3% from any single source using Turnitin/iThenticate.</div>
+          </div>
+          <div class="detail-box">
+            <div class="d-label">Outcome Branches</div>
+            <div class="d-content">Pass -> Advanced to Track Chair. Fail -> Desk Rejection or 7-day formatting revision request sent to author.</div>
+          </div>
+        </div>
+
+        <!-- Stage 3 -->
+        <div class="stage-card featured">
+          <div class="stage-top">
+            <div class="stage-num-badge">03</div>
+            <div class="stage-duration">1 Apr – 10 May 2027</div>
+          </div>
+          <h4 class="stage-title">Double-Blind Peer Review</h4>
+          <p class="stage-desc">
+            Two independent reviewers are assigned per paper. Reviewers cannot see author identities or institutions, eliminating prestige bias.
+          </p>
+          <div class="detail-box">
+            <div class="d-label">Review Panel Pool</div>
+            <div class="d-content">Drawn from IIT Patna, NIT Surathkal, GEC Munger, GEC Bhojpur, and senior NSIT faculty across 7 departments.</div>
+          </div>
+          <div class="detail-box">
+            <div class="d-label">Automated Safeguard</div>
+            <div class="d-content">Conflict of Interest (COI) detector prevents reviewers from evaluating papers from their own institution or department.</div>
+          </div>
+        </div>
+
+        <!-- Stage 4 -->
+        <div class="stage-card">
+          <div class="stage-top">
+            <div class="stage-num-badge">04</div>
+            <div class="stage-duration">By 31 May 2027</div>
+          </div>
+          <h4 class="stage-title">Convenor Decision Desk</h4>
+          <p class="stage-desc">
+            Conference Convenor Dr. Atif Hussain and Track Chairs review reviewer scores and synthesize feedback into a definitive decision.
+          </p>
+          <div class="detail-box">
+            <div class="d-label">Evaluation Rubric (100 pts)</div>
+            <div class="d-content">Novelty (20%), Soundness & Math (30%), Experimental Validation (20%), Structure & English (15%), Track Fit (15%).</div>
+          </div>
+          <div class="detail-box">
+            <div class="d-label">Decision Categories</div>
+            <div class="d-content"><strong>Accept</strong> (Ready for camera-ready) | <strong>Minor Revision</strong> (7-day turnaround) | <strong>Reject</strong> (Constructive feedback).</div>
+          </div>
+        </div>
+
+        <!-- Stage 5 -->
+        <div class="stage-card">
+          <div class="stage-top">
+            <div class="stage-num-badge">05</div>
+            <div class="stage-duration">By 20 June 2027</div>
+          </div>
+          <h4 class="stage-title">Camera-Ready & Copyright</h4>
+          <p class="stage-desc">
+            Accepted authors revise their papers according to reviewer recommendations and upload final production-ready files.
+          </p>
+          <div class="detail-box">
+            <div class="d-label">Submission Requirements</div>
+            <div class="d-content">Final PDF, editable source files (Word DOCX / LaTeX ZIP), and signed institutional Copyright Consent Form.</div>
+          </div>
+          <div class="detail-box">
+            <div class="d-label">Prerequisite Rule</div>
+            <div class="d-content">At least one registered author with confirmed fee payment is mandatory for inclusion in the official proceedings.</div>
+          </div>
+        </div>
+
+        <!-- Stage 6 -->
+        <div class="stage-card">
+          <div class="stage-top">
+            <div class="stage-num-badge">06</div>
+            <div class="stage-duration">23–24 July 2027</div>
+          </div>
+          <h4 class="stage-title">Oral Presentation & Awards</h4>
+          <p class="stage-desc">
+            Physical presentation in assigned conference hall at NSIT Bihta before domain session chairs and peer audience.
+          </p>
+          <div class="detail-box">
+            <div class="d-label">Presentation Formats</div>
+            <div class="d-content">Oral Presentation: 12 min presentation + 3 min Q&A. Poster Session: Dedicated 60 min exhibition in central foyer.</div>
+          </div>
+          <div class="detail-box">
+            <div class="d-label">Award Evaluation</div>
+            <div class="d-content">Session chairs score presentations for Best Paper, Best Student Paper, and Best Poster Awards presented at valedictory.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────────── -->
+    <!-- TAB 3: DELEGATE REGISTRATION & PAYMENT FLOW -->
+    <!-- ───────────────────────────────────────────────────────────── -->
+    <section class="tab-section" id="tab-delegate-flow">
+      <div class="section-head">
+        <div class="section-tag">Financial Reconciliation & Attendee Intake</div>
+        <h3 class="section-title">Delegate Registration & Payment Verification Flow</h3>
+        <p class="section-desc">How delegates register, pay via UPI / Gateway, get verified by NSIT accounts, and check in on-campus.</p>
+      </div>
+
+      <div class="stages-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="stage-card">
+          <div class="stage-num-badge" style="margin-bottom:12px;">1</div>
+          <h4 class="stage-title">Category Selection</h4>
+          <p class="stage-desc">
+            Delegate chooses one of 5 verified tiers: Faculty (₹2,500), Industry (₹3,500), PG/Scholar (₹1,500), UG Student (₹800), Attendee (₹500). System applies Early-Bird or Regular tariff automatically.
+          </p>
+          <div class="detail-box">
+            <div class="d-label">Input Fields</div>
+            <div class="d-content">Full Name, Email, Phone, College/Org, Presentation Type (Oral / Poster / Observer).</div>
+          </div>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-num-badge" style="margin-bottom:12px;">2</div>
+          <h4 class="stage-title">Payment Settlement</h4>
+          <p class="stage-desc">
+            Delegate pays via official NSIT Conference QR Code (SBI/PNB/Canara Bank) or online payment gateway. Enters 12-digit Bank UTR / Reference Number.
+          </p>
+          <div class="detail-box">
+            <div class="d-label">Payment Modes</div>
+            <div class="d-content">UPI (GPay / PhonePe / Paytm / BHIM) or NEFT/RTGS Bank Transfer.</div>
+          </div>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-num-badge" style="margin-bottom:12px;">3</div>
+          <h4 class="stage-title">Accounts Reconciliation</h4>
+          <p class="stage-desc">
+            NSIT Finance Desk checks bank ledger against submitted UTR number. For student categories, verifies valid college ID card. Clicks 'Approve'.
+          </p>
+          <div class="detail-box">
+            <div class="d-label">Turnaround Time</div>
+            <div class="d-content">Instant (for Payment Gateway Webhooks) or within 24 hours (for Manual Bank UPI verification).</div>
+          </div>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-num-badge" style="margin-bottom:12px;">4</div>
+          <h4 class="stage-title">Pass & On-Campus Check-In</h4>
+          <p class="stage-desc">
+            System generates verifiable digital Delegate Pass with unique Pass ID (e.g. <code>ETIMS27-D409</code>) and QR code. Downloadable as PDF/TXT.
+          </p>
+          <div class="detail-box">
+            <div class="d-label">At NSIT Reception</div>
+            <div class="d-content">Volunteer scans QR code on phone -> Handover of official delegate kit, lunch coupons, and physical lanyard badge.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tariff Summary Table -->
+      <div style="background: var(--nsit-card-dark); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 22px; margin-top: 10px;">
+        <h4 style="font-family: var(--font-display); color: var(--nsit-gold-light); font-size: 16px; margin-bottom: 14px;">
+          Official Registration Tariff & Entitlements (INR)
+        </h4>
+        <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+          <thead>
+            <tr style="border-bottom: 2px solid rgba(191, 152, 46, 0.3); color: var(--nsit-gold);">
+              <th style="padding: 10px 14px;">Category</th>
+              <th style="padding: 10px 14px;">Early Fee (by 20 June 2027)</th>
+              <th style="padding: 10px 14px;">Regular Fee (by 10 July 2027)</th>
+              <th style="padding: 10px 14px;">Included Entitlements</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 12px 14px; font-weight: 700; color: #FFF;">Faculty / Academicians</td>
+              <td style="padding: 12px 14px; color: var(--nsit-gold-light); font-weight: 700;">₹ 2,500</td>
+              <td style="padding: 12px 14px; color: #E2E8F0;">₹ 3,000</td>
+              <td style="padding: 12px 14px; color: #94A3B8;">Full Sessions, Delegate Kit, 2 Days Working Lunch, Certificate</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 12px 14px; font-weight: 700; color: #FFF;">Industry Professionals</td>
+              <td style="padding: 12px 14px; color: var(--nsit-gold-light); font-weight: 700;">₹ 3,500</td>
+              <td style="padding: 12px 14px; color: #E2E8F0;">₹ 4,000</td>
+              <td style="padding: 12px 14px; color: #94A3B8;">All Tracks, Kit, Networking Luncheon, Industry Certificate</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 12px 14px; font-weight: 700; color: #FFF;">Research Scholars / PG</td>
+              <td style="padding: 12px 14px; color: var(--nsit-gold-light); font-weight: 700;">₹ 1,500</td>
+              <td style="padding: 12px 14px; color: #E2E8F0;">₹ 2,000</td>
+              <td style="padding: 12px 14px; color: #94A3B8;">Presentation Slot, Conference Kit, Lunch, Scholar Certificate</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 12px 14px; font-weight: 700; color: #FFF;">UG Students</td>
+              <td style="padding: 12px 14px; color: var(--nsit-gold-light); font-weight: 700;">₹ 800</td>
+              <td style="padding: 12px 14px; color: #E2E8F0;">₹ 1,000</td>
+              <td style="padding: 12px 14px; color: #94A3B8;">Project Presentation, Student Badge, Lunch, Participation Certificate</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 14px; font-weight: 700; color: #FFF;">Non-presenting Co-author / Attendee</td>
+              <td style="padding: 12px 14px; color: var(--nsit-gold-light); font-weight: 700;">₹ 500</td>
+              <td style="padding: 12px 14px; color: #E2E8F0;">₹ 500</td>
+              <td style="padding: 12px 14px; color: #94A3B8;">Auditorium Access, Refreshments, Attendee Certificate</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────────── -->
+    <!-- TAB 4: WHAT NEEDS SETUP (EXACT REQUIREMENTS) -->
+    <!-- ───────────────────────────────────────────────────────────── -->
+    <section class="tab-section" id="tab-setup-checklist">
+      <div class="section-head">
+        <div class="section-tag">Convenor's Setup Blueprint</div>
+        <h3 class="section-title">Exact Setup Checklist: Accounts, Systems & Committees</h3>
+        <p class="section-desc">What Dr. Atif Hussain, the college IT administration, and NSIT accounts must set up to launch operations.</p>
+      </div>
+
+      <div class="checklist-wrap">
+        <!-- Category 1: Software & Accounts Setup -->
+        <div class="check-category-card">
+          <h3>💻 Software, Portals & Cloud Setup</h3>
+          <p class="cat-sub">Technical infrastructure required to manage papers, emails, and web traffic.</p>
+          
+          <ul class="checklist-items">
+            <li class="check-item">
+              <div class="check-item-icon">1</div>
+              <div class="check-item-text">
+                <div class="title">Microsoft CMT Conference Registration (Option A)</div>
+                <div class="detail">Go to <code>cmt3.research.microsoft.com</code>, submit a Conference Request form for 'ETIMS 2027'. Enter Dr. Atif Hussain as Chair. Create 8 tracks (T1 to T8). Cost: <strong>₹0 (Free by Microsoft Research)</strong>.</div>
+                <span class="action-badge">Est. Setup Time: 24–48 hours</span>
+              </div>
+            </li>
+            <li class="check-item">
+              <div class="check-item-icon">2</div>
+              <div class="check-item-text">
+                <div class="title">Institutional Subdomain DNS Linkage</div>
+                <div class="detail">Request NSIT IT admin to map <code>etims2027.nsit.ac.in</code> via CNAME to our production Vercel edge deployment. Gives authentic college domain credibility.</div>
+                <span class="action-badge">Est. Setup Time: 1 hour</span>
+              </div>
+            </li>
+            <li class="check-item">
+              <div class="check-item-icon">3</div>
+              <div class="check-item-text">
+                <div class="title">Official Secretariat Mailbox Verification</div>
+                <div class="detail">Ensure <code>etims2027@nsiterp.in</code> has SPF, DKIM, and sufficient sending quota (Google Workspace / Outlook 365) to send batch acceptance letters without spam filtering.</div>
+                <span class="action-badge">Est. Setup Time: 2 hours</span>
+              </div>
+            </li>
+            <li class="check-item">
+              <div class="check-item-icon">4</div>
+              <div class="check-item-text">
+                <div class="title">Turnitin / iThenticate Screening Account</div>
+                <div class="detail">Verify NSIT Central Library Turnitin institutional license is active for plagiarism checking during desk triage. Threshold locked at &lt;15%.</div>
+                <span class="action-badge">Est. Setup Time: Ready via Library</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Category 2: Financial & On-Campus Logistics Setup -->
+        <div class="check-category-card">
+          <h3>🏦 Banking, Payment & Campus Setup</h3>
+          <p class="cat-sub">Financial account, reception counters, and logistical execution.</p>
+
+          <ul class="checklist-items">
+            <li class="check-item">
+              <div class="check-item-icon">1</div>
+              <div class="check-item-text">
+                <div class="title">Dedicated Bank Account / Merchant UPI QR</div>
+                <div class="detail">Coordinate with NSIT Accounts office to generate a dedicated conference UPI QR Code with name <em>'NSIT ETIMS 2027'</em>. Avoids mixing conference delegate fees with general college fees.</div>
+                <span class="action-badge">Responsible: Finance Section</span>
+              </div>
+            </li>
+            <li class="check-item">
+              <div class="check-item-icon">2</div>
+              <div class="check-item-text">
+                <div class="title">Reviewer Invitation Letters to Advisory Board</div>
+                <div class="detail">Send formal invitation circulars signed by Convenor Dr. Atif Hussain to our 7 advisory professors at IIT Patna, NIT Surathkal, GEC Munger, and GEC Bhojpur confirming their track assignments.</div>
+                <span class="action-badge">Responsible: Convenor Desk</span>
+              </div>
+            </li>
+            <li class="check-item">
+              <div class="check-item-icon">3</div>
+              <div class="check-item-text">
+                <div class="title">Student Volunteer Wing Allocation (6 Wings)</div>
+                <div class="detail">Appoint departmental student volunteers across 6 wings: (1) Registration Desk, (2) Hall Management & AV, (3) Guest Reception, (4) Publicity, (5) Photography & Docs, (6) IT Support.</div>
+                <span class="action-badge">Responsible: 5 Co-Convenors</span>
+              </div>
+            </li>
+            <li class="check-item">
+              <div class="check-item-icon">4</div>
+              <div class="check-item-text">
+                <div class="title">Publisher Agreement / Proceedings MoU</div>
+                <div class="detail">Finalize formal agreement with academic publisher (e.g. CRC Press / Springer / Atlantis) to define camera-ready templates and indexing specifications.</div>
+                <span class="action-badge">Responsible: Patron & Convenor</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────────── -->
+    <!-- TAB 5: INTERACTIVE SIMULATION SANDBOX -->
+    <!-- ───────────────────────────────────────────────────────────── -->
+    <section class="tab-section" id="tab-simulation">
+      <div class="section-head">
+        <div class="section-tag">Live Operations Simulator</div>
+        <h3 class="section-title">Interactive Process Simulator</h3>
+        <p class="section-desc">Run real-time simulations to demonstrate to Dr. Atif Hussain and the committee exactly how paper submissions and delegate passes flow through the system.</p>
+      </div>
+
+      <div class="sim-container">
+        <div class="sim-header">
+          <div>
+            <div class="sim-title">Conference Workflow Simulation Engine</div>
+            <div class="sim-desc">Click either simulation button below to trigger automated end-to-end execution.</div>
+          </div>
+          <div class="sim-actions">
+            <button class="btn-sim" id="btnRunPaperSim">
+              <span>▶ Simulate Paper Submission</span>
+            </button>
+            <button class="btn-sim secondary" id="btnRunDelegateSim">
+              <span>▶ Simulate Delegate Registration</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step tracker -->
+        <div class="sim-tracker" id="simTracker">
+          <div class="sim-step" id="sStep1">
+            <div class="sim-step-icon">📤</div>
+            <div class="sim-step-title">1. Intake</div>
+            <div class="sim-step-state">Ready</div>
+          </div>
+          <div class="sim-step" id="sStep2">
+            <div class="sim-step-icon">🛡️</div>
+            <div class="sim-step-title">2. Triage</div>
+            <div class="sim-step-state">Idle</div>
+          </div>
+          <div class="sim-step" id="sStep3">
+            <div class="sim-step-icon">🔬</div>
+            <div class="sim-step-title">3. Review</div>
+            <div class="sim-step-state">Idle</div>
+          </div>
+          <div class="sim-step" id="sStep4">
+            <div class="sim-step-icon">⚖️</div>
+            <div class="sim-step-title">4. Decision</div>
+            <div class="sim-step-state">Idle</div>
+          </div>
+          <div class="sim-step" id="sStep5">
+            <div class="sim-step-icon">📑</div>
+            <div class="sim-step-title">5. Camera-Ready</div>
+            <div class="sim-step-state">Idle</div>
+          </div>
+          <div class="sim-step" id="sStep6">
+            <div class="sim-step-icon">🏛️</div>
+            <div class="sim-step-title">6. Session Hall</div>
+            <div class="sim-step-state">Idle</div>
+          </div>
+        </div>
+
+        <!-- Live Terminal Log -->
+        <div class="sim-log-terminal" id="simTerminal">
+          <div class="sim-log-line">
+            <span class="timestamp">[SYSTEM READY]</span>
+            <span class="tag">[ETIMS-CORE]</span>
+            Operational workflow engine initialized. Ready to execute live demonstration.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Node Inspector Modal -->
+  <div class="inspector-modal" id="inspectorModal">
+    <div class="inspector-box">
+      <button class="inspector-close" onclick="closeInspector()">✕</button>
+      <div id="inspectorTitle" class="inspector-title">Step Details</div>
+      <div id="inspectorRole" class="inspector-role">Role: Convenor Secretariat</div>
+      <div id="inspectorDesc" class="inspector-content">Description details...</div>
+      <div style="margin-top: 20px; padding: 12px; background: rgba(191,152,46,0.1); border-radius: 8px; border: 1px solid rgba(191,152,46,0.3);">
+        <div style="font-size: 11px; font-weight: 700; color: var(--nsit-gold-light); text-transform: uppercase;">Software / Tooling Used</div>
+        <div id="inspectorTool" style="font-family: var(--font-mono); font-size: 12px; color: #FFF; margin-top: 4px;">Microsoft CMT</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tab switching
+    const tabs = document.querySelectorAll('.nav-tab-btn');
+    const sections = document.querySelectorAll('.tab-section');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-tab');
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        sections.forEach(sec => {
+          if (sec.id === `tab-${target}`) {
+            sec.classList.add('active');
+          } else {
+            sec.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // Inspector Modal
+    function inspectNode(title, desc, tool, actor, deliverable) {
+      document.getElementById('inspectorTitle').textContent = title;
+      document.getElementById('inspectorRole').textContent = `Actor: ${actor} | Output: ${deliverable}`;
+      document.getElementById('inspectorDesc').textContent = desc;
+      document.getElementById('inspectorTool').textContent = tool;
+      document.getElementById('inspectorModal').classList.add('open');
+    }
+
+    function closeInspector() {
+      document.getElementById('inspectorModal').classList.remove('open');
+    }
+
+    document.getElementById('inspectorModal').addEventListener('click', (e) => {
+      if (e.target.id === 'inspectorModal') closeInspector();
+    });
+
+    // Interactive Simulation Engine
+    const simTerminal = document.getElementById('simTerminal');
+    const btnRunPaperSim = document.getElementById('btnRunPaperSim');
+    const btnRunDelegateSim = document.getElementById('btnRunDelegateSim');
+
+    function log(tag, msg) {
+      const line = document.createElement('div');
+      line.className = 'sim-log-line';
+      const time = new Date().toLocaleTimeString();
+      line.innerHTML = `<span class="timestamp">[${time}]</span> <span class="tag">[${tag}]</span> ${msg}`;
+      simTerminal.appendChild(line);
+      simTerminal.scrollTop = simTerminal.scrollHeight;
+    }
+
+    function resetSteps() {
+      for (let i = 1; i <= 6; i++) {
+        const el = document.getElementById(`sStep${i}`);
+        el.className = 'sim-step';
+        el.querySelector('.sim-step-state').textContent = 'Pending';
+      }
+    }
+
+    function setStep(num, state, isCompleted) {
+      const el = document.getElementById(`sStep${num}`);
+      el.className = isCompleted ? 'sim-step completed' : 'sim-step active';
+      el.querySelector('.sim-step-state').textContent = state;
+    }
+
+    let isSimulating = false;
+
+    // Simulation 1: Paper Review Pipeline
+    btnRunPaperSim.addEventListener('click', () => {
+      if (isSimulating) return;
+      isSimulating = true;
+      resetSteps();
+      simTerminal.innerHTML = '';
+
+      log('INIT', 'Starting Paper Submission Simulation for Track 01 (Computer Science & AI)...');
+      setStep(1, 'Uploading', false);
+
+      setTimeout(() => {
+        log('INTAKE', 'Manuscript uploaded: "Deep Reinforcement Learning for Adaptive Power Dispatch" (Anonymized).');
+        log('INTAKE', 'Assigned Unique ID: ETIMS27-P184. Corresponding Author: Dr. Priya Sharma (IIT Patna).');
+        setStep(1, 'Completed', true);
+        setStep(2, 'Turnitin Check', false);
+      }, 1000);
+
+      setTimeout(() => {
+        log('TRIAGE', 'Running Turnitin Similarity Check...');
+        log('TRIAGE', 'Result: 8.4% Similarity Index (Threshold: <15%). Formatting: IEEE 2-Column Validated.');
+        log('TRIAGE', 'Desk Screening APPROVED by Secretariat Desk.');
+        setStep(2, 'Passed (<15%)', true);
+        setStep(3, 'Double-Blind Review', false);
+      }, 2500);
+
+      setTimeout(() => {
+        log('PEER-REVIEW', 'Assigning 2 Independent Domain Reviewers from Advisory Board...');
+        log('PEER-REVIEW', 'Reviewer 1 (IIT Patna): Score 4.5/5.0 - "Sound methodology and strong simulation validation."');
+        log('PEER-REVIEW', 'Reviewer 2 (NIT Surathkal): Score 4.0/5.0 - "Clear contribution; minor typo corrections requested."');
+        setStep(3, 'Reviewed (4.25/5)', true);
+        setStep(4, 'Convenor Decision', false);
+      }, 4200);
+
+      setTimeout(() => {
+        log('DECISION', 'Convenor Dr. Atif Hussain synthesizes scores: RECOMMENDATION ACCEPT (Oral Presentation).');
+        log('DECISION', 'Automated formal Acceptance Notice generated and emailed to author with reviewer notes.');
+        setStep(4, 'ACCEPTED', true);
+        setStep(5, 'Camera-Ready', false);
+      }, 5800);
+
+      setTimeout(() => {
+        log('POST-ACCEPT', 'Author uploads revised Camera-Ready PDF & signed Copyright Agreement.');
+        log('POST-ACCEPT', 'Faculty Delegate Registration fee verified (₹2,500 Early Bird).');
+        setStep(5, 'Verified', true);
+        setStep(6, 'Scheduled', false);
+      }, 7200);
+
+      setTimeout(() => {
+        log('SESSION', 'Allotted to Track 01 Hall A (Aryabhatta Auditorium), Session 2: 24 July 2027, 10:30 AM.');
+        log('SUCCESS', '🎉 Paper lifecycle fully completed! Added to Conference Proceedings Directory.');
+        setStep(6, 'Hall A Allotted', true);
+        isSimulating = false;
+      }, 8600);
+    });
+
+    // Simulation 2: Delegate Registration Pipeline
+    btnRunDelegateSim.addEventListener('click', () => {
+      if (isSimulating) return;
+      isSimulating = true;
+      resetSteps();
+      simTerminal.innerHTML = '';
+
+      log('INIT', 'Starting Delegate Registration Simulation...');
+      setStep(1, 'Selecting Tier', false);
+
+      setTimeout(() => {
+        log('REG-DESK', 'Delegate selected: Industry Professional (Corporate / Industry Practitioner).');
+        log('REG-DESK', 'Delegate Name: Rajiv Verma (Tata Consultancy Services, Patna).');
+        setStep(1, 'Industry Tier', true);
+        setStep(2, 'Calculating Fee', false);
+      }, 1000);
+
+      setTimeout(() => {
+        log('TARIFF', 'Applying Tariff: Early Bird Deadline (before 20 June 2027) -> ₹3,500 INR applied.');
+        log('PAYMENT', 'Payment Mode: UPI Instant Scan (SBI Conference Virtual Account).');
+        log('PAYMENT', 'Submitted Bank UTR: 418290481928.');
+        setStep(2, 'Paid (₹3,500)', true);
+        setStep(3, 'Accounts Check', false);
+      }, 2400);
+
+      setTimeout(() => {
+        log('ACCOUNTS', 'NSIT Accounts Desk matching bank statement ledger with UTR 418290481928...');
+        log('ACCOUNTS', 'Bank credit confirmed: ₹3,500 credited to Sitwanto Devi Mahila Kalyan Sansthan (NSIT).');
+        setStep(3, 'Reconciled', true);
+        setStep(4, 'Pass Generation', false);
+      }, 3800);
+
+      setTimeout(() => {
+        log('PASS-GEN', 'Generating High-Security Digital Delegate Pass...');
+        log('PASS-GEN', 'Assigned PASS ID: ETIMS27-IND-3920 with embedded QR Verification Hash.');
+        log('PASS-GEN', 'Receipt issued and sent to r.verma@tcs.com.');
+        setStep(4, 'Pass Issued', true);
+        setStep(5, 'Campus Transit', false);
+      }, 5200);
+
+      setTimeout(() => {
+        log('TRANSIT', 'Delegate accesses Bihta travel guide: Arrives via NH-922 elevated corridor.');
+        setStep(5, 'Arrived at NSIT', true);
+        setStep(6, 'Check-in Desk', false);
+      }, 6600);
+
+      setTimeout(() => {
+        log('CHECK-IN', 'NSIT Reception Desk scans QR code on phone -> Handover of official kit, badge & lunch card.');
+        log('SUCCESS', '🎉 Delegate successfully checked in for ETIMS 2027 on 23 July 2027!');
+        setStep(6, 'Kit Handed Over', true);
+        isSimulating = false;
+      }, 8000);
+    });
+  </script>
+</body>
+</html>
