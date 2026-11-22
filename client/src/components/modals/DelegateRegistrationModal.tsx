@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X,
@@ -40,18 +40,32 @@ interface SubmittedDelegateRecord {
   registeredAt: string;
 }
 
+const matchCategoryIndex = (catName?: string): number => {
+  if (!catName) return 0;
+  const target = catName.toLowerCase().trim();
+  const found = REGISTRATION_CATEGORIES.findIndex((c) => {
+    const cName = c.category.toLowerCase();
+    const bName = c.badge.toLowerCase();
+    return (
+      cName === target ||
+      cName.includes(target) ||
+      target.includes(cName) ||
+      bName === target ||
+      bName.includes(target) ||
+      target.includes(bName)
+    );
+  });
+  return found !== -1 ? found : 0;
+};
+
 export default function DelegateRegistrationModal({
   isOpen,
   onClose,
   defaultCategory,
 }: DelegateRegistrationModalProps) {
-  const [selectedCategoryIdx, setSelectedCategoryIdx] = useState<number>(() => {
-    if (!defaultCategory) return 0;
-    const found = REGISTRATION_CATEGORIES.findIndex((c) =>
-      c.category.toLowerCase().includes(defaultCategory.toLowerCase())
-    );
-    return found !== -1 ? found : 0;
-  });
+  const [selectedCategoryIdx, setSelectedCategoryIdx] = useState<number>(() =>
+    matchCategoryIndex(defaultCategory)
+  );
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -66,6 +80,16 @@ export default function DelegateRegistrationModal({
   const [submittedRecord, setSubmittedRecord] = useState<SubmittedDelegateRecord | null>(null);
   const [copied, setCopied] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
+
+  // Automatically synchronize selected category whenever modal opens or defaultCategory changes
+  useEffect(() => {
+    if (isOpen) {
+      if (defaultCategory) {
+        setSelectedCategoryIdx(matchCategoryIndex(defaultCategory));
+      }
+      setValidationError(null);
+    }
+  }, [isOpen, defaultCategory]);
 
   const selectedCat = REGISTRATION_CATEGORIES[selectedCategoryIdx] || REGISTRATION_CATEGORIES[0];
 

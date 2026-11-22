@@ -57,7 +57,7 @@ export default function RegistrationPage() {
 
             <button
               type="button"
-              onClick={() => handleOpenModal('Faculty')}
+              onClick={() => handleOpenModal('Faculty / Academicians')}
               className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#7B1123] hover:bg-[#5C1324] px-7 py-3.5 text-sm font-bold text-white shadow-md transition-all shrink-0 cursor-pointer self-start lg:self-center"
             >
               <Sparkles className="h-4 w-4 text-[#F3D993]" />
@@ -229,6 +229,7 @@ export default function RegistrationPage() {
 
       {/* Interactive Delegate Pass Generator Modal */}
       <DelegateRegistrationModal
+        key={`${selectedCategory}-${modalOpen}`}
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
         defaultCategory={selectedCategory}
