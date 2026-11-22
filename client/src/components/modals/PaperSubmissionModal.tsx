@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X,
@@ -229,23 +229,37 @@ export default function PaperSubmissionModal({
     setValidationError(null);
   };
 
+  // Lock background body scroll completely while modal is open
+  useEffect(() => {
+    if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
+      const originalTouchAction = document.body.style.touchAction;
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        document.body.style.touchAction = originalTouchAction;
+      };
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
     <AnimatePresence>
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto"
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto overscroll-contain"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
       >
-        {/* Backdrop */}
+        {/* Solid Dark Dimming Backdrop with High Blur to prevent background bleed */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-midnight/85 backdrop-blur-md cursor-pointer"
+          className="fixed inset-0 bg-black/80 backdrop-blur-md cursor-pointer"
           aria-hidden="true"
         />
 
@@ -255,7 +269,7 @@ export default function PaperSubmissionModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 16 }}
           transition={{ type: 'spring', damping: 26, stiffness: 300 }}
-          className="relative w-full max-w-2xl rounded-3xl border border-[#E7E0D6] bg-white shadow-2xl my-auto text-[#1C1917] overflow-hidden z-10"
+          className="relative w-full max-w-2xl max-h-[90vh] flex flex-col rounded-3xl border border-[#E7E0D6] bg-white shadow-2xl my-auto text-[#1C1917] overflow-hidden z-10 overscroll-contain"
         >
           {/* Modal Header */}
           <div className="flex items-center justify-between border-b border-[#E7E0D6] px-6 py-4 bg-[#FAF8F5]">
@@ -284,7 +298,7 @@ export default function PaperSubmissionModal({
           </div>
 
           {/* Modal Body */}
-          <div className="p-6 sm:p-7 max-h-[80vh] overflow-y-auto">
+          <div className="p-6 sm:p-7 overflow-y-auto overscroll-contain flex-1">
             {/* SUCCESS SCREEN */}
             {submittedRecord ? (
               <motion.div

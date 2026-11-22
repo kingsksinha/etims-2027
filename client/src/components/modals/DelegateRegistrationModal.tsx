@@ -91,6 +91,20 @@ export default function DelegateRegistrationModal({
     }
   }, [isOpen, defaultCategory]);
 
+  // Lock background body scroll while modal is open
+  useEffect(() => {
+    if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
+      const originalTouchAction = document.body.style.touchAction;
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        document.body.style.touchAction = originalTouchAction;
+      };
+    }
+  }, [isOpen]);
+
   const selectedCat = REGISTRATION_CATEGORIES[selectedCategoryIdx] || REGISTRATION_CATEGORIES[0];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -230,13 +244,28 @@ export default function DelegateRegistrationModal({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto bg-black/60 backdrop-blur-sm">
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto overscroll-contain"
+        role="dialog"
+        aria-modal="true"
+      >
+        {/* Solid Dark Dimming Backdrop with High Blur to prevent background bleed */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          className="fixed inset-0 bg-black/80 backdrop-blur-md cursor-pointer"
+          aria-hidden="true"
+        />
+
+        {/* Modal Window Container */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.25 }}
-          className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl border border-[#BF982E]/40 bg-white p-5 sm:p-8 shadow-2xl text-[#1C1917]"
+          className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto overscroll-contain rounded-3xl border border-[#BF982E]/40 bg-white p-5 sm:p-8 shadow-2xl text-[#1C1917] my-auto z-10"
         >
           {/* Close Button */}
           <button
