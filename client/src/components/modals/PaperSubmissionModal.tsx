@@ -14,7 +14,7 @@ import {
   Mail,
   Phone,
 } from 'lucide-react';
-import { CONVENOR, CONFERENCE, PROVISIONAL_TRACKS } from '../../utils/constants';
+import { CONVENOR, PROVISIONAL_TRACKS } from '../../utils/constants';
 
 interface PaperSubmissionModalProps {
   isOpen: boolean;
@@ -60,6 +60,27 @@ export default function PaperSubmissionModal({
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Prevent background scroll bleed when modal is active
+  useEffect(() => {
+    if (isOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.touchAction = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [isOpen]);
+
+  // Sync trackId if defaultTrackId changes
+  useEffect(() => {
+    if (defaultTrackId) {
+      setTrackId(defaultTrackId);
+    }
+  }, [defaultTrackId]);
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
@@ -68,7 +89,12 @@ export default function PaperSubmissionModal({
         'application/msword',
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
       ];
-      if (!validTypes.includes(file.type) && !file.name.endsWith('.pdf') && !file.name.endsWith('.docx') && !file.name.endsWith('.doc')) {
+      if (
+        !validTypes.includes(file.type) &&
+        !file.name.endsWith('.pdf') &&
+        !file.name.endsWith('.docx') &&
+        !file.name.endsWith('.doc')
+      ) {
         setValidationError('Please upload a valid PDF or Word document (.pdf, .docx, .doc).');
         return;
       }
@@ -98,15 +124,15 @@ export default function PaperSubmissionModal({
     setSubmitting(true);
     setStatusMessage('Validating manuscript parameters...');
 
-    await new Promise((r) => setTimeout(r, 600));
+    await new Promise((r) => setTimeout(r, 500));
     setStatusMessage('Securing manuscript for double-blind peer review...');
 
-    await new Promise((r) => setTimeout(r, 600));
+    await new Promise((r) => setTimeout(r, 500));
     setStatusMessage('Registering submission with ETIMS 2027 Secretariat Desk...');
 
-    await new Promise((r) => setTimeout(r, 700));
+    await new Promise((r) => setTimeout(r, 600));
 
-    // Generate authoritative tracking reference ID
+    // Generate tracking reference ID
     const randomDigits = Math.floor(1000 + Math.random() * 9000);
     const trackCode = trackId.replace('track-', 'TR0');
     const trackingId = `ETIMS27-${trackCode}-${randomDigits}`;
@@ -118,102 +144,93 @@ export default function PaperSubmissionModal({
       ? `${(selectedFile.size / (1024 * 1024)).toFixed(2)} MB`
       : '3.40 MB (Default)';
 
-    const fileNameStr = selectedFile ? selectedFile.name : 'Manuscript_Draft.pdf';
+    const now = new Date();
+    const dateFormatted = now.toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
 
-    const newRecord: SubmittedPaperRecord = {
+    const record: SubmittedPaperRecord = {
       trackingId,
-      authorName,
-      email,
-      phone,
-      institution,
+      authorName: authorName.trim(),
+      email: email.trim(),
+      phone: phone.trim() || 'Not Provided',
+      institution: institution.trim() || 'Independent Researcher',
       trackId,
       trackTitle,
-      paperTitle,
-      abstract,
-      fileName: fileNameStr,
+      paperTitle: paperTitle.trim(),
+      abstract: abstract.trim(),
+      fileName: selectedFile ? selectedFile.name : `${trackingId}_Manuscript.pdf`,
       fileSize: fileSizeStr,
-      submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+      submittedAt: dateFormatted,
     };
 
-    // Store in localStorage for persistence
-    try {
-      const existingStr = localStorage.getItem('etims_submissions');
-      const existing = existingStr ? JSON.parse(existingStr) : [];
-      existing.unshift(newRecord);
-      localStorage.setItem('etims_submissions', JSON.stringify(existing));
-    } catch {
-      // Ignore storage errors
-    }
-
+    setSubmittedRecord(record);
     setSubmitting(false);
-    setSubmittedRecord(newRecord);
+
+    try {
+      const existing = JSON.parse(localStorage.getItem('etims2027_submissions') || '[]');
+      existing.unshift(record);
+      localStorage.setItem('etims2027_submissions', JSON.stringify(existing));
+    } catch {
+      // safe fallback
+    }
   };
 
   const copyTrackingId = () => {
-    if (submittedRecord) {
-      navigator.clipboard.writeText(submittedRecord.trackingId);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
+    if (!submittedRecord) return;
+    navigator.clipboard.writeText(submittedRecord.trackingId);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const downloadReceipt = () => {
     if (!submittedRecord) return;
+    const slip = `=====================================================
+ETIMS 2027 — OFFICIAL MANUSCRIPT SUBMISSION RECEIPT
+1st National Conference on Emerging Technologies, Innovation & Multidisciplinary Studies
+Netaji Subhas Institute of Technology (NSIT), Bihta, Patna
+Dates: 23–24 July 2027 · Physical Mode
+=====================================================
 
-    const receiptText = [
-      '========================================================================',
-      '        ETIMS 2027 - 1ST NATIONAL CONFERENCE PAPER SUBMISSION RECEIPT',
-      '  Netaji Subhas Institute of Technology (NSIT), Bihta, Patna, Bihar, India',
-      '========================================================================',
-      '',
-      `TRACKING REFERENCE ID : ${submittedRecord.trackingId}`,
-      `DATE OF SUBMISSION    : ${submittedRecord.submittedAt} (IST)`,
-      `CONFERENCE DATES      : ${CONFERENCE.dateDisplay}`,
-      `HOST INSTITUTION      : ${CONFERENCE.hostInstitution}, ${CONFERENCE.venue}`,
-      '',
-      '------------------------------------------------------------------------',
-      '1. MANUSCRIPT DETAILS:',
-      '------------------------------------------------------------------------',
-      `Paper Title          : ${submittedRecord.paperTitle}`,
-      `Thematic Track       : ${submittedRecord.trackTitle}`,
-      `Attached Manuscript  : ${submittedRecord.fileName} (${submittedRecord.fileSize})`,
-      '',
-      'Abstract Preview:',
-      submittedRecord.abstract,
-      '',
-      '------------------------------------------------------------------------',
-      '2. PRIMARY AUTHOR DETAILS:',
-      '------------------------------------------------------------------------',
-      `Author Full Name     : ${submittedRecord.authorName}`,
-      `Author Email         : ${submittedRecord.email}`,
-      `Contact Phone        : ${submittedRecord.phone || 'Not Provided'}`,
-      `Affiliated Institute : ${submittedRecord.institution || 'Not Provided'}`,
-      '',
-      '------------------------------------------------------------------------',
-      '3. PEER REVIEW PROCEDURE & NEXT STEPS:',
-      '------------------------------------------------------------------------',
-      '1. Your manuscript has entered the double-blind peer review queue.',
-      '2. Technical Program Committee (TPC) reviewers evaluate papers on technical novelty,',
-      '   methodology, similarity analysis (<15%), and multidisciplinary clarity.',
-      '3. Official review decisions and notification of acceptance will be dispatched to your',
-      '   registered email address.',
-      '4. At least one author must register and present the accepted paper in person at NSIT Bihta.',
-      '',
-      '------------------------------------------------------------------------',
-      'CONVENORSHIP CONTACT:',
-      `Convenor : ${CONVENOR.name}, Assistant Professor, Dept. of Civil Engineering`,
-      `Email    : ${CONVENOR.email}`,
-      `Phone    : ${CONVENOR.phone}`,
-      '========================================================================',
-    ].join('\r\n');
+MANUSCRIPT REFERENCE ID : ${submittedRecord.trackingId}
+SUBMISSION STATUS       : CONFIRMED (QUEUED FOR DOUBLE-BLIND PEER REVIEW)
+DATE OF SUBMISSION      : ${submittedRecord.submittedAt} (IST)
 
-    const blob = new Blob([receiptText], { type: 'text/plain;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.setAttribute('download', `${submittedRecord.trackingId}-Submission-Receipt.txt`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+--- AUTHOR & AFFILIATION ---
+Primary Author          : ${submittedRecord.authorName}
+Email Address           : ${submittedRecord.email}
+Phone Number            : ${submittedRecord.phone}
+Affiliated Institution  : ${submittedRecord.institution}
+
+--- PAPER PARAMETERS ---
+Target Track            : ${submittedRecord.trackTitle}
+Manuscript Title        : ${submittedRecord.paperTitle}
+Attached Document       : ${submittedRecord.fileName} (${submittedRecord.fileSize})
+
+--- PEER REVIEW DIRECTIVE ---
+1. Your paper has entered the formal double-blind review queue.
+2. Desk triage and similarity check (< 15% threshold) are initiated.
+3. Official decision notifications will be sent by 31 May 2027.
+4. Camera-Ready submission deadline: 20 June 2027.
+
+CONVENOR SECRETARIAT CONTACT:
+Dr. Atif Hussain, Assistant Professor, Department of Civil Engineering
+Netaji Subhas Institute of Technology (NSIT), Bihta, Patna
+Email: ${CONVENOR.email} | Phone: ${CONVENOR.phone}
+Official Website: https://etims-2027.vercel.app
+=====================================================`;
+
+    const blob = new Blob([slip], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ETIMS2027_Submission_${submittedRecord.trackingId}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const resetForm = () => {
@@ -229,26 +246,12 @@ export default function PaperSubmissionModal({
     setValidationError(null);
   };
 
-  // Lock background body scroll completely while modal is open
-  useEffect(() => {
-    if (isOpen) {
-      const originalOverflow = document.body.style.overflow;
-      const originalTouchAction = document.body.style.touchAction;
-      document.body.style.overflow = 'hidden';
-      document.body.style.touchAction = 'none';
-      return () => {
-        document.body.style.overflow = originalOverflow;
-        document.body.style.touchAction = originalTouchAction;
-      };
-    }
-  }, [isOpen]);
-
   if (!isOpen) return null;
 
   return (
     <AnimatePresence>
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto overscroll-contain"
+        className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 overflow-y-auto overscroll-contain"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
@@ -263,26 +266,26 @@ export default function PaperSubmissionModal({
           aria-hidden="true"
         />
 
-        {/* Modal Window Container */}
+        {/* Modal Window Container — Compact & Ergonomic on Mobile Phones */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 16 }}
+          initial={{ opacity: 0, scale: 0.96, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 16 }}
+          exit={{ opacity: 0, scale: 0.96, y: 12 }}
           transition={{ type: 'spring', damping: 26, stiffness: 300 }}
-          className="relative w-full max-w-2xl max-h-[90vh] flex flex-col rounded-3xl border border-[#E7E0D6] bg-white shadow-2xl my-auto text-[#1C1917] overflow-hidden z-10 overscroll-contain"
+          className="relative w-full max-w-xl max-h-[92vh] flex flex-col rounded-2xl sm:rounded-3xl border border-[#E7E0D6] bg-white shadow-2xl my-auto text-[#1C1917] overflow-hidden z-10 overscroll-contain"
         >
-          {/* Modal Header */}
-          <div className="flex items-center justify-between border-b border-[#E7E0D6] px-6 py-4 bg-[#FAF8F5]">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#7B1123]/10 text-[#7B1123] border border-[#7B1123]/25">
-                <Upload className="h-5 w-5" />
+          {/* Compact Modal Header */}
+          <div className="flex items-center justify-between border-b border-[#E7E0D6] px-3.5 py-2.5 sm:px-6 sm:py-3.5 bg-[#FAF8F5]">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-[#7B1123]/10 text-[#7B1123] border border-[#7B1123]/25 shrink-0">
+                <Upload className="h-4 w-4" />
               </div>
-              <div>
-                <h3 id="modal-title" className="font-heading text-lg font-bold text-[#1C1917]">
-                  ETIMS 2027 Manuscript Submission Portal
+              <div className="min-w-0">
+                <h3 id="modal-title" className="font-heading text-xs sm:text-base font-bold text-[#1C1917] truncate">
+                  ETIMS 2027 Manuscript Portal
                 </h3>
-                <span className="text-[10px] font-mono text-[#7B1123] uppercase tracking-wider block font-semibold">
-                  Netaji Subhas Institute of Technology &bull; Bihta, Patna
+                <span className="text-[9px] sm:text-[10px] font-mono text-[#7B1123] uppercase tracking-wider block font-semibold truncate">
+                  NSIT Bihta, Patna &bull; Double-Blind Submission
                 </span>
               </div>
             </div>
@@ -290,212 +293,206 @@ export default function PaperSubmissionModal({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-xl p-2 text-[#57534E] hover:text-[#1C1917] hover:bg-[#FAF8F5] border border-[#E7E0D6] transition-colors cursor-pointer"
+              className="rounded-lg p-1.5 text-[#57534E] hover:text-[#1C1917] hover:bg-[#FAF8F5] border border-[#E7E0D6] transition-colors cursor-pointer shrink-0 ml-2"
               aria-label="Close Submission Dialog"
             >
-              <X className="h-5 w-5" />
+              <X className="h-4 w-4" />
             </button>
           </div>
 
-          {/* Modal Body */}
-          <div className="p-6 sm:p-7 overflow-y-auto overscroll-contain flex-1">
+          {/* Modal Body — Compact Vertical Spacing for Mobile Screens */}
+          <div className="p-3.5 sm:p-5 overflow-y-auto overscroll-contain flex-1">
             {/* SUCCESS SCREEN */}
             {submittedRecord ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="space-y-6 text-center"
+                className="space-y-4 text-center py-2"
               >
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-mint/20 to-cyan/20 border border-mint/40 text-mint shadow-xl">
-                  <CheckCircle2 className="h-9 w-9 text-mint" />
+                <div className="mx-auto flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 shadow-xs">
+                  <CheckCircle2 className="h-7 w-7 text-emerald-600" />
                 </div>
 
                 <div>
-                  <span className="rounded-full bg-mint/15 border border-mint/30 px-3.5 py-1 text-xs font-mono font-bold text-mint">
+                  <span className="rounded-full bg-emerald-50 border border-emerald-200 px-3 py-0.5 text-[11px] font-mono font-bold text-emerald-700">
                     Submission Confirmed
                   </span>
-                  <h3 className="font-heading text-2xl font-black text-light-text mt-3">
+                  <h3 className="font-heading text-lg sm:text-xl font-bold text-[#1C1917] mt-2">
                     Manuscript Successfully Transmitted!
                   </h3>
-                  <p className="text-xs sm:text-sm text-secondary-text mt-1 max-w-md mx-auto">
-                    Your paper has entered the formal double-blind review queue of ETIMS 2027 under the Organizing Secretariat.
+                  <p className="text-xs text-[#57534E] mt-0.5 max-w-sm mx-auto">
+                    Your paper has entered the formal double-blind review queue of ETIMS 2027.
                   </p>
                 </div>
 
                 {/* Tracking ID Badge */}
-                <div className="rounded-2xl border border-cyan/40 bg-midnight p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-left">
+                <div className="rounded-xl border border-[#BF982E] bg-[#FAF8F5] p-3.5 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-left">
                   <div>
-                    <span className="text-[10px] font-mono text-cyan uppercase block">
-                      Official Manuscript Tracking Reference:
+                    <span className="text-[10px] font-mono text-[#7B1123] uppercase block font-semibold">
+                      Manuscript Tracking ID:
                     </span>
-                    <span className="font-heading text-xl sm:text-2xl font-black text-light-text font-mono text-glow-cyan">
+                    <span className="font-heading text-lg sm:text-xl font-black text-[#1C1917] font-mono">
                       {submittedRecord.trackingId}
                     </span>
-                    <span className="text-[10px] text-secondary-text block mt-0.5">
-                      Submitted on: {submittedRecord.submittedAt} (IST)
+                    <span className="text-[10px] text-[#57534E] block mt-0.5">
+                      Submitted: {submittedRecord.submittedAt}
                     </span>
                   </div>
 
                   <button
                     type="button"
                     onClick={copyTrackingId}
-                    className="flex items-center gap-1.5 rounded-xl border border-border-dark bg-navy/80 px-3 py-2 text-xs font-mono text-cyan hover:border-cyan transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 rounded-lg border border-[#E7E0D6] bg-white px-3 py-1.5 text-xs font-mono text-[#7B1123] hover:border-[#7B1123] transition-colors cursor-pointer shrink-0"
                   >
-                    {copied ? <Check className="h-4 w-4 text-mint" /> : <Copy className="h-4 w-4" />}
+                    {copied ? <Check className="h-3.5 w-3.5 text-emerald-600" /> : <Copy className="h-3.5 w-3.5" />}
                     <span>{copied ? 'Copied' : 'Copy ID'}</span>
                   </button>
                 </div>
 
                 {/* Paper Summary Pill */}
-                <div className="rounded-2xl border border-border-dark bg-navy/40 p-4 text-left space-y-2 text-xs">
+                <div className="rounded-xl border border-[#E7E0D6] bg-white p-3 text-left space-y-1.5 text-xs">
                   <div>
-                    <span className="text-secondary-text">Paper Title:</span>
-                    <p className="font-bold text-light-text text-sm">{submittedRecord.paperTitle}</p>
+                    <span className="text-[10px] font-mono uppercase text-[#57534E] block">Paper Title:</span>
+                    <p className="font-bold text-[#1C1917] text-xs sm:text-sm line-clamp-2">{submittedRecord.paperTitle}</p>
                   </div>
-                  <div className="flex flex-wrap gap-4 pt-1 text-[11px] text-secondary-text border-t border-border-dark/60">
-                    <span>
-                      Track: <strong className="text-cyan">{submittedRecord.trackTitle}</strong>
-                    </span>
-                    <span>
-                      Author: <strong className="text-light-text">{submittedRecord.authorName}</strong>
-                    </span>
-                    <span>
-                      File: <strong className="text-mint">{submittedRecord.fileName}</strong> ({submittedRecord.fileSize})
-                    </span>
+                  <div className="flex flex-wrap gap-x-3 gap-y-1 pt-1.5 text-[11px] text-[#57534E] border-t border-[#E7E0D6]">
+                    <span>Track: <strong className="text-[#7B1123]">{submittedRecord.trackTitle}</strong></span>
+                    <span>Author: <strong className="text-[#1C1917]">{submittedRecord.authorName}</strong></span>
                   </div>
                 </div>
 
                 {/* Actions */}
-                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <div className="flex flex-col sm:flex-row gap-2 pt-1">
                   <button
                     type="button"
                     onClick={downloadReceipt}
-                    className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-5 py-3 text-xs font-bold text-white shadow-md cursor-pointer transition-all"
+                    className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-4 py-2.5 text-xs font-bold text-white shadow-xs cursor-pointer transition-all"
                   >
-                    <Download className="h-4 w-4" />
-                    <span>Download Official Submission Slip (.txt)</span>
+                    <Download className="h-3.5 w-3.5" />
+                    <span>Download Submission Slip (.txt)</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={resetForm}
-                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-4 py-3 text-xs font-bold text-[#1C1917] hover:border-[#7B1123] cursor-pointer"
+                    className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-3.5 py-2.5 text-xs font-bold text-[#1C1917] hover:border-[#7B1123] cursor-pointer"
                   >
-                    <span>Submit Another Paper</span>
+                    <span>Submit Another</span>
                   </button>
                 </div>
               </motion.div>
             ) : (
-              /* FORM SCREEN */
-              <form onSubmit={handleSubmit} className="space-y-5">
+              /* COMPACT FORM SCREEN */
+              <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-3.5">
                 {validationError && (
-                  <div className="rounded-xl border border-red-500/40 bg-red-500/10 p-3 text-xs text-red-300 flex items-center gap-2">
-                    <AlertCircle className="h-4 w-4 text-red-400 shrink-0" />
+                  <div className="rounded-xl border border-red-200 bg-red-50 p-2.5 text-xs text-red-700 flex items-center gap-2">
+                    <AlertCircle className="h-4 w-4 text-red-600 shrink-0" />
                     <span>{validationError}</span>
                   </div>
                 )}
 
-                {/* Author Information Grid */}
-                <div className="space-y-3">
-                  <span className="text-xs font-mono uppercase text-cyan block tracking-wider">
-                    01 // Primary Author & Affiliation
+                {/* Section 1: Author Information */}
+                <div>
+                  <span className="text-[10px] sm:text-[11px] font-mono uppercase text-[#7B1123] font-bold block mb-1.5">
+                    01 // Author & Affiliation
                   </span>
-                  <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="grid gap-2 sm:grid-cols-2">
                     <div>
-                      <label className="text-xs font-medium text-secondary-text mb-1 block">
+                      <label className="text-[11px] font-semibold text-[#1C1917] mb-0.5 block">
                         Full Name *
                       </label>
                       <div className="relative">
-                        <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-secondary-text" />
+                        <User className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#57534E]" />
                         <input
                           type="text"
                           required
                           placeholder="e.g. Dr. Rajesh Kumar"
                           value={authorName}
                           onChange={(e) => setAuthorName(e.target.value)}
-                          className="w-full rounded-xl border border-border-dark bg-midnight/90 pl-9 pr-3 py-2 text-xs text-light-text placeholder:text-secondary-text/60 focus:border-cyan focus:outline-none focus:ring-1 focus:ring-cyan"
+                          className="w-full rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] pl-8 pr-2.5 py-1.5 sm:py-2 text-xs text-[#1C1917] placeholder:text-[#57534E]/60 focus:bg-white focus:border-[#7B1123] focus:outline-none focus:ring-1 focus:ring-[#7B1123]"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="text-xs font-medium text-secondary-text mb-1 block">
+                      <label className="text-[11px] font-semibold text-[#1C1917] mb-0.5 block">
                         Email Address *
                       </label>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-secondary-text" />
+                        <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#57534E]" />
                         <input
                           type="email"
                           required
                           placeholder="author@institution.edu"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          className="w-full rounded-xl border border-border-dark bg-midnight/90 pl-9 pr-3 py-2 text-xs text-light-text placeholder:text-secondary-text/60 focus:border-cyan focus:outline-none focus:ring-1 focus:ring-cyan"
+                          className="w-full rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] pl-8 pr-2.5 py-1.5 sm:py-2 text-xs text-[#1C1917] placeholder:text-[#57534E]/60 focus:bg-white focus:border-[#7B1123] focus:outline-none focus:ring-1 focus:ring-[#7B1123]"
                         />
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="grid gap-2 sm:grid-cols-2 mt-2">
                     <div>
-                      <label className="text-xs font-medium text-secondary-text mb-1 block">
+                      <label className="text-[11px] font-semibold text-[#1C1917] mb-0.5 block">
                         Phone / WhatsApp
                       </label>
                       <div className="relative">
-                        <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-secondary-text" />
+                        <Phone className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#57534E]" />
                         <input
                           type="tel"
                           placeholder="+91 98765 43210"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
-                          className="w-full rounded-xl border border-border-dark bg-midnight/90 pl-9 pr-3 py-2 text-xs text-light-text placeholder:text-secondary-text/60 focus:border-cyan focus:outline-none focus:ring-1 focus:ring-cyan"
+                          className="w-full rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] pl-8 pr-2.5 py-1.5 sm:py-2 text-xs text-[#1C1917] placeholder:text-[#57534E]/60 focus:bg-white focus:border-[#7B1123] focus:outline-none focus:ring-1 focus:ring-[#7B1123]"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="text-xs font-medium text-secondary-text mb-1 block">
-                        Affiliated University / College
+                      <label className="text-[11px] font-semibold text-[#1C1917] mb-0.5 block">
+                        Affiliated University / College *
                       </label>
                       <div className="relative">
-                        <Building className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-secondary-text" />
+                        <Building className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#57534E]" />
                         <input
                           type="text"
+                          required
                           placeholder="e.g. Dept. of CSE, NSIT Bihta"
                           value={institution}
                           onChange={(e) => setInstitution(e.target.value)}
-                          className="w-full rounded-xl border border-border-dark bg-midnight/90 pl-9 pr-3 py-2 text-xs text-light-text placeholder:text-secondary-text/60 focus:border-cyan focus:outline-none focus:ring-1 focus:ring-cyan"
+                          className="w-full rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] pl-8 pr-2.5 py-1.5 sm:py-2 text-xs text-[#1C1917] placeholder:text-[#57534E]/60 focus:bg-white focus:border-[#7B1123] focus:outline-none focus:ring-1 focus:ring-[#7B1123]"
                         />
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Track & Manuscript Parameters */}
-                <div className="space-y-3 pt-2 border-t border-border-dark">
-                  <span className="text-xs font-mono uppercase text-cyan block tracking-wider">
+                {/* Section 2: Track & Manuscript Details */}
+                <div className="pt-2 border-t border-[#E7E0D6]">
+                  <span className="text-[10px] sm:text-[11px] font-mono uppercase text-[#7B1123] font-bold block mb-1.5">
                     02 // Research Track & Paper Title
                   </span>
 
                   <div>
-                    <label className="text-xs font-medium text-secondary-text mb-1 block">
+                    <label className="text-[11px] font-semibold text-[#1C1917] mb-0.5 block">
                       Target Thematic Track *
                     </label>
                     <select
                       value={trackId}
                       onChange={(e) => setTrackId(e.target.value)}
-                      className="w-full rounded-xl border border-border-dark bg-midnight/90 px-3 py-2 text-xs text-light-text focus:border-cyan focus:outline-none focus:ring-1 focus:ring-cyan"
+                      className="w-full rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-3 py-1.5 sm:py-2 text-xs text-[#1C1917] focus:bg-white focus:border-[#7B1123] focus:outline-none focus:ring-1 focus:ring-[#7B1123]"
                     >
                       {PROVISIONAL_TRACKS.map((track) => (
-                        <option key={track.id} value={track.id} className="bg-midnight text-light-text">
+                        <option key={track.id} value={track.id}>
                           {track.code} – {track.title}
                         </option>
                       ))}
                     </select>
                   </div>
 
-                  <div>
-                    <label className="text-xs font-medium text-secondary-text mb-1 block">
+                  <div className="mt-2">
+                    <label className="text-[11px] font-semibold text-[#1C1917] mb-0.5 block">
                       Manuscript Title *
                     </label>
                     <input
@@ -504,29 +501,29 @@ export default function PaperSubmissionModal({
                       placeholder="e.g. Deep Reinforcement Learning for Adaptive Renewable Power Dispatch"
                       value={paperTitle}
                       onChange={(e) => setPaperTitle(e.target.value)}
-                      className="w-full rounded-xl border border-border-dark bg-midnight/90 px-3 py-2 text-xs text-light-text placeholder:text-secondary-text/60 focus:border-cyan focus:outline-none focus:ring-1 focus:ring-cyan"
+                      className="w-full rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-3 py-1.5 sm:py-2 text-xs text-[#1C1917] placeholder:text-[#57534E]/60 focus:bg-white focus:border-[#7B1123] focus:outline-none focus:ring-1 focus:ring-[#7B1123]"
                     />
                   </div>
 
-                  <div>
-                    <label className="text-xs font-medium text-secondary-text mb-1 block">
+                  <div className="mt-2">
+                    <label className="text-[11px] font-semibold text-[#1C1917] mb-0.5 block">
                       Abstract (150–250 words) *
                     </label>
                     <textarea
                       required
-                      rows={3}
-                      placeholder="Brief summary outlining research objectives, experimental methodology, key results, and multidisciplinary contribution..."
+                      rows={2.5}
+                      placeholder="Summary outlining research objectives, experimental methodology, and key results..."
                       value={abstract}
                       onChange={(e) => setAbstract(e.target.value)}
-                      className="w-full rounded-xl border border-border-dark bg-midnight/90 p-3 text-xs text-light-text placeholder:text-secondary-text/60 focus:border-cyan focus:outline-none focus:ring-1 focus:ring-cyan leading-relaxed"
+                      className="w-full rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] p-2.5 text-xs text-[#1C1917] placeholder:text-[#57534E]/60 focus:bg-white focus:border-[#7B1123] focus:outline-none focus:ring-1 focus:ring-[#7B1123] leading-relaxed resize-none"
                     />
                   </div>
                 </div>
 
-                {/* File Upload Box */}
-                <div className="space-y-2 pt-2 border-t border-border-dark">
-                  <span className="text-xs font-mono uppercase text-cyan block tracking-wider">
-                    03 // Attach Manuscript Document (PDF / DOCX)
+                {/* Section 3: File Upload Dropzone (Compact) */}
+                <div className="pt-2 border-t border-[#E7E0D6]">
+                  <span className="text-[10px] sm:text-[11px] font-mono uppercase text-[#7B1123] font-bold block mb-1.5">
+                    03 // Attach Manuscript (PDF / DOCX)
                   </span>
 
                   <input
@@ -539,25 +536,25 @@ export default function PaperSubmissionModal({
 
                   <div
                     onClick={() => fileInputRef.current?.click()}
-                    className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-cyan/40 bg-navy/40 p-5 hover:border-cyan hover:bg-navy/60 transition-all cursor-pointer text-center group"
+                    className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E7E0D6] bg-[#FAF8F5] p-3 sm:p-4 hover:border-[#7B1123] hover:bg-white transition-all cursor-pointer text-center group"
                   >
-                    <Upload className="h-7 w-7 text-cyan group-hover:scale-110 transition-transform mb-2" />
+                    <Upload className="h-5 w-5 text-[#7B1123] group-hover:scale-110 transition-transform mb-1" />
                     {selectedFile ? (
                       <div className="space-y-0.5">
-                        <span className="text-xs font-bold text-mint block">
-                          File Ready: {selectedFile.name}
+                        <span className="text-xs font-bold text-[#7B1123] block truncate max-w-xs">
+                          {selectedFile.name}
                         </span>
-                        <span className="text-[10px] text-secondary-text font-mono">
-                          {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB &bull; Click to change
+                        <span className="text-[10px] text-[#57534E] font-mono">
+                          {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB &bull; Tap to change
                         </span>
                       </div>
                     ) : (
                       <div className="space-y-0.5">
-                        <span className="text-xs font-semibold text-light-text block">
-                          Click to select your manuscript file
+                        <span className="text-xs font-semibold text-[#1C1917] block">
+                          Tap to select manuscript file
                         </span>
-                        <span className="text-[10px] text-secondary-text font-mono">
-                          Supports PDF, DOCX (Max 25 MB) &bull; Mask author names for blind review
+                        <span className="text-[10px] text-[#57534E] font-mono">
+                          PDF, DOCX (Max 25 MB) &bull; Mask names for blind review
                         </span>
                       </div>
                     )}
@@ -565,25 +562,25 @@ export default function PaperSubmissionModal({
                 </div>
 
                 {/* Academic Integrity Checkbox */}
-                <div className="pt-2 border-t border-border-dark flex items-start gap-2.5">
+                <div className="pt-1 flex items-start gap-2">
                   <input
                     type="checkbox"
                     id="plagiarismAgreed"
                     checked={plagiarismAgreed}
                     onChange={(e) => setPlagiarismAgreed(e.target.checked)}
-                    className="h-4 w-4 rounded border-border-dark text-cyan focus:ring-cyan mt-0.5 cursor-pointer"
+                    className="h-3.5 w-3.5 rounded border-[#E7E0D6] text-[#7B1123] focus:ring-[#7B1123] mt-0.5 cursor-pointer"
                   />
-                  <label htmlFor="plagiarismAgreed" className="text-xs text-secondary-text cursor-pointer leading-snug">
-                    I certify that this paper contains original, unpublished research, adheres to standard IEEE/Springer format, and satisfies plagiarism thresholds (&lt; 15% similarity).
+                  <label htmlFor="plagiarismAgreed" className="text-[11px] text-[#57534E] cursor-pointer leading-tight">
+                    I certify original unpublished research adhering to standard IEEE/Springer format (&lt; 15% similarity).
                   </label>
                 </div>
 
                 {/* Submit Action Button */}
-                <div className="pt-4 border-t border-border-dark">
+                <div className="pt-2">
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-6 py-3.5 text-xs sm:text-sm font-bold text-white shadow-lg transition-all active:scale-[0.99] cursor-pointer disabled:opacity-60"
+                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] py-2.5 sm:py-3 text-xs sm:text-sm font-bold text-white shadow-md transition-all active:scale-[0.99] cursor-pointer disabled:opacity-60"
                   >
                     {submitting ? (
                       <>
@@ -597,8 +594,8 @@ export default function PaperSubmissionModal({
                       </>
                     )}
                   </button>
-                  <p className="text-[11px] text-center text-secondary-text mt-2 font-mono">
-                    Direct Secretariat Desk: {CONVENOR.email} &bull; {CONVENOR.phone}
+                  <p className="text-[10px] text-center text-[#57534E] mt-1.5 font-mono">
+                    Secretariat Desk: {CONVENOR.email} &bull; {CONVENOR.phone}
                   </p>
                 </div>
               </form>

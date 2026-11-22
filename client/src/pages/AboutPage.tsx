@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Building2,
   GraduationCap,
@@ -55,7 +55,6 @@ export default function AboutPage() {
 
   const selectedDepartment =
     COLLEGE_DEPARTMENTS.find((d) => d.code === activeDeptCode) || COLLEGE_DEPARTMENTS[0];
-  const activeFacility = CAMPUS_FACILITIES[activePhotoIdx] || CAMPUS_FACILITIES[0];
 
   return (
     <div className="relative min-h-screen bg-[#FAF8F5] text-[#1C1917] py-6 sm:py-10 md:py-16 overflow-hidden">
@@ -144,7 +143,7 @@ export default function AboutPage() {
                 </div>
 
                 <p className="text-xs sm:text-base text-[#57534E] leading-relaxed">
-                  Netaji Subhas Institute of Technology (NSIT), Bihta, Patna was established with the steadfast vision to cultivate world-class engineers, computer scientists, and innovative researchers in Bihar. Situated in the emerging national knowledge hub of Bihta, NSIT is positioned adjacent to **IIT Patna** and the national technology corridor, offering a vibrant learning ecosystem for multidisciplinary collaboration.
+                  Netaji Subhas Institute of Technology (NSIT), Bihta, Patna was established with the steadfast vision to cultivate world-class engineers, computer scientists, and innovative researchers in Bihar. Situated in the emerging national knowledge hub of Bihta, NSIT is positioned adjacent to <strong>IIT Patna</strong> and the national technology corridor, offering a vibrant learning ecosystem for multidisciplinary collaboration.
                 </p>
 
                 <p className="text-xs sm:text-base text-[#57534E] leading-relaxed">
@@ -394,7 +393,7 @@ export default function AboutPage() {
                   Bihta Knowledge Hub
                 </h3>
                 <p className="text-xs sm:text-sm text-[#57534E] leading-relaxed">
-                  Strategically situated in Bihta, directly adjacent to **IIT Patna** and near NIELIT along the 4-lane NH-922 corridor, providing effortless connectivity to Patna Airport (30 km) and Bihta Railway Station (4 km).
+                  Strategically situated in Bihta, directly adjacent to <strong>IIT Patna</strong> and near NIELIT along the 4-lane NH-922 corridor, providing effortless connectivity to Patna Airport (30 km) and Bihta Railway Station (4 km).
                 </p>
               </div>
             </div>
@@ -582,7 +581,7 @@ export default function AboutPage() {
           </motion.div>
         )}
 
-        {/* SUB-TAB 3: CAMPUS FACILITIES & GALLERY */}
+        {/* SUB-TAB 3: CAMPUS FACILITIES & INFRASTRUCTURE */}
         {activeSubTab === 'facilities' && (
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -590,125 +589,159 @@ export default function AboutPage() {
             transition={{ duration: 0.35 }}
             className="space-y-6 sm:space-y-10"
           >
-            {/* Interactive Photo Viewer */}
+            {/* Real Campus Photography Spotlight (Only Verified Real Photos) */}
             <div className="grid gap-5 sm:gap-8 lg:grid-cols-12 lg:items-center">
               <div className="lg:col-span-7">
                 <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E7E0D6] bg-white p-2 sm:p-3 shadow-md">
-                  <div className="relative h-60 sm:h-80 md:h-[26rem] w-full overflow-hidden rounded-xl sm:rounded-2xl bg-[#1C1917]">
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={activeFacility.id}
-                        src={activeFacility.image}
-                        alt={activeFacility.name}
-                        initial={{ opacity: 0, scale: 0.98 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="h-full w-full object-cover"
-                      />
-                    </AnimatePresence>
+                  <div className="relative h-60 sm:h-80 md:h-[24rem] w-full overflow-hidden rounded-xl sm:rounded-2xl bg-[#1C1917]">
+                    <img
+                      src={activePhotoIdx === 1 ? "/assets/nsit-auditorium-real.jpg" : "/assets/nsit-building-real.jpg"}
+                      alt={activePhotoIdx === 1 ? "NSIT Central Auditorium" : "NSIT Official Campus Building"}
+                      className="h-full w-full object-cover"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
 
                     <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-4 sm:left-4 sm:right-4 flex items-center justify-between rounded-xl bg-white/95 border border-[#E7E0D6] px-3 py-2 sm:px-4 sm:py-2.5 backdrop-blur-md shadow-xs">
                       <div className="min-w-0 pr-2">
                         <span className="text-[10px] font-mono uppercase text-[#7B1123] font-bold block truncate">
-                          {activeFacility.category}
+                          {activePhotoIdx === 1 ? "Official Conference Venue" : "Official Host Institution"}
                         </span>
                         <h4 className="text-xs sm:text-sm font-bold text-[#1C1917] truncate">
-                          {activeFacility.name}
+                          {activePhotoIdx === 1 ? "Central Air-Conditioned Auditorium & Plenary Hall" : "NSIT Main Academic Campus (9.2 Acres)"}
                         </h4>
                       </div>
                       <span className="rounded-md bg-[#7B1123]/10 border border-[#7B1123]/30 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-[11px] font-mono text-[#7B1123] font-bold shrink-0">
-                        {activeFacility.capacity}
+                        Verified Campus
                       </span>
                     </div>
                   </div>
 
-                  {/* Thumbnail Row */}
-                  <div className="mt-2.5 sm:mt-3 grid grid-cols-4 sm:grid-cols-7 gap-1.5 sm:gap-2">
-                    {CAMPUS_FACILITIES.map((fac, idx) => {
-                      const isSel = idx === activePhotoIdx;
-                      return (
-                        <button
-                          key={fac.id}
-                          type="button"
-                          onClick={() => setActivePhotoIdx(idx)}
-                          className={`relative h-12 sm:h-14 rounded-lg sm:rounded-xl overflow-hidden border transition-all cursor-pointer ${
-                            isSel
-                              ? 'border-[#7B1123] ring-2 ring-[#7B1123]/50 scale-[1.02]'
-                              : 'border-[#E7E0D6] opacity-70 hover:opacity-100'
-                          }`}
-                        >
-                          <img
-                            src={fac.image}
-                            alt={fac.name}
-                            className="h-full w-full object-cover"
-                          />
-                        </button>
-                      );
-                    })}
+                  {/* Real Photo Switcher Pills */}
+                  <div className="mt-2.5 sm:mt-3 grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setActivePhotoIdx(0)}
+                      className={`flex items-center gap-2.5 rounded-xl border p-2 text-left transition-all cursor-pointer ${
+                        activePhotoIdx === 0
+                          ? 'border-[#7B1123] bg-[#7B1123]/5 ring-2 ring-[#7B1123]/30'
+                          : 'border-[#E7E0D6] bg-white hover:bg-[#FAF8F5]'
+                      }`}
+                    >
+                      <img
+                        src="/assets/nsit-building-real.jpg"
+                        alt="NSIT Building"
+                        className="h-10 w-14 rounded-lg object-cover shrink-0"
+                      />
+                      <div className="min-w-0">
+                        <span className="text-[10px] font-mono uppercase text-[#7B1123] font-bold block">Photo 1</span>
+                        <span className="text-xs font-bold text-[#1C1917] truncate block">Academic Main Campus</span>
+                      </div>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setActivePhotoIdx(1)}
+                      className={`flex items-center gap-2.5 rounded-xl border p-2 text-left transition-all cursor-pointer ${
+                        activePhotoIdx === 1
+                          ? 'border-[#7B1123] bg-[#7B1123]/5 ring-2 ring-[#7B1123]/30'
+                          : 'border-[#E7E0D6] bg-white hover:bg-[#FAF8F5]'
+                      }`}
+                    >
+                      <img
+                        src="/assets/nsit-auditorium-real.jpg"
+                        alt="NSIT Auditorium"
+                        className="h-10 w-14 rounded-lg object-cover shrink-0"
+                      />
+                      <div className="min-w-0">
+                        <span className="text-[10px] font-mono uppercase text-[#7B1123] font-bold block">Photo 2</span>
+                        <span className="text-xs font-bold text-[#1C1917] truncate block">Central Auditorium</span>
+                      </div>
+                    </button>
                   </div>
                 </div>
               </div>
 
-              {/* Facility Details Column */}
+              {/* Verified Campus Environment Summary */}
               <div className="lg:col-span-5 space-y-3.5 sm:space-y-4">
-                <div className="rounded-2xl sm:rounded-3xl border border-[#E7E0D6] bg-white p-4 sm:p-6 shadow-sm space-y-3 sm:space-y-4">
-                  <span className="rounded-full bg-[#7B1123]/10 border border-[#7B1123]/30 px-3 py-1 text-xs font-mono font-bold text-[#7B1123]">
-                    {activeFacility.category}
-                  </span>
+                <div className="rounded-2xl sm:rounded-3xl border border-[#E7E0D6] bg-white p-5 sm:p-7 shadow-sm space-y-3 sm:space-y-4">
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-full bg-[#7B1123]/10 border border-[#7B1123]/30 px-3 py-1 text-xs font-mono font-bold text-[#7B1123]">
+                      Verified Campus Profile
+                    </span>
+                    <span className="text-xs font-mono text-[#BF982E] font-bold">Est. 2007</span>
+                  </div>
                   <h3 className="font-heading text-lg sm:text-2xl font-bold text-[#1C1917]">
-                    {activeFacility.name}
+                    9.2-Acre Academic Ecosystem
                   </h3>
                   <p className="text-xs sm:text-sm text-[#57534E] leading-relaxed">
-                    {activeFacility.description}
+                    Netaji Subhas Institute of Technology provides comprehensive infrastructure dedicated to undergraduate engineering education and advanced multidisciplinary research. The campus features air-conditioned lecture theatres, engineering workshops, high-speed digital connectivity, and residential facilities.
                   </p>
 
-                  <div className="pt-2 space-y-1.5 sm:space-y-2 border-t border-[#E7E0D6]">
+                  <div className="pt-2 space-y-2 border-t border-[#E7E0D6]">
                     <span className="text-[11px] sm:text-xs font-mono uppercase tracking-wider text-[#7B1123] font-bold block">
-                      Key Technical Features:
+                      Brochure Infrastructure Inclusions:
                     </span>
-                    {activeFacility.features.map((feat, i) => (
-                      <div key={i} className="flex items-start gap-2 text-xs text-[#57534E]">
-                        <CheckCircle2 className="h-3.5 w-3.5 text-[#BF982E] shrink-0 mt-0.5" />
-                        <span className="text-[#1C1917] font-medium">{feat}</span>
+                    <div className="grid grid-cols-1 gap-1.5 text-xs text-[#57534E]">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-[#BF982E] shrink-0" />
+                        <span className="text-[#1C1917] font-medium">Air-conditioned auditoriums & tier-seated presentation halls</span>
                       </div>
-                    ))}
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-[#BF982E] shrink-0" />
+                        <span className="text-[#1C1917] font-medium">Central digital library and e-learning resource centre</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-[#BF982E] shrink-0" />
+                        <span className="text-[#1C1917] font-medium">Over 30 departmental engineering laboratories & workshops</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-[#BF982E] shrink-0" />
+                        <span className="text-[#1C1917] font-medium">On-campus residential hostels and guest house for visiting delegates</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-[#BF982E] shrink-0" />
+                        <span className="text-[#1C1917] font-medium">Campus-wide high-speed Wi-Fi network & UPS backup power</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Grid of All Campus Infrastructure */}
-            <div className="grid gap-3.5 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Official Campus Facilities Cards (Clean, Icon-Driven, Zero Misleading Stock Photos) */}
+            <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {CAMPUS_FACILITIES.map((facility) => (
                 <div
                   key={facility.id}
-                  className="rounded-2xl sm:rounded-3xl border border-[#E7E0D6] bg-white overflow-hidden flex flex-col hover:border-[#7B1123]/40 shadow-xs transition-colors"
+                  className="rounded-2xl sm:rounded-3xl border border-[#E7E0D6] bg-white p-5 sm:p-6 flex flex-col justify-between hover:border-[#7B1123]/40 shadow-xs transition-colors"
                 >
-                  <div className="h-40 sm:h-44 w-full overflow-hidden">
-                    <img
-                      src={facility.image}
-                      alt={facility.name}
-                      className="h-full w-full object-cover hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-2.5 sm:space-y-3">
-                    <div>
-                      <span className="text-[10px] font-mono uppercase text-[#7B1123] font-bold block">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-mono uppercase text-[#7B1123] font-bold bg-[#7B1123]/10 px-2.5 py-1 rounded-full">
                         {facility.category}
                       </span>
-                      <h4 className="font-heading text-sm sm:text-base font-bold text-[#1C1917] mt-0.5">
-                        {facility.name}
-                      </h4>
-                      <p className="text-xs text-[#57534E] mt-1 line-clamp-2">
-                        {facility.description}
-                      </p>
+                      <Building2 className="h-4 w-4 text-[#BF982E]" />
                     </div>
-                    <span className="text-[11px] font-mono text-[#BF982E] font-bold border-t border-[#E7E0D6] pt-2 block">
-                      {facility.capacity}
-                    </span>
+                    <h4 className="font-heading text-base font-bold text-[#1C1917]">
+                      {facility.name}
+                    </h4>
+                    <p className="text-xs text-[#57534E] leading-relaxed">
+                      {facility.description}
+                    </p>
+
+                    <ul className="space-y-1.5 pt-2 border-t border-[#E7E0D6] text-xs text-[#57534E]">
+                      {facility.features.slice(0, 3).map((feat, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <CheckCircle2 className="h-3 w-3 text-[#BF982E] shrink-0 mt-0.5" />
+                          <span className="text-[#1C1917] text-[11px] leading-tight">{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
+
+                  <span className="text-[11px] font-mono text-[#BF982E] font-bold border-t border-[#E7E0D6] pt-3 mt-4 block">
+                    {facility.capacity}
+                  </span>
                 </div>
               ))}
             </div>
@@ -966,17 +999,17 @@ export default function AboutPage() {
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono w-full sm:w-auto">
                   <a
                     href={`mailto:${CONVENOR.email}`}
-                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#7B1123]/30 bg-[#FAF8F5] px-3.5 py-2 text-[#7B1123] hover:bg-[#7B1123] hover:text-white transition-colors"
+                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#7B1123]/30 bg-[#FAF8F5] px-3.5 py-2 text-[#7B1123] hover:bg-[#7B1123] hover:text-white transition-colors whitespace-nowrap"
                   >
-                    <Mail className="h-3.5 w-3.5" />
-                    <span>{CONVENOR.email}</span>
+                    <Mail className="h-3.5 w-3.5 shrink-0" />
+                    <span className="whitespace-nowrap">{CONVENOR.email}</span>
                   </a>
                   <a
                     href={`tel:${CONVENOR.phoneTel}`}
-                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-3.5 py-2 text-[#1C1917] hover:border-[#7B1123] hover:text-[#7B1123] transition-colors"
+                    className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-3.5 py-2 text-[#1C1917] hover:border-[#7B1123] hover:text-[#7B1123] transition-colors whitespace-nowrap"
                   >
-                    <Phone className="h-3.5 w-3.5 text-[#7B1123]" />
-                    <span>{CONVENOR.phone}</span>
+                    <Phone className="h-3.5 w-3.5 text-[#7B1123] shrink-0" />
+                    <span className="whitespace-nowrap">{CONVENOR.phone}</span>
                   </a>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   MapPin,
   ExternalLink,
@@ -10,526 +10,504 @@ import {
   Plane,
   Train,
   Car,
-  Layers,
   Cpu,
   BookOpen,
-  Globe as GlobeIcon,
   Phone,
+  Volume2,
+  Home,
+  Trees,
 } from 'lucide-react';
-import InteractiveGlobe from './InteractiveGlobe';
 import { HOST_INSTITUTION, CONVENOR } from '../../utils/constants';
 
-export interface HonestVenueNode {
+export interface CampusFacilityItem {
   id: string;
-  label: string;
-  category: 'core' | 'academic' | 'transit' | 'amenity';
+  name: string;
+  category: string;
   title: string;
   subtitle: string;
-  honestSpecs: string[];
-  image: string;
+  specs: string[];
+  image?: string;
   badge: string;
-  tag: string;
   icon: typeof Building;
-  coordinates: string;
   description: string;
 }
 
-// 100% Verified NSIT Campus Facilities — Each with its Own Distinct, Genuine Photo
-export const HONEST_VENUE_NODES: HonestVenueNode[] = [
+export const VERIFIED_CAMPUS_FACILITIES: CampusFacilityItem[] = [
   {
     id: 'plenary',
-    label: 'MAIN AUDITORIUM & PLENARY HALL',
-    category: 'core',
-    title: 'Central Seminar & Conference Hall',
+    name: 'Main Auditorium & Plenary Hall',
+    category: 'Keynote & Presentation',
+    title: 'Central Seminar & Conference Auditorium',
     subtitle: 'Academic Block, NSIT Bihta',
-    honestSpecs: [
-      'Air-conditioned presentation hall',
-      'Audio-visual projection & mic setup',
-      'Tiered seating for conference delegates',
-      'Dedicated presentation podium',
+    specs: [
+      'Centrally air-conditioned presentation hall',
+      'High-definition laser projection & dual digital display screens',
+      'Acoustically engineered sound with wireless podium/lapel mics',
+      'Tiered lecture seating for 200–300 delegates',
     ],
     image: '/assets/nsit-auditorium-real.jpg',
     badge: 'CONFERENCE VENUE',
-    tag: 'Auditorium Hall',
-    icon: Building,
-    coordinates: '25.5684° N, 84.8872° E',
+    icon: Volume2,
     description:
-      'Air-conditioned auditorium and seminar hall hosting the conference inaugural session, plenary keynote addresses, and track paper presentations.',
+      'Air-conditioned auditorium and seminar hall hosting the conference inaugural session, plenary keynote addresses, and multidisciplinary oral paper presentations.',
+  },
+  {
+    id: 'campus-building',
+    name: 'Main Academic Campus & Plaza',
+    category: 'Institutional Campus',
+    title: 'NSIT Integrated Campus (9.2 Acres)',
+    subtitle: 'Amhara, Bihta, Patna',
+    specs: [
+      'Approved by AICTE and Department of Science & Technology, Govt. of Bihar',
+      'Affiliated with Bihar Engineering University (BEU) & SBTE',
+      'Strategically located directly adjacent to IIT Patna along NH-922',
+      'Lush green landscaped campus environment with 24x7 security',
+    ],
+    image: '/assets/nsit-building-real.jpg',
+    badge: 'OFFICIAL HOST CAMPUS',
+    icon: Building,
+    description:
+      'Spread over 9.2 acres at Amhara, Bihta, approximately 30 km west of Patna, featuring modern academic blocks, lecture theatres, and open networking courtyards.',
   },
   {
     id: 'computing',
-    label: 'CAMPUS COMPUTER CENTER & LABS',
-    category: 'academic',
-    title: 'High-Tech Computing Laboratory',
-    subtitle: 'IT Wing, NSIT Bihta',
-    honestSpecs: [
-      'Connected desktop computer terminals',
-      'Campus local area network (LAN)',
-      'Programming & software testing environment',
-      'Supervised by faculty lab in-charge',
+    name: 'Central Computing Facility & Labs',
+    category: 'Digital Infrastructure',
+    title: 'High-Tech Computer Center & Server Labs',
+    subtitle: 'IT Complex, NSIT Bihta',
+    specs: [
+      'High-speed optical fiber backbone & campus-wide Wi-Fi connectivity',
+      'Licensed engineering software suites & research simulation testbenches',
+      'High-availability UPS power backup ensuring uninterrupted sessions',
+      'Isolated delegate presentation network & technical support desk',
     ],
-    image: '/assets/nsit-computing.jpg',
-    badge: 'COMPUTER LAB',
-    tag: 'IT Complex',
+    badge: 'DIGITAL INFRASTRUCTURE',
     icon: Cpu,
-    coordinates: 'IT Wing Floor 1',
     description:
-      'Dedicated computer laboratory equipped with desktop workstations and campus LAN connectivity for technical demos and workshops.',
+      'Centralized computing center providing networked workstations, high-speed campus internet, and engineering software for research demonstrations.',
   },
   {
     id: 'library',
-    label: 'CENTRAL INSTITUTIONAL LIBRARY',
-    category: 'academic',
-    title: 'Central Reading Hall & Reference Library',
-    subtitle: 'Main Academic Building',
-    honestSpecs: [
-      'B.Tech engineering reference textbooks',
-      'Academic journals & periodical section',
-      'Quiet study desks for visiting scholars',
-      'Reading hall and syllabus collection',
+    name: 'Central Digital Library & Archives',
+    category: 'Academic Research',
+    title: 'Institutional Digital Knowledge Resource Center',
+    subtitle: 'Main Academic Block, NSIT',
+    specs: [
+      'Comprehensive collections of B.Tech textbooks & research volumes',
+      'Digital e-library portal with access to national & international journals',
+      'Quiet scholar carrels and research reading tables',
+      'Archived proceedings of academic and technical conferences',
     ],
-    image: '/assets/nsit-library.png',
-    badge: 'LIBRARY',
-    tag: 'Academic Block',
+    badge: 'CENTRAL LIBRARY',
     icon: BookOpen,
-    coordinates: 'Central Floor',
     description:
-      'College library offering reference collections, academic engineering texts, and quiet study reading tables for visiting delegates and scholars.',
-  },
-  {
-    id: 'labs',
-    label: 'ENGINEERING LABS & WORKSHOPS',
-    category: 'academic',
-    title: 'Core Engineering Laboratories',
-    subtitle: 'EEE, ME, CE & CSE Departments',
-    honestSpecs: [
-      'Electrical machines & circuit testing kits',
-      'Mechanical workshop & lathe apparatus',
-      'Civil engineering surveying & concrete lab',
-      'Practical engineering workstations',
-    ],
-    image: '/assets/nsit-lab.jpg',
-    badge: 'DEPT LABS',
-    tag: 'Workshop Wing',
-    icon: Layers,
-    coordinates: 'Tech Blocks',
-    description:
-      'Hands-on engineering laboratories equipped with standard testing instruments, machine benches, and apparatus for technical demonstrations.',
+      'Spacious academic central library offering digital catalog access, research repositories, and quiet scholar reading halls for conference delegates.',
   },
   {
     id: 'hostels',
-    label: 'ON-CAMPUS STUDENT HOSTELS',
-    category: 'amenity',
-    title: 'Residential Hostels & Delegate Living',
-    subtitle: 'Campus Residential Quadrangle',
-    honestSpecs: [
-      'Separate residential blocks for boys & girls',
-      'Hostel mess providing daily meals',
-      'Resident warden & 24/7 security supervision',
-      'Furnished rooms for visiting attendees',
+    name: 'On-Campus Hostels & Guest House',
+    category: 'Hospitality & Accommodation',
+    title: 'Residential Hostels & Visiting Faculty Guest House',
+    subtitle: 'Residential Enclave, NSIT Bihta',
+    specs: [
+      'Furnished guest rooms for outstation delegates (subject to prior request)',
+      'Separate residential wings for gentlemen and lady researchers',
+      'Hygienic campus dining serving wholesome vegetarian meals',
+      'Round-the-clock perimeter security and medical first-aid support',
     ],
-    image: '/assets/nsit-hostel.png',
-    badge: 'RESIDENTIAL',
-    tag: 'Residential Wing',
-    icon: Building,
-    coordinates: 'Hostel Quadrangle',
+    badge: 'CAMPUS RESIDENCE',
+    icon: Home,
     description:
-      'On-campus multi-storey residential hostel accommodations with mess dining facilities, available for student attendees and scholars traveling from other cities.',
-  },
-  {
-    id: 'campus',
-    label: 'NSIT BIHTA CAMPUS GROUNDS',
-    category: 'core',
-    title: '11-Acre Academic Campus & Lawns',
-    subtitle: 'Amhara, Bihta, Patna, Bihar',
-    honestSpecs: [
-      '11-acre integrated tech campus',
-      'Located on 4-lane NH-922 highway',
-      'Situated in Bihta knowledge corridor near IIT Patna',
-      'Green lawns & open campus parking area',
-    ],
-    image: '/assets/nsit-building-real.jpg',
-    badge: 'ACADEMIC FACADE',
-    tag: 'Main Building',
-    icon: Building,
-    coordinates: 'Amhara, Bihta – 801106',
-    description:
-      'Pollution-free green academic campus situated along the Patna–Buxar national highway corridor in Bihta, featuring academic blocks, administrative offices, and central fountain plaza.',
+      'Limited on-campus guest accommodation is available for registered delegates upon prior request, subject to availability. Dining facilities cater to visiting scholars.',
   },
   {
     id: 'sports',
-    label: '11-ACRE ATHLETIC GROUNDS & FLEET',
-    category: 'amenity',
-    title: 'Outdoor Sports Grounds & Transit Fleet',
-    subtitle: '11-Acre Campus Grounds, NSIT Bihta',
-    honestSpecs: [
-      'Multi-sport outdoor grounds for cricket & athletics',
-      'Campus transport bus fleet connecting Patna',
-      'Open green courtyards & pedestrian walkways',
-      'Open-air delegate networking and event space',
+    name: 'Campus Grounds & Institutional Fleet',
+    category: 'Transit & Grounds',
+    title: 'Open Networking Grounds & Transport Fleet',
+    subtitle: 'NSIT Campus Grounds, Bihta',
+    specs: [
+      'Expansive landscaped outdoor courtyards for conference tea & networking',
+      'Dedicated institutional bus fleet connecting Patna Junction & Bihta Station',
+      'Secure on-campus parking for delegate vehicles & keynote convoys',
+      'Direct arterial access to the 4-lane Patna–Buxar Expressway (NH-922)',
     ],
-    image: '/assets/nsit-sports-grounds.jpg',
-    badge: 'CAMPUS GROUNDS',
-    tag: 'Sports & Transit',
-    icon: Building,
-    coordinates: 'Campus Open Quadrangle',
+    badge: 'GROUNDS & TRANSIT',
+    icon: Trees,
     description:
-      'Extensive 11-acre outdoor grounds featuring sports playing fields, institutional transit fleet parking, and open-air event spaces surrounded by lush green foliage.',
+      'Ample outdoor green courtyards for delegate interactions, poster presentations, and dedicated institutional transport connecting key transit nodes.',
   },
 ];
 
 export default function OrbitalVenueRadar() {
-  const [activeNodeId, setActiveNodeId] = useState<string>('plenary');
-  const [activeTab, setActiveTab] = useState<'3d-globe' | 'facilities' | 'transit'>('3d-globe');
+  const [activeTab, setActiveTab] = useState<'showcase' | 'facilities' | 'transit'>('showcase');
+  const [activeFacilityId, setActiveFacilityId] = useState<string>('plenary');
 
-  const activeNode =
-    HONEST_VENUE_NODES.find((node) => node.id === activeNodeId) || HONEST_VENUE_NODES[0];
+  const activeFacility =
+    VERIFIED_CAMPUS_FACILITIES.find((f) => f.id === activeFacilityId) ||
+    VERIFIED_CAMPUS_FACILITIES[0];
 
   return (
-    <div className="relative w-full rounded-3xl border border-[#BF982E]/30 bg-zinc-950 text-white overflow-hidden shadow-2xl backdrop-blur-2xl">
-      {/* Top Header Bar — Styled in Brochure Maroon (#4A0E1C) with Warm Gold Accents */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#BF982E]/25 px-4 sm:px-8 py-3.5 sm:py-4 bg-[#4A0E1C]">
+    <div className="relative w-full rounded-3xl border border-[#E7E0D6] bg-white text-[#1C1917] overflow-hidden shadow-lg">
+      {/* Top Header Bar — Prestigious Maroon & Gold Institutional Styling */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#E7E0D6] px-5 sm:px-8 py-4 bg-[#7B1123] text-white">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#BF982E]/40 bg-[#BF982E]/20 text-[#BF982E] shrink-0">
-            <GlobeIcon className="h-5 w-5 text-[#BF982E]" />
+            <Compass className="h-5 w-5 text-[#F3D993]" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-[#F3D993]">
-                NSIT BIHTA, PATNA // SPATIAL RADAR
+              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#F3D993]">
+                NSIT BIHTA, PATNA // CAMPUS DIRECTORY
               </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/20 px-2 py-0.5 font-mono text-[9px] font-semibold text-emerald-300 border border-emerald-500/40">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                INTERACTIVE 3D
+              <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-2 py-0.5 font-mono text-[9px] font-semibold text-white border border-white/20">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#BF982E]" />
+                PHYSICAL SUMMIT
               </span>
             </div>
-            <h3 className="font-heading text-sm sm:text-base font-extrabold !text-white tracking-tight drop-shadow-xs">
-              Summit Location, Interactive 3D Earth & Campus Facilities
+            <h3 className="font-heading text-sm sm:text-base font-extrabold text-white tracking-tight">
+              Host Academic Institution & Regional Transit Corridors
             </h3>
           </div>
         </div>
 
-        {/* View Switcher Pills — High-Contrast on Mobile & Desktop */}
-        <div className="w-full sm:w-auto grid grid-cols-3 sm:flex items-center rounded-2xl sm:rounded-full border border-white/15 bg-black/40 p-1 gap-1">
+        {/* View Switcher Pills */}
+        <div className="w-full sm:w-auto grid grid-cols-3 sm:flex items-center rounded-xl bg-black/25 p-1 gap-1 border border-white/10">
           <button
             type="button"
-            onClick={() => setActiveTab('3d-globe')}
-            className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-bold transition-all cursor-pointer text-center truncate ${
-              activeTab === '3d-globe'
-                ? 'bg-[#BF982E] !text-[#3B0A16] shadow-md ring-1 ring-[#BF982E]'
-                : '!text-zinc-200 hover:!text-white hover:bg-white/10'
+            onClick={() => setActiveTab('showcase')}
+            className={`rounded-lg px-2.5 sm:px-3.5 py-1.5 text-xs font-mono font-bold transition-all cursor-pointer text-center truncate ${
+              activeTab === 'showcase'
+                ? 'bg-[#BF982E] text-[#1C1917] shadow-sm'
+                : 'text-white/80 hover:text-white hover:bg-white/10'
             }`}
           >
-            <span className="sm:hidden">3D Earth</span>
-            <span className="hidden sm:inline">3D Interactive Earth</span>
+            Campus & Map
           </button>
           <button
             type="button"
             onClick={() => setActiveTab('facilities')}
-            className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-bold transition-all cursor-pointer text-center truncate ${
+            className={`rounded-lg px-2.5 sm:px-3.5 py-1.5 text-xs font-mono font-bold transition-all cursor-pointer text-center truncate ${
               activeTab === 'facilities'
-                ? 'bg-[#BF982E] !text-[#3B0A16] shadow-md ring-1 ring-[#BF982E]'
-                : '!text-zinc-200 hover:!text-white hover:bg-white/10'
+                ? 'bg-[#BF982E] text-[#1C1917] shadow-sm'
+                : 'text-white/80 hover:text-white hover:bg-white/10'
             }`}
           >
-            <span className="sm:hidden">Facilities</span>
-            <span className="hidden sm:inline">Campus Facilities</span>
+            Halls & Facilities
           </button>
           <button
             type="button"
             onClick={() => setActiveTab('transit')}
-            className={`rounded-xl sm:rounded-full px-2 sm:px-3.5 py-1.5 sm:py-1 text-[11px] sm:text-xs font-mono font-bold transition-all cursor-pointer text-center truncate ${
+            className={`rounded-lg px-2.5 sm:px-3.5 py-1.5 text-xs font-mono font-bold transition-all cursor-pointer text-center truncate ${
               activeTab === 'transit'
-                ? 'bg-[#BF982E] !text-[#3B0A16] shadow-md ring-1 ring-[#BF982E]'
-                : '!text-zinc-200 hover:!text-white hover:bg-white/10'
+                ? 'bg-[#BF982E] text-[#1C1917] shadow-sm'
+                : 'text-white/80 hover:text-white hover:bg-white/10'
             }`}
           >
-            <span className="sm:hidden">Transit</span>
-            <span className="hidden sm:inline">Transit & Routes</span>
+            Transit Corridors
           </button>
         </div>
       </div>
 
-      {/* TAB 1: 3D INTERACTIVE EARTH (FUN, SMOOTH, 60 FPS, NOT LAGGY) */}
-      {activeTab === '3d-globe' && (
-        <div className="p-3 sm:p-6 bg-black space-y-4 sm:space-y-6">
-          {/* Instructions Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-2.5 px-2">
-            <div className="flex items-center gap-2 text-xs font-mono text-zinc-200">
-              <Compass className="h-4 w-4 text-[#BF982E] shrink-0" />
-              <span>
-                Drag or touch to rotate the 3D Earth • Tap <strong className="text-[#F3D993]">"Locate NSIT"</strong> to focus on Patna, India
-              </span>
-            </div>
-            <span className="font-mono text-[11px] text-[#BF982E] font-bold">
-              Latitude: 25.5684° N • Longitude: 84.8872° E
-            </span>
-          </div>
-
-          {/* Dedicated 3D Interactive WebGL Globe Stage */}
-          <InteractiveGlobe className="w-full" />
-
-          {/* Honest Quick Coordinates & Campus Stats Bar (No fake claims!) */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-            <div className="rounded-2xl border border-white/10 bg-zinc-950 p-3.5 text-center">
-              <span className="font-mono text-[#BF982E] font-bold text-xs uppercase block">
-                CAMPUS AREA
-              </span>
-              <p className="font-heading text-lg font-black text-white mt-1">
-                9.2 Acres
-              </p>
-              <span className="text-[10px] text-zinc-400">Green Tech Campus</span>
-            </div>
-
-            <div className="rounded-2xl border border-white/10 bg-zinc-950 p-3.5 text-center">
-              <span className="font-mono text-emerald-400 font-bold text-xs uppercase block">
-                AFFILIATION
-              </span>
-              <p className="font-heading text-sm sm:text-base font-bold text-white mt-1">
-                BEU Patna
-              </p>
-              <span className="text-[10px] text-zinc-400">AICTE Approved</span>
-            </div>
-
-            <div className="rounded-2xl border border-white/10 bg-zinc-950 p-3.5 text-center">
-              <span className="font-mono text-[#BF982E] font-bold text-xs uppercase block">
-                AIRPORT DISTANCE
-              </span>
-              <p className="font-heading text-lg font-black text-white mt-1">
-                ~30 km
-              </p>
-              <span className="text-[10px] text-zinc-400">Patna Airport (PAT)</span>
-            </div>
-
-            <div className="rounded-2xl border border-white/10 bg-zinc-950 p-3.5 text-center">
-              <span className="font-mono text-amber-400 font-bold text-xs uppercase block">
-                NEAREST RAILWAY
-              </span>
-              <p className="font-heading text-lg font-black text-white mt-1">
-                4 km
-              </p>
-              <span className="text-[10px] text-zinc-400">Bihta Railway Station</span>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 2: CAMPUS FACILITIES & TELEMETRY CAPSULES (CLEAN, NO OVERLAPPING) */}
-      {activeTab === 'facilities' && (
-        <div className="p-4 sm:p-7 bg-black">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            {/* Left: Sleek Capsule Buttons Column */}
-            <div className="lg:col-span-5 flex flex-col gap-2">
-              <div className="mb-2">
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-400 block">
-                  CAMPUS SPATIAL NODES // SELECT FACILITY:
-                </span>
-                <p className="text-xs text-zinc-400 mt-0.5">
-                  Click any verified facility to view photo and details
-                </p>
+      {/* Main Body Viewport */}
+      <div className="p-5 sm:p-8 bg-[#FAF8F5]">
+        {/* TAB 1: CAMPUS SHOWCASE & MAP */}
+        {activeTab === 'showcase' && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="grid gap-6 lg:grid-cols-12 lg:items-center"
+          >
+            {/* Real Campus Photos Display */}
+            <div className="lg:col-span-7 space-y-4">
+              <div className="relative overflow-hidden rounded-2xl border border-[#E7E0D6] bg-white p-2 shadow-md">
+                <div className="relative h-60 sm:h-80 w-full overflow-hidden rounded-xl bg-zinc-950">
+                  <img
+                    src="/assets/nsit-building-real.jpg"
+                    alt="NSIT Bihta Main Campus"
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-xl bg-white/95 border border-[#E7E0D6] px-3 py-2 backdrop-blur-md">
+                    <div>
+                      <span className="text-[10px] font-mono text-[#7B1123] font-bold uppercase block">
+                        Official Conference Host
+                      </span>
+                      <p className="text-xs sm:text-sm font-bold text-[#1C1917]">
+                        Netaji Subhas Institute of Technology, Bihta, Patna
+                      </p>
+                    </div>
+                    <span className="rounded-md bg-[#7B1123]/10 border border-[#7B1123]/25 px-2 py-0.5 text-[10px] font-mono font-bold text-[#7B1123] shrink-0">
+                      9.2-Acre Campus
+                    </span>
+                  </div>
+                </div>
               </div>
 
-              {HONEST_VENUE_NODES.map((node) => {
-                const isSelected = activeNodeId === node.id;
-                const Icon = node.icon;
+              {/* Verified Campus Facts Bar */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
+                <div className="rounded-xl border border-[#E7E0D6] bg-white p-2.5 shadow-2xs">
+                  <span className="text-[10px] font-mono text-[#57534E] uppercase block">Campus Area</span>
+                  <strong className="text-xs sm:text-sm text-[#7B1123] font-bold">9.2 Acres</strong>
+                </div>
+                <div className="rounded-xl border border-[#E7E0D6] bg-white p-2.5 shadow-2xs">
+                  <span className="text-[10px] font-mono text-[#57534E] uppercase block">Location</span>
+                  <strong className="text-xs sm:text-sm text-[#1C1917] font-bold">Bihta, Patna</strong>
+                </div>
+                <div className="rounded-xl border border-[#E7E0D6] bg-white p-2.5 shadow-2xs">
+                  <span className="text-[10px] font-mono text-[#57534E] uppercase block">From Patna</span>
+                  <strong className="text-xs sm:text-sm text-[#BF982E] font-bold">~30 km West</strong>
+                </div>
+                <div className="rounded-xl border border-[#E7E0D6] bg-white p-2.5 shadow-2xs">
+                  <span className="text-[10px] font-mono text-[#57534E] uppercase block">Railway Link</span>
+                  <strong className="text-xs sm:text-sm text-[#7B1123] font-bold">4 km to Bihta</strong>
+                </div>
+              </div>
+            </div>
 
+            {/* Location & Navigation Card */}
+            <div className="lg:col-span-5 space-y-4">
+              <div className="rounded-2xl border border-[#E7E0D6] bg-white p-5 sm:p-6 shadow-sm space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full bg-[#7B1123]/10 border border-[#7B1123]/30 px-3 py-0.5 text-[11px] font-mono font-bold text-[#7B1123]">
+                    Official Venue
+                  </span>
+                  <span className="text-xs font-mono text-[#BF982E] font-bold">Physical Mode</span>
+                </div>
+
+                <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#1C1917]">
+                  {HOST_INSTITUTION.name}
+                </h3>
+
+                <p className="text-xs text-[#7B1123] font-mono flex items-start gap-2 font-semibold">
+                  <MapPin className="h-4 w-4 shrink-0 mt-0.5" />
+                  <span>{HOST_INSTITUTION.fullAddress}</span>
+                </p>
+
+                <p className="text-xs sm:text-sm text-[#57534E] leading-relaxed">
+                  Situated in the emerging educational corridor of Bihta, directly adjacent to IIT Patna along the 4-lane Patna–Buxar National Highway (NH-922).
+                </p>
+
+                <div className="pt-2 border-t border-[#E7E0D6] space-y-2.5">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-[#57534E]">GPS Coordinates:</span>
+                    <span className="font-mono font-bold text-[#1C1917]">25.5684° N, 84.8872° E</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-[#57534E]">Academic Approvals:</span>
+                    <span className="font-mono font-bold text-[#7B1123]">AICTE & DST Bihar</span>
+                  </div>
+                </div>
+
+                <div className="pt-2 flex flex-wrap gap-2.5">
+                  <a
+                    href="https://maps.google.com/?q=Netaji+Subhas+Institute+of+Technology+Bihta+Patna"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-4 py-2.5 text-xs font-bold text-white shadow-xs transition-all cursor-pointer whitespace-nowrap"
+                  >
+                    <Navigation className="h-3.5 w-3.5" />
+                    <span>Open in Google Maps</span>
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                  <a
+                    href={`tel:${CONVENOR.phoneTel}`}
+                    className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-3.5 py-2.5 text-xs font-mono font-semibold text-[#1C1917] hover:border-[#7B1123] transition-colors whitespace-nowrap"
+                  >
+                    <Phone className="h-3.5 w-3.5 text-[#7B1123]" />
+                    <span>{CONVENOR.phone}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* TAB 2: CONFERENCE VENUES & FACILITIES */}
+        {activeTab === 'facilities' && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="grid gap-6 lg:grid-cols-12 lg:items-start"
+          >
+            {/* Left Facilities Selector List (5 cols) */}
+            <div className="lg:col-span-5 space-y-2">
+              {VERIFIED_CAMPUS_FACILITIES.map((fac) => {
+                const isSelected = fac.id === activeFacilityId;
+                const IconComponent = fac.icon;
                 return (
                   <button
-                    key={node.id}
+                    key={fac.id}
                     type="button"
-                    onClick={() => setActiveNodeId(node.id)}
-                    className={`group flex items-center justify-between gap-3 rounded-full px-4 py-2 sm:py-2.5 text-left transition-all cursor-pointer border backdrop-blur-md ${
+                    onClick={() => setActiveFacilityId(fac.id)}
+                    className={`w-full text-left rounded-2xl p-3.5 sm:p-4 transition-all cursor-pointer border flex items-center gap-3 ${
                       isSelected
-                        ? 'border-cyan-400 bg-cyan-950/70 text-white shadow-[0_0_15px_rgba(34,211,238,0.3)] ring-1 ring-cyan-400/80'
-                        : 'border-white/10 bg-zinc-950 text-zinc-300 hover:border-white/30 hover:bg-zinc-900 hover:text-white'
+                        ? 'border-[#7B1123] bg-white shadow-sm ring-1 ring-[#7B1123]/25'
+                        : 'border-[#E7E0D6] bg-white/70 hover:bg-white hover:border-[#7B1123]/30'
                     }`}
                   >
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <span
-                        className={`h-2 w-2 rounded-full transition-all shrink-0 ${
-                          isSelected ? 'bg-cyan-400 shadow-[0_0_8px_#22d3ee]' : 'bg-zinc-500'
-                        }`}
-                      />
-                      <Icon
-                        className={`h-3.5 w-3.5 shrink-0 ${
-                          isSelected ? 'text-cyan-400' : 'text-zinc-400'
-                        }`}
-                      />
-                      <span className="font-mono text-[11px] sm:text-xs uppercase tracking-wider font-semibold truncate">
-                        {node.label}
-                      </span>
-                    </div>
-
-                    <span
-                      className={`rounded-full px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider shrink-0 ${
+                    <div
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${
                         isSelected
-                          ? 'bg-cyan-400/20 text-cyan-300 border border-cyan-400/40'
-                          : 'bg-white/5 text-zinc-400 border border-white/5'
+                          ? 'bg-[#7B1123] text-white'
+                          : 'bg-[#7B1123]/10 text-[#7B1123]'
                       }`}
                     >
-                      {node.tag}
-                    </span>
+                      <IconComponent className="h-4 w-4" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <span className="text-[10px] font-mono uppercase text-[#7B1123] font-bold block">
+                        {fac.category}
+                      </span>
+                      <h4 className="text-xs sm:text-sm font-bold text-[#1C1917] truncate">
+                        {fac.name}
+                      </h4>
+                    </div>
                   </button>
                 );
               })}
             </div>
 
-            {/* Right: Selected Facility Detail Inspector (Clean & Uncluttered) */}
+            {/* Right Facility Detail Card (7 cols) */}
             <div className="lg:col-span-7">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeNode.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="rounded-2xl border border-cyan-400/30 bg-zinc-950 p-5 sm:p-6 shadow-xl"
-                >
-                  <div className="flex items-center justify-between gap-3 border-b border-white/10 pb-3 mb-4">
-                    <span className="rounded-full bg-cyan-400/15 border border-cyan-400/40 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-cyan-300">
-                      {activeNode.badge}
-                    </span>
-                    <span className="font-mono text-[11px] text-zinc-400 flex items-center gap-1">
-                      <MapPin className="h-3.5 w-3.5 text-cyan-400" />
-                      <span>{activeNode.coordinates}</span>
-                    </span>
-                  </div>
-
-                  {/* Real Photo Preview */}
-                  <div className="relative h-48 sm:h-60 w-full overflow-hidden rounded-xl border border-white/10 mb-4 bg-black">
+              <div className="rounded-3xl border border-[#E7E0D6] bg-white p-6 sm:p-8 shadow-sm space-y-4">
+                {activeFacility.image && (
+                  <div className="relative h-48 sm:h-56 w-full overflow-hidden rounded-2xl border border-[#E7E0D6] mb-4">
                     <img
-                      src={activeNode.image}
-                      alt={activeNode.title}
-                      className="h-full w-full object-cover object-center"
+                      src={activeFacility.image}
+                      alt={activeFacility.name}
+                      className="h-full w-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-                    <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[11px] font-mono text-zinc-300">
-                      <span>NSIT BIHTA CAMPUS ASSET</span>
-                      <span className="text-cyan-400 font-bold">{activeNode.tag}</span>
+                    <div className="absolute bottom-2.5 left-2.5 rounded-lg bg-black/75 px-3 py-1 text-[11px] font-mono text-white">
+                      Verified Campus Photo
                     </div>
                   </div>
+                )}
 
-                  {/* Title & Honest Description */}
-                  <div className="space-y-1 mb-4">
-                    <h4 className="font-heading text-lg sm:text-xl font-bold text-white">
-                      {activeNode.title}
-                    </h4>
-                    <p className="font-mono text-xs text-cyan-400">
-                      {activeNode.subtitle}
-                    </p>
-                    <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed pt-1">
-                      {activeNode.description}
-                    </p>
-                  </div>
-
-                  {/* Honest Specifications (No exaggerated claims!) */}
-                  <div className="mb-5 space-y-1.5 pt-3 border-t border-white/10">
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-400 block mb-1">
-                      FACILITY DETAILS & DELEGATE AMENITIES:
+                <div className="flex items-center justify-between border-b border-[#E7E0D6] pb-3">
+                  <div>
+                    <span className="text-xs font-mono uppercase text-[#7B1123] font-bold block">
+                      {activeFacility.badge}
                     </span>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {activeNode.honestSpecs.map((spec, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-center gap-2 rounded-lg bg-white/5 border border-white/5 px-2.5 py-1.5 text-xs text-zinc-200 font-mono"
-                        >
-                          <CheckCircle2 className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
-                          <span className="truncate">{spec}</span>
-                        </div>
-                      ))}
-                    </div>
+                    <h3 className="font-heading text-lg sm:text-2xl font-bold text-[#1C1917]">
+                      {activeFacility.title}
+                    </h3>
                   </div>
-
-                  {/* Navigation Action Buttons */}
-                  <div className="flex flex-wrap items-center gap-3 pt-2">
-                    <a
-                      href="https://maps.google.com/?q=Netaji+Subhas+Institute+of+Technology+Bihta+Patna"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-4 py-2 text-xs font-bold text-black shadow-md hover:brightness-110 transition-all cursor-pointer"
-                    >
-                      <Navigation className="h-3.5 w-3.5 text-black" />
-                      <span>Open Campus in Google Maps</span>
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
-
-                    <a
-                      href={`tel:${CONVENOR.phoneTel}`}
-                      className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-3.5 py-2 text-xs font-mono text-zinc-300 hover:text-white hover:border-cyan-400 transition-colors"
-                    >
-                      <Phone className="h-3 w-3 text-cyan-400" />
-                      <span>Secretariat: {CONVENOR.phone}</span>
-                    </a>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 3: TRANSIT & ACCESS GUIDE */}
-      {activeTab === 'transit' && (
-        <div className="p-6 sm:p-8 bg-black space-y-6">
-          <div className="grid gap-6 md:grid-cols-3">
-            {HOST_INSTITUTION.transitAccess.map((transit, idx) => (
-              <div
-                key={idx}
-                className="rounded-2xl border border-white/10 bg-zinc-950 p-5 space-y-3 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-400/15 text-cyan-400 border border-cyan-400/30 mb-3">
-                    {idx === 0 && <Plane className="h-5 w-5" />}
-                    {idx === 1 && <Train className="h-5 w-5" />}
-                    {idx === 2 && <Car className="h-5 w-5" />}
-                  </div>
-
-                  <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-wider block">
-                    {transit.mode}
-                  </span>
-                  <h4 className="font-heading text-base font-bold text-white mt-0.5">
-                    {transit.terminal}
-                  </h4>
-                  <p className="text-xs text-zinc-300 leading-relaxed mt-2">
-                    {transit.detail}
-                  </p>
+                  <span className="text-xs font-mono text-[#57534E]">{activeFacility.subtitle}</span>
                 </div>
 
-                <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <span>TRANSIT TERMINAL</span>
-                  <span className="text-cyan-400 font-bold">Patna Route</span>
+                <p className="text-xs sm:text-sm text-[#57534E] leading-relaxed">
+                  {activeFacility.description}
+                </p>
+
+                <div className="pt-2 border-t border-[#E7E0D6] space-y-2">
+                  <span className="text-xs font-mono uppercase text-[#7B1123] font-bold block tracking-wider">
+                    Infrastructure Specifications:
+                  </span>
+                  <div className="grid grid-cols-1 gap-2 text-xs text-[#57534E]">
+                    {activeFacility.specs.map((spec, i) => (
+                      <div key={i} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-[#BF982E] shrink-0 mt-0.5" />
+                        <span className="text-[#1C1917] font-medium leading-snug">{spec}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          </motion.div>
+        )}
 
-          {/* Official Location Summary Bar */}
-          <div className="rounded-2xl border border-cyan-400/30 bg-zinc-950 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="space-y-1">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-cyan-400 block">
-                OFFICIAL SUMMIT VENUE ADDRESS
-              </span>
-              <h4 className="font-heading text-base sm:text-lg font-bold text-white">
-                Netaji Subhas Institute of Technology (NSIT)
-              </h4>
-              <p className="text-xs text-zinc-300 font-mono">
-                Amhara, Bihta, Patna, Bihar – 801106, India • Adjacent to IIT Patna
-              </p>
+        {/* TAB 3: TRANSIT CORRIDORS */}
+        {activeTab === 'transit' && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="grid gap-4 sm:gap-6 md:grid-cols-3"
+          >
+            {/* Airways */}
+            <div className="rounded-2xl border border-[#E7E0D6] bg-white p-5 sm:p-6 shadow-sm space-y-3 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#7B1123]/10 text-[#7B1123]">
+                  <Plane className="h-5 w-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono uppercase text-[#7B1123] font-bold block">
+                    Airways Connectivity
+                  </span>
+                  <h4 className="font-heading text-base font-bold text-[#1C1917]">
+                    Patna Airport (PAT)
+                  </h4>
+                  <span className="text-xs font-mono text-[#BF982E] font-semibold">
+                    ~30 km from NSIT Campus
+                  </span>
+                </div>
+                <p className="text-xs text-[#57534E] leading-relaxed">
+                  Jay Prakash Narayan International Airport in Patna operates daily direct flights to Delhi, Mumbai, Bengaluru, Kolkata, and Hyderabad. Future Bihta Civil Enclave is located minutes away.
+                </p>
+              </div>
+              <div className="pt-3 border-t border-[#E7E0D6] text-[11px] font-mono text-[#57534E]">
+                Prepaid taxi & ride-hailing available at airport terminal.
+              </div>
             </div>
 
-            <a
-              href="https://maps.google.com/?q=Netaji+Subhas+Institute+of+Technology+Bihta+Patna"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-cyan-400 px-5 py-2.5 text-xs font-bold text-black shadow-lg hover:bg-cyan-300 transition-all shrink-0 cursor-pointer"
-            >
-              <MapPin className="h-4 w-4" />
-              <span>Open in Google Maps</span>
-              <ExternalLink className="h-3 w-3" />
-            </a>
-          </div>
-        </div>
-      )}
+            {/* Railways */}
+            <div className="rounded-2xl border border-[#E7E0D6] bg-white p-5 sm:p-6 shadow-sm space-y-3 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#7B1123]/10 text-[#7B1123]">
+                  <Train className="h-5 w-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono uppercase text-[#7B1123] font-bold block">
+                    Railways Connectivity
+                  </span>
+                  <h4 className="font-heading text-base font-bold text-[#1C1917]">
+                    Bihta & Patna Junction
+                  </h4>
+                  <span className="text-xs font-mono text-[#BF982E] font-semibold">
+                    Bihta (4 km) &bull; Patna Jn (~32 km)
+                  </span>
+                </div>
+                <p className="text-xs text-[#57534E] leading-relaxed">
+                  Bihta Railway Station (4 km) connects frequent local passenger trains along the Danapur–Mughalsarai mainline. Patna Junction (32 km) connects Rajdhani, Vande Bharat, and Superfast expresses nationwide.
+                </p>
+              </div>
+              <div className="pt-3 border-t border-[#E7E0D6] text-[11px] font-mono text-[#57534E]">
+                Auto-rickshaws and campus transport available from Bihta station.
+              </div>
+            </div>
+
+            {/* Roadways */}
+            <div className="rounded-2xl border border-[#E7E0D6] bg-white p-5 sm:p-6 shadow-sm space-y-3 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#7B1123]/10 text-[#7B1123]">
+                  <Car className="h-5 w-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono uppercase text-[#7B1123] font-bold block">
+                    Roadways & Highways
+                  </span>
+                  <h4 className="font-heading text-base font-bold text-[#1C1917]">
+                    NH-922 Corridor
+                  </h4>
+                  <span className="text-xs font-mono text-[#BF982E] font-semibold">
+                    Danapur–Bihta Elevated Highway
+                  </span>
+                </div>
+                <p className="text-xs text-[#57534E] leading-relaxed">
+                  Smooth 4-lane access along the Patna–Buxar National Highway (NH-922) and the Danapur–Bihta elevated corridor. Institutional parking is available for private and delegate vehicles.
+                </p>
+              </div>
+              <div className="pt-3 border-t border-[#E7E0D6] text-[11px] font-mono text-[#57534E]">
+                Estimated travel time from Danapur: ~25 minutes via elevated expressway.
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </div>
     </div>
   );
 }

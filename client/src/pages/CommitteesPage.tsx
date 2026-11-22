@@ -68,8 +68,8 @@ export default function CommitteesPage() {
 
           {/* Featured Convenor Profile Banner */}
           <div className="mt-8 rounded-3xl border border-[#E7E0D6] bg-white p-6 sm:p-8 shadow-md w-full min-w-0">
-            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 w-full min-w-0">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 w-full min-w-0">
+            <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-6 w-full min-w-0">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 flex-1 min-w-0">
                 <div className="relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 rounded-2xl border-2 border-[#BF982E] shadow-md overflow-hidden bg-[#FAF8F5]">
                   <img
                     src={CONVENOR.photo || "/assets/committee/atif-hussain.png"}
@@ -102,21 +102,21 @@ export default function CommitteesPage() {
                 </div>
               </div>
 
-              {/* Direct Convenor Contacts */}
-              <div className="flex flex-col sm:flex-row gap-2.5 w-full lg:w-auto text-xs font-mono min-w-0">
+              {/* Direct Convenor Contacts (Clean, Spacious, No Letter-by-Letter Wrapping) */}
+              <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 w-full xl:w-auto shrink-0 text-xs font-mono">
                 <a
                   href={`mailto:${CONVENOR.email}`}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-3.5 py-2.5 text-[#1C1917] hover:border-[#7B1123] hover:text-[#7B1123] transition-colors min-w-0"
+                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-xl border border-[#7B1123]/30 bg-[#FAF8F5] px-4 py-2.5 text-[#7B1123] hover:bg-[#7B1123] hover:text-white transition-colors shadow-xs whitespace-nowrap"
                 >
-                  <Mail className="h-4 w-4 text-[#7B1123] shrink-0" />
-                  <span className="break-all">{CONVENOR.email}</span>
+                  <Mail className="h-4 w-4 shrink-0 text-[#7B1123]" />
+                  <span className="font-semibold whitespace-nowrap">{CONVENOR.email}</span>
                 </a>
                 <a
                   href={`tel:${CONVENOR.phoneTel}`}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-3.5 py-2.5 text-[#1C1917] hover:border-[#7B1123] hover:text-[#7B1123] transition-colors shrink-0"
+                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-4 py-2.5 text-[#1C1917] hover:border-[#7B1123] hover:text-[#7B1123] transition-colors shadow-xs whitespace-nowrap"
                 >
-                  <Phone className="h-4 w-4 text-[#7B1123] shrink-0" />
-                  <span>{CONVENOR.phone}</span>
+                  <Phone className="h-4 w-4 shrink-0 text-[#7B1123]" />
+                  <span className="font-semibold whitespace-nowrap">{CONVENOR.phone}</span>
                 </a>
               </div>
             </div>

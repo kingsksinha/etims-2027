@@ -66,25 +66,27 @@ export default function RegistrationPage() {
           </div>
         </div>
 
-        {/* Important Deadlines Callout */}
-        <div className="mb-10 rounded-2xl border border-[#E7E0D6] bg-white p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4 shadow-sm">
-          <div className="flex items-center gap-3">
+        {/* Important Deadlines Callout — Mobile Optimized */}
+        <div className="mb-6 sm:mb-10 rounded-2xl border border-[#E7E0D6] bg-white p-3.5 sm:p-5 flex flex-wrap items-center justify-between gap-3 shadow-xs">
+          <div className="flex items-center gap-3 min-w-0">
             <Calendar className="h-5 w-5 text-[#7B1123] shrink-0" />
-            <div className="text-xs sm:text-sm">
-              <span className="text-[#57534E]">Early Registration Deadline: </span>
-              <strong className="text-[#7B1123] font-bold">{REGISTRATION_TERMS.earlyDeadline}</strong>
-              <span className="mx-2 text-[#E7E0D6]">|</span>
-              <span className="text-[#57534E]">Final Registration Deadline: </span>
-              <strong className="text-[#BF982E] font-bold">{REGISTRATION_TERMS.finalDeadline}</strong>
+            <div className="text-xs sm:text-sm min-w-0">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                <span className="text-[#57534E]">Early Registration: </span>
+                <strong className="text-[#7B1123] font-bold whitespace-nowrap">{REGISTRATION_TERMS.earlyDeadline}</strong>
+                <span className="text-[#E7E0D6] hidden sm:inline">|</span>
+                <span className="text-[#57534E]">Final Registration: </span>
+                <strong className="text-[#BF982E] font-bold whitespace-nowrap">{REGISTRATION_TERMS.finalDeadline}</strong>
+              </div>
             </div>
           </div>
-          <span className="text-xs font-mono text-[#7B1123] bg-[#7B1123]/10 border border-[#7B1123]/25 rounded-lg px-3 py-1 font-semibold">
+          <span className="text-[11px] font-mono text-[#7B1123] bg-[#7B1123]/10 border border-[#7B1123]/25 rounded-lg px-2.5 py-1 font-semibold shrink-0">
             Currency: INR (₹)
           </span>
         </div>
 
         {/* Categories Table / Cards */}
-        <div className="overflow-hidden rounded-3xl border border-[#E7E0D6] bg-white shadow-md">
+        <div className="overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E7E0D6] bg-white shadow-md">
           <div className="hidden lg:grid grid-cols-12 gap-4 px-8 py-4 bg-[#5C1324] text-white text-xs font-mono font-bold uppercase tracking-wider">
             <div className="col-span-5">Category & Scope</div>
             <div className="col-span-3 text-center">Early Fee (by 20 June 2027)</div>
@@ -96,35 +98,35 @@ export default function RegistrationPage() {
             {REGISTRATION_CATEGORIES.map((cat, idx) => (
               <div
                 key={idx}
-                className="p-6 lg:px-8 lg:py-6 grid lg:grid-cols-12 gap-4 items-center hover:bg-[#FAF8F5] transition-colors"
+                className="p-4 sm:p-5 lg:px-8 lg:py-6 grid lg:grid-cols-12 gap-3 sm:gap-4 items-center hover:bg-[#FAF8F5] transition-colors"
               >
+                {/* Category Title & Scope */}
                 <div className="lg:col-span-5">
-                  <div className="flex items-center gap-2 lg:hidden mb-2">
+                  <div className="flex items-center gap-2 lg:hidden mb-1.5">
                     <span className="rounded-full bg-[#7B1123]/10 border border-[#7B1123]/25 px-2.5 py-0.5 text-[10px] font-mono font-bold text-[#7B1123]">
                       {cat.badge}
                     </span>
                   </div>
-                  <h3 className="font-heading text-lg font-bold text-[#1C1917]">
+                  <h3 className="font-heading text-base sm:text-lg font-bold text-[#1C1917]">
                     {cat.category}
                   </h3>
-                  <p className="mt-1 text-xs text-[#57534E] leading-relaxed">
+                  <p className="mt-0.5 text-xs text-[#57534E] leading-relaxed">
                     {cat.scope}
                   </p>
                 </div>
 
-                <div className="lg:col-span-3 flex lg:justify-center items-center justify-between border-t lg:border-t-0 border-[#E7E0D6] pt-3 lg:pt-0">
-                  <span className="lg:hidden text-xs font-mono text-[#57534E]">Early Fee:</span>
+                {/* Desktop Fee Columns (Hidden on Mobile) */}
+                <div className="hidden lg:flex lg:col-span-3 justify-center items-center">
                   <div className="rounded-xl border border-[#7B1123]/30 bg-[#7B1123]/5 px-4 py-2 text-center">
-                    <span className="font-heading text-lg font-black text-[#7B1123]">
+                    <span className="font-heading text-lg font-black text-[#7B1123] whitespace-nowrap">
                       {cat.earlyFormatted}
                     </span>
                   </div>
                 </div>
 
-                <div className="lg:col-span-3 flex lg:justify-center items-center justify-between border-t lg:border-t-0 border-[#E7E0D6] pt-3 lg:pt-0">
-                  <span className="lg:hidden text-xs font-mono text-[#57534E]">Regular Fee:</span>
+                <div className="hidden lg:flex lg:col-span-3 justify-center items-center">
                   <div className="rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-4 py-2 text-center">
-                    <span className="font-heading text-lg font-bold text-[#57534E]">
+                    <span className="font-heading text-lg font-bold text-[#57534E] whitespace-nowrap">
                       {cat.regularFormatted}
                     </span>
                   </div>
@@ -140,11 +142,28 @@ export default function RegistrationPage() {
                   </button>
                 </div>
 
-                <div className="lg:hidden col-span-12 pt-2">
+                {/* Mobile Fee Display (Clean, Symmetrical 2-Column Grid — No Broken Currency Symbols!) */}
+                <div className="lg:hidden grid grid-cols-2 gap-2.5 pt-2 border-t border-[#E7E0D6]">
+                  <div className="rounded-xl border border-[#7B1123]/30 bg-[#7B1123]/5 p-2.5 text-center">
+                    <span className="text-[10px] font-mono text-[#57534E] uppercase block mb-0.5">Early (by 20 Jun)</span>
+                    <span className="font-heading text-base font-black text-[#7B1123] whitespace-nowrap block">
+                      {cat.earlyFormatted}
+                    </span>
+                  </div>
+                  <div className="rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] p-2.5 text-center">
+                    <span className="text-[10px] font-mono text-[#57534E] uppercase block mb-0.5">Regular (by 10 Jul)</span>
+                    <span className="font-heading text-base font-bold text-[#57534E] whitespace-nowrap block">
+                      {cat.regularFormatted}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Mobile Full-Width Register Action */}
+                <div className="lg:hidden pt-1">
                   <button
                     type="button"
                     onClick={() => handleOpenModal(cat.category)}
-                    className="w-full rounded-xl bg-[#7B1123] hover:bg-[#5C1324] py-2 text-xs font-mono font-bold text-white shadow-xs transition-all cursor-pointer text-center"
+                    className="w-full rounded-xl bg-[#7B1123] hover:bg-[#5C1324] py-2.5 text-xs font-mono font-bold text-white shadow-xs transition-all cursor-pointer text-center"
                   >
                     Register as {cat.badge} &rarr;
                   </button>

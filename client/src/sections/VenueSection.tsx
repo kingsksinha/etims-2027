@@ -13,8 +13,8 @@ export default function VenueSection() {
 
       <Container className="relative z-10 w-full min-w-0">
         <SectionHeading
-          tag="08 // Summit Location & Spatial Radar"
-          title="Summit Venue & Orbital Telemetry"
+          tag="08 // Summit Location & Campus Guide"
+          title="Conference Venue & Campus Guide"
           subtitle="Netaji Subhas Institute of Technology (NSIT) • Bihta, Patna, Bihar, India"
           align="left"
         />

@@ -158,20 +158,20 @@ export default function CommitteeSection() {
             </div>
 
             {/* Direct Communication Channels */}
-            <div className="mt-6 pt-5 border-t border-[#E7E0D6] flex flex-col sm:flex-row gap-3 text-xs font-mono w-full min-w-0">
+            <div className="mt-6 pt-5 border-t border-[#E7E0D6] flex flex-wrap sm:flex-nowrap gap-3 text-xs font-mono w-full min-w-0">
               <a
                 href={`mailto:${CONVENOR.email}`}
-                className="flex items-center justify-center gap-2 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-4 py-2 font-medium text-[#1C1917] hover:border-[#7B1123] hover:text-[#7B1123] transition-colors min-w-0"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-4 py-2 font-medium text-[#1C1917] hover:border-[#7B1123] hover:text-[#7B1123] transition-colors whitespace-nowrap"
               >
                 <Mail className="h-4 w-4 text-[#7B1123] shrink-0" />
-                <span className="break-all">{CONVENOR.email}</span>
+                <span className="whitespace-nowrap">{CONVENOR.email}</span>
               </a>
               <a
                 href={`tel:${CONVENOR.phoneTel}`}
-                className="flex items-center justify-center gap-2 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-4 py-2 font-medium text-[#1C1917] hover:border-[#7B1123] hover:text-[#7B1123] transition-colors shrink-0"
+                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-xl border border-[#E7E0D6] bg-[#FAF8F5] px-4 py-2 font-medium text-[#1C1917] hover:border-[#7B1123] hover:text-[#7B1123] transition-colors whitespace-nowrap"
               >
                 <Phone className="h-4 w-4 text-[#7B1123] shrink-0" />
-                <span>{CONVENOR.phone}</span>
+                <span className="whitespace-nowrap">{CONVENOR.phone}</span>
               </a>
             </div>
 

@@ -1294,7 +1294,7 @@ export const CAMPUS_FACILITIES: CampusFacility[] = [
     id: 'computing-center',
     name: 'Central Computing Facility & Digital Infrastructure',
     category: 'Digital Infrastructure',
-    image: '/assets/nsit-computing.jpg',
+    image: '/assets/nsit-building-real.jpg',
     description:
       'Centralized computer center providing networked workstations, high-speed campus internet connectivity, and licensed engineering software suites for research simulations and academic sessions.',
     capacity: 'High-Speed Computing Facility',
@@ -1309,7 +1309,7 @@ export const CAMPUS_FACILITIES: CampusFacility[] = [
     id: 'library',
     name: 'Central Digital Library & Knowledge Resource Center',
     category: 'Academic Research',
-    image: '/assets/nsit-library.png',
+    image: '/assets/nsit-building-real.jpg',
     description:
       'Spacious central library housing comprehensive collections of engineering textbooks, reference volumes, national and international journals, and digital learning portals.',
     capacity: 'Modern Digital Central Library',
@@ -1324,7 +1324,7 @@ export const CAMPUS_FACILITIES: CampusFacility[] = [
     id: 'laboratories',
     name: 'Departmental Laboratories & Technical Workshops',
     category: 'Research Facilities',
-    image: '/assets/nsit-lab.jpg',
+    image: '/assets/nsit-building-real.jpg',
     description:
       'Specialized engineering laboratories and practical workshops equipped with modern experimental test benches across Civil, Mechanical, EEE, and CSE.',
     capacity: 'Full Departmental Engineering Labs & Workshops',
@@ -1339,7 +1339,7 @@ export const CAMPUS_FACILITIES: CampusFacility[] = [
     id: 'hostels',
     name: 'On-Campus Residential Hostels & Guest House',
     category: 'Hospitality & Accommodation',
-    image: '/assets/nsit-hostel.png',
+    image: '/assets/nsit-building-real.jpg',
     description:
       'Safe, comfortable on-campus residential hostels for boys and girls alongside furnished accommodations for visiting scholars and delegates.',
     capacity: 'On-Campus Hostels & Guest House Accommodations',
@@ -1369,7 +1369,7 @@ export const CAMPUS_FACILITIES: CampusFacility[] = [
     id: 'sports-grounds',
     name: 'Campus Sports Facilities & Transport Fleet',
     category: 'Campus Grounds & Transit',
-    image: '/assets/nsit-sports-grounds.jpg',
+    image: '/assets/nsit-building-real.jpg',
     description:
       'Outdoor sports facilities, athletic grounds, and institutional transport fleet connecting Patna and surrounding regions.',
     capacity: 'Sports Grounds & Transit Fleet',

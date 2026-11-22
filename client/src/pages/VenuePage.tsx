@@ -23,13 +23,13 @@ export default function VenuePage() {
         <div className="mb-10 sm:mb-12">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#7B1123]/30 bg-[#7B1123]/10 px-4 py-1.5 text-xs font-mono font-semibold text-[#7B1123] mb-4">
             <Compass className="h-3.5 w-3.5" />
-            <span>Summit Location & Spatial Telemetry</span>
+            <span>Summit Location & Travel Guide</span>
           </div>
           <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#1C1917]">
-            Venue & <span className="text-[#7B1123]">Campus Telemetry</span>
+            Venue & <span className="text-[#7B1123]">Campus Guide</span>
           </h1>
           <p className="mt-3 max-w-3xl text-sm sm:text-base text-[#57534E] leading-relaxed">
-            Planning your visit to Netaji Subhas Institute of Technology (NSIT) in Bihta, Patna, Bihar. Explore the spatial campus radar, transit hubs, and nearby lodging guidance.
+            Planning your visit to Netaji Subhas Institute of Technology (NSIT) in Bihta, Patna, Bihar. Explore official conference halls, verified campus infrastructure, and regional transit connectivity.
           </p>
         </div>
 

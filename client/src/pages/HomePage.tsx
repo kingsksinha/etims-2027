@@ -199,10 +199,10 @@ export default function HomePage() {
                     </div>
 
                     <div className="text-xs font-mono text-left sm:text-right space-y-1 w-full sm:w-auto shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border-dark/60">
-                      <a href={`mailto:${CONVENOR.email}`} className="text-cyan block hover:underline break-all">
+                      <a href={`mailto:${CONVENOR.email}`} className="text-cyan block hover:underline whitespace-nowrap">
                         {CONVENOR.email}
                       </a>
-                      <a href={`tel:${CONVENOR.phoneTel}`} className="text-light-text block hover:underline">
+                      <a href={`tel:${CONVENOR.phoneTel}`} className="text-light-text block hover:underline whitespace-nowrap">
                         {CONVENOR.phone}
                       </a>
                     </div>

@@ -16,46 +16,49 @@ import {
   ArrowRight,
   FileText,
   Info,
+  ChevronDown,
 } from 'lucide-react';
 import Container from '../components/common/Container';
 import { RESEARCH_TRACKS } from '../utils/constants';
 
 const TRACK_ICONS = [
-  <Brain className="h-5 w-5 text-cyan" />,
-  <Building2 className="h-5 w-5 text-amber-400" />,
-  <Zap className="h-5 w-5 text-emerald-400" />,
-  <Bot className="h-5 w-5 text-blue-400" />,
-  <Radio className="h-5 w-5 text-mint" />,
-  <FlaskConical className="h-5 w-5 text-purple-300" />,
-  <Briefcase className="h-5 w-5 text-rose-400" />,
-  <BookOpen className="h-5 w-5 text-teal-300" />,
+  <Brain className="h-5 w-5 text-[#7B1123]" />,
+  <Building2 className="h-5 w-5 text-[#BF982E]" />,
+  <Zap className="h-5 w-5 text-[#7B1123]" />,
+  <Bot className="h-5 w-5 text-[#BF982E]" />,
+  <Radio className="h-5 w-5 text-[#7B1123]" />,
+  <FlaskConical className="h-5 w-5 text-[#BF982E]" />,
+  <Briefcase className="h-5 w-5 text-[#7B1123]" />,
+  <BookOpen className="h-5 w-5 text-[#BF982E]" />,
 ];
 
 export default function TracksPage() {
-  const [selectedTrackIdx, setSelectedTrackIdx] = useState<number>(0);
+  const [selectedTrackIdx, setSelectedTrackIdx] = useState(0);
+
   const activeTrack = RESEARCH_TRACKS[selectedTrackIdx] || RESEARCH_TRACKS[0];
 
   return (
-    <div className="relative min-h-screen bg-[#FAF8F5] text-[#1C1917] py-12 sm:py-16 overflow-hidden">
+    <div className="relative min-h-screen bg-[#FAF8F5] text-[#1C1917] py-8 sm:py-12 md:py-16 overflow-hidden">
       {/* Background Lighting */}
-      <div className="pointer-events-none absolute top-10 left-1/3 h-96 w-96 rounded-full bg-[#BF982E]/10 blur-[140px]" />
+      <div className="pointer-events-none absolute top-10 left-1/4 h-96 w-96 rounded-full bg-[#BF982E]/10 blur-[140px]" />
+      <div className="pointer-events-none absolute bottom-20 right-10 h-96 w-96 rounded-full bg-[#7B1123]/10 blur-[150px]" />
 
       <Container className="relative z-10">
-        <div className="mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#7B1123]/30 bg-[#7B1123]/10 px-4 py-1.5 text-xs font-mono font-semibold text-[#7B1123] mb-4">
+        <div className="mb-6 sm:mb-8">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#7B1123]/30 bg-[#7B1123]/10 px-3.5 py-1 text-xs font-mono font-semibold text-[#7B1123] mb-3">
             <Layers className="h-3.5 w-3.5" />
-            <span>Call for Papers & Eight Technical Tracks</span>
+            <span>Official Brochure Technical Tracks</span>
           </div>
-          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#1C1917]">
+          <h1 className="font-heading text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#1C1917]">
             Eight Official Tracks & <span className="text-[#7B1123]">Thematic Scope</span>
           </h1>
-          <p className="mt-3 max-w-3xl text-sm sm:text-base text-[#57534E] leading-relaxed">
+          <p className="mt-2 sm:mt-3 max-w-3xl text-xs sm:text-base text-[#57534E] leading-relaxed">
             ETIMS 2027 invites original, unpublished research papers across eight tracks. Related multidisciplinary contributions are also welcome.
           </p>
         </div>
 
         {/* Official Scope Banner */}
-        <div className="mb-8 rounded-2xl border border-[#E7E0D6] bg-white p-4 flex items-center justify-between gap-4 flex-wrap shadow-sm">
+        <div className="mb-6 sm:mb-8 rounded-2xl border border-[#E7E0D6] bg-white p-4 flex items-center justify-between gap-4 flex-wrap shadow-xs">
           <div className="flex items-center gap-2.5 text-xs text-[#57534E]">
             <Info className="h-4 w-4 text-[#7B1123] shrink-0" />
             <span>
@@ -64,49 +67,127 @@ export default function TracksPage() {
           </div>
           <Link
             to="/submission"
-            className="inline-flex items-center gap-1.5 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-4 py-2 text-xs font-bold text-white shadow-sm transition-all shrink-0"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-4 py-2 text-xs font-bold text-white shadow-xs transition-all shrink-0"
           >
             <span>Submission Guidelines</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
 
-        {/* Two-Column Interactive Track Explorer */}
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
-          {/* Track Selection List (5 cols) */}
+        {/* Two-Column on Desktop; Interactive Accordion Dropdown on Mobile */}
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-12 lg:items-start">
+          {/* Track Selection List (5 cols on Desktop; Full Accordion on Mobile) */}
           <div className="lg:col-span-5 space-y-2.5">
             {RESEARCH_TRACKS.map((track, idx) => {
               const isSelected = idx === selectedTrackIdx;
               return (
-                <button
+                <div
                   key={track.id}
-                  type="button"
-                  onClick={() => setSelectedTrackIdx(idx)}
-                  className={`w-full text-left rounded-2xl p-4 transition-all cursor-pointer border ${
+                  className={`rounded-2xl border transition-all overflow-hidden bg-white ${
                     isSelected
-                      ? 'border-[#7B1123] bg-white shadow-md ring-2 ring-[#7B1123]/20'
-                      : 'border-[#E7E0D6] bg-white/70 hover:bg-white hover:border-[#7B1123]/40'
+                      ? 'border-[#7B1123] shadow-md ring-1 ring-[#7B1123]/25'
+                      : 'border-[#E7E0D6] hover:border-[#7B1123]/40'
                   }`}
                 >
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-[10px] font-mono text-[#7B1123] uppercase font-bold tracking-wider">
-                      {track.code} // {track.number}
-                    </span>
-                    <span className="h-2 w-2 rounded-full bg-[#7B1123]" />
-                  </div>
-                  <h3 className="font-heading text-sm sm:text-base font-bold text-[#1C1917] mt-1">
-                    {track.title}
-                  </h3>
-                  <p className="text-xs text-[#57534E] mt-1 line-clamp-1">
-                    {track.tagline}
-                  </p>
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedTrackIdx(idx)}
+                    className={`w-full text-left p-3.5 sm:p-4 transition-all cursor-pointer flex items-start justify-between gap-3 ${
+                      isSelected ? 'bg-[#7B1123]/5' : 'hover:bg-[#FAF8F5]'
+                    }`}
+                  >
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-mono text-[#7B1123] uppercase font-bold tracking-wider">
+                          {track.code} // {track.number}
+                        </span>
+                        <span className={`h-1.5 w-1.5 rounded-full ${isSelected ? 'bg-[#7B1123]' : 'bg-[#E7E0D6]'}`} />
+                      </div>
+                      <h3 className="font-heading text-sm sm:text-base font-bold text-[#1C1917] mt-1">
+                        {track.title}
+                      </h3>
+                      <p className="text-xs text-[#57534E] mt-0.5 line-clamp-1">
+                        {track.tagline}
+                      </p>
+                    </div>
+
+                    {/* Mobile indicator icon showing dropdown behavior */}
+                    <div className="lg:hidden shrink-0 pt-1 text-[#7B1123]">
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform duration-200 ${
+                          isSelected ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </div>
+                  </button>
+
+                  {/* MOBILE INLINE DROP-DOWN EXPANSION:
+                      When clicked on phone, displays the image, details, and topics RIGHT BELOW this track! */}
+                  {isSelected && (
+                    <div className="lg:hidden p-4 bg-[#FAF8F5] border-t border-[#E7E0D6] space-y-3.5">
+                      {/* Respective Track Photo */}
+                      <div className="relative w-full h-44 sm:h-52 rounded-xl overflow-hidden border border-[#E7E0D6] bg-zinc-950 shadow-xs">
+                        <img
+                          src={`/assets/tracks/track_${idx + 1}.jpg`}
+                          alt={track.title}
+                          className="w-full h-full object-cover object-center"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/20 pointer-events-none" />
+
+                        {/* Top Badges */}
+                        <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#7B1123]/95 text-white text-[10px] font-mono font-bold">
+                          <span className="text-[#F3D993]">{track.code}</span>
+                          <span className="text-white/60">·</span>
+                          <span>{track.number}</span>
+                        </div>
+
+                        {/* Bottom Tagline */}
+                        <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-[10px] font-mono text-zinc-200">
+                          <span className="text-[#F3D993] font-bold uppercase truncate pr-2">
+                            Thematic Scope
+                          </span>
+                          <span className="bg-black/60 px-2 py-0.5 rounded text-white/90 shrink-0">
+                            Peer-Reviewed
+                          </span>
+                        </div>
+                      </div>
+
+                      <p className="text-xs text-[#57534E] leading-relaxed">
+                        {track.tagline}. Submissions must report original research, novel methodologies, or applied multidisciplinary contributions.
+                      </p>
+
+                      {/* Sub-Topics List */}
+                      <div className="rounded-xl border border-[#E7E0D6] bg-white p-3.5 space-y-2">
+                        <span className="text-[10px] font-mono uppercase text-[#7B1123] font-bold block tracking-wider">
+                          Official Research Topics ({track.code}):
+                        </span>
+                        <ul className="space-y-1.5 text-xs text-[#57534E]">
+                          {track.illustrativeTopics.map((topic, i) => (
+                            <li key={i} className="flex items-start gap-2">
+                              <CheckCircle2 className="h-3.5 w-3.5 text-[#BF982E] shrink-0 mt-0.5" />
+                              <span className="text-[#1C1917] font-medium leading-tight">{topic}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Direct Submission CTA for Mobile */}
+                      <Link
+                        to="/submission"
+                        className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] py-2.5 text-xs font-bold text-white shadow-xs transition-all"
+                      >
+                        <FileText className="h-3.5 w-3.5" />
+                        <span>Submit Manuscript to {track.code} &rarr;</span>
+                      </Link>
+                    </div>
+                  )}
+                </div>
               );
             })}
           </div>
 
-          {/* Active Track Detailed View (7 cols) */}
-          <div className="lg:col-span-7">
+          {/* Active Track Detailed View (Desktop Only: hidden on mobile so nothing is pushed to extreme bottom!) */}
+          <div className="hidden lg:block lg:col-span-7">
             <motion.div
               key={activeTrack.id}
               initial={{ opacity: 0, x: 12 }}
