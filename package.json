@@ -8,11 +8,14 @@
     "node": ">=20.0.0"
   },
   "scripts": {
+    "dev": "npm --prefix client run dev",
+    "dev:server": "npm --prefix server run dev",
     "postinstall": "npm --prefix client install",
     "build:client": "npm --prefix client run build",
     "build:server": "npm --prefix server run build",
     "build": "npm run build:client",
-    "start": "node server/dist/index.js"
+    "preview": "npm --prefix client run preview",
+    "start": "npm --prefix client run preview"
   },
   "keywords": [
     "etims2027",
