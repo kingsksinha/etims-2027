@@ -176,7 +176,7 @@ export default function DelegateRegistrationModal({
       '',
       '------------------------------------------------------------------------',
       'SECRETARIAT DESK CONTACT:',
-      `Convenor : ${CONVENOR.name}, Assistant Professor, Dept. of EEE`,
+      `Convenor : ${CONVENOR.name}, Assistant Professor, Dept. of Civil Engineering`,
       `Email    : ${CONVENOR.email}`,
       `Phone    : ${CONVENOR.phone}`,
       '========================================================================',

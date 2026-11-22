@@ -15,22 +15,20 @@ import {
 } from '../utils/constants';
 
 const FILTER_CATEGORIES = [
-  'All In-Charges',
+  'All Committee Members',
   'Leadership & Patrons',
-  'Secretariat & Convenor',
+  'Convenorship & Co-Convenors',
   'National Advisory Committee',
-  'Technical Program & Track Chairs',
-  'Operational Desks & In-Charges',
 ];
 
 export default function CommitteesPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All In-Charges');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All Committee Members');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const filteredTeams = useMemo(() => {
     return FACULTY_TASK_TEAMS.filter((item) => {
       const matchesCategory =
-        selectedCategory === 'All In-Charges' || item.taskCategory === selectedCategory;
+        selectedCategory === 'All Committee Members' || item.taskCategory === selectedCategory;
 
       const q = searchQuery.toLowerCase().trim();
       if (!q) return matchesCategory;
@@ -58,14 +56,14 @@ export default function CommitteesPage() {
         <div className="mb-10 sm:mb-12">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#7B1123]/30 bg-[#7B1123]/10 px-4 py-1.5 text-xs font-mono font-semibold text-[#7B1123] mb-4">
             <Users2 className="h-3.5 w-3.5" />
-            <span>Academic Governance & Task Organization</span>
+            <span>Official Brochure Governance</span>
           </div>
           <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#1C1917]">
-            Organizing Committee &{' '}
-            <span className="text-[#7B1123]">Faculty In-Charges</span>
+            Organising Committee &{' '}
+            <span className="text-[#7B1123]">Advisory Board</span>
           </h1>
           <p className="mt-3 max-w-3xl text-sm sm:text-base text-[#57534E] leading-relaxed">
-            Faculty team members, track chairs, and administrative coordinators leading specialized academic and operational tasks for ETIMS 2027 at Netaji Subhas Institute of Technology (NSIT), Bihta, Patna.
+            The 16 patrons, convenor secretariat members, and national advisory committee members officially listed in the ETIMS 2027 conference brochure at Netaji Subhas Institute of Technology (NSIT), Bihta, Patna.
           </p>
 
           {/* Featured Convenor Profile Banner */}
@@ -152,7 +150,7 @@ export default function CommitteesPage() {
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#78716C]" />
               <input
                 type="text"
-                placeholder="Search faculty, task, or track..."
+                placeholder="Search committee member, department, or institute..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full rounded-xl border border-[#E7E0D6] bg-white pl-10 pr-4 py-2 text-xs text-[#1C1917] placeholder:text-[#A8A29E] focus:border-[#7B1123] focus:outline-none focus:ring-1 focus:ring-[#7B1123]"
@@ -173,7 +171,7 @@ export default function CommitteesPage() {
         {/* Results Counter */}
         <div className="mb-6 flex items-center justify-between text-xs text-[#57534E]">
           <span>
-            Showing <strong className="text-[#7B1123] font-mono">{filteredTeams.length}</strong> task in-charge teams
+            Showing <strong className="text-[#7B1123] font-mono">{filteredTeams.length}</strong> official committee members
           </span>
           <span className="font-mono text-[11px] text-[#BF982E] font-semibold">
             ETIMS 2027 &bull; 23–24 July 2027
@@ -228,7 +226,7 @@ export default function CommitteesPage() {
                     </div>
                     <div className="min-w-0 flex-1 space-y-0.5">
                       <span className="text-[10px] font-mono uppercase text-[#BF982E] font-bold block">
-                        In-Charge Faculty Lead
+                        Brochure Committee Member
                       </span>
                       <p className="font-heading text-sm font-bold text-[#1C1917] truncate">
                         {team.leadName}
@@ -245,7 +243,7 @@ export default function CommitteesPage() {
                   {/* Responsibilities List */}
                   <div className="mt-4 space-y-2 min-w-0">
                     <span className="text-[11px] font-mono uppercase text-[#7B1123] block tracking-wider font-semibold">
-                      Specific Task Responsibilities:
+                      Designated Role & Responsibilities:
                     </span>
                     <ul className="space-y-1.5 text-xs text-[#57534E]">
                       {team.responsibilities.map((resp, i) => (
@@ -279,9 +277,9 @@ export default function CommitteesPage() {
         <div className="mt-12 rounded-2xl border border-[#E7E0D6] bg-white p-5 flex items-start gap-3.5 text-xs text-[#57534E] shadow-sm">
           <Info className="h-5 w-5 text-[#7B1123] shrink-0 mt-0.5" />
           <div>
-            <strong className="text-[#1C1917]">Continuous Committee Updates:</strong>
+            <strong className="text-[#1C1917]">Brochure Official Notice & Student Volunteers:</strong>
             <p className="mt-0.5 leading-relaxed">
-              In accordance with conference protocol, additional co-chairs, international technical reviewers, and session moderators are continuously being inducted under the convenorship of Dr. Atif Hussain. For committee participation enquiries, contact <a href={`mailto:${CONVENOR.email}`} className="text-[#7B1123] underline">{CONVENOR.email}</a>.
+              As outlined in the official conference brochure, student volunteers drawn from every academic department will support registration, the help desk, hall management, guest reception, publicity, photography, and audio-visual/IT support. For official committee and conference enquiries, contact Conference Convenor Dr. Atif Hussain at <a href={`mailto:${CONVENOR.email}`} className="text-[#7B1123] underline">{CONVENOR.email}</a>.
             </p>
           </div>
         </div>

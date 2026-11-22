@@ -162,10 +162,10 @@ export default function HomePage() {
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-dark pb-4">
                     <div>
                       <span className="text-xs font-mono text-cyan uppercase">
-                        Academic Leadership & In-Charges
+                        Brochure Organising Structure
                       </span>
                       <h3 className="font-heading text-2xl font-bold text-light-text mt-0.5">
-                        Faculty Task Teams & Secretariats ({FACULTY_TASK_TEAMS.length} Designated In-Charges)
+                        Organising Committee & Advisory Members ({FACULTY_TASK_TEAMS.length} Official Members)
                       </h3>
                     </div>
 
@@ -174,7 +174,7 @@ export default function HomePage() {
                       onClick={() => goToTab('/committees')}
                       className="inline-flex items-center gap-1.5 rounded-xl bg-cyan/15 border border-cyan/40 px-4 py-2 text-xs font-bold text-cyan hover:bg-cyan/25 transition-all cursor-pointer shrink-0"
                     >
-                      <span>View All In-Charges</span>
+                      <span>View All Committee Members</span>
                       <ArrowRight className="h-3.5 w-3.5" />
                     </button>
                   </div>
