@@ -201,7 +201,7 @@ export default function PaperSubmissionModal({
       '',
       '------------------------------------------------------------------------',
       'CONVENORSHIP CONTACT:',
-      `Convenor : ${CONVENOR.name}, Assistant Professor, Dept. of EEE`,
+      `Convenor : ${CONVENOR.name}, Assistant Professor, Dept. of Civil Engineering`,
       `Email    : ${CONVENOR.email}`,
       `Phone    : ${CONVENOR.phone}`,
       '========================================================================',

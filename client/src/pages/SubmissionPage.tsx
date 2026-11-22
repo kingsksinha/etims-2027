@@ -11,6 +11,16 @@ import {
   Clock,
   Loader2,
   Calendar,
+  Presentation,
+  Workflow,
+  Database,
+  Mail,
+  Layers,
+  ShieldCheck,
+  Cpu,
+  Cloud,
+  Printer,
+  Check,
 } from 'lucide-react';
 import Container from '../components/common/Container';
 import PaperSubmissionModal from '../components/modals/PaperSubmissionModal';
@@ -30,7 +40,7 @@ interface SavedSubmission {
 }
 
 export default function SubmissionPage() {
-  const [activeTab, setActiveTab] = useState<'guidelines' | 'publication' | 'templates' | 'plagiarism' | 'faq' | 'status'>('guidelines');
+  const [activeTab, setActiveTab] = useState<'guidelines' | 'publication' | 'templates' | 'plagiarism' | 'faq' | 'status' | 'architecture'>('guidelines');
   const [modalOpen, setModalOpen] = useState(false);
   const [recentSubmissions, setRecentSubmissions] = useState<SavedSubmission[]>([]);
   const [searchTrackingId, setSearchTrackingId] = useState('');
@@ -122,18 +132,41 @@ export default function SubmissionPage() {
               </p>
             </div>
 
-            <button
-              type="button"
-              onClick={() => setModalOpen(true)}
-              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#7B1123] hover:bg-[#5C1324] px-7 py-3.5 text-sm font-bold text-white shadow-md transition-all shrink-0 cursor-pointer self-start lg:self-center"
-            >
-              <Upload className="h-4 w-4" />
-              <span>Submit Manuscript Online</span>
-            </button>
+            <div className="flex flex-col sm:flex-row gap-3 self-start lg:self-center">
+              <button
+                type="button"
+                onClick={() => setActiveTab('architecture')}
+                className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-[#BF982E] bg-white hover:bg-[#FAF8F5] px-5 py-3.5 text-xs sm:text-sm font-bold text-[#7B1123] shadow-sm hover:shadow-md transition-all shrink-0 cursor-pointer"
+              >
+                <Presentation className="h-4 w-4 text-[#BF982E]" />
+                <span>Executive Presentation Deck</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setModalOpen(true)}
+                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#7B1123] hover:bg-[#5C1324] px-6 py-3.5 text-xs sm:text-sm font-bold text-white shadow-md transition-all shrink-0 cursor-pointer"
+              >
+                <Upload className="h-4 w-4" />
+                <span>Submit Manuscript Online</span>
+              </button>
+            </div>
           </div>
 
           {/* Sub-Tabs */}
           <div className="mt-8 flex flex-wrap items-center gap-2 border-b border-[#E7E0D6] pb-4">
+            <button
+              type="button"
+              onClick={() => setActiveTab('architecture')}
+              className={`rounded-xl px-4 py-2 text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                activeTab === 'architecture'
+                  ? 'bg-[#BF982E] text-[#450F1D] shadow-sm font-extrabold ring-2 ring-[#BF982E]/50'
+                  : 'bg-white border-2 border-[#BF982E]/60 text-[#7B1123] hover:bg-[#BF982E]/10'
+              }`}
+            >
+              <Presentation className="h-4 w-4 text-[#BF982E]" />
+              <span>System Setup & Presentation</span>
+            </button>
             <button
               type="button"
               onClick={() => setActiveTab('guidelines')}
@@ -722,6 +755,441 @@ export default function SubmissionPage() {
                 </div>
               </div>
             )}
+          </div>
+        )}
+
+        {/* TAB 7: EXECUTIVE PRESENTATION & ARCHITECTURE ROADMAP */}
+        {activeTab === 'architecture' && (
+          <div className="space-y-10 animate-in fade-in duration-300">
+            {/* Header Presentation Banner */}
+            <div className="rounded-3xl border-2 border-[#BF982E]/50 bg-gradient-to-br from-[#450F1D] via-[#5C1324] to-[#450F1D] p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
+              <div className="pointer-events-none absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-[#BF982E]/15 blur-[90px]" />
+
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+                <div className="space-y-2 max-w-3xl">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-[#BF982E]/20 border border-[#BF982E]/40 px-3.5 py-1 text-xs font-mono font-bold text-[#F3D993]">
+                    <Presentation className="h-3.5 w-3.5 text-[#F3D993]" />
+                    <span>EXECUTIVE BRIEFING & IMPLEMENTATION PROPOSAL</span>
+                  </div>
+                  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
+                    ETIMS 2027 Conference Paper Submission System
+                  </h2>
+                  <p className="text-xs sm:text-sm text-[#F5EFEB]/90 leading-relaxed font-subheading">
+                    End-to-end peer review lifecycle, technical architecture comparison (Microsoft CMT vs In-House Cloud Stack), infrastructure requirements, and secretariat setup roadmap for Netaji Subhas Institute of Technology (NSIT), Bihta, Patna.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap sm:flex-col gap-2.5 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => window.print()}
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/25 px-4 py-2.5 text-xs font-mono font-bold text-white transition-all cursor-pointer backdrop-blur-sm"
+                  >
+                    <Printer className="h-3.5 w-3.5" />
+                    <span>Print / Save as PDF Deck</span>
+                  </button>
+                  <a
+                    href="mailto:etims2027@nsiterp.in?subject=ETIMS%202027%20Submission%20Architecture%20Feedback"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#BF982E] hover:bg-[#A37F22] text-[#450F1D] px-4 py-2.5 text-xs font-mono font-bold transition-all shadow-sm"
+                  >
+                    <Mail className="h-3.5 w-3.5" />
+                    <span>Email to Convenor Desk</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Quick Stats Badges */}
+              <div className="mt-8 pt-6 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
+                <div className="rounded-xl bg-black/25 p-3 border border-white/10">
+                  <span className="text-[#F3D993] text-[10px] uppercase block font-bold">Thematic Tracks</span>
+                  <span className="font-heading text-lg font-black text-white">8 Tracks (T1–T8)</span>
+                </div>
+                <div className="rounded-xl bg-black/25 p-3 border border-white/10">
+                  <span className="text-[#F3D993] text-[10px] uppercase block font-bold">Review Pipeline</span>
+                  <span className="font-heading text-lg font-black text-white">Double-Blind</span>
+                </div>
+                <div className="rounded-xl bg-black/25 p-3 border border-white/10">
+                  <span className="text-[#F3D993] text-[10px] uppercase block font-bold">Similarity Cap</span>
+                  <span className="font-heading text-lg font-black text-white">&lt; 15% Similarity</span>
+                </div>
+                <div className="rounded-xl bg-black/25 p-3 border border-white/10">
+                  <span className="text-[#F3D993] text-[10px] uppercase block font-bold">Summit Timeline</span>
+                  <span className="font-heading text-lg font-black text-white">23–24 July 2027</span>
+                </div>
+              </div>
+            </div>
+
+            {/* SECTION 1: 6-STAGE PEER REVIEW WORKFLOW */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-2.5 border-b border-[#E7E0D6] pb-3">
+                <Workflow className="h-5 w-5 text-[#7B1123]" />
+                <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#1C1917]">
+                  1. The 6-Stage Academic Peer-Review Lifecycle
+                </h3>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {/* Stage 1 */}
+                <div className="rounded-3xl border border-[#E7E0D6] bg-white p-5 sm:p-6 shadow-sm space-y-3 relative hover:border-[#7B1123]/40 transition-all">
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#7B1123] text-white font-mono text-xs font-bold">
+                      01
+                    </span>
+                    <span className="font-mono text-[10px] uppercase text-[#BF982E] font-bold bg-[#BF982E]/10 px-2 py-0.5 rounded-full border border-[#BF982E]/30">
+                      JANUARY 2027
+                    </span>
+                  </div>
+                  <h4 className="font-heading text-base font-bold text-[#1C1917]">
+                    Author Intake & Track Selection
+                  </h4>
+                  <p className="text-xs text-[#57534E] leading-relaxed">
+                    Authors select target track (T1–T8), submit abstract (250–300 words), author affiliations, and upload masked full paper (PDF/DOCX, max 25 MB).
+                  </p>
+                  <div className="pt-2 border-t border-[#E7E0D6] text-[11px] font-mono text-[#7B1123]">
+                    &bull; Output: Unique Tracking ID (e.g. ETIMS27-T1-5491) + Automated PDF Receipt
+                  </div>
+                </div>
+
+                {/* Stage 2 */}
+                <div className="rounded-3xl border border-[#E7E0D6] bg-white p-5 sm:p-6 shadow-sm space-y-3 relative hover:border-[#7B1123]/40 transition-all">
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#7B1123] text-white font-mono text-xs font-bold">
+                      02
+                    </span>
+                    <span className="font-mono text-[10px] uppercase text-[#7B1123] font-bold bg-[#7B1123]/10 px-2 py-0.5 rounded-full border border-[#7B1123]/25">
+                      EARLY APRIL 2027
+                    </span>
+                  </div>
+                  <h4 className="font-heading text-base font-bold text-[#1C1917]">
+                    Desk Screening & Plagiarism Check
+                  </h4>
+                  <p className="text-xs text-[#57534E] leading-relaxed">
+                    Secretariat verifies scope relevance, double-blind compliance (no author names in body), and runs similarity check (must be &lt; 15% via Turnitin / DrillBit).
+                  </p>
+                  <div className="pt-2 border-t border-[#E7E0D6] text-[11px] font-mono text-[#7B1123]">
+                    &bull; Output: Desk-approval to TPC queue or immediate re-submission query
+                  </div>
+                </div>
+
+                {/* Stage 3 */}
+                <div className="rounded-3xl border border-[#E7E0D6] bg-white p-5 sm:p-6 shadow-sm space-y-3 relative hover:border-[#7B1123]/40 transition-all">
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#7B1123] text-white font-mono text-xs font-bold">
+                      03
+                    </span>
+                    <span className="font-mono text-[10px] uppercase text-[#BF982E] font-bold bg-[#BF982E]/10 px-2 py-0.5 rounded-full border border-[#BF982E]/30">
+                      APRIL – MAY 2027
+                    </span>
+                  </div>
+                  <h4 className="font-heading text-base font-bold text-[#1C1917]">
+                    Double-Blind Peer Review
+                  </h4>
+                  <p className="text-xs text-[#57534E] leading-relaxed">
+                    Masked manuscripts allocated to 2–3 independent reviewers (IIT Patna, NIT Surathkal, GEC Munger/Bhojpur & NSIT faculty).
+                  </p>
+                  <div className="pt-2 border-t border-[#E7E0D6] text-[11px] font-mono text-[#7B1123]">
+                    &bull; Rubric: Originality (25%), Rigor (25%), Methodology (25%), Multidisciplinary Impact (25%)
+                  </div>
+                </div>
+
+                {/* Stage 4 */}
+                <div className="rounded-3xl border border-[#E7E0D6] bg-white p-5 sm:p-6 shadow-sm space-y-3 relative hover:border-[#7B1123]/40 transition-all">
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#7B1123] text-white font-mono text-xs font-bold">
+                      04
+                    </span>
+                    <span className="font-mono text-[10px] uppercase text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                      31 MAY 2027
+                    </span>
+                  </div>
+                  <h4 className="font-heading text-base font-bold text-[#1C1917]">
+                    Acceptance Decision Notification
+                  </h4>
+                  <p className="text-xs text-[#57534E] leading-relaxed">
+                    Convenor and Track Chairs aggregate review scores. Official decision letters dispatched to author emails: Accepted, Minor Revisions, or Rejected.
+                  </p>
+                  <div className="pt-2 border-t border-[#E7E0D6] text-[11px] font-mono text-[#7B1123]">
+                    &bull; Output: Formal Letter of Acceptance + Reviewer Feedback Summary
+                  </div>
+                </div>
+
+                {/* Stage 5 */}
+                <div className="rounded-3xl border border-[#E7E0D6] bg-white p-5 sm:p-6 shadow-sm space-y-3 relative hover:border-[#7B1123]/40 transition-all">
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#7B1123] text-white font-mono text-xs font-bold">
+                      05
+                    </span>
+                    <span className="font-mono text-[10px] uppercase text-[#7B1123] font-bold bg-[#7B1123]/10 px-2 py-0.5 rounded-full border border-[#7B1123]/25">
+                      20 JUNE 2027
+                    </span>
+                  </div>
+                  <h4 className="font-heading text-base font-bold text-[#1C1917]">
+                    Camera-Ready Submission
+                  </h4>
+                  <p className="text-xs text-[#57534E] leading-relaxed">
+                    Authors incorporate reviewer suggestions and submit final camera-ready manuscript formatted to the publisher template along with signed copyright form.
+                  </p>
+                  <div className="pt-2 border-t border-[#E7E0D6] text-[11px] font-mono text-[#7B1123]">
+                    &bull; Output: Publisher-ready bundle for conference proceedings
+                  </div>
+                </div>
+
+                {/* Stage 6 */}
+                <div className="rounded-3xl border border-[#E7E0D6] bg-white p-5 sm:p-6 shadow-sm space-y-3 relative hover:border-[#7B1123]/40 transition-all">
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#BF982E] text-[#450F1D] font-mono text-xs font-bold">
+                      06
+                    </span>
+                    <span className="font-mono text-[10px] uppercase text-[#BF982E] font-bold bg-[#BF982E]/10 px-2 py-0.5 rounded-full border border-[#BF982E]/30">
+                      23–24 JULY 2027
+                    </span>
+                  </div>
+                  <h4 className="font-heading text-base font-bold text-[#1C1917]">
+                    Delegate Registration & Presentation
+                  </h4>
+                  <p className="text-xs text-[#57534E] leading-relaxed">
+                    At least one author completes registration (Faculty ₹2,500, Industry ₹3,500, PG ₹1,500, UG ₹800) and presents oral paper or poster at NSIT Campus, Bihta.
+                  </p>
+                  <div className="pt-2 border-t border-[#E7E0D6] text-[11px] font-mono text-[#7B1123]">
+                    &bull; Output: Certificate of Presentation + Best Paper Award eligibility
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* SECTION 2: SIDE-BY-SIDE IMPLEMENTATION COMPARISON */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-2.5 border-b border-[#E7E0D6] pb-3">
+                <Layers className="h-5 w-5 text-[#7B1123]" />
+                <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#1C1917]">
+                  2. Implementation Options: Which Path Should NSIT Choose?
+                </h3>
+              </div>
+
+              <div className="grid gap-6 lg:grid-cols-2">
+                {/* Option A: Microsoft CMT */}
+                <div className="rounded-3xl border-2 border-[#BF982E] bg-white p-6 sm:p-8 shadow-md relative overflow-hidden flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="rounded-full bg-[#BF982E]/15 border border-[#BF982E]/40 px-3 py-0.5 text-xs font-mono font-bold text-[#BF982E]">
+                        OPTION A &bull; RECOMMENDED STANDARD
+                      </span>
+                      <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-lg">
+                        Setup: 1–2 Days &bull; ₹0 Free
+                      </span>
+                    </div>
+
+                    <h4 className="font-heading text-xl font-black text-[#1C1917]">
+                      Microsoft CMT / EasyChair Academic Engine
+                    </h4>
+
+                    <p className="text-xs text-[#57534E] leading-relaxed">
+                      Used by 95%+ of global engineering and science summits. We configure an official ETIMS 2027 workspace on Microsoft CMT, and link all "Submit Paper" buttons on this website directly to it.
+                    </p>
+
+                    <div className="space-y-2 pt-2">
+                      <span className="text-[11px] font-mono uppercase text-[#7B1123] font-bold block">
+                        Why Professors & Advisory Members Recommend It:
+                      </span>
+                      <ul className="space-y-1.5 text-xs text-[#57534E]">
+                        <li className="flex items-start gap-2">
+                          <Check className="h-3.5 w-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                          <span><strong>Zero Server Maintenance:</strong> Cloud-hosted by Microsoft Research with 99.99% uptime.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <Check className="h-3.5 w-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                          <span><strong>Automatic Double-Blind Protection:</strong> Detects and prevents institutional conflicts of interest (e.g. an NSIT reviewer reviewing an NSIT paper).</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <Check className="h-3.5 w-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                          <span><strong>Reviewer Trust:</strong> Advisory professors from IIT Patna & NIT Surathkal already have active Microsoft CMT accounts.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <Check className="h-3.5 w-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                          <span><strong>Direct Publisher Export:</strong> Compatible with Springer, IEEE, and Scopus proceedings formats in one click.</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-[#E7E0D6] flex items-center justify-between text-xs">
+                    <span className="font-mono text-[#57534E]">Implementation Effort:</span>
+                    <strong className="text-emerald-700 font-bold">Minimal (Create portal & add URL)</strong>
+                  </div>
+                </div>
+
+                {/* Option B: Custom In-House Cloud Stack */}
+                <div className="rounded-3xl border border-[#E7E0D6] bg-white p-6 sm:p-8 shadow-sm relative overflow-hidden flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="rounded-full bg-[#7B1123]/10 border border-[#7B1123]/25 px-3 py-0.5 text-xs font-mono font-bold text-[#7B1123]">
+                        OPTION B &bull; IN-HOUSE CUSTOM BACKEND
+                      </span>
+                      <span className="text-xs font-mono font-bold text-[#57534E] bg-zinc-100 border border-zinc-200 px-2.5 py-0.5 rounded-lg">
+                        Setup: 2–3 Weeks &bull; ~₹800/mo
+                      </span>
+                    </div>
+
+                    <h4 className="font-heading text-xl font-black text-[#1C1917]">
+                      Custom NSIT Website Portal (Supabase + R2)
+                    </h4>
+
+                    <p className="text-xs text-[#57534E] leading-relaxed">
+                      Build an integrated backend directly into this website using PostgreSQL (Supabase), Cloudflare R2 object storage, and transactional email APIs (Resend).
+                    </p>
+
+                    <div className="space-y-2 pt-2">
+                      <span className="text-[11px] font-mono uppercase text-[#7B1123] font-bold block">
+                        Features & Trade-Offs:
+                      </span>
+                      <ul className="space-y-1.5 text-xs text-[#57534E]">
+                        <li className="flex items-start gap-2">
+                          <Check className="h-3.5 w-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                          <span><strong>100% White-Labeled:</strong> Everything happens on the NSIT website domain without external redirects.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <Check className="h-3.5 w-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                          <span><strong>Custom Tracking:</strong> Authors can check real-time status directly on the existing tracking desk.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <AlertTriangle className="h-3.5 w-3.5 text-amber-600 shrink-0 mt-0.5" />
+                          <span><strong>Reviewer Onboarding Friction:</strong> Every external reviewer from IITs/NITs must be given custom credentials.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <AlertTriangle className="h-3.5 w-3.5 text-amber-600 shrink-0 mt-0.5" />
+                          <span><strong>Maintenance Overhead:</strong> Secretariat must maintain database backups and security patches.</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-[#E7E0D6] flex items-center justify-between text-xs">
+                    <span className="font-mono text-[#57534E]">Implementation Effort:</span>
+                    <strong className="text-amber-700 font-bold">Moderate (Needs DB, Storage & API)</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* SECTION 3: TECHNICAL SETUP CHECKLIST */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-2.5 border-b border-[#E7E0D6] pb-3">
+                <Cpu className="h-5 w-5 text-[#7B1123]" />
+                <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#1C1917]">
+                  3. What Would Be Needed to Set It Up (Checklist for Secretariat)
+                </h3>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="rounded-2xl border border-[#E7E0D6] bg-white p-5 space-y-2.5 shadow-2xs">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#7B1123]/10 text-[#7B1123]">
+                    <Cloud className="h-5 w-5" />
+                  </div>
+                  <h4 className="font-heading text-sm font-bold text-[#1C1917]">
+                    1. Cloud File Storage
+                  </h4>
+                  <p className="text-[11px] text-[#57534E] leading-relaxed">
+                    Bucket to store author PDF/DOCX manuscripts (max 25 MB/paper). Recommend <strong>Cloudflare R2</strong> or <strong>AWS S3</strong> with pre-signed upload URLs.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-[#E7E0D6] bg-white p-5 space-y-2.5 shadow-2xs">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#BF982E]/15 text-[#BF982E]">
+                    <Database className="h-5 w-5" />
+                  </div>
+                  <h4 className="font-heading text-sm font-bold text-[#1C1917]">
+                    2. Relational Database
+                  </h4>
+                  <p className="text-[11px] text-[#57534E] leading-relaxed">
+                    Stores author records, abstracts, track allocations (T1–T8), and reviewer scorecards. Recommend <strong>Supabase (PostgreSQL)</strong>.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-[#E7E0D6] bg-white p-5 space-y-2.5 shadow-2xs">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#7B1123]/10 text-[#7B1123]">
+                    <Mail className="h-5 w-5" />
+                  </div>
+                  <h4 className="font-heading text-sm font-bold text-[#1C1917]">
+                    3. Transactional Email API
+                  </h4>
+                  <p className="text-[11px] text-[#57534E] leading-relaxed">
+                    Automated dispatch of submission receipts, tracking IDs, and acceptance letters from <strong>etims2027@nsiterp.in</strong> using <strong>Resend</strong> or SMTP.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-[#E7E0D6] bg-white p-5 space-y-2.5 shadow-2xs">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <ShieldCheck className="h-5 w-5" />
+                  </div>
+                  <h4 className="font-heading text-sm font-bold text-[#1C1917]">
+                    4. Reviewer Pool Roster
+                  </h4>
+                  <p className="text-[11px] text-[#57534E] leading-relaxed">
+                    List of verified external professors (from IIT Patna, NIT Surathkal, GECs) and NSIT faculty mapped to each track with max 5 papers/reviewer limit.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* SECTION 4: 4-WEEK ACTIONABLE ROADMAP */}
+            <div className="rounded-3xl border border-[#E7E0D6] bg-white p-6 sm:p-8 space-y-6 shadow-sm">
+              <div className="flex items-center justify-between border-b border-[#E7E0D6] pb-3">
+                <div className="flex items-center gap-2">
+                  <Calendar className="h-5 w-5 text-[#7B1123]" />
+                  <h3 className="font-heading text-lg sm:text-xl font-bold text-[#1C1917]">
+                    4. Secretariat Action Plan (Leading up to January 2027 CFP)
+                  </h3>
+                </div>
+                <span className="font-mono text-xs text-[#BF982E] font-bold">
+                  Target: Launch by Jan 2027
+                </span>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="rounded-2xl border border-[#E7E0D6] bg-[#FAF8F5] p-4 space-y-1.5">
+                  <span className="font-mono text-xs font-bold text-[#7B1123] block">WEEK 1</span>
+                  <h5 className="font-heading text-xs font-bold text-[#1C1917]">Platform Selection</h5>
+                  <p className="text-[11px] text-[#57534E] leading-relaxed">
+                    Convenorship reviews proposal and decides between Microsoft CMT vs In-House Supabase stack.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-[#E7E0D6] bg-[#FAF8F5] p-4 space-y-1.5">
+                  <span className="font-mono text-xs font-bold text-[#7B1123] block">WEEK 2</span>
+                  <h5 className="font-heading text-xs font-bold text-[#1C1917]">Track & Reviewer Setup</h5>
+                  <p className="text-[11px] text-[#57534E] leading-relaxed">
+                    Configure the 8 tracks, upload rubrics, and invite 20+ advisory reviewers to the review roster.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-[#E7E0D6] bg-[#FAF8F5] p-4 space-y-1.5">
+                  <span className="font-mono text-xs font-bold text-[#7B1123] block">WEEK 3</span>
+                  <h5 className="font-heading text-xs font-bold text-[#1C1917]">Templates & Test Submissions</h5>
+                  <p className="text-[11px] text-[#57534E] leading-relaxed">
+                    Attach Word/LaTeX publisher templates and perform 3 test paper submissions end-to-end.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-[#E7E0D6] bg-[#FAF8F5] p-4 space-y-1.5">
+                  <span className="font-mono text-xs font-bold text-emerald-700 block">WEEK 4</span>
+                  <h5 className="font-heading text-xs font-bold text-[#1C1917]">Nationwide Public CFP</h5>
+                  <p className="text-[11px] text-[#57534E] leading-relaxed">
+                    Activate submission link across website, academic mailing lists, and social channels.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* SECTION 5: OFFICIAL RECOMMENDATION CALLOUT */}
+            <div className="rounded-2xl border-2 border-[#BF982E] bg-[#FAF8F5] p-6 space-y-3">
+              <div className="flex items-center gap-2 text-[#7B1123] font-bold text-sm">
+                <CheckCircle2 className="h-5 w-5 text-[#BF982E]" />
+                <span className="font-heading text-base text-[#1C1917]">Official Committee Recommendation</span>
+              </div>
+              <p className="text-xs sm:text-sm text-[#57534E] leading-relaxed font-subheading">
+                Adopt <strong>Option A (Microsoft CMT)</strong> as the underlying peer-review engine while using <strong>this website</strong> as the primary public portal. This combines the zero-maintenance, double-blind auditability favored by IIT/NIT reviewers and major publishers (Springer/Scopus) with NSIT’s modern, high-conversion web presence.
+              </p>
+            </div>
           </div>
         )}
 
