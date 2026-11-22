@@ -1356,7 +1356,7 @@
           <div>
             <div class="slide-tag">Web Platform Showcase</div>
             <h2 class="slide-title">ETIMS 2027 Digital Infrastructure & Features</h2>
-            <div class="slide-subtitle">High-performance responsive portal deployed live on Vercel Edge Network</div>
+            <div class="slide-subtitle">High-performance responsive portal deployed live on Vercel Edge Network (with full local offline execution support)</div>
           </div>
           <div class="slide-number-chip">Slide 05 / 10</div>
         </div>
@@ -1652,7 +1652,32 @@
               <div style="background: rgba(123, 17, 35, 0.06); padding: 14px; border-radius: 8px; border: 1px solid var(--nsit-border);">
                 <div style="font-size: 11px; font-weight: 700; color: var(--nsit-maroon); text-transform: uppercase;">Live Demo Quick Link</div>
                 <div style="font-size: 12px; color: var(--nsit-slate); margin-top: 4px;">
-                  Website is live and fully interactive at <a href="/" target="_blank" style="color:var(--nsit-maroon); font-weight:700;">etims-2027.vercel.app</a>
+                  Website is live and fully interactive at <a href="https://etims-2027.vercel.app" target="_blank" style="color:var(--nsit-maroon); font-weight:700;">etims-2027.vercel.app</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Domain Migration Checklist -->
+            <div class="action-card" style="grid-column: 1 / -1; background: #FFFBEB; border: 1px solid #FDE68A; padding: 14px 18px;">
+              <h4 style="color: #92400E; display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 13.5px;">
+                <span>⚠️</span> <strong>Domain Migration Checklist (Don't Forget to Update If You Change Domain)</strong>
+              </h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; font-size: 11.5px; color: #78350F; line-height: 1.5;">
+                <div style="background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; border: 1px solid #FCD34D;">
+                  <strong>1. Submission Slip:</strong><br>
+                  <code>client/src/components/modals/PaperSubmissionModal.tsx</code> (Downloaded paper confirmation text)
+                </div>
+                <div style="background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; border: 1px solid #FCD34D;">
+                  <strong>2. Registration Slip:</strong><br>
+                  <code>client/src/components/modals/DelegateRegistrationModal.tsx</code> (Delegate fee acknowledgement)
+                </div>
+                <div style="background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; border: 1px solid #FCD34D;">
+                  <strong>3. Constants & README:</strong><br>
+                  <code>client/src/utils/constants.ts</code> & <code>README.md</code> (Official portal link)
+                </div>
+                <div style="background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; border: 1px solid #FCD34D;">
+                  <strong>4. Vercel & DNS:</strong><br>
+                  Add custom domain in Vercel Settings & map DNS CNAME to <code>cname.vercel-dns.com</code>
                 </div>
               </div>
             </div>

@@ -5,7 +5,8 @@
 **Dates:** 23–24 July 2027 · Physical Mode · 9.2-Acre Residential Campus  
 **Institutional Accreditations:** Approved by AICTE & DST Bihar · Affiliated with BEU & SBTE  
 **Conference Convenor:** Dr. Atif Hussain (Assistant Professor, Department of Civil Engineering)  
-**Live Production URL:** [https://etims-2027.vercel.app](https://etims-2027.vercel.app)
+**Live Production URL:** [https://etims-2027.vercel.app](https://etims-2027.vercel.app)  
+**Official Institutional Domain:** [https://etims2027.nsiterp.in](https://etims2027.nsiterp.in)
 
 ---
 

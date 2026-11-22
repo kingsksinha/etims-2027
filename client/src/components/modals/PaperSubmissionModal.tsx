@@ -219,7 +219,7 @@ CONVENOR SECRETARIAT CONTACT:
 Dr. Atif Hussain, Assistant Professor, Department of Civil Engineering
 Netaji Subhas Institute of Technology (NSIT), Bihta, Patna
 Email: ${CONVENOR.email} | Phone: ${CONVENOR.phone}
-Official Website: https://etims-2027.vercel.app
+Official Website: https://etims-2027.vercel.app (or https://etims2027.nsiterp.in)
 =====================================================`;
 
     const blob = new Blob([slip], { type: 'text/plain;charset=utf-8' });

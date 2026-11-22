@@ -40,3 +40,8 @@ coverage/
 tmp/
 temp/
 *.zip
+
+# Cloud & Tooling
+.vercel/
+.agents/
+skills-lock.json
