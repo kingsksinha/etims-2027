@@ -124,8 +124,8 @@ export default function CommitteesPage() {
 
           {/* Search & Filter Bar */}
           <div className="mt-8 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 border-b border-[#E7E0D6] pb-6 w-full min-w-0">
-            {/* Category Filter Pills (Smooth Horizontal Touch Scroll on Mobile) */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none w-full max-w-full -mx-1 px-1">
+            {/* Category Filter Pills (Touch Scroll on Mobile, Wrap on Desktop) */}
+            <div className="flex items-center gap-2 overflow-x-auto md:flex-wrap md:overflow-visible pb-2 md:pb-0 scrollbar-none w-full max-w-full -mx-1 px-1">
               {FILTER_CATEGORIES.map((cat) => {
                 const isSelected = selectedCategory === cat;
                 return (

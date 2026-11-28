@@ -78,7 +78,7 @@ export default function AboutPage() {
           </p>
 
           {/* Sub-Tabs Switcher Bar */}
-          <div className="mt-4 sm:mt-6 flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-[#E7E0D6] w-full min-w-0">
+          <div className="mt-4 sm:mt-6 flex items-center gap-1.5 sm:gap-2 overflow-x-auto sm:flex-wrap sm:overflow-visible pb-2 sm:pb-3 scrollbar-none border-b border-[#E7E0D6] w-full min-w-0">
             {SUB_TABS.map((tab) => {
               const isSelected = activeSubTab === tab.id;
               return (
