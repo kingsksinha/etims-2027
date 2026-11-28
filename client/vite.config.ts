@@ -6,10 +6,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
-    host: true, // Listen on all local IPs (IPv4 & IPv6 loopback + LAN)
+    host: 'localhost',
     port: 5173,
     strictPort: true,
-    allowedHosts: true, // Allow external preview tunnels (lhr.life, loca.lt, etc.)
     proxy: {
       '/api': {
         target: 'http://localhost:5000',

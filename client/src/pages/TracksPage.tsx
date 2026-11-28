@@ -21,21 +21,26 @@ import {
 import Container from '../components/common/Container';
 import { RESEARCH_TRACKS } from '../utils/constants';
 
-const TRACK_ICONS = [
-  <Brain className="h-5 w-5 text-[#7B1123]" />,
-  <Building2 className="h-5 w-5 text-[#BF982E]" />,
-  <Zap className="h-5 w-5 text-[#7B1123]" />,
-  <Bot className="h-5 w-5 text-[#BF982E]" />,
-  <Radio className="h-5 w-5 text-[#7B1123]" />,
-  <FlaskConical className="h-5 w-5 text-[#BF982E]" />,
-  <Briefcase className="h-5 w-5 text-[#7B1123]" />,
-  <BookOpen className="h-5 w-5 text-[#BF982E]" />,
+const TRACK_ICON_ITEMS = [
+  { Icon: Brain, colorClass: 'text-[#7B1123]' },
+  { Icon: Building2, colorClass: 'text-[#BF982E]' },
+  { Icon: Zap, colorClass: 'text-[#7B1123]' },
+  { Icon: Bot, colorClass: 'text-[#BF982E]' },
+  { Icon: Radio, colorClass: 'text-[#7B1123]' },
+  { Icon: FlaskConical, colorClass: 'text-[#BF982E]' },
+  { Icon: Briefcase, colorClass: 'text-[#7B1123]' },
+  { Icon: BookOpen, colorClass: 'text-[#BF982E]' },
 ];
 
 export default function TracksPage() {
   const [selectedTrackIdx, setSelectedTrackIdx] = useState(0);
 
   const activeTrack = RESEARCH_TRACKS[selectedTrackIdx] || RESEARCH_TRACKS[0];
+  const activeIconMeta = TRACK_ICON_ITEMS[selectedTrackIdx] || {
+    Icon: Sparkles,
+    colorClass: 'text-[#7B1123]',
+  };
+  const ActiveTrackIcon = activeIconMeta.Icon;
 
   return (
     <div className="relative min-h-screen bg-[#FAF8F5] text-[#1C1917] py-8 sm:py-12 md:py-16 overflow-hidden">
@@ -234,7 +239,7 @@ export default function TracksPage() {
               <div className="flex items-center justify-between border-b border-[#E7E0D6] pb-4">
                 <div className="flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#7B1123]/10 border border-[#7B1123]/25">
-                    {TRACK_ICONS[selectedTrackIdx] || <Sparkles className="h-5 w-5 text-[#7B1123]" />}
+                    <ActiveTrackIcon className={`h-5 w-5 ${activeIconMeta.colorClass}`} />
                   </div>
                   <div>
                     <span className="text-xs font-mono text-[#7B1123] uppercase tracking-wider block">

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X,
@@ -91,19 +92,23 @@ export default function DelegateRegistrationModal({
     }
   }, [isOpen, defaultCategory]);
 
-  // Lock background body scroll while modal is open
+  // Lock background body scroll & allow Escape key close while modal is open
   useEffect(() => {
-    if (isOpen) {
-      const originalOverflow = document.body.style.overflow;
-      const originalTouchAction = document.body.style.touchAction;
-      document.body.style.overflow = 'hidden';
-      document.body.style.touchAction = 'none';
-      return () => {
-        document.body.style.overflow = originalOverflow;
-        document.body.style.touchAction = originalTouchAction;
-      };
-    }
-  }, [isOpen]);
+    if (!isOpen) return;
+    const originalOverflow = document.body.style.overflow;
+    const originalTouchAction = document.body.style.touchAction;
+    document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.body.style.touchAction = originalTouchAction;
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   const selectedCat = REGISTRATION_CATEGORIES[selectedCategoryIdx] || REGISTRATION_CATEGORIES[0];
 
@@ -113,6 +118,11 @@ export default function DelegateRegistrationModal({
 
     if (!fullName.trim() || !email.trim() || !institution.trim()) {
       setValidationError('Please complete all required fields.');
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setValidationError('Please enter a valid delegate email address.');
       return;
     }
 
@@ -158,7 +168,8 @@ export default function DelegateRegistrationModal({
     // Save to localStorage
     try {
       const stored = localStorage.getItem('etims_delegates');
-      const list = stored ? JSON.parse(stored) : [];
+      const parsed = stored ? JSON.parse(stored) : [];
+      const list = Array.isArray(parsed) ? parsed : [];
       list.unshift(newRecord);
       localStorage.setItem('etims_delegates', JSON.stringify(list));
     } catch {
@@ -242,10 +253,10 @@ export default function DelegateRegistrationModal({
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <AnimatePresence>
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto overscroll-contain"
+        className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 overflow-y-auto overscroll-contain"
         role="dialog"
         aria-modal="true"
       >
@@ -642,6 +653,7 @@ export default function DelegateRegistrationModal({
           )}
         </motion.div>
       </div>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

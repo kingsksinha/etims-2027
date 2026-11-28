@@ -4,8 +4,8 @@
   "description": "1st National Conference on Emerging Technologies, Innovation and Multidisciplinary Studies at NSIT Bihta, Patna",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F4F8F7",
-  "theme_color": "#073B3A",
+  "background_color": "#FAF8F5",
+  "theme_color": "#5C1324",
   "icons": [
     {
       "src": "/favicon.svg",

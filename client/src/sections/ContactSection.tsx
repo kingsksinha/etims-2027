@@ -34,20 +34,45 @@ export default function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
+    const trimmedName = formData.name.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedMessage = formData.message.trim();
+
+    if (trimmedName.length < 2) {
+      setErrorMessage('Please enter your full name (at least 2 characters).');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      setErrorMessage('Please enter a valid institutional or personal email address.');
+      return;
+    }
+    if (trimmedMessage.length < 5) {
+      setErrorMessage('Please enter a message of at least 5 characters.');
+      return;
+    }
 
     setSubmitting(true);
     setErrorMessage(null);
 
     try {
-      // Realistic transmission delay
-      await new Promise((r) => setTimeout(r, 700));
-
-      // Attempt background network ping if server is active, otherwise catch silently
+      // Attempt server submission; fall back cleanly only if offline / no local backend running
       try {
-        await api.post('/contact', formData).catch(() => {});
-      } catch {
-        // Fallback gracefully without blocking user
+        await api.post('/contact', {
+          ...formData,
+          name: trimmedName,
+          email: trimmedEmail,
+          message: trimmedMessage,
+        });
+      } catch (err: unknown) {
+        const axiosErr = err as { response?: { status?: number; data?: { message?: string } } };
+        if (axiosErr?.response && axiosErr.response.status && axiosErr.response.status < 500) {
+          setErrorMessage(
+            axiosErr.response.data?.message || 'Please check your inquiry details and try again.'
+          );
+          return;
+        }
+        // Offline / static demo fallback when Express server isn't started
+        await new Promise((r) => setTimeout(r, 500));
       }
 
       const generatedTicket = `ETIMS27-INQ-${Math.floor(1000 + Math.random() * 9000)}`;
@@ -56,10 +81,14 @@ export default function ContactSection() {
       // Persist in localStorage for device memory
       try {
         const stored = localStorage.getItem('etims_inquiries');
-        const list = stored ? JSON.parse(stored) : [];
+        const parsed = stored ? JSON.parse(stored) : [];
+        const list = Array.isArray(parsed) ? parsed : [];
         list.unshift({
           ticketId: generatedTicket,
           ...formData,
+          name: trimmedName,
+          email: trimmedEmail,
+          message: trimmedMessage,
           createdAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
         });
         localStorage.setItem('etims_inquiries', JSON.stringify(list));

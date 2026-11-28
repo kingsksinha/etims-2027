@@ -22,7 +22,10 @@ export default function RegistrationPage() {
     try {
       const stored = localStorage.getItem('etims_delegates');
       if (stored) {
-        setRecentPasses(JSON.parse(stored));
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          setRecentPasses(parsed);
+        }
       }
     } catch {
       // Ignore storage errors

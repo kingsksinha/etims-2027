@@ -31,7 +31,12 @@ export const authenticate = (
   const token = authHeader.split(' ')[1];
 
   try {
-    const decoded = jwt.verify(token, env.JWT_SECRET) as JwtPayload;
+    const decoded = jwt.verify(token, env.JWT_SECRET, {
+      algorithms: ['HS256'],
+    }) as JwtPayload;
+    if (!decoded?.id || !decoded?.role) {
+      throw ApiError.unauthorized('Malformed token payload');
+    }
     req.user = decoded;
     next();
   } catch {

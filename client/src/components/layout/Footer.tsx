@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { Mail, MapPin, Calendar, Phone, ArrowUp, ExternalLink } from 'lucide-react';
 import { CONFERENCE, CONVENOR, HOST_INSTITUTION, TAB_NAV_ITEMS } from '../../utils/constants';
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export default function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -152,7 +154,7 @@ export default function Footer() {
         {/* Bottom Bar: Copyright & Attribution */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[#BF982E]/20 pt-8 sm:flex-row text-xs text-[#F5EFEB]/60">
           <p>
-            &copy; {new Date().getFullYear()} {CONFERENCE.acronym} &bull; Netaji Subhas Institute of Technology, Bihta, Patna. All rights reserved.
+            &copy; {CURRENT_YEAR} {CONFERENCE.acronym} &bull; Netaji Subhas Institute of Technology, Bihta, Patna. All rights reserved.
           </p>
 
           <button

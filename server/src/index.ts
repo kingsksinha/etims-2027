@@ -23,16 +23,21 @@ app.use(
   })
 );
 
+const isWildcardCors = env.CORS_ORIGIN === '*';
+
 app.use(
   cors({
-    origin:
-      env.CORS_ORIGIN === '*'
-        ? true
-        : [env.CORS_ORIGIN, 'http://localhost:5173', 'http://127.0.0.1:5173'],
-    credentials: true,
+    origin: isWildcardCors
+      ? '*'
+      : [
+          ...env.CORS_ORIGIN.split(',').map((o) => o.trim()).filter(Boolean),
+          'http://localhost:5173',
+          'http://127.0.0.1:5173',
+        ],
+    credentials: !isWildcardCors,
   })
 );
-app.use(express.json({ limit: '10mb' }));
+app.use(express.json({ limit: '1mb' }));
 
 // API routes protected by rate limiter
 app.use('/api', rateLimiter, routes);

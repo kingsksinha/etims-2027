@@ -40,14 +40,23 @@ export default function SubmissionPage() {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem('etims_submissions');
-      if (stored) {
-        const parsed: SavedSubmission[] = JSON.parse(stored);
-        setRecentSubmissions(parsed);
-        if (parsed.length > 0 && !trackedRecord) {
-          setTrackedRecord(parsed[0]);
-          setSearchTrackingId(parsed[0].trackingId);
-        }
+      const loadList = (key: string): SavedSubmission[] => {
+        const raw = localStorage.getItem(key);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      };
+      const merged = [...loadList('etims_submissions'), ...loadList('etims2027_submissions')];
+      const unique = merged.filter(
+        (item, idx, arr) =>
+          item &&
+          typeof item.trackingId === 'string' &&
+          arr.findIndex((x) => x.trackingId === item.trackingId) === idx
+      );
+      setRecentSubmissions(unique);
+      if (unique.length > 0) {
+        setTrackedRecord((prev) => prev ?? unique[0]);
+        setSearchTrackingId((prev) => prev || unique[0].trackingId);
       }
     } catch {
       // Ignore storage errors
@@ -506,7 +515,7 @@ export default function SubmissionPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b border-[#E7E0D6] pb-4">
                 <div>
                   <span className="font-mono text-xs text-[#7B1123] font-bold uppercase tracking-wider block">
-                    LIVE PEER-REVIEW TELEMETRY
+                    DOUBLE-BLIND REVIEW TRACKER
                   </span>
                   <h3 className="font-heading text-xl sm:text-2xl font-black text-[#1C1917] mt-1">
                     Track Manuscript Review Status
@@ -714,7 +723,7 @@ export default function SubmissionPage() {
                     <strong className="text-[#7B1123] font-mono">{trackedRecord.trackingId}</strong>
                   </div>
                   <a
-                    href={`mailto:${CONVENOR.email}?subject=Inquiry%20regarding%20Manuscript%20${trackedRecord.trackingId}`}
+                    href={`mailto:${CONVENOR.email}?subject=${encodeURIComponent(`Inquiry regarding Manuscript ${trackedRecord.trackingId}`)}`}
                     className="inline-flex items-center gap-1.5 rounded-lg bg-[#7B1123] hover:bg-[#5C1324] px-4 py-2 font-mono font-bold text-white shrink-0 transition-colors"
                   >
                     <span>Contact Secretariat</span>

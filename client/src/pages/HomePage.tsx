@@ -419,17 +419,17 @@ export default function HomePage() {
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border-dark pb-4">
                     <div>
-                      <span className="text-xs font-mono text-cyan uppercase tracking-wider">
-                        SPATIAL RADAR & CAMPUS ACCESS
+                      <span className="text-xs font-mono text-[#7B1123] uppercase tracking-wider font-bold">
+                        HOST CAMPUS &amp; TRANSIT DIRECTORY
                       </span>
-                      <h3 className="font-heading text-2xl font-bold text-light-text mt-0.5">
+                      <h3 className="font-heading text-2xl font-bold text-[#1C1917] mt-0.5">
                         Netaji Subhas Institute of Technology (NSIT) • Bihta, Patna
                       </h3>
                     </div>
                     <button
                       type="button"
                       onClick={() => goToTab('/venue')}
-                      className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-cyan to-blue-500 px-4 py-2 text-xs font-bold text-black shadow-md hover:brightness-110 cursor-pointer self-start sm:self-auto"
+                      className="inline-flex items-center gap-1.5 rounded-xl bg-[#7B1123] hover:bg-[#5C1324] px-4 py-2 text-xs font-bold text-white shadow-md transition-colors cursor-pointer self-start sm:self-auto"
                     >
                       <span>Full Venue Page</span>
                       <ArrowRight className="h-3.5 w-3.5" />

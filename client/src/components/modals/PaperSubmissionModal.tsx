@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X,
@@ -60,19 +61,23 @@ export default function PaperSubmissionModal({
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Prevent background scroll bleed when modal is active
+  // Prevent background scroll bleed & allow Escape key close when modal is active
   useEffect(() => {
-    if (isOpen) {
-      const scrollY = window.scrollY;
-      document.body.style.overflow = 'hidden';
-      document.body.style.touchAction = 'none';
-      return () => {
-        document.body.style.overflow = '';
-        document.body.style.touchAction = '';
-        window.scrollTo(0, scrollY);
-      };
-    }
-  }, [isOpen]);
+    if (!isOpen) return;
+    const scrollY = window.scrollY;
+    document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+      window.removeEventListener('keydown', onKeyDown);
+      window.scrollTo(0, scrollY);
+    };
+  }, [isOpen, onClose]);
 
   // Sync trackId if defaultTrackId changes
   useEffect(() => {
@@ -113,6 +118,11 @@ export default function PaperSubmissionModal({
 
     if (!authorName.trim() || !email.trim() || !paperTitle.trim() || !abstract.trim()) {
       setValidationError('Please complete all required fields.');
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setValidationError('Please enter a valid corresponding email address.');
       return;
     }
 
@@ -170,9 +180,10 @@ export default function PaperSubmissionModal({
     setSubmitting(false);
 
     try {
-      const existing = JSON.parse(localStorage.getItem('etims2027_submissions') || '[]');
+      const raw = JSON.parse(localStorage.getItem('etims_submissions') || '[]');
+      const existing = Array.isArray(raw) ? raw : [];
       existing.unshift(record);
-      localStorage.setItem('etims2027_submissions', JSON.stringify(existing));
+      localStorage.setItem('etims_submissions', JSON.stringify(existing));
     } catch {
       // safe fallback
     }
@@ -248,10 +259,10 @@ Official Website: https://etims-2027.vercel.app (or https://etims2027.nsiterp.in
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <AnimatePresence>
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 overflow-y-auto overscroll-contain"
+        className="fixed inset-0 z-[100] flex items-center justify-center p-2.5 sm:p-4 overflow-y-auto overscroll-contain"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
@@ -603,6 +614,7 @@ Official Website: https://etims-2027.vercel.app (or https://etims2027.nsiterp.in
           </div>
         </motion.div>
       </div>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
